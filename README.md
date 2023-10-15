@@ -302,25 +302,21 @@ Tanto los diferentes paisajes y territorios que los personajes recorren y explor
 4. ***Objetos, elementos interactuables*** 
 1) Las  peligrosas  criaturas  que  habitan  las  aguas  subterráneas  del  inicio  del  mapa impedirán a cualquiera de los jugadores salir de estas y continuar su viaje si caen en ellas, necesitando que el otro jugador lo libere.
 
-![](CONCEPTS/IdeaAgua1.png)
-![](CONCEPTS/IdeaAgua2.png)
-![](CONCEPTS/IdeaAgua3.png)
-![](CONCEPTS/IdeaAgua4.png)
+![](CONCEPTS/IdeaAgua1.png) ![](CONCEPTS/IdeaAgua2.png)
+![](CONCEPTS/IdeaAgua3.png) ![](CONCEPTS/IdeaAgua4.png)
 
 *Img. Idea Enemigos Acuaticos*
   
 2) Las nubes que actúan como plataformas en la parte final del mapa solo se encuentran en esta última etapa y no son capaces de soportar el peso de ambos protagonistas al mismo tiempo.
 
-![](CONCEPTS/IdeaNube1.png)
-![](CONCEPTS/IdeaNube2.png)
+![](CONCEPTS/IdeaNube1.png) ![](CONCEPTS/IdeaNube2.png)
 ![](CONCEPTS/IdeaNube3.png)
 
 *Img. Idea Nubes*
    
 3) Algunas  grandes  y frondosas ramas de los  árboles del  bosque pueden bloquear o entorpecer la visión de los jugadores. El leve viento producido por el aleteo (salto prolongado de mayor altura) de Seraphina revela lo que se oculta tras estas hojas haciéndolas volar lejos.
 
-![](CONCEPTS/IdeaHojas1.png)
-![](CONCEPTS/IdeaHojas2.png)
+![](CONCEPTS/IdeaHojas1.png) ![](CONCEPTS/IdeaHojas2.png)
 ![](CONCEPTS/IdeaHojas3.png)
 
 *Img. Idea Hojas*
@@ -336,8 +332,7 @@ Tanto los diferentes paisajes y territorios que los personajes recorren y explor
    
 5) La mecánica principal del juego se basa en presionar botones y activar palancas que alteran el entorno en el orden y momento adecuado para permitir o acelerar el viaje hacia arriba de vuelta al cielo. Hacer aparecer y desaparecer plataformas y paredes o activar el movimiento de las plataformas dinámicas son los cambios controlados por estos mecanismos. Estos se activan al entrar en contacto con el jugador sin necesidad de pulsar un botón para interactuar y se diferencian en que las palancas cambian de estado al ser activadas y se mantienen en el nuevo estado hasta entrar nuevamente en contacto con un jugador, mientras que los botones deben mantenerse presionados para estar activos y solo producirán el cambio mientras uno de los jugadores se encuentre sobre estos.
 
-![](CONCEPTS/IdeaPalanca1.png)
-![](CONCEPTS/IdeaPalanca2.png)
+![](CONCEPTS/IdeaPalanca1.png) ![](CONCEPTS/IdeaPalanca2.png)
 ![](CONCEPTS/IdeaPalanca3.png)
 
 *Img. Botones Idea*
