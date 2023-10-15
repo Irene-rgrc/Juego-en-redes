@@ -319,11 +319,28 @@ Tanto los diferentes paisajes y territorios que los personajes recorren y explor
    
 3) Algunas  grandes  y frondosas ramas de los  árboles del  bosque pueden bloquear o entorpecer la visión de los jugadores. El leve viento producido por el aleteo (salto prolongado de mayor altura) de Seraphina revela lo que se oculta tras estas hojas haciéndolas volar lejos.
 
+![](CONCEPTS/IdeaHojas1.png)
+![](CONCEPTS/IdeaHojas2.png)
+![](CONCEPTS/IdeaHojas3.png)
+
+*Img. Idea Hojas*
+
    
 4) Ciertos elementos de gran tamaño (rocas) pueden bloquear el paso o ser necesarios como alturas intermedias para alcanzar plataformas. Estos objetos solo pueden ser desplazados mediante la fuerza extra del sprint de Cassadie.
 
+![](CONCEPTS/IdeaRoca1.png)
+![](CONCEPTS/IdeaRoca2.png)
+![](CONCEPTS/IdeaRoca3.png)
+
+*Img. Idea Rocas*
    
 5) La mecánica principal del juego se basa en presionar botones y activar palancas que alteran el entorno en el orden y momento adecuado para permitir o acelerar el viaje hacia arriba de vuelta al cielo. Hacer aparecer y desaparecer plataformas y paredes o activar el movimiento de las plataformas dinámicas son los cambios controlados por estos mecanismos. Estos se activan al entrar en contacto con el jugador sin necesidad de pulsar un botón para interactuar y se diferencian en que las palancas cambian de estado al ser activadas y se mantienen en el nuevo estado hasta entrar nuevamente en contacto con un jugador, mientras que los botones deben mantenerse presionados para estar activos y solo producirán el cambio mientras uno de los jugadores se encuentre sobre estos.
+
+![](CONCEPTS/IdeaPalanca1.png)
+![](CONCEPTS/IdeaPalanca2.png)
+![](CONCEPTS/IdeaPalanca3.png)
+
+*Img. Botones Idea*
 
 ## ***4 Interfaz*** 
 
