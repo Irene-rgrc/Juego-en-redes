@@ -1,8 +1,8 @@
 # Caída Celestial: El Desafío de los Exiliados
 
-**Documento de diseño**  
+## Documento de diseño  
 
-*Diseño y Desarrollo de Videojuegos (Quintana 2023-2024) Juegos en Red* 
+### *Diseño y Desarrollo de Videojuegos (Quintana 2023-2024) Juegos en Red* 
 
 **Integrantes** 
 
@@ -14,7 +14,7 @@
 
 **McAcos** 
 
-***Índice ![](FOTO)***
+## ***Índice ![](FOTO)***
 
 **1 Introducción** 
 
@@ -59,7 +59,7 @@
 
 **6 Bibliografía** 
 
-***1. Introducción*** 
+## ***1. Introducción*** 
 
 Este es el documento de diseño del videojuego Caída Celestial: el desafío de los exiliados. Este GDD forma parte de la Fase 1 (Equipo de Desarrollo y Temática del Juego) de la práctica de la asignatura de Juegos en Red. 
 
@@ -111,7 +111,7 @@ En cuanto a los recursos y actividades clave; son necesarios dos jugadores y dos
 
 *Img. Modelo de Negocio* 
 
-***2 Guión*** 
+## ***2 Guión*** 
 
 A continuación se presenta la historia del videojuego y todos sus finales alternativos. Asimismo se presentarán y describirán los personajes y el mundo en el que se encuentran. 
 
@@ -251,7 +251,7 @@ Si gana Seraphina, se ramifica a su vez en otros dos posibles finales. Dios le d
 
 Si  gana  Cassadie,  se  ramifica,  de  igual  forma,  en  dos  posibles  finales.  Dios  le  dará  la oportunidad, también, de decidir si entra el solo al cielo o si entran ambos. Si el jugador decide que solo entra su personaje, entonces Dios lo tomará como un acto egoísta y malicioso, lo cual le cabreará mucho y será enviado directamente al infierno. Si el jugador decide que entran ambos, Dios lo tomará como un acto de arrepentimiento por los actos pasados de Cassadie y como una evolución hacia bien de él, dándoles a ambos otra oportunidad. 
 
-***3 Mecánicas del juego*** 
+## ***3 Mecánicas del juego*** 
 
 Ambos personajes podrán desplazarse en las cuatro direcciones (izquierda, derecha, arriba y abajo) e interactuar con diversos elementos del entorno con el objetivo de resolver puzzles o rompecabezas necesarios para despejar el camino y continuar subiendo.
 
@@ -284,7 +284,7 @@ Tanto los diferentes paisajes y territorios que los personajes recorren y explor
 1) Ciertos elementos de gran tamaño (rocas) pueden bloquear el paso o ser necesarios como alturas intermedias para alcanzar plataformas. Estos objetos solo pueden ser desplazados mediante la fuerza extra del sprint de Cassadie.
 5) La mecánica principal del juego se basa en presionar botones y activar palancas que alteran el entorno en el orden y momento adecuado para permitir o acelerar el viaje hacia arriba de vuelta al cielo. Hacer aparecer y desaparecer plataformas y paredes o activar el movimiento de las plataformas dinámicas son los cambios controlados por estos mecanismos. Estos se activan al entrar en contacto con el jugador sin necesidad de pulsar un botón para interactuar y se diferencian en que las palancas cambian de estado al ser activadas y se mantienen en el nuevo estado hasta entrar nuevamente en contacto con un jugador, mientras que los botones deben mantenerse presionados para estar activos y solo producirán el cambio mientras uno de los jugadores se encuentre sobre estos.
 
-***4 Interfaz*** 
+## ***4 Interfaz*** 
 
 El juego contendrá una serie de “menús” los cuales les permitirán al jugador empezar el juego, salir y ciertos aspectos de configuración del juego, para que pueda ajustarlos a su gusto. El aspecto estético será diseñado en canva debido a que tienen muchas funcionalidades específicas para crear una interfaz como herramientas de selección, color, formato etc. 
 
@@ -328,7 +328,7 @@ Se presentan distintos niveles que pueden salir debido a las acciones de cada ju
 
 En los créditos se expondrá los participantes del proyecto y una vez acabado se volverá al menú principal por si quiere crear una nueva partida o finalizar la experiencia.*** 
 
-***5 Audio*** 
+## ***5 Audio*** 
 
 A continuación se describen los recursos audiovisuales que serán empleados en el videojuego: 
 
@@ -356,6 +356,6 @@ El videojuego contará con una serie de efectos de sonido  con el objetivo de au
 
 Los  efectos  de  sonido  serán  los  siguientes:  Al  saltar,  al  abrir  una  puerta,  al  activar  un mecanismo, al caer un objeto o interactuar con algún elemento. 
 
-***6 Bibliografía*** 
+## ***6 Bibliografía*** 
 
 Todos los recursos empleados han sido creación del equipo desarrollador; no se han utilizado assets ni concepts externos. 
