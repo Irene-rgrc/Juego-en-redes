@@ -210,7 +210,7 @@ Seraphina: Un ángel que echaron recientemente del cielo por el pecado de hurto.
 
 *Img. Concept de Seraphina (Concepto Final)* 
 
-![](CONCEPTS/Concept Personaje Seraphina.png)
+![](CONCEPTS/ConceptPersonajeSeraphina.png)
 
 *Img. Concept de Seraphina Pruebas* 
 
