@@ -1,6 +1,6 @@
-##***Caída Celestial:*** 
+##Caída Celestial: 
 
-***El Desafío de los Exiliados*** 
+##El Desafío de los Exiliados
 
 **Documento de diseño**  
 
