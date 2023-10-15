@@ -116,7 +116,7 @@ En cuanto la propuesta de valor,se ofrece un juego  cooperativo de plataformas q
 
 En cuanto a los recursos y actividades clave; son necesarios dos jugadores y dos ordenadores para poder disfrutar de la experiencia. Como ya acaba de ser mencionado, la plataforma para la que se encontrará disponible será el ordenador. Los jugadores interactúan con el mundo y sus personajes mediante el uso de teclado y ratón. Todos estos controles y formas de interacción serán explicados en detalle más adelante. 
 
-![](FOTO)
+![](CONCEPTS/ModeloDeNegocio.jpeg)
 
 *Img. Modelo de Negocio* 
 
