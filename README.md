@@ -6,8 +6,9 @@
 
 **Integrantes** 
 
-*Irene Rodríguez García Miriam Sanz Tardón Cristina Valero Abella* 
-
+*Irene Rodríguez García*
+*Miriam Sanz Tardón*
+*Cristina Valero Abella* 
 *Rosa Ghaudy Bellido Euribe* 
 
 ![](FOTO)
