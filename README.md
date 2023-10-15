@@ -19,11 +19,11 @@ descripción de la temática: "Se trata de un juego cooperativo para dos jugador
 *Cristina Valero Abella* 
 *Rosa Ghaudy Bellido Euribe* 
 
-![](CONCEPTS/McAcos.png)
+![](CONCEPTS/URJC.png)
 
 **McAcos** 
 
-## ***Índice ![](FOTO)***
+## ***Índice ![](CONCEPTS/McAcos.png)***
 
 **1 Introducción** 
 
