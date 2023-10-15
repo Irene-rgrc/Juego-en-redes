@@ -80,7 +80,7 @@ El equipo de desarrollo está formado por  *Irene Rodríguez García*, *Miriam S
 
 El concepto del equipo está basado en los macacos, los animales más inteligentes de la selva, que con gran adaptabilidad y destreza trepan lianas y árboles estratégicamente, del mismo modo  en  el  que  nosotras  inesperadamente  dominamos  el  mercado,  con  una  popularidad exponencialmente  creciente  que  se  eleva  por  encima  de  la  competencia  rápidamente. Imparables,  graciosos,  con  un  ingenio  incansable  y  un  encanto  que  no  pasa  de  moda, demostrando tenacidad que no se rinde acompañada de frescas ideas y siempre dispuestos a darlo todo para conseguir lo que quieren, son la mejor representación del espíritu e ideales del equipo dedicado y trabajador. 
 
-![](FOTO)
+![](CONCEPTS/McAcos.png)
 
 ` `*Img. Logo del equipo de Desarrollo “McAcos”* 
 
@@ -200,11 +200,20 @@ Los ángeles carecen de género, por lo tanto, se decidió tratarlos con pronomb
 
 Cassadie: Un ángel que fue echado del cielo hace muchos años, por cometer el pecado de la avaricia y el egoísmo. Debido a su larga estancia en el subsuelo tiene un comportamiento nervioso y errático guiado por la desesperación y la ansiedad que le ha provocado vivir allí. Su aspecto actual ha sido producto del deterioramiento a lo largo de los años, además que al estar más cerca del infierno fue mutando poco a poco hasta parecerse a un demonio, obteniendo un cuernito y que parte de su cara se cayera viéndose los huesos y, además, tiene un ala rota. Tiene ropa mugrienta y simplona. 
 
-![](FOTO)
+![](CONCEPTS/Cassadie.png)
 
-*Img. Concept de Cassadie.* 
+*Img. Concept de Cassadie (Concepto Final)* 
 
 Seraphina: Un ángel que echaron recientemente del cielo por el pecado de hurto. Es un ser miedoso e inocente, lo cual se refleja en su aspecto, además de verse de forma pura, ya que acaba de llegar al subsuelo al inicio de la historia. 
+
+![](CONCEPTS/Seraphina.png)
+
+*Img. Concept de Seraphina (Concepto Final)* 
+
+![](CONCEPTS/Concept Personaje Seraphina.png)
+
+*Img. Concept de Seraphina Pruebas* 
+
 
 Dios del bien, superior: es un ente, el cual se muestra ante sus ángeles como una luz con una voz. Es un ser superior y creado de la nada para gobernar todo. Es duro contra los que rompen sus reglas, pero también es misericordioso. 
 
@@ -220,35 +229,35 @@ En cuanto al mundo observable dentro del juego, este se divide en tres zonas o e
 
 El primer escenario que se podrá ver y donde se comenzará el juego es el subsuelo, siendo el lugar más oscuro y fúnebre de todos. Este lugar es un sitio vacío y solitario donde se encontrará inicialmente Cassadie y al cual caerá después Seraphina. Este primer escenario simboliza la decadencia  y  el  punto  más  bajo  al  que  puede  caer  un  ser  a  causa  de  una  determinada circunstancia y donde habrá un punto de inflexión en el desarrollo del personaje debido a la desesperación. 
 
-![](FOTO)
+![](CONCEPTS/Concept_Subterraneo_principal.jpeg)
 
 *Img. Concept Subsuelo Principal* 
 
-![](FOTO) ![](FOTO)
+![](CONCEPTS/Concept_Subterraneo_I.png) ![](CONCEPTS/Concept_Subterraneo_II.png)
 
 *Img. concept Subsuelo prueba de colores* 
 
-![](FOTO)
+![](CONCEPTS/Concept_Subterraneo_EscalaDeGris.jpeg)
 
 *Img. Subsuelo concept escala de grises.*
 
 Se ascenderá de este escenario y se llegará al siguiente, el cual es la tierra como tal, en este caso, los jugadores llegarán a un bosque, el cual visualmente tiene ciertos toques místicos y de fantasía. Esta zona, como tal, no simboliza nada, aparte del hecho que para los personajes, dentro de la historia como tal sería como su momento de reflexionar cómo quieren evolucionar. 
 
-![](FOTO)
+![](CONCEPTS/Concept_Tierra_Principal.jpeg)
 
 *Img. Concept Tierra Principal* 
 
-![](FOTO)
+![](CONCEPTS/Concept_tierra_EcalaDeGris.jpeg)
 
 *Img. Concept Tierra Base escala de grises* 
 
 Por último se ascenderá al cielo, el último escenario del juego y donde culmina la historia y el juego. Esta escena tendrá colores más brillantes y claros, para simbolizar la pureza del lugar. Aquí se deberá culminar el desarrollo del personaje y las decisiones que debe tomar en base a eso. 
 
-![](FOTO)
+![](CONCEPTS/Concept_Cielo_Principal.jpeg)
 
 *Img. Concept Cielo I* 
 
-![](FOTO)
+![](CONCEPTS/Concept_Cielo_II.jpeg)
 
 *Img. Concept Cielo II* 
 
