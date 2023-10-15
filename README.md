@@ -324,8 +324,7 @@ Tanto los diferentes paisajes y territorios que los personajes recorren y explor
    
 4) Ciertos elementos de gran tamaño (rocas) pueden bloquear el paso o ser necesarios como alturas intermedias para alcanzar plataformas. Estos objetos solo pueden ser desplazados mediante la fuerza extra del sprint de Cassadie.
 
-![](CONCEPTS/IdeaRoca1.png)
-![](CONCEPTS/IdeaRoca2.png)
+![](CONCEPTS/IdeaRoca1.png) ![](CONCEPTS/IdeaRoca2.png)
 ![](CONCEPTS/IdeaRoca3.png)
 
 *Img. Idea Rocas*
@@ -334,6 +333,10 @@ Tanto los diferentes paisajes y territorios que los personajes recorren y explor
 
 ![](CONCEPTS/IdeaPalanca1.png) ![](CONCEPTS/IdeaPalanca2.png)
 ![](CONCEPTS/IdeaPalanca3.png)
+
+![](CONCEPTS/IdeaBoton1.png) ![](CONCEPTS/IdeaBoton2.png)
+![](CONCEPTS/IdeaBoton3.png)
+
 
 *Img. Botones Idea*
 
