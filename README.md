@@ -291,7 +291,7 @@ Seraphina se desplazará por el escenario mediante las teclas “W” (para el m
 
 Cassadie tendrá su movimiento por el mundo controlado por las “flechas de dirección” del teclado, cada una de estas desplazará al personaje en la dirección que señalan. Su sprint se activará mediante la tecla “control”, al mantenerla presionada al indicar un movimiento en horizontal. 
 
-![](FOTO)
+![](CONCEPTS/Teclado.jpeg)
 
 3. ***Locaciones*** 
 
@@ -312,13 +312,13 @@ El juego contendrá una serie de “menús” los cuales les permitirán al juga
 
 A continuación, se explicará en qué consiste el diagrama de flujo de las interfaces. Un diagrama de  flujo  de  una  interfaz,  a  menudo  denominado  diagrama  de  flujo  de  usuario,  es  una representación  gráfica  que  muestra  cómo  un  usuario  interactúa  con  una  interfaz  del juego/software.*** 
 
-![](FOTO)
+![](CONCEPTS/Interfaz.jpeg)
 
 *Img. Diagrama de flujo de interfaz.* 
 
 Se comienza con una interfaz principal denominada menú en la cual se podrá pulsar con el ratón a tres opciones: Comenzar, Ajustes y Salir. En Comenzar empezará a ejecutarse el juego, es decir pantalla de juego sin embargo podremos acceder a la pantalla de pausa siempre que se esté jugando. También si el jugador finaliza el nivel se encuentra en el menú de fin de nivel y después unos créditos con los participantes del proyecto, una vez visto todos los créditos se volverá al menú principal. En ajustes nos encontramos con una pantalla de pausa en la cual podrá ajustar el volumen en la misma pantalla y finalizar el juego. Por último se encuentra el botón de Salir que inmediatamente tras accionarlo se finaliza el programa. 
 
-![](FOTO)
+![](CONCEPTS/Concept_Boton_Continuar.png)
 
 *Img. Concept Botones de Interfaz* 
 
@@ -328,7 +328,7 @@ El menú principal consta del título del juego que ocupe un tamaño razonable p
 
 Al pulsar comenzar, se iniciará el juego; Si se pincha ajustes, entrará en otra intro menú; por último si se pincha salir, se cierra el programa. 
 
-![](FOTO)
+![](CONCEPTS/Concept_MenuPrincipal.jpeg)
 
 *Img. Esquema del menú principal*
 
