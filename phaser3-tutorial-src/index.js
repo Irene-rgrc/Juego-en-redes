@@ -16,4 +16,5 @@ const config = {
     }
 }
 
+
 var game=new Phaser.Game(config); //Para crear el uago como tal, le pasamos la configuracion
