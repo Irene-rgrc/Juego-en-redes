@@ -16,5 +16,5 @@ const config = {
     }
 }
 
+var Nivel1=new Phaser.Game(config); //Para crear el juego como tal, le pasamos la configuracion
 
-var game=new Phaser.Game(config); //Para crear el uago como tal, le pasamos la configuracion

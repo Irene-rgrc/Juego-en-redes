@@ -2,9 +2,8 @@ export class Game extends Phaser.Scene{
 //Exportamos el nivel para poder usarse fuera. Es una clase de javaScript, extiende de Phaser.Scene (Punto de partida para crear escenas del juego)
 
     constructor(){
-        super({key:"Nivel1"}); //Inicializar la clase. Key indica su nombre para poder usarse,es una valor clave unico; cada escena debe tener uno distinto.
-    
-         
+        super({key:'Nivel1'}); //Inicializar la clase. Key indica su nombre para poder usarse,es una valor clave unico; cada escena debe tener uno distinto.
+        
     }
 
    
@@ -12,24 +11,22 @@ export class Game extends Phaser.Scene{
        
         this.load.image('ground', 'assetsEjemplo/platform.png');
         this.load.image('background', 'assets/Concept_Subterraneo_principal.jpeg');
-        //this.load.multiatlas('Seraphine','assets/spritesheet.json','assets/spritesheet.png');
-        //this.load.path='./assets/';
-        //this.load.json('SeraphineWalk','spritesheet.json');
-        //history.load.atlas('spritesSeraphine','spritesheet.png')
         this.load.spritesheet('Seraphine', 'assets/spritesheet.png', { frameWidth: 857, frameHeight: 983 });
     }
     create(){
-        this.add.image(400, 300, 'background');
         
-        this.platform = this.physics.add.image(400,460,"ground").setScale(2);
+        
+        this.add.image(400, 300, 'background').setScale();
+        this.platform = this.physics.add.image(400,460,"ground");
         this.platform.body.allowGravity=false;
 
         //Seraphine = this.physics.add.sprite(100, 450, 'Seraphine').setScale(0.10,0.10);
         //Serpahine.setBounce(0.2);
 
+        
         this.Seraphine = this.physics.add.sprite(100, 450, 'Seraphine').setScale(0.10,0.10);
-        Seraphine.setBounce(0.2);
-        Seraphine.setCollideWorldBounds(true);
+        this.Seraphine.setBounce(0.2);
+        this.Seraphine.setCollideWorldBounds(true);
 
         this.anims.create({
             key: 'left',
@@ -52,29 +49,26 @@ export class Game extends Phaser.Scene{
         });
     
         //  Input Events
-        cursors = this.input.keyboard.createCursorKeys();
-        this.physics.add.collider(Seraphine, platform);
+        this.cursors = this.input.keyboard.createCursorKeys();
+        this.physics.add.collider(this.Seraphine, this.platform);
 
     }
 
     update ()
 {
-    if (gameOver)
-    {
-        return;
-    }
+    
 
-    if (cursors.left.isDown)
+    if (this.cursors.left.isDown)
     {
         this.Seraphine.setVelocityX(-160);
         this.Seraphine.anims.play('left', true);
 
-    } else if(cursors.right.isDown)
+    } else if(this.cursors.right.isDown)
     {
         this.Seraphine.setVelocityX(160);
         this.Seraphine.anims.play('right', true);
     }
-    else if(cursors.up.isDown && player1.body.touching.down)
+    else if(this.cursors.up.isDown && this.Seraphine.body.touching.down)
     {
         this.Seraphine.setVelocityY(-330);
     }
