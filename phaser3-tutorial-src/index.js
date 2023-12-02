@@ -1,4 +1,4 @@
-import {Game}from ".game.js"; //Importar las distintas escenas
+import {Game}from "./Nivel1.js"; //Importar las distintas escenas
 
 const config = {
 
@@ -16,4 +16,4 @@ const config = {
     }
 }
 
-var game=new Phaser.Game(config);
+var game=new Phaser.Game(config); //Para crear el uago como tal, le pasamos la configuracion
