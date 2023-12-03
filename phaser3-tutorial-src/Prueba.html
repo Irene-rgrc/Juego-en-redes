@@ -14,19 +14,20 @@
 
 <script type="text/javascript">
 
-var nivel;
+    var nivel;
 
     class NivelBase extends Phaser.Scene {
 
         constructor() {
             super('NivelBase');
 
-            this.Seraphine;
+            this.Seraphina;
             this.Cassadie;
             this.collectStar;
-            this.hitBomb;
-            this.bombs;
             this.platforms;
+            this.palancas;
+            this.boton;
+            this.piezaboton;
             this.cursors;
             this.keyW;
             this.keyA;
@@ -39,15 +40,20 @@ var nivel;
             this.gameOver = false;
             this.salto;
             this.empujon;
+            this.tocarC = false;
+            this.tocarS = false;
+            this.pulsar = false;
         }
 
         preload() {
             this.load.image('sky', 'assetsEjemplo/sky.png');
             this.load.image('ground', 'assetsEjemplo/platform.png');
             this.load.image('star', 'assetsEjemplo/star.png');
-            this.load.image('bomb', 'assetsEjemplo/bomb.png');
-            this.load.spritesheet('Cassadie', 'assets/cassadie.png', { frameWidth: 867, frameHeight: 980 });
-            this.load.spritesheet('Seraphine', 'assets/spritesheet.png', { frameWidth: 862, frameHeight: 983 });
+            this.load.spritesheet('palanca', 'assets/palancaCielo.png', { frameWidth: 446, frameHeight: 345 });
+            this.load.spritesheet('palancaInv', 'assets/palancaCieloInv.png', { frameWidth: 446, frameHeight: 345 });
+            this.load.spritesheet('botonBosque', 'assets/botonBosque.png', { frameWidth: 2789, frameHeight: 1946 });
+            this.load.spritesheet('Cassadie', 'assets/cassadie.png', { frameWidth: 862, frameHeight: 980 });
+            this.load.spritesheet('Seraphina', 'assets/spritesheet.png', { frameWidth: 862, frameHeight: 980 });
         }
 
         create() {
@@ -57,6 +63,8 @@ var nivel;
 
             //  The platforms group contains the ground and the 2 ledges we can jump on
             this.platforms = this.physics.add.staticGroup();
+            this.palancas = this.physics.add.group();
+            this.boton = this.physics.add.group();
 
             //  Here we create the ground.
             //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
@@ -64,16 +72,20 @@ var nivel;
 
             //  Now let's create some ledges
             this.platforms.create(600, 400, 'ground');
-            this.platforms.create(50, 250, 'ground');
-            this.platforms.create(750, 220, 'ground');
+
+            // --------------------------------------------------------------------------------------------------------------------PALANCAS Y boton
+            this.palancas.create(600, 350, 'palanca').setScale(0.2).setData({ ground: this.platforms.create(50, 250, 'ground') });
+            this.palancas.create(660, 470, 'palanca').setScale(0.2).setData({ ground: this.platforms.create(750, 220, 'ground') });
+            this.boton = this.physics.add.sprite(400, 470, 'botonBosque').setScale(0.02);
+            this.piezaboton = this.platforms.create(400, 100, 'ground');
 
             // The player and its settings
-            this.Seraphine = this.physics.add.sprite(100, 450, 'Seraphine').setScale(0.10, 0.10);
+            this.Seraphina = this.physics.add.sprite(100, 450, 'Seraphina').setScale(0.10, 0.10);
             this.Cassadie = this.physics.add.sprite(100, 450, 'Cassadie').setScale(0.10, 0.10);;
 
             //  Player physics properties. Give the little guy a slight bounce.
-            this.Seraphine.setBounce(0.2);
-            this.Seraphine.setCollideWorldBounds(true);
+            this.Seraphina.setBounce(0.2);
+            this.Seraphina.setCollideWorldBounds(true);
 
             this.Cassadie.setBounce(0.2);
             this.Cassadie.setCollideWorldBounds(true);
@@ -81,20 +93,20 @@ var nivel;
             //  Our player animations, turning, walking left and walking right.
             this.anims.create({
                 key: 'leftS',
-                frames: this.anims.generateFrameNumbers('Seraphine', { start: 0, end: 3 }),
+                frames: this.anims.generateFrameNumbers('Seraphina', { start: 0, end: 3 }),
                 frameRate: 10,
                 repeat: -1
             });
 
             this.anims.create({
                 key: 'turnS',
-                frames: [{ key: 'Seraphine', frame: 4 }],
+                frames: [{ key: 'Seraphina', frame: 4 }],
                 frameRate: 20
             });
 
             this.anims.create({
                 key: 'rightS',
-                frames: this.anims.generateFrameNumbers('Seraphine', { start: 5, end: 8 }),
+                frames: this.anims.generateFrameNumbers('Seraphina', { start: 5, end: 8 }),
                 frameRate: 10,
                 repeat: -1
             });
@@ -116,10 +128,40 @@ var nivel;
 
             this.anims.create({
                 key: 'rightC',
-                frames: this.anims.generateFrameNumbers('Cassadie', { start: 5, end: 9 }),
+                frames: this.anims.generateFrameNumbers('Cassadie', { start: 5, end: 8 }),
                 frameRate: 10,
                 repeat: -1
             });
+
+            //-----------------------------------------
+
+            this.anims.create({
+                key: 'desactivar',
+                frames: this.anims.generateFrameNumbers('palancaInv', { start: 0, end: 4 }),
+                frameRate: 10,
+                repeat: 0
+            })
+
+            this.anims.create({
+                key: 'activar',
+                frames: this.anims.generateFrameNumbers('palanca', { start: 0, end: 4 }),
+                frameRate: 10,
+                repeat: 0
+            })
+
+            this.anims.create({
+                key: 'arriba',
+                frames: [{ key: 'botonBosque', frame: 0 }],
+                frameRate: 7,
+                repeat: 0
+            })
+
+            this.anims.create({
+                key: 'pulsar',
+                frames: this.anims.generateFrameNumbers('botonBosque', { start: 0, end: 2 }),
+                frameRate: 7,
+                repeat: 0
+            })
 
             //  Input Events
             this.cursors = this.input.keyboard.createCursorKeys();
@@ -148,24 +190,26 @@ var nivel;
 
             });
 
-            this.bombs = this.physics.add.group();
-
             //  The score
             this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
 
             //  Collide the player and the stars with the platforms
-            this.physics.add.collider(this.Seraphine, this.platforms);
+            this.physics.add.collider(this.Seraphina, this.platforms);
             this.physics.add.collider(this.Cassadie, this.platforms);
             this.physics.add.collider(this.stars, this.platforms);
-            this.physics.add.collider(this.bombs, this.platforms);
+            this.physics.add.collider(this.palancas, this.platforms);
+            this.physics.add.collider(this.boton, this.platforms);
 
 
             //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
-            this.physics.add.overlap(this.Seraphine, this.stars, this.collectStar, null, this);
+            this.physics.add.overlap(this.Seraphina, this.stars, this.collectStar, null, this);
             this.physics.add.overlap(this.Cassadie, this.stars, this.collectStar, null, this);
 
-            this.physics.add.collider(this.Seraphine, this.bombs, this.hitBomb, null, this);
-            this.physics.add.collider(this.Cassadie, this.bombs, this.hitBomb, null, this);
+            this.physics.add.overlap(this.Seraphina, this.palancas, this.activarS, null, this);
+            this.physics.add.overlap(this.Cassadie, this.palancas, this.activarC, null, this);
+
+            this.physics.add.overlap(this.Cassadie, this.boton, this.presionar, null, this);
+            this.physics.add.overlap(this.Seraphina, this.boton, this.presionar, null, this);
         }
 
         update() {
@@ -174,24 +218,24 @@ var nivel;
             }
 
             if (this.cursors.left.isDown) {
-                this.Seraphine.setVelocityX(-160);
-                this.Seraphine.anims.play('leftS', true);
+                this.Seraphina.setVelocityX(-160);
+                this.Seraphina.anims.play('leftS', true);
             } else if (this.cursors.right.isDown) {
-                this.Seraphine.setVelocityX(160);
-                this.Seraphine.anims.play('rightS', true);
+                this.Seraphina.setVelocityX(160);
+                this.Seraphina.anims.play('rightS', true);
             }
             else {
-                this.Seraphine.setVelocityX(0);
-                this.Seraphine.anims.play('turnS');
+                this.Seraphina.setVelocityX(0);
+                this.Seraphina.anims.play('turnS');
             }
 
-            if (this.cursors.up.isDown && this.Seraphine.body.touching.down) {
-                this.Seraphine.setVelocityY(-330);
+            if (this.cursors.up.isDown && this.Seraphina.body.touching.down) {
+                this.Seraphina.setVelocityY(-330);
                 this.salto = true;
             }
 
-            if (this.enter.isDown && !this.Seraphine.body.touching.down && this.salto) {
-                this.Seraphine.setVelocityY(-330);
+            if (this.enter.isDown && !this.Seraphina.body.touching.down && this.salto) {
+                this.Seraphina.setVelocityY(-330);
                 this.salto = false;
             }
 
@@ -226,7 +270,7 @@ var nivel;
             }
 
 
-            if(Phaser.Input.Keyboard.JustDown(this.keyP)){
+            if (Phaser.Input.Keyboard.JustDown(this.keyP)) {
                 //this.scene.pause();
                 this.scene.sleep('NivelBase');
                 this.scene.launch('Pausa');
@@ -237,6 +281,64 @@ var nivel;
                 this.cursors.right.isDown = false;
                 this.cursors.up.isDown = false;
             }
+
+            if (!this.Cassadie.body.touching.left && !this.Cassadie.body.touching.right && !this.Cassadie.body.touching.up) {
+                this.tocarC = true;
+            }
+            else {
+                this.tocarC = false;
+            }
+            if (!this.Seraphina.body.touching.left && !this.Seraphina.body.touching.right && !this.Seraphina.body.touching.up) {
+                this.tocarS = true;
+            }
+            else {
+                this.tocarS = false;
+            }
+
+            if (!this.Seraphina.body.touching.left && !this.Seraphina.body.touching.right && !this.Seraphina.body.touching.up
+                && !this.Cassadie.body.touching.left && !this.Cassadie.body.touching.right && !this.Cassadie.body.touching.up) {
+                this.piezaboton.enableBody(false, 0, 0, true, true);
+                this.boton.anims.play('arriba');
+                this.pulsar = true;
+            }
+            else { this.pulsar = false; }
+        }
+
+
+
+        activarC(player, palanca) {
+            if (!palanca.getData('on') && this.tocarC) {
+                palanca.anims.play('activar', false);
+                palanca.getData('ground').disableBody(true, true);
+                palanca.setData({ on: true });
+            }
+            else if (palanca.getData('on') && this.tocarC) {
+                palanca.anims.play('desactivar', false);
+                palanca.getData('ground').enableBody(false, 0, 0, true, true);
+                palanca.setData({ on: false });
+            }
+        }
+
+        activarS(player, palanca) {
+            if (!palanca.getData('on') && this.tocarS) {
+                palanca.anims.play('activar', false);
+                palanca.getData('ground').disableBody(true, true);
+                palanca.setData({ on: true });
+            }
+            else if (palanca.getData('on') && this.tocarS) {
+                palanca.anims.play('desactivar', false);
+                palanca.getData('ground').enableBody(false, 0, 0, true, true);
+                palanca.setData({ on: false });
+            }
+        }
+
+        presionar(player, boton) {
+            if (this.pulsar) {
+                boton.anims.play('pulsar', false);
+                this.pulsar = false;
+
+            }
+            this.piezaboton.disableBody(true, true);
         }
 
 
@@ -258,25 +360,7 @@ var nivel;
                 });
 
                 var x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
-
-
-                var bomb = this.bombs.create(x, 16, 'bomb');
-                bomb.setBounce(1);
-                bomb.setCollideWorldBounds(true);
-                bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
-                bomb.allowGravity = false;
-
             }
-        }
-
-        hitBomb(player, bomb) {
-            this.physics.pause();
-
-            player.setTint(0xff0000);
-
-            player.anims.play('turn');
-
-            this.gameOver = true;
         }
     }
 
@@ -297,8 +381,8 @@ var nivel;
             this.keyP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
         }
 
-        update(){
-            if(Phaser.Input.Keyboard.JustDown(this.keyP)){
+        update() {
+            if (Phaser.Input.Keyboard.JustDown(this.keyP)) {
                 this.scene.wake(nivel);
                 //this.scene.resume(nivel);
                 this.scene.stop('Pausa');
