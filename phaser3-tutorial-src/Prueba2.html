@@ -20,6 +20,7 @@ var nivel;
 let posicionSliderGlobal=950;
 let volumenGlobal=0.5;
 let cancionReproducida=false;
+let cancion;
 
     class NivelBase extends Phaser.Scene {
 
@@ -301,6 +302,7 @@ let cancionReproducida=false;
         }
 
         create() {
+
             //Fondo
             const fondo=this.add.image(0, 0, 'fondo').setDisplaySize(1920,1080);
             fondo.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
@@ -475,30 +477,32 @@ let cancionReproducida=false;
             });
            
             //CANCION
-            const cancion=this.sound.add('cancion',{loop:true});
-            //cancion.setVolume(volumenGlobal);
-            if(!cancionReproducida){
-               cancion.play();
-                cancionReproducida=!cancionReproducida;
-            }
-            else{cancion.resume();}
+
+            
+            if (!cancionReproducida) {
+            cancion = this.sound.add('cancion', { loop: true });
+            cancion.play();
+            cancionReproducida = true;
+                }
             
             //SLIDER VOLUMEN
         
             const controlVol=this.add.image(posicionSliderGlobal,550,"circulo").setInteractive({draggable:true});
             controlVol.setScale(0.15,0.15);
             this.input.setDraggable(controlVol);
-
+            
             
             this.input.on('drag',function(pointer,gameObject,dragX,dragY){
                 controlVol.x=Phaser.Math.Clamp(dragX,780,1210);
                 posicionSliderGlobal=controlVol.x;
-                const volumenGlobal=(controlVol.x-780)/430;
+                volumenGlobal=(controlVol.x-780)/430;
                 cancion.setVolume(volumenGlobal);
+                console.log(volumenGlobal);
                 console.log("Ajustando volumen");
-                cancion.pause();
                 cancion.resume();
+
             })
+            
             
             
             
