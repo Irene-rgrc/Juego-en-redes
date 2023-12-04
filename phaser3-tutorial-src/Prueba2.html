@@ -16,6 +16,11 @@
 
 var nivel;
 
+//VARIABLES GLOBALES
+let posicionSliderGlobal=950;
+let volumenGlobal=0.5;
+let cancionReproducida=false;
+
     class NivelBase extends Phaser.Scene {
 
         constructor() {
@@ -292,12 +297,18 @@ var nivel;
             this.load.image('jugar', 'assets/BotonJugar.png');
             this.load.image('ajustes', 'assets/BotonAjustes.png');
             this.load.image('salir', 'assets/BotonSalir.png');
+            this.load.image('titulo', 'assets/Título.png');
         }
 
         create() {
             //Fondo
             const fondo=this.add.image(0, 0, 'fondo').setDisplaySize(1920,1080);
             fondo.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+
+            //Titulo
+            const titulo=this.add.image(960,240,"titulo");
+            titulo.setScale(0.18,0.18);
+            titulo.setTint(0x555555);
 
             //Tecla Enter
             this.enter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
@@ -421,13 +432,76 @@ var nivel;
         }
 
         preload() {
-            this.load.image('sky', 'assetsEjemplo/sky.png');
+            this.load.image('fondoAjustes', 'assets/FondoAjustes.JPG');
+            this.load.image('salir', 'assets/BotonSalir.png');
+            this.load.image('cuadradoVolumen', 'assets/Volumen.PNG');
+            this.load.image('circulo', 'assets/Slider.PNG');
+            this.load.image('barra', 'assets/BarraSonido.PNG');
+            this.load.audio('cancion','assets/MusicaPrueba.mp3')
         }
 
         create() {
-            
-            this.add.image(400, 300, 'sky');
+            //Fondo
+            const fondoAjustes=this.add.image(0, 0, 'fondoAjustes').setDisplaySize(1920,1080);
+            fondoAjustes.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+
+            //Rectangulo volumen
+            const cuadroVolumen = this.add.image(975,500,"cuadradoVolumen");
+            cuadroVolumen.setScale(0.5,0.5)
+            const barraVolumen = this.add.image(975,550,"barra");
+            barraVolumen.setScale(0.5,0.5)
+
+            //BOTON SALIR
+            //Se añade el boton de salir
+            const botonSalir = this.add.image(975,760,"salir").setInteractive();
+            botonSalir.setScale(0.20,0.20)
+
+            //Al pasar por encima se pone mas oscuro y crece en tamaño
+            botonSalir.on('pointerover',function(){
+                this.setTint(0x555555);
+                this.setScale(0.23,0.23);
+            });
+
+             //Al quitar el cursor el boton vuelve al tamaño original
+             botonSalir.on('pointerout',function(){
+                this.clearTint();
+                this.setScale(0.20,0.20);
+            });
+
+            //Al hacer click en el boton se sale del juego
+            botonSalir.on('pointerdown',(pointer)=>{ 
+                console.log('Saliendo de Ajustes');
+                this.scene.start('MenuInicio');
+            });
            
+            //CANCION
+            const cancion=this.sound.add('cancion',{loop:true});
+            //cancion.setVolume(volumenGlobal);
+            if(!cancionReproducida){
+               cancion.play();
+                cancionReproducida=!cancionReproducida;
+            }
+            else{cancion.resume();}
+            
+            //SLIDER VOLUMEN
+        
+            const controlVol=this.add.image(posicionSliderGlobal,550,"circulo").setInteractive({draggable:true});
+            controlVol.setScale(0.15,0.15);
+            this.input.setDraggable(controlVol);
+
+            
+            this.input.on('drag',function(pointer,gameObject,dragX,dragY){
+                controlVol.x=Phaser.Math.Clamp(dragX,780,1210);
+                posicionSliderGlobal=controlVol.x;
+                const volumenGlobal=(controlVol.x-780)/430;
+                cancion.setVolume(volumenGlobal);
+                console.log("Ajustando volumen");
+                cancion.pause();
+                cancion.resume();
+            })
+            
+            
+            
         }
 
         update(){
@@ -452,7 +526,8 @@ var nivel;
                 debug: false
             }
         },
-        scene: [MenuInicio, NivelBase, Pausa, Ajustes]
+        scene: [MenuInicio, NivelBase, Pausa, Ajustes],
+        audio:{ disableWebAudio:false}
     };
 
     var game = new Phaser.Game(config);
