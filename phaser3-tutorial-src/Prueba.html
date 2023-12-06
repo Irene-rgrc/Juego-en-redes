@@ -46,7 +46,7 @@
 
         iniciarMecanismos() {
             //carga el fondo
-            this.add.image(400, 300, 'fondo');
+            this.add.image(960, 500, 'fondo');
 
             //se añaden las physics
             this.platforms = this.physics.add.staticGroup();
@@ -407,11 +407,98 @@
         }*/
     }
 
+    class NivelBosque extends NivelBase {
+
+constructor() {
+    super('NivelBosque');
+    this.construir();
+    //si se necesitan añadir más botones se indican aquí como "this.boton1; this.boton2;"
+}
+
+preload(){
+    //se cargan sprites de fondo, plataformas, palancas del derecho y del revés y botones para el nivel correspondiente
+    this.load.image('fondo', 'assets/Bosque.png');
+    this.load.image('ground', 'assetsEjemplo/platform.png');
+    this.load.spritesheet('palanca', 'assets/palancaCielo.png', { frameWidth: 446, frameHeight: 345 });
+    this.load.spritesheet('palancaInv', 'assets/palancaCieloInv.png', { frameWidth: 446, frameHeight: 345 });
+    this.load.spritesheet('boton', 'assets/botonBosque.png', { frameWidth: 2789, frameHeight: 1946 });
+
+    //se carga lo común en el padre que son los personajes
+    this.cargarPersonajes();
+}
+
+create(){
+    //se añade que tienen fisicas
+    this.iniciarMecanismos();
+    //se coloca el botón
+    this.boton = this.physics.add.sprite(400, 470, 'boton').setScale(0.02);
+    //por cada botón extra se añaden físicas y se coloca porque no es una lista de botones
+    ////////////this.boton1 = this.physics.add.group();
+    ////////////this.boton1 = this.physics.add.sprite(400, 470, 'boton').setScale(0.02);
+
+    //se colocan las plataformas normales sueltas
+    this.platforms.create(400, 950, 'ground').setScale(2).refreshBody();
+    this.platforms.create(600, 400, 'ground');
+    this.platforms.create(600, 50, 'ground');
+    
+
+    //El suelo que controlan las palancas se crea como suelo normal pero dentro de las plataformas como data "ground" (para que cada una lo controle y tal)
+    this.palancas.create(600, 350, 'palanca').setScale(0.2).setData({ ground: this.platforms.create(50, 250, 'ground') });
+    this.palancas.create(660, 470, 'palanca').setScale(0.2).setData({ ground: this.platforms.create(750, 220, 'ground') });
+    
+
+    //colocar el suelo que controla el boton por separado porque se necesita acceder a este individualmente
+    //fuera de una lista porque fuera de la función de colisión hay que detectar que no se tocan
+    this.piezaboton = this.platforms.create(400, 100, 'ground');
+    this.personajesAnimaciones();
+    this.crearControles();
+    this.colisiones();
+
+    //por cada botón sus físicas
+    ////////////this.physics.add.collider(this.boton1, this.platforms);
+    //creando un nuevo presionar para su pieza (porque estos tienen que detectar también cuando se dejan de tocar)
+    ////////////this.physics.add.overlap(this.Cassadie, this.boton1, this.presionar, null, this);
+    ////////////this.physics.add.overlap(this.Seraphina, this.boton1, this.presionar, null, this);
+}
+
+update(){
+    this.movimientoPersonajes();
+    this.controlMecanismos();
+    /*if (!this.Seraphina.body.touching.left && !this.Seraphina.body.touching.right && !this.Seraphina.body.touching.up
+        && !this.Cassadie.body.touching.left && !this.Cassadie.body.touching.right && !this.Cassadie.body.touching.up) {
+        this.piezaboton.enableBody(false, 0, 0, true, true);
+        this.boton.anims.play('arriba');
+        this.pulsar = true;
+    }*/   //controlMecanismos para poner arriba cuando no esté activado el nuevo botón
+
+    //se actualiza el nivel actual para que la pantalla de pausa te devuelva a donde debe
+    nivelActual = 'NivelBosque';
+
+    //Y se manda a pausa desde aquí porque hay que controlarlo metiendo el string que identifica a cada escena y es diferente para cada una
+    if (Phaser.Input.Keyboard.JustDown(this.keyP)) {
+        //this.scene.pause();
+        this.scene.sleep('NivelBosque');
+        this.scene.launch('Pausa');
+        this.parar();  
+    }
+}
+
+//////////////////////Presionar para hacer otro con cada piezaboton extra
+/*presionar(player, boton) {
+    if (this.pulsar) {
+        boton.anims.play('pulsar', false);
+        this.pulsar = false;
+
+    }
+    this.piezaboton.disableBody(true, true);
+}*/
+}
+
 
     var config = {
         type: Phaser.AUTO,
-        width: 800,
-        height: 600,
+        width: 1920,
+        height: 1080,
         physics: {
             default: 'arcade',
             arcade: {
@@ -419,7 +506,7 @@
                 debug: false
             }
         },
-        scene: [Plantilla, Pausa]
+        scene: [NivelBosque, Pausa]
     };
 
     var game = new Phaser.Game(config);
