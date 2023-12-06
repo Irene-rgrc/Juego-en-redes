@@ -434,8 +434,8 @@
                 this.load.image('sueloBosque', 'assets/CuadradoMarron.png');
                 this.load.image('plataformaBosque1', 'assets/LadoVerde.png');
                 this.load.image('plataformaBosque2', 'assets/LadoOscuro.png');
-                this.load.spritesheet('palanca', 'assets/palancaCielo.png', { frameWidth: 446, frameHeight: 345 });
-                this.load.spritesheet('palancaInv', 'assets/palancaCieloInv.png', { frameWidth: 446, frameHeight: 345 });
+                this.load.spritesheet('palanca', 'assets/palancaBosque.png', { frameWidth: 446, frameHeight: 345 });
+                this.load.spritesheet('palancaInv', 'assets/palancaMaderaInv.png', { frameWidth: 446, frameHeight: 345 });
                 this.load.spritesheet('boton', 'assets/botonBosque.png', { frameWidth: 322, frameHeight: 223 });
 
                 //se carga lo común en el padre que son los personajes
@@ -482,8 +482,8 @@
                 
 
                 //El suelo que controlan las palancas se crea como suelo normal pero dentro de las plataformas como data "ground" (para que cada una lo controle y tal)
-                this.palancas.create(80, 575, 'palanca').setScale(0.2).setData({ ground: this.platforms.create(1754, 470, 'plataformaBosque2').setScale(1, 0.3).refreshBody() });
-                this.palancas.create(1800, 570, 'palanca').setScale(0.2).setData({ ground: this.platforms.create(150, 470, 'plataformaBosque2').setScale(1, 0.3).refreshBody() });
+                this.palancas.create(220, 554, 'palanca').setScale(0.3).setData({ ground: this.platforms.create(1754, 470, 'plataformaBosque2').setScale(1, 0.3).refreshBody() });
+                this.palancas.create(1550, 554, 'palanca').setScale(0.3).setData({ ground: this.platforms.create(150, 470, 'plataformaBosque2').setScale(1, 0.3).refreshBody() });
 
 
                 //colocar el suelo que controla el boton por separado porque se necesita acceder a este individualmente
