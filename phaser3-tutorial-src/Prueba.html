@@ -614,13 +614,23 @@ class NivelCielo extends NivelBase {
 constructor() {
     super('NivelCielo');
     this.construir();
+    this.boton;
+    this.boton2;
+    this.boton4;
+    this.piezaboton;
+    this.piezaboton2;
+    this.piezaboton3;
+    this.piezaboton4;
     //si se necesitan añadir más botones se indican aquí como "this.boton1; this.boton2;"
 }
 
 preload(){
     //se cargan sprites de fondo, plataformas, palancas del derecho y del revés y botones para el nivel correspondiente
     this.load.image('fondo', 'assets/Cielo.jpg');
-    this.load.image('ground', 'assetsEjemplo/platform.png');
+    this.load.image('sueloCielo', 'assets/PlataformaMoradaLado.png');
+    this.load.image('plataformaCieloMorado', 'assets/PlataformaMoradaCuad.png');
+    this.load.image('plataformaCieloRojo', 'assets/PlataformaRojaCuad.png');
+    this.load.image('plataformaCieloClaro', 'assets/PlataformaClaroCuad.png');
     this.load.spritesheet('palanca', 'assets/palancaCielo.png', { frameWidth: 446, frameHeight: 345 });
     this.load.spritesheet('palancaInv', 'assets/palancaCieloInv.png', { frameWidth: 446, frameHeight: 345 });
     this.load.spritesheet('boton', 'assets/botonCielo.png', { frameWidth: 322, frameHeight: 223 });
@@ -632,33 +642,75 @@ preload(){
 create(){
     //se añade que tienen fisicas
     this.iniciarMecanismos();
-    //se coloca el botón
-    this.boton = this.physics.add.sprite(400, 470, 'boton').setScale(0.1);
+    // Poner los personajes en las posiciones que se desen: las quiero poner juntas en el centro
+    this.Seraphina = this.physics.add.sprite(955, 800, 'Seraphina').setScale(0.10, 0.10);
+    this.Cassadie = this.physics.add.sprite(995, 800, 'Cassadie').setScale(0.10, 0.10);
+
+    //  Player physics properties. Give the little guy a slight bounce.
+    this.Seraphina.setBounce(0.2);
+    this.Seraphina.setCollideWorldBounds(true);
+
+    this.Cassadie.setBounce(0.2);
+    this.Cassadie.setCollideWorldBounds(true);
+
+    //se coloca el botón X Y
+    // 1
+    this.boton = this.physics.add.sprite(840, 810, 'boton').setScale(0.1);
+    // 2
+    this.boton2 = this.physics.add.group();
+    this.boton2 = this.physics.add.sprite(500, 470, 'boton').setScale(0.1);
+    // 4 (el 3 es palanca)
+    this.boton4 = this.physics.add.group();
+    this.boton4 = this.physics.add.sprite(700, 470, 'boton').setScale(0.1);
     //por cada botón extra se añaden físicas y se coloca porque no es una lista de botones
     ////////////this.boton1 = this.physics.add.group();
     ////////////this.boton1 = this.physics.add.sprite(400, 470, 'boton').setScale(0.02);
 
-    //se colocan las plataformas normales sueltas
-    this.platforms.create(400, 568, 'ground').setScale(2).refreshBody();
-    this.platforms.create(600, 400, 'ground');
+    //se colocan las plataformas normales sueltas -> PLATAFORMAS
+    this.platforms.create(950, 1020, 'sueloCielo').setScale(6,1.5).refreshBody();
+    this.platforms.create(80, 760, 'plataformaCieloMorado').setScale(1,0.7).refreshBody();
+    this.platforms.create(1060, 760, 'plataformaCieloMorado').setScale(2, 0.5).refreshBody();
+    this.platforms.create(1900, 623, 'plataformaCieloRojo').setScale(0.5, 0.3).refreshBody();
+    this.platforms.create(612, 910, 'plataformaCieloMorado').setScale(0.3, 0.3).refreshBody();
+    this.platforms.create(1300, 910, 'plataformaCieloMorado').setScale(0.3, 0.3).refreshBody();
+    this.platforms.create(1850, 300, 'plataformaCieloRojo').setScale(0.5, 0.3).refreshBody();
+    this.platforms.create(170, 550, 'plataformaCieloRojo').setScale(0.2,0.3).refreshBody();
+    this.platforms.create(25, 480, 'plataformaCieloRojo').setScale(0.2,0.5).refreshBody();
+    this.platforms.create(25, 200, 'plataformaCieloClaro').setScale(0.2,0.5).refreshBody();
+    this.platforms.create(100, 380, 'plataformaCieloClaro').setScale(1, 0.3).refreshBody();
+    this.platforms.create(1120, 380, 'plataformaCieloClaro').setScale(1.5, 0.3).refreshBody();
+    this.platforms.create(1060, 290, 'plataformaCieloClaro').setScale(0.1, 1.3).refreshBody();
+    this.platforms.create(1170, 200, 'plataformaCieloClaro').setScale(1, 0.3).refreshBody();
+    this.platforms.create(900, 200, 'plataformaCieloClaro').setScale(0.2,0.2).refreshBody();
+    this.platforms.create(1400, 150, 'plataformaCieloClaro').setScale(0.2,0.2).refreshBody();
+    //this.platforms.create(400, 568, 'plataformaCieloRojo').setScale(2).refreshBody();
+    //this.platforms.create(600, 400, 'sueloCielo');
+
 
     //El suelo que controlan las palancas se crea como suelo normal pero dentro de las plataformas como data "ground" (para que cada una lo controle y tal)
-    this.palancas.create(600, 350, 'palanca').setScale(0.2).setData({ ground: this.platforms.create(50, 250, 'ground') });
-    this.palancas.create(660, 470, 'palanca').setScale(0.2).setData({ ground: this.platforms.create(750, 220, 'ground') });
+    // 3
+    this.palancas.create(1855, 100, 'palanca').setScale(0.3).setData({ ground: this.platforms.create(1200, 862, 'plataformaCieloMorado').setScale(0.1, 1.3).refreshBody() });
     
-
+    
     //colocar el suelo que controla el boton por separado porque se necesita acceder a este individualmente
     //fuera de una lista porque fuera de la función de colisión hay que detectar que no se tocan
-    this.piezaboton = this.platforms.create(400, 100, 'ground');
+    this.piezaboton = this.platforms.create(760, 862, 'plataformaCieloMorado').setScale(0.1, 1.3).refreshBody();
+    this.piezaboton2 = this.platforms.create(550, 380, 'plataformaCieloClaro').setScale(2.5, 0.3).refreshBody();
+    this.piezaboton4 = this.platforms.create(1280, 290, 'plataformaCieloClaro').setScale(0.1, 1.3).refreshBody();
     this.personajesAnimaciones();
     this.crearControles();
     this.colisiones();
 
     //por cada botón sus físicas
     ////////////this.physics.add.collider(this.boton1, this.platforms);
+    this.physics.add.collider(this.boton, this.platforms);
+    this.physics.add.overlap(this.Cassadie, this.boton, this.presionar1, null, this);
+    this.physics.add.overlap(this.Seraphina, this.boton, this.presionar1, null, this);
+                          
     //creando un nuevo presionar para su pieza (porque estos tienen que detectar también cuando se dejan de tocar)
     ////////////this.physics.add.overlap(this.Cassadie, this.boton1, this.presionar, null, this);
     ////////////this.physics.add.overlap(this.Seraphina, this.boton1, this.presionar, null, this);
+    
 }
 
 update(){
@@ -670,9 +722,11 @@ update(){
         this.boton.anims.play('arriba');
         this.pulsar = true;
     }*/   //controlMecanismos para poner arriba cuando no esté activado el nuevo botón
+   
+
 
     //se actualiza el nivel actual para que la pantalla de pausa te devuelva a donde debe
-    nivelActual = 'NivelCielo';
+    nivelActual = 'Niveel';
 
     //Y se manda a pausa desde aquí porque hay que controlarlo metiendo el string que identifica a cada escena y es diferente para cada una
     if (Phaser.Input.Keyboard.JustDown(this.keyP)) {
@@ -706,7 +760,7 @@ update(){
                 debug: false
             }
         },
-        scene: [NivelBosque, Pausa] // NivelBosque  NivelCielo
+        scene: [NivelCielo, Pausa] // NivelBosque  NivelCielo
     };
 
     var game = new Phaser.Game(config);
