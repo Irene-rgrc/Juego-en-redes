@@ -508,7 +508,7 @@ preload(){
     this.load.image('ground', 'assetsEjemplo/platform.png');
     this.load.spritesheet('palanca', 'assets/palancaCielo.png', { frameWidth: 446, frameHeight: 345 });
     this.load.spritesheet('palancaInv', 'assets/palancaCieloInv.png', { frameWidth: 446, frameHeight: 345 });
-    this.load.spritesheet('boton', 'assets/botonCielo.png', { frameWidth: 2789, frameHeight: 1946 });
+    this.load.spritesheet('boton', 'assets/botonCielo.png', { frameWidth: 322, frameHeight: 223 });
 
     //se carga lo común en el padre que son los personajes
     this.cargarPersonajes();
@@ -518,7 +518,7 @@ create(){
     //se añade que tienen fisicas
     this.iniciarMecanismos();
     //se coloca el botón
-    this.boton = this.physics.add.sprite(400, 470, 'boton').setScale(0.02);
+    this.boton = this.physics.add.sprite(400, 470, 'boton').setScale(0.1);
     //por cada botón extra se añaden físicas y se coloca porque no es una lista de botones
     ////////////this.boton1 = this.physics.add.group();
     ////////////this.boton1 = this.physics.add.sprite(400, 470, 'boton').setScale(0.02);
@@ -591,7 +591,7 @@ update(){
                 debug: false
             }
         },
-        scene: [NivelBosque, Pausa] // NivelBosque  NivelCielo
+        scene: [NivelCielo, Pausa] // NivelBosque  NivelCielo
     };
 
     var game = new Phaser.Game(config);

@@ -1,63 +1,63 @@
 {
 	"frames": {
-		"1.png": {
+		"1 (1).png": {
 			"frame": {
 				"x": 1,
 				"y": 1,
-				"w": 2789,
-				"h": 1946
+				"w": 322,
+				"h": 223
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 2789,
-				"h": 1946
+				"w": 322,
+				"h": 223
 			},
 			"sourceSize": {
-				"w": 2789,
-				"h": 1946
+				"w": 322,
+				"h": 223
 			}
 		},
-		"2.png": {
+		"2 (1).png": {
 			"frame": {
-				"x": 2792,
+				"x": 325,
 				"y": 1,
-				"w": 2789,
-				"h": 1946
+				"w": 322,
+				"h": 223
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 2789,
-				"h": 1946
+				"w": 322,
+				"h": 223
 			},
 			"sourceSize": {
-				"w": 2789,
-				"h": 1946
+				"w": 322,
+				"h": 223
 			}
 		},
-		"3.png": {
+		"3 (1).png": {
 			"frame": {
-				"x": 5583,
+				"x": 649,
 				"y": 1,
-				"w": 2789,
-				"h": 1946
+				"w": 322,
+				"h": 223
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 2789,
-				"h": 1946
+				"w": 322,
+				"h": 223
 			},
 			"sourceSize": {
-				"w": 2789,
-				"h": 1946
+				"w": 322,
+				"h": 223
 			}
 		}
 	},
@@ -67,8 +67,8 @@
 		"image": "botonCielo.png",
 		"format": "RGBA8888",
 		"size": {
-			"w": 8373,
-			"h": 1948
+			"w": 972,
+			"h": 225
 		},
 		"scale": "1"
 	}
