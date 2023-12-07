@@ -638,10 +638,10 @@
                 this.boton = this.physics.add.sprite(840, 810, 'botonSCielo').setScale(0.1);
                 // 2
                 this.boton2 = this.physics.add.group();
-                this.boton2 = this.physics.add.sprite(840, 470, 'botonSCielo').setScale(0.1);
+                this.boton2 = this.physics.add.sprite(940, 470, 'botonSCielo').setScale(0.1);
                 // 4 (el 3 es palanca)
                 this.boton4 = this.physics.add.group();
-                this.boton4 = this.physics.add.sprite(700, 470, 'botonSCielo').setScale(0.1);
+                this.boton4 = this.physics.add.sprite(1140, 810, 'botonSCielo').setScale(0.1);
                 //por cada botón extra se añaden físicas y se coloca porque no es una lista de botones
                 ////////////this.boton1 = this.physics.add.group();
                 ////////////this.boton1 = this.physics.add.sprite(400, 470, 'boton').setScale(0.02);
@@ -752,14 +752,14 @@
                     this.piezaboton2.enableBody(false, 0, 0, true, true);
                     this.boton2.anims.play('arriba');
                     this.pulsar = true;
-                }
+                } else { this.pulsar = false; }
 
                 if (!this.Seraphina.body.touching.left && !this.Seraphina.body.touching.right && !this.Seraphina.body.touching.up
                     && !this.Cassadie.body.touching.left && !this.Cassadie.body.touching.right && !this.Cassadie.body.touching.up) {
                     this.piezaboton4.enableBody(false, 0, 0, true, true);
                     this.boton4.anims.play('arriba');
                     this.pulsar = true;
-                }
+                } else { this.pulsar = false; }
 
 
                 //se actualiza el nivel actual para que la pantalla de pausa te devuelva a donde debe
@@ -789,7 +789,7 @@
             }*/
             presionar1(player, boton) {
                 if (this.pulsar) {
-                    boton2.anims.play('pulsar', false);
+                    boton.anims.play('pulsar', false);
                     this.pulsar = false;
             
                 }
@@ -798,7 +798,7 @@
 
             presionar2(player, boton) {
                 if (this.pulsar) {
-                    boton4.anims.play('pulsar', false);
+                    boton.anims.play('pulsar', false);
                     this.pulsar = false;
             
                 }
@@ -1070,8 +1070,8 @@
                     debug: false
                 }
             },
-            //scene: [MenuInicio, Ajustes, NivelBosque, NivelCielo, Elegir] // NivelBosque  NivelCielo
-            scene: [NivelCielo]
+            scene: [MenuInicio, Ajustes, NivelBosque, NivelCielo, Elegir] // NivelBosque  NivelCielo
+            //scene: [NivelCielo]
         };
 
         var game = new Phaser.Game(config);
