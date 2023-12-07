@@ -115,9 +115,9 @@
                     frameRate: 10,
                     repeat: -1
                 });
-
-                //-----------------------------------------
-
+            }
+            //-----------------------------------------
+            mecanismosAnimaciones() {
                 this.anims.create({
                     key: 'desactivar',
                     frames: this.anims.generateFrameNumbers('palancaInv', { start: 0, end: 4 }),
@@ -605,20 +605,21 @@
 
             preload() {
                 //se cargan sprites de fondo, plataformas, palancas del derecho y del revés y botones para el nivel correspondiente
-                this.load.image('fondo', 'assets/Cielo.jpg');
+                this.load.image('fondoCielo', 'assets/Cielo.jpg');
                 this.load.image('sueloCielo', 'assets/PlataformaMoradaLado.png');
                 this.load.image('plataformaCieloMorado', 'assets/PlataformaMoradaCuad.png');
                 this.load.image('plataformaCieloRojo', 'assets/PlataformaRojaCuad.png');
                 this.load.image('plataformaCieloClaro', 'assets/PlataformaClaroCuad.png');
-                this.load.spritesheet('palanca', 'assets/palancaCielo.png', { frameWidth: 446, frameHeight: 345 });
-                this.load.spritesheet('palancaInv', 'assets/palancaCieloInv.png', { frameWidth: 446, frameHeight: 345 });
-                this.load.spritesheet('boton', 'assets/botonCielo.png', { frameWidth: 322, frameHeight: 223 });
+                this.load.spritesheet('palancaCielo', 'assets/palancaCielo.png', { frameWidth: 446, frameHeight: 345 });
+                this.load.spritesheet('palancaInvCielo', 'assets/palancaCieloInv.png', { frameWidth: 446, frameHeight: 345 });
+                this.load.spritesheet('botonSCielo', 'assets/botonCielo.png', { frameWidth: 322, frameHeight: 223 });
 
                 //se carga lo común en el padre que son los personajes
                 this.cargarPersonajes();
             }
 
             create() {
+                this.add.image(960, 500, 'fondoCielo');
                 //se añade que tienen fisicas
                 this.iniciarMecanismos();
                 // Poner los personajes en las posiciones que se desen: las quiero poner juntas en el centro
@@ -634,13 +635,13 @@
 
                 //se coloca el botón X Y
                 // 1
-                this.boton = this.physics.add.sprite(840, 810, 'boton').setScale(0.1);
+                this.boton = this.physics.add.sprite(840, 810, 'botonSCielo').setScale(0.1);
                 // 2
                 this.boton2 = this.physics.add.group();
-                this.boton2 = this.physics.add.sprite(500, 470, 'boton').setScale(0.1);
+                this.boton2 = this.physics.add.sprite(500, 470, 'botonSCielo').setScale(0.1);
                 // 4 (el 3 es palanca)
                 this.boton4 = this.physics.add.group();
-                this.boton4 = this.physics.add.sprite(700, 470, 'boton').setScale(0.1);
+                this.boton4 = this.physics.add.sprite(700, 470, 'botonSCielo').setScale(0.1);
                 //por cada botón extra se añaden físicas y se coloca porque no es una lista de botones
                 ////////////this.boton1 = this.physics.add.group();
                 ////////////this.boton1 = this.physics.add.sprite(400, 470, 'boton').setScale(0.02);
@@ -668,7 +669,7 @@
 
                 //El suelo que controlan las palancas se crea como suelo normal pero dentro de las plataformas como data "ground" (para que cada una lo controle y tal)
                 // 3
-                this.palancas.create(1855, 100, 'palanca').setScale(0.3).setData({ ground: this.platforms.create(1200, 862, 'plataformaCieloMorado').setScale(0.1, 1.3).refreshBody() });
+                this.palancas.create(1855, 100, 'palancaCielo').setScale(0.3).setData({ ground: this.platforms.create(1200, 862, 'plataformaCieloMorado').setScale(0.1, 1.3).refreshBody() });
 
 
                 //colocar el suelo que controla el boton por separado porque se necesita acceder a este individualmente
@@ -677,6 +678,35 @@
                 this.piezaboton2 = this.platforms.create(550, 380, 'plataformaCieloClaro').setScale(2.5, 0.3).refreshBody();
                 this.piezaboton4 = this.platforms.create(1280, 290, 'plataformaCieloClaro').setScale(0.1, 1.3).refreshBody();
                 this.personajesAnimaciones();
+                this.anims.create({
+                    key: 'desactivar',
+                    frames: this.anims.generateFrameNumbers('palancaInvCielo', { start: 0, end: 4 }),
+                    frameRate: 10,
+                    repeat: 0
+                })
+
+                this.anims.create({
+                    key: 'activar',
+                    frames: this.anims.generateFrameNumbers('palancaCielo', { start: 0, end: 4 }),
+                    frameRate: 10,
+                    repeat: 0
+                })
+
+                this.anims.create({
+                    key: 'arriba',
+                    frames: [{ key: 'botonSCielo', frame: 0 }],
+                    frameRate: 7,
+                    repeat: 0
+                })
+
+                this.anims.create({
+                    key: 'pulsar',
+                    frames: this.anims.generateFrameNumbers('botonSCielo', { start: 0, end: 2 }),
+                    frameRate: 7,
+                    repeat: 0
+                })
+
+
                 this.crearControles();
                 this.colisiones();
 
@@ -691,7 +721,7 @@
                 ////////////this.physics.add.overlap(this.Seraphina, this.boton1, this.presionar, null, this);
 
                 this.puerta = this.physics.add.group();
-                this.puerta = this.physics.add.sprite(500, 470, 'boton').setScale(0.1);
+                this.puerta = this.physics.add.sprite(500, 470, 'botonSCielo').setScale(0.1);
                 this.physics.add.collider(this.puerta, this.platforms);
                 this.physics.add.overlap(this.Cassadie, this.puerta, this.elegir, null, this);
                 this.physics.add.overlap(this.Seraphina, this.puerta, this.elegir, null, this);
@@ -711,7 +741,7 @@
 
 
                 //se actualiza el nivel actual para que la pantalla de pausa te devuelva a donde debe
-                nivelActual = 'Nivel';
+                nivelActual = 'NivelCielo';
 
                 //Y se manda a pausa desde aquí porque hay que controlarlo metiendo el string que identifica a cada escena y es diferente para cada una
                 if (Phaser.Input.Keyboard.JustDown(this.keyP)) {
@@ -1002,6 +1032,7 @@
                 }
             },
             scene: [MenuInicio, Ajustes, NivelBosque, NivelCielo, Elegir] // NivelBosque  NivelCielo
+            //scene: [NivelCielo]
         };
 
         var game = new Phaser.Game(config);
