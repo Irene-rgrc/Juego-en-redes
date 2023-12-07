@@ -15,404 +15,379 @@
 <script type="text/javascript">
 
     var nivelActual;
+    let posicionSliderGlobal = 950;
+    let volumenGlobal = 0.5;
+    let cancionReproducida = false;
+    let cancion;
 
-    class NivelBase extends Phaser.Scene {
+        class NivelBase extends Phaser.Scene {
 
-        construir() {
-            this.Seraphina;
-            this.Cassadie;
-            this.platforms;
-            this.palancas;
-            this.boton;
-            this.piezaboton;
-            this.cursors;
-            this.keyW;
-            this.keyA;
-            this.keyD;
-            this.keyP;
-            this.space;
-            this.enter;
-            this.salto;
-            this.empujon;
-            this.tocarC = false;
-            this.tocarS = false;
-            this.pulsar = false;
-        }
-
-        cargarPersonajes() {
-            this.load.spritesheet('Cassadie', 'assets/cassadie.png', { frameWidth: 862, frameHeight: 980 });
-            this.load.spritesheet('Seraphina', 'assets/spritesheet.png', { frameWidth: 862, frameHeight: 980 });
-        }
-
-        iniciarMecanismos() {
-            //carga el fondo
-            this.add.image(960, 500, 'fondo');
-
-            //se añaden las physics
-            this.platforms = this.physics.add.staticGroup();
-            this.palancas = this.physics.add.group();
-            this.boton = this.physics.add.group();
-        }
-
-        iniciarPersonajes(){
-            this.Seraphina = this.physics.add.sprite(100, 450, 'Seraphina').setScale(0.10, 0.10);
-            this.Cassadie = this.physics.add.sprite(100, 450, 'Cassadie').setScale(0.10, 0.10);
-
-            //  Player physics properties. Give the little guy a slight bounce.
-            this.Seraphina.setBounce(0.2);
-            this.Seraphina.setCollideWorldBounds(true);
-
-            this.Cassadie.setBounce(0.2);
-            this.Cassadie.setCollideWorldBounds(true);
-        }
-
-        personajesAnimaciones(){
-            // The player and its settings
-           
-
-            //  Our player animations, turning, walking left and walking right.
-            this.anims.create({
-                key: 'leftS',
-                frames: this.anims.generateFrameNumbers('Seraphina', { start: 0, end: 3 }),
-                frameRate: 10,
-                repeat: -1
-            });
-
-            this.anims.create({
-                key: 'turnS',
-                frames: [{ key: 'Seraphina', frame: 4 }],
-                frameRate: 20
-            });
-
-            this.anims.create({
-                key: 'rightS',
-                frames: this.anims.generateFrameNumbers('Seraphina', { start: 5, end: 8 }),
-                frameRate: 10,
-                repeat: -1
-            });
-
-            //-----------------------------------------
-
-            this.anims.create({
-                key: 'leftC',
-                frames: this.anims.generateFrameNumbers('Cassadie', { start: 0, end: 3 }),
-                frameRate: 10,
-                repeat: -1
-            });
-
-            this.anims.create({
-                key: 'turnC',
-                frames: [{ key: 'Cassadie', frame: 4 }],
-                frameRate: 20
-            });
-
-            this.anims.create({
-                key: 'rightC',
-                frames: this.anims.generateFrameNumbers('Cassadie', { start: 5, end: 8 }),
-                frameRate: 10,
-                repeat: -1
-            });
-
-            //-----------------------------------------
-
-            this.anims.create({
-                key: 'desactivar',
-                frames: this.anims.generateFrameNumbers('palancaInv', { start: 0, end: 4 }),
-                frameRate: 10,
-                repeat: 0
-            })
-
-            this.anims.create({
-                key: 'activar',
-                frames: this.anims.generateFrameNumbers('palanca', { start: 0, end: 4 }),
-                frameRate: 10,
-                repeat: 0
-            })
-
-            this.anims.create({
-                key: 'arriba',
-                frames: [{ key: 'boton', frame: 0 }],
-                frameRate: 7,
-                repeat: 0
-            })
-
-            this.anims.create({
-                key: 'pulsar',
-                frames: this.anims.generateFrameNumbers('boton', { start: 0, end: 2 }),
-                frameRate: 7,
-                repeat: 0
-            })
-        }
-
-        crearControles(){
-
-            //  Input Events
-            this.cursors = this.input.keyboard.createCursorKeys();
-
-            this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
-            this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
-            this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-            this.keyP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
-            this.space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-            this.enter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
-
-            this.salto = false;
-            this.empujon = false;
-        }
-
-        colisiones(){
-            //  Collide the player and the stars with the platforms
-            this.physics.add.collider(this.Seraphina, this.platforms);
-            this.physics.add.collider(this.Cassadie, this.platforms);
-            this.physics.add.collider(this.palancas, this.platforms);
-            this.physics.add.collider(this.boton, this.platforms);
-
-            this.physics.add.overlap(this.Seraphina, this.palancas, this.activarS, null, this);
-            this.physics.add.overlap(this.Cassadie, this.palancas, this.activarC, null, this);
-
-            this.physics.add.overlap(this.Cassadie, this.boton, this.presionar, null, this);
-            this.physics.add.overlap(this.Seraphina, this.boton, this.presionar, null, this);
-        }
-
-        movimientoPersonajes() {
-            if (this.gameOver) {
-                return;
-            }
-
-            if (this.cursors.left.isDown) {
-                this.Seraphina.setVelocityX(-160);
-                this.Seraphina.anims.play('leftS', true);
-            } else if (this.cursors.right.isDown) {
-                this.Seraphina.setVelocityX(160);
-                this.Seraphina.anims.play('rightS', true);
-            }
-            else {
-                this.Seraphina.setVelocityX(0);
-                this.Seraphina.anims.play('turnS');
-            }
-
-            if (this.cursors.up.isDown && this.Seraphina.body.touching.down) {
-                this.Seraphina.setVelocityY(-330);
-                this.salto = true;
-            }
-
-            if (this.enter.isDown && !this.Seraphina.body.touching.down && this.salto) {
-                this.Seraphina.setVelocityY(-330);
-                this.salto = false;
-            }
-
-
-            if (this.keyA.isDown) {
-                if (Phaser.Input.Keyboard.JustDown(this.space)) {
-                    this.Cassadie.setVelocityX(-600);
-                    this.empujon = false;
-                }
-                else {
-                    this.Cassadie.setVelocityX(-160);
-                    this.Cassadie.anims.play('leftC', true);
-                }
-            } else if (this.keyD.isDown) {
-                if (Phaser.Input.Keyboard.JustDown(this.space)) {
-                    this.Cassadie.setVelocityX(600);
-                    this.empujon = false;
-                }
-                else {
-                    this.Cassadie.setVelocityX(160);
-                    this.Cassadie.anims.play('rightC', true);
-                }
-            }
-            else {
-                this.Cassadie.setVelocityX(0);
-                this.Cassadie.anims.play('turnC');
-                this.empujon = true;
-            }
-
-            if (this.keyW.isDown && this.Cassadie.body.touching.down) {
-                this.Cassadie.setVelocityY(-330);
-            }
-        }
-     
-        controlMecanismos(){
-            if (!this.Cassadie.body.touching.left && !this.Cassadie.body.touching.right && !this.Cassadie.body.touching.up) {
-                this.tocarC = true;
-            }
-            else {
+            construir() {
+                this.Seraphina;
+                this.Cassadie;
+                this.platforms;
+                this.palancas;
+                this.boton;
+                this.piezaboton;
+                this.cursors;
+                this.keyW;
+                this.keyA;
+                this.keyD;
+                this.keyP;
+                this.space;
+                this.enter;
+                this.salto;
+                this.empujon;
                 this.tocarC = false;
-            }
-            if (!this.Seraphina.body.touching.left && !this.Seraphina.body.touching.right && !this.Seraphina.body.touching.up) {
-                this.tocarS = true;
-            }
-            else {
                 this.tocarS = false;
-            }
-
-            if (!this.Seraphina.body.touching.left && !this.Seraphina.body.touching.right && !this.Seraphina.body.touching.up
-                && !this.Cassadie.body.touching.left && !this.Cassadie.body.touching.right && !this.Cassadie.body.touching.up) {
-                this.piezaboton.enableBody(false, 0, 0, true, true);
-                this.boton.anims.play('arriba');
-                this.pulsar = true;
-            }
-            else { this.pulsar = false; }
-        }
-
-        parar(){
-            this.keyA.isDown = false;
-            this.keyD.isDown = false;
-            this.keyW.isDown = false;
-            this.cursors.left.isDown = false;
-            this.cursors.right.isDown = false;
-            this.cursors.up.isDown = false; 
-        }
-
-        activarC(player, palanca) {
-            if (!palanca.getData('on') && this.tocarC) {
-                palanca.anims.play('activar', false);
-                palanca.getData('ground').disableBody(true, true);
-                palanca.setData({ on: true });
-            }
-            else if (palanca.getData('on') && this.tocarC) {
-                palanca.anims.play('desactivar', false);
-                palanca.getData('ground').enableBody(false, 0, 0, true, true);
-                palanca.setData({ on: false });
-            }
-        }
-
-        activarS(player, palanca) {
-            if (!palanca.getData('on') && this.tocarS) {
-                palanca.anims.play('activar', false);
-                palanca.getData('ground').disableBody(true, true);
-                palanca.setData({ on: true });
-            }
-            else if (palanca.getData('on') && this.tocarS) {
-                palanca.anims.play('desactivar', false);
-                palanca.getData('ground').enableBody(false, 0, 0, true, true);
-                palanca.setData({ on: false });
-            }
-        }
-
-        presionar(player, boton) {
-            if (this.pulsar) {
-                boton.anims.play('pulsar', false);
                 this.pulsar = false;
-
             }
-            this.piezaboton.disableBody(true, true);
-        }
-    }
 
-    class Pausa extends Phaser.Scene {
-        constructor() {
-            super('Pausa');
-            this.keyP;
-        }
+            cargarPersonajes() {
+                this.load.spritesheet('Cassadie', 'assets/cassadie.png', { frameWidth: 862, frameHeight: 980 });
+                this.load.spritesheet('Seraphina', 'assets/spritesheet.png', { frameWidth: 862, frameHeight: 980 });
+            }
 
-        preload() {
-            this.load.image('sky', 'assetsEjemplo/sky.png');
-        }
+            iniciarMecanismos() {
+                //se añaden las physics
+                this.platforms = this.physics.add.staticGroup();
+                this.palancas = this.physics.add.group();
+                this.boton = this.physics.add.group();
+            }
 
-        create() {
-            //  A simple background for our game
-            this.add.image(400, 300, 'sky');
+            iniciarPersonajes() {
+                this.Seraphina = this.physics.add.sprite(100, 450, 'Seraphina').setScale(0.10, 0.10);
+                this.Cassadie = this.physics.add.sprite(100, 450, 'Cassadie').setScale(0.10, 0.10);
 
-            this.keyP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
-        }
+                //  Player physics properties. Give the little guy a slight bounce.
+                this.Seraphina.setBounce(0.2);
+                this.Seraphina.setCollideWorldBounds(true);
 
-        update() {
-            if (Phaser.Input.Keyboard.JustDown(this.keyP)) {
-                this.scene.wake(nivelActual);
-                //this.scene.resume(nivelActual);
-                this.scene.stop('Pausa');
+                this.Cassadie.setBounce(0.2);
+                this.Cassadie.setCollideWorldBounds(true);
+            }
+
+            personajesAnimaciones() {
+                // The player and its settings
+
+
+                //  Our player animations, turning, walking left and walking right.
+                this.anims.create({
+                    key: 'leftS',
+                    frames: this.anims.generateFrameNumbers('Seraphina', { start: 0, end: 3 }),
+                    frameRate: 10,
+                    repeat: -1
+                });
+
+                this.anims.create({
+                    key: 'turnS',
+                    frames: [{ key: 'Seraphina', frame: 4 }],
+                    frameRate: 20
+                });
+
+                this.anims.create({
+                    key: 'rightS',
+                    frames: this.anims.generateFrameNumbers('Seraphina', { start: 5, end: 8 }),
+                    frameRate: 10,
+                    repeat: -1
+                });
+
+                //-----------------------------------------
+
+                this.anims.create({
+                    key: 'leftC',
+                    frames: this.anims.generateFrameNumbers('Cassadie', { start: 0, end: 3 }),
+                    frameRate: 10,
+                    repeat: -1
+                });
+
+                this.anims.create({
+                    key: 'turnC',
+                    frames: [{ key: 'Cassadie', frame: 4 }],
+                    frameRate: 20
+                });
+
+                this.anims.create({
+                    key: 'rightC',
+                    frames: this.anims.generateFrameNumbers('Cassadie', { start: 5, end: 8 }),
+                    frameRate: 10,
+                    repeat: -1
+                });
+
+                //-----------------------------------------
+
+                this.anims.create({
+                    key: 'desactivar',
+                    frames: this.anims.generateFrameNumbers('palancaInv', { start: 0, end: 4 }),
+                    frameRate: 10,
+                    repeat: 0
+                })
+
+                this.anims.create({
+                    key: 'activar',
+                    frames: this.anims.generateFrameNumbers('palanca', { start: 0, end: 4 }),
+                    frameRate: 10,
+                    repeat: 0
+                })
+
+                this.anims.create({
+                    key: 'arriba',
+                    frames: [{ key: 'boton', frame: 0 }],
+                    frameRate: 7,
+                    repeat: 0
+                })
+
+                this.anims.create({
+                    key: 'pulsar',
+                    frames: this.anims.generateFrameNumbers('boton', { start: 0, end: 2 }),
+                    frameRate: 7,
+                    repeat: 0
+                })
+            }
+
+            crearControles() {
+
+                //  Input Events
+                this.cursors = this.input.keyboard.createCursorKeys();
+
+                this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+                this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+                this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+                this.keyP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
+                this.space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+                this.enter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
+
+                this.salto = false;
+                this.empujon = false;
+            }
+
+            colisiones() {
+                //  Collide the player and the stars with the platforms
+                this.physics.add.collider(this.Seraphina, this.platforms);
+                this.physics.add.collider(this.Cassadie, this.platforms);
+                this.physics.add.collider(this.palancas, this.platforms);
+                this.physics.add.collider(this.boton, this.platforms);
+
+                this.physics.add.overlap(this.Seraphina, this.palancas, this.activarS, null, this);
+                this.physics.add.overlap(this.Cassadie, this.palancas, this.activarC, null, this);
+
+                this.physics.add.overlap(this.Cassadie, this.boton, this.presionar, null, this);
+                this.physics.add.overlap(this.Seraphina, this.boton, this.presionar, null, this);
+            }
+
+            movimientoPersonajes() {
+                if (this.gameOver) {
+                    return;
+                }
+
+                if (this.cursors.left.isDown) {
+                    this.Seraphina.setVelocityX(-160);
+                    this.Seraphina.anims.play('leftS', true);
+                } else if (this.cursors.right.isDown) {
+                    this.Seraphina.setVelocityX(160);
+                    this.Seraphina.anims.play('rightS', true);
+                }
+                else {
+                    this.Seraphina.setVelocityX(0);
+                    this.Seraphina.anims.play('turnS');
+                }
+
+                if (this.cursors.up.isDown && this.Seraphina.body.touching.down) {
+                    this.Seraphina.setVelocityY(-330);
+                    this.salto = true;
+                }
+
+                if (this.enter.isDown && !this.Seraphina.body.touching.down && this.salto) {
+                    this.Seraphina.setVelocityY(-330);
+                    this.salto = false;
+                }
+
+
+                if (this.keyA.isDown) {
+                    if (Phaser.Input.Keyboard.JustDown(this.space)) {
+                        this.Cassadie.setVelocityX(-600);
+                        this.empujon = false;
+                    }
+                    else {
+                        this.Cassadie.setVelocityX(-160);
+                        this.Cassadie.anims.play('leftC', true);
+                    }
+                } else if (this.keyD.isDown) {
+                    if (Phaser.Input.Keyboard.JustDown(this.space)) {
+                        this.Cassadie.setVelocityX(600);
+                        this.empujon = false;
+                    }
+                    else {
+                        this.Cassadie.setVelocityX(160);
+                        this.Cassadie.anims.play('rightC', true);
+                    }
+                }
+                else {
+                    this.Cassadie.setVelocityX(0);
+                    this.Cassadie.anims.play('turnC');
+                    this.empujon = true;
+                }
+
+                if (this.keyW.isDown && this.Cassadie.body.touching.down) {
+                    this.Cassadie.setVelocityY(-330);
+                }
+            }
+
+            controlMecanismos() {
+                if (!this.Cassadie.body.touching.left && !this.Cassadie.body.touching.right && !this.Cassadie.body.touching.up) {
+                    this.tocarC = true;
+                }
+                else {
+                    this.tocarC = false;
+                }
+                if (!this.Seraphina.body.touching.left && !this.Seraphina.body.touching.right && !this.Seraphina.body.touching.up) {
+                    this.tocarS = true;
+                }
+                else {
+                    this.tocarS = false;
+                }
+
+                if (!this.Seraphina.body.touching.left && !this.Seraphina.body.touching.right && !this.Seraphina.body.touching.up
+                    && !this.Cassadie.body.touching.left && !this.Cassadie.body.touching.right && !this.Cassadie.body.touching.up) {
+                    this.piezaboton.enableBody(false, 0, 0, true, true);
+                    this.boton.anims.play('arriba');
+                    this.pulsar = true;
+                }
+                else { this.pulsar = false; }
+            }
+
+            parar() {
+                this.keyA.isDown = false;
+                this.keyD.isDown = false;
+                this.keyW.isDown = false;
+                this.cursors.left.isDown = false;
+                this.cursors.right.isDown = false;
+                this.cursors.up.isDown = false;
+            }
+
+            activarC(player, palanca) {
+                if (!palanca.getData('on') && this.tocarC) {
+                    palanca.anims.play('activar', false);
+                    palanca.getData('ground').disableBody(true, true);
+                    palanca.setData({ on: true });
+                }
+                else if (palanca.getData('on') && this.tocarC) {
+                    palanca.anims.play('desactivar', false);
+                    palanca.getData('ground').enableBody(false, 0, 0, true, true);
+                    palanca.setData({ on: false });
+                }
+            }
+
+            activarS(player, palanca) {
+                if (!palanca.getData('on') && this.tocarS) {
+                    palanca.anims.play('activar', false);
+                    palanca.getData('ground').disableBody(true, true);
+                    palanca.setData({ on: true });
+                }
+                else if (palanca.getData('on') && this.tocarS) {
+                    palanca.anims.play('desactivar', false);
+                    palanca.getData('ground').enableBody(false, 0, 0, true, true);
+                    palanca.setData({ on: false });
+                }
+            }
+
+            presionar(player, boton) {
+                if (this.pulsar) {
+                    boton.anims.play('pulsar', false);
+                    this.pulsar = false;
+
+                }
+                this.piezaboton.disableBody(true, true);
             }
         }
-    }
 
-    class Plantilla extends NivelBase {
+        class Plantilla extends NivelBase {
 
-        constructor() {
-            super('Plantilla');
-            this.construir();
-            //si se necesitan añadir más botones se indican aquí como "this.boton1; this.boton2;"
-        }
-
-        preload(){
-            //se cargan sprites de fondo, plataformas, palancas del derecho y del revés y botones para el nivel correspondiente
-            this.load.image('fondo', 'assetsEjemplo/sky.png');
-            this.load.image('ground', 'assetsEjemplo/platform.png');
-            this.load.spritesheet('palanca', 'assets/palancaCielo.png', { frameWidth: 446, frameHeight: 345 });
-            this.load.spritesheet('palancaInv', 'assets/palancaCieloInv.png', { frameWidth: 446, frameHeight: 345 });
-            this.load.spritesheet('boton', 'assets/botonBosque.png', { frameWidth: 322, frameHeight: 223 });
-
-            //se carga lo común en el padre que son los personajes
-            this.cargarPersonajes();
-        }
-
-        create(){
-            //se añade que tienen fisicas
-            this.iniciarMecanismos();
-            //se coloca el botón
-            this.boton = this.physics.add.sprite(400, 470, 'boton').setScale(0.02);
-            //por cada botón extra se añaden físicas y se coloca porque no es una lista de botones
-            ////////////this.boton1 = this.physics.add.group();
-            ////////////this.boton1 = this.physics.add.sprite(400, 470, 'boton').setScale(0.02);
-
-            //se colocan las plataformas normales sueltas
-            this.platforms.create(400, 568, 'ground').setScale(2).refreshBody();
-            this.platforms.create(600, 400, 'ground');
-
-            //El suelo que controlan las palancas se crea como suelo normal pero dentro de las plataformas como data "ground" (para que cada una lo controle y tal)
-            this.palancas.create(600, 350, 'palanca').setScale(0.2).setData({ ground: this.platforms.create(50, 250, 'ground') });
-            this.palancas.create(660, 470, 'palanca').setScale(0.2).setData({ ground: this.platforms.create(750, 220, 'ground') });
-            
-        
-
-            //colocar el suelo que controla el boton por separado porque se necesita acceder a este individualmente
-            //fuera de una lista porque fuera de la función de colisión hay que detectar que no se tocan
-            this.piezaboton = this.platforms.create(400, 100, 'ground');
-            this.personajesAnimaciones();
-            this.crearControles();
-            this.colisiones();
-
-            //por cada botón sus físicas
-            ////////////this.physics.add.collider(this.boton1, this.platforms);
-            //creando un nuevo presionar para su pieza (porque estos tienen que detectar también cuando se dejan de tocar)
-            ////////////this.physics.add.overlap(this.Cassadie, this.boton1, this.presionar, null, this);
-            ////////////this.physics.add.overlap(this.Seraphina, this.boton1, this.presionar, null, this);
-        }
-
-        update(){
-            this.movimientoPersonajes();
-            this.controlMecanismos();
-            /*if (!this.Seraphina.body.touching.left && !this.Seraphina.body.touching.right && !this.Seraphina.body.touching.up
-                && !this.Cassadie.body.touching.left && !this.Cassadie.body.touching.right && !this.Cassadie.body.touching.up) {
-                this.piezaboton.enableBody(false, 0, 0, true, true);
-                this.boton.anims.play('arriba');
-                this.pulsar = true;
-            }*/   //controlMecanismos para poner arriba cuando no esté activado el nuevo botón
-
-            //se actualiza el nivel actual para que la pantalla de pausa te devuelva a donde debe
-            nivelActual = 'Plantilla';
-
-            //Y se manda a pausa desde aquí porque hay que controlarlo metiendo el string que identifica a cada escena y es diferente para cada una
-            if (Phaser.Input.Keyboard.JustDown(this.keyP)) {
-                //this.scene.pause();
-                this.scene.sleep('Plantilla');
-                this.scene.launch('Pausa');
-                this.parar();  
+            constructor() {
+                super('Plantilla');
+                this.construir();
+                //si se necesitan añadir más botones se indican aquí como "this.boton1; this.boton2;"
             }
+
+            preload() {
+                //se cargan sprites de fondo, plataformas, palancas del derecho y del revés y botones para el nivel correspondiente
+                this.load.image('fondo', 'assetsEjemplo/sky.png');
+                this.load.image('ground', 'assetsEjemplo/platform.png');
+                this.load.spritesheet('palanca', 'assets/palancaCielo.png', { frameWidth: 446, frameHeight: 345 });
+                this.load.spritesheet('palancaInv', 'assets/palancaCieloInv.png', { frameWidth: 446, frameHeight: 345 });
+                this.load.spritesheet('boton', 'assets/botonBosque.png', { frameWidth: 322, frameHeight: 223 });
+
+                //se carga lo común en el padre que son los personajes
+                this.cargarPersonajes();
+            }
+
+            create() {
+                //se añade que tienen fisicas
+                this.iniciarMecanismos();
+                //se coloca el botón
+                this.boton = this.physics.add.sprite(400, 470, 'boton').setScale(0.02);
+                //por cada botón extra se añaden físicas y se coloca porque no es una lista de botones
+                ////////////this.boton1 = this.physics.add.group();
+                ////////////this.boton1 = this.physics.add.sprite(400, 470, 'boton').setScale(0.02);
+
+                //se colocan las plataformas normales sueltas
+                this.platforms.create(400, 568, 'ground').setScale(2).refreshBody();
+                this.platforms.create(600, 400, 'ground');
+
+                //El suelo que controlan las palancas se crea como suelo normal pero dentro de las plataformas como data "ground" (para que cada una lo controle y tal)
+                this.palancas.create(600, 350, 'palanca').setScale(0.2).setData({ ground: this.platforms.create(50, 250, 'ground') });
+                this.palancas.create(660, 470, 'palanca').setScale(0.2).setData({ ground: this.platforms.create(750, 220, 'ground') });
+
+
+
+                //colocar el suelo que controla el boton por separado porque se necesita acceder a este individualmente
+                //fuera de una lista porque fuera de la función de colisión hay que detectar que no se tocan
+                this.piezaboton = this.platforms.create(400, 100, 'ground');
+                this.personajesAnimaciones();
+                this.crearControles();
+                this.colisiones();
+
+                //por cada botón sus físicas
+                ////////////this.physics.add.collider(this.boton1, this.platforms);
+                //creando un nuevo presionar para su pieza (porque estos tienen que detectar también cuando se dejan de tocar)
+                ////////////this.physics.add.overlap(this.Cassadie, this.boton1, this.presionar, null, this);
+                ////////////this.physics.add.overlap(this.Seraphina, this.boton1, this.presionar, null, this);
+            }
+
+            update() {
+                this.movimientoPersonajes();
+                this.controlMecanismos();
+                /*if (!this.Seraphina.body.touching.left && !this.Seraphina.body.touching.right && !this.Seraphina.body.touching.up
+                    && !this.Cassadie.body.touching.left && !this.Cassadie.body.touching.right && !this.Cassadie.body.touching.up) {
+                    this.piezaboton.enableBody(false, 0, 0, true, true);
+                    this.boton.anims.play('arriba');
+                    this.pulsar = true;
+                }*/   //controlMecanismos para poner arriba cuando no esté activado el nuevo botón
+
+                //se actualiza el nivel actual para que la pantalla de pausa te devuelva a donde debe
+                nivelActual = 'Plantilla';
+
+                //Y se manda a pausa desde aquí porque hay que controlarlo metiendo el string que identifica a cada escena y es diferente para cada una
+                if (Phaser.Input.Keyboard.JustDown(this.keyP)) {
+                    //this.scene.pause();
+                    this.scene.sleep('Plantilla');
+                    this.scene.launch('Ajustes');
+                    this.parar();
+                }
+            }
+
+            //////////////////////Presionar para hacer otro con cada piezaboton extra
+            /*presionar(player, boton) {
+                if (this.pulsar) {
+                    boton.anims.play('pulsar', false);
+                    this.pulsar = false;
+    
+                }
+                this.piezaboton.disableBody(true, true);
+            }*/
         }
 
-        //////////////////////Presionar para hacer otro con cada piezaboton extra
-        /*presionar(player, boton) {
-            if (this.pulsar) {
-                boton.anims.play('pulsar', false);
-                this.pulsar = false;
-
-            }
-            this.piezaboton.disableBody(true, true);
-        }*/
-    }
-
-    class NivelBosque extends NivelBase {
+        class NivelBosque extends NivelBase {
 
             constructor() {
                 super('NivelBosque');
@@ -424,13 +399,13 @@
                 this.piezaboton1;
                 this.piezaboton2;
                 this.piezaboton3;
-                
+
                 //si se necesitan añadir más botones se indican aquí como "this.boton1; this.boton2;"
             }
 
             preload() {
                 //se cargan sprites de fondo, plataformas, palancas del derecho y del revés y botones para el nivel correspondiente
-                this.load.image('fondo', 'assets/Bosque.png');
+                this.load.image('fondoB', 'assets/Bosque.png');
                 this.load.image('sueloBosque', 'assets/CuadradoMarron.png');
                 this.load.image('plataformaBosque1', 'assets/LadoVerde.png');
                 this.load.image('plataformaBosque2', 'assets/LadoOscuro.png');
@@ -443,18 +418,20 @@
             }
 
             create() {
+                //carga el fondo
+                this.add.image(960, 500, 'fondoB');
                 //se añade que tienen fisicas
                 this.iniciarMecanismos();
-                
+
                 this.Seraphina = this.physics.add.sprite(100, 810, 'Seraphina').setScale(0.10, 0.10);
                 this.Cassadie = this.physics.add.sprite(1800, 810, 'Cassadie').setScale(0.10, 0.10);
 
-            //  Player physics properties. Give the little guy a slight bounce.
-                 this.Seraphina.setBounce(0.2);
-                 this.Seraphina.setCollideWorldBounds(true);
+                //  Player physics properties. Give the little guy a slight bounce.
+                this.Seraphina.setBounce(0.2);
+                this.Seraphina.setCollideWorldBounds(true);
 
-                 this.Cassadie.setBounce(0.2);
-                 this.Cassadie.setCollideWorldBounds(true);
+                this.Cassadie.setBounce(0.2);
+                this.Cassadie.setCollideWorldBounds(true);
 
                 //se coloca el botón
                 this.boton = this.physics.add.sprite(800, 850, 'boton').setScale(0.15);
@@ -479,7 +456,7 @@
                 this.platforms.create(1824, 250, 'plataformaBosque1').setScale(1.5, 0.3).refreshBody();
                 this.platforms.create(1090, 200, 'plataformaBosque1').setScale(0.3, 0.1).refreshBody();
                 this.platforms.create(1350, 200, 'plataformaBosque1').setScale(0.3, 0.1).refreshBody();
-                
+
 
                 //El suelo que controlan las palancas se crea como suelo normal pero dentro de las plataformas como data "ground" (para que cada una lo controle y tal)
                 this.palancas.create(220, 554, 'palanca').setScale(0.3).setData({ ground: this.platforms.create(1754, 470, 'plataformaBosque2').setScale(1, 0.3).refreshBody() });
@@ -492,7 +469,7 @@
                 this.piezaboton = this.platforms.create(1374, 753, 'plataformaBosque2').setScale(0.1, 2).refreshBody();
                 this.piezaboton1 = this.platforms.create(1574, 123, 'plataformaBosque2').setScale(0.1, 2.3).refreshBody();
                 this.piezaboton2 = this.platforms.create(1574, 370, 'plataformaBosque2').setScale(0.1, 2.1).refreshBody();
-                this.piezaboton3 = this.platforms.create(300, 753, 'plataformaBosque2').setScale(0.1, 2).refreshBody(); 
+                this.piezaboton3 = this.platforms.create(300, 753, 'plataformaBosque2').setScale(0.1, 2).refreshBody();
                 this.personajesAnimaciones();
                 this.crearControles();
                 this.colisiones();
@@ -555,9 +532,9 @@
                 console.log(this.Cassadie.y)
 
                 //Condición para pasar al siguiente nivel, falta añadirle las posiciones verdaderas.
-                /*if(this.Cassadie.x >=1876 && this.Cassadie.y >= 816 && this.Seraphine.x >=1876 && this.Seraphine.y >= 816 ){
+                if(this.Cassadie.x >=1876 && this.Cassadie.y >= 816 && this.Seraphina.x >=1876 && this.Seraphina.y >= 816 ){
                     this.scene.start('NivelCielo');
-                }*/
+                }
 
                 nivelActual = 'NivelBosque';
 
@@ -565,7 +542,7 @@
                 if (Phaser.Input.Keyboard.JustDown(this.keyP)) {
                     //this.scene.pause();
                     this.scene.sleep('NivelBosque');
-                    this.scene.launch('Pausa');
+                    this.scene.launch('Ajustes');
                     this.parar();
                 }
             }
@@ -609,107 +586,384 @@
             }*/
         }
 
-class NivelCielo extends NivelBase {
+        class NivelCielo extends NivelBase {
 
-constructor() {
-    super('NivelCielo');
-    this.construir();
-    //si se necesitan añadir más botones se indican aquí como "this.boton1; this.boton2;"
-}
-
-preload(){
-    //se cargan sprites de fondo, plataformas, palancas del derecho y del revés y botones para el nivel correspondiente
-    this.load.image('fondo', 'assets/Cielo.jpg');
-    this.load.image('ground', 'assetsEjemplo/platform.png');
-    this.load.spritesheet('palanca', 'assets/palancaCielo.png', { frameWidth: 446, frameHeight: 345 });
-    this.load.spritesheet('palancaInv', 'assets/palancaCieloInv.png', { frameWidth: 446, frameHeight: 345 });
-    this.load.spritesheet('boton', 'assets/botonCielo.png', { frameWidth: 322, frameHeight: 223 });
-
-    //se carga lo común en el padre que son los personajes
-    this.cargarPersonajes();
-}
-
-create(){
-    //se añade que tienen fisicas
-    this.iniciarMecanismos();
-    //se coloca el botón
-    this.boton = this.physics.add.sprite(400, 470, 'boton').setScale(0.1);
-    //por cada botón extra se añaden físicas y se coloca porque no es una lista de botones
-    ////////////this.boton1 = this.physics.add.group();
-    ////////////this.boton1 = this.physics.add.sprite(400, 470, 'boton').setScale(0.02);
-
-    //se colocan las plataformas normales sueltas
-    this.platforms.create(400, 568, 'ground').setScale(2).refreshBody();
-    this.platforms.create(600, 400, 'ground');
-
-    //El suelo que controlan las palancas se crea como suelo normal pero dentro de las plataformas como data "ground" (para que cada una lo controle y tal)
-    this.palancas.create(600, 350, 'palanca').setScale(0.2).setData({ ground: this.platforms.create(50, 250, 'ground') });
-    this.palancas.create(660, 470, 'palanca').setScale(0.2).setData({ ground: this.platforms.create(750, 220, 'ground') });
-    
-
-    //colocar el suelo que controla el boton por separado porque se necesita acceder a este individualmente
-    //fuera de una lista porque fuera de la función de colisión hay que detectar que no se tocan
-    this.piezaboton = this.platforms.create(400, 100, 'ground');
-    this.personajesAnimaciones();
-    this.crearControles();
-    this.colisiones();
-
-    //por cada botón sus físicas
-    ////////////this.physics.add.collider(this.boton1, this.platforms);
-    //creando un nuevo presionar para su pieza (porque estos tienen que detectar también cuando se dejan de tocar)
-    ////////////this.physics.add.overlap(this.Cassadie, this.boton1, this.presionar, null, this);
-    ////////////this.physics.add.overlap(this.Seraphina, this.boton1, this.presionar, null, this);
-}
-
-update(){
-    this.movimientoPersonajes();
-    this.controlMecanismos();
-    /*if (!this.Seraphina.body.touching.left && !this.Seraphina.body.touching.right && !this.Seraphina.body.touching.up
-        && !this.Cassadie.body.touching.left && !this.Cassadie.body.touching.right && !this.Cassadie.body.touching.up) {
-        this.piezaboton.enableBody(false, 0, 0, true, true);
-        this.boton.anims.play('arriba');
-        this.pulsar = true;
-    }*/   //controlMecanismos para poner arriba cuando no esté activado el nuevo botón
-
-    //se actualiza el nivel actual para que la pantalla de pausa te devuelva a donde debe
-    nivelActual = 'NivelCielo';
-
-    //Y se manda a pausa desde aquí porque hay que controlarlo metiendo el string que identifica a cada escena y es diferente para cada una
-    if (Phaser.Input.Keyboard.JustDown(this.keyP)) {
-        //this.scene.pause();
-        this.scene.sleep('NivelCielo');
-        this.scene.launch('Pausa');
-        this.parar();  
-    }
-}
-
-//////////////////////Presionar para hacer otro con cada piezaboton extra
-/*presionar(player, boton) {
-    if (this.pulsar) {
-        boton.anims.play('pulsar', false);
-        this.pulsar = false;
-
-    }
-    this.piezaboton.disableBody(true, true);
-}*/
-}
-
-
-    var config = {
-        type: Phaser.AUTO,
-        width: 1920,
-        height: 1080,
-        physics: {
-            default: 'arcade',
-            arcade: {
-                gravity: { y: 300 },
-                debug: false
+            constructor() {
+                super('NivelCielo');
+                this.construir();
+                //si se necesitan añadir más botones se indican aquí como "this.boton1; this.boton2;"
+                this.puerta;
             }
-        },
-        scene: [NivelBosque, Pausa] // NivelBosque  NivelCielo
-    };
 
-    var game = new Phaser.Game(config);
+            preload() {
+                //se cargan sprites de fondo, plataformas, palancas del derecho y del revés y botones para el nivel correspondiente
+                this.load.image('fondoC', 'assets/Cielo.jpg');
+                this.load.image('ground', 'assetsEjemplo/platform.png');
+                this.load.spritesheet('palanca', 'assets/palancaCielo.png', { frameWidth: 446, frameHeight: 345 });
+                this.load.spritesheet('palancaInv', 'assets/palancaCieloInv.png', { frameWidth: 446, frameHeight: 345 });
+                this.load.spritesheet('boton', 'assets/botonCielo.png', { frameWidth: 322, frameHeight: 223 });
+
+                //se carga lo común en el padre que son los personajes
+                this.cargarPersonajes();
+            }
+
+            create() {
+                //carga el fondo
+                this.add.image(960, 500, 'fondoC');
+                //se añade que tienen fisicas
+                this.iniciarMecanismos();
+
+                this.Seraphina = this.physics.add.sprite(100, 450, 'Seraphina').setScale(0.10, 0.10);
+                this.Cassadie = this.physics.add.sprite(100, 450, 'Cassadie').setScale(0.10, 0.10);
+
+                //  Player physics properties. Give the little guy a slight bounce.
+                this.Seraphina.setBounce(0.2);
+                this.Seraphina.setCollideWorldBounds(true);
+
+                this.Cassadie.setBounce(0.2);
+                this.Cassadie.setCollideWorldBounds(true);
+
+                //se coloca el botón
+                this.boton = this.physics.add.sprite(400, 470, 'boton').setScale(0.1);
+                //por cada botón extra se añaden físicas y se coloca porque no es una lista de botones
+                ////////////this.boton1 = this.physics.add.group();
+                ////////////this.boton1 = this.physics.add.sprite(400, 470, 'boton').setScale(0.02);
+
+                //se colocan las plataformas normales sueltas
+                this.platforms.create(400, 568, 'ground').setScale(2).refreshBody();
+                this.platforms.create(600, 400, 'ground');
+
+                //El suelo que controlan las palancas se crea como suelo normal pero dentro de las plataformas como data "ground" (para que cada una lo controle y tal)
+                this.palancas.create(600, 350, 'palanca').setScale(0.2).setData({ ground: this.platforms.create(50, 250, 'ground') });
+                this.palancas.create(660, 470, 'palanca').setScale(0.2).setData({ ground: this.platforms.create(750, 220, 'ground') });
+
+
+                //colocar el suelo que controla el boton por separado porque se necesita acceder a este individualmente
+                //fuera de una lista porque fuera de la función de colisión hay que detectar que no se tocan
+                this.piezaboton = this.platforms.create(400, 100, 'ground');
+                this.personajesAnimaciones();
+                this.crearControles();
+                this.colisiones();
+
+                //por cada botón sus físicas
+                ////////////this.physics.add.collider(this.boton1, this.platforms);
+                //creando un nuevo presionar para su pieza (porque estos tienen que detectar también cuando se dejan de tocar)
+                ////////////this.physics.add.overlap(this.Cassadie, this.boton1, this.presionar, null, this);
+                ////////////this.physics.add.overlap(this.Seraphina, this.boton1, this.presionar, null, this);
+
+                this.puerta = this.physics.add.group();
+                this.puerta = this.physics.add.sprite(500, 470, 'boton').setScale(0.1);
+                this.physics.add.collider(this.puerta, this.platforms);
+                this.physics.add.overlap(this.Cassadie, this.puerta, this.elegir, null, this);
+                this.physics.add.overlap(this.Seraphina, this.puerta, this.elegir, null, this);
+            }
+
+            update() {
+                this.movimientoPersonajes();
+                this.controlMecanismos();
+                /*if (!this.Seraphina.body.touching.left && !this.Seraphina.body.touching.right && !this.Seraphina.body.touching.up
+                    && !this.Cassadie.body.touching.left && !this.Cassadie.body.touching.right && !this.Cassadie.body.touching.up) {
+                    this.piezaboton.enableBody(false, 0, 0, true, true);
+                    this.boton.anims.play('arriba');
+                    this.pulsar = true;
+                }*/   //controlMecanismos para poner arriba cuando no esté activado el nuevo botón
+
+                //se actualiza el nivel actual para que la pantalla de pausa te devuelva a donde debe
+                nivelActual = 'NivelCielo';
+
+                //Y se manda a pausa desde aquí porque hay que controlarlo metiendo el string que identifica a cada escena y es diferente para cada una
+                if (Phaser.Input.Keyboard.JustDown(this.keyP)) {
+                    //this.scene.pause();
+                    this.scene.sleep('NivelCielo');
+                    this.scene.launch('Ajustes');
+                    this.parar();
+                }
+            }
+
+            //////////////////////Presionar para hacer otro con cada piezaboton extra
+            /*presionar(player, boton) {
+                if (this.pulsar) {
+                    boton.anims.play('pulsar', false);
+                    this.pulsar = false;
+            
+                }
+                this.piezaboton.disableBody(true, true);
+            }*/
+
+
+            elegir(){
+                this.scene.start('Elegir');
+            }   
+        }
+
+        class MenuInicio extends Phaser.Scene {
+        constructor() {
+            super('MenuInicio');
+            this.enter;
+        }
+
+        preload() {
+            this.load.image('fondoI', 'assets/MenúInicio.PNG');
+            this.load.image('jugar', 'assets/BotonJugar.png');
+            this.load.image('ajustes', 'assets/BotonAjustes.png');
+            this.load.image('salir', 'assets/BotonSalir.png');
+            this.load.image('titulo', 'assets/Título.png');
+        }
+
+        create() {
+
+            //Fondo
+            const fondo=this.add.image(0, 0, 'fondoI').setDisplaySize(1920,1080);
+            fondo.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+
+            //Titulo
+            const titulo=this.add.image(960,240,"titulo");
+            titulo.setScale(0.5,0.5);
+            
+
+            //Tecla Enter
+            this.enter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
+
+            //-------------------------------------------------------------------------------------------------
+            //BOTON JUGAR
+            //Se añade el boton para jugar
+            const botonJugar = this.add.image(960,500,"jugar").setInteractive();
+            botonJugar.setScale(0.35,0.35)
+
+            //Al pasar por encima se pone mas oscuro y crece en tamaño
+            botonJugar.on('pointerover',function(){
+                this.setTint(0x555555);
+                this.setScale(0.40,0.40);
+            });
+
+            //Al quitar el cursor el boton vuelve al tamaño original
+            botonJugar.on('pointerout',function(){
+                this.clearTint();
+                this.setScale(0.35,0.35);
+            });
+
+            //Al hacer click en el boton comienza el juego
+            botonJugar.on('pointerdown',(pointer)=>{ 
+                console.log('Comenzando Juego');
+                this.scene.start('NivelBosque');
+            });
+
+            //BOTON AJUSTES
+            //Se añade el boton de ajustes
+            const botonAjustes = this.add.image(973,630,"ajustes").setInteractive();
+            botonAjustes.setScale(0.25,0.25)
+
+            //Al pasar por encima se pone mas oscuro y crece en tamaño
+            botonAjustes.on('pointerover',function(){
+                this.setTint(0x555555);
+                this.setScale(0.28,0.28);
+            });
+
+             //Al quitar el cursor el boton vuelve al tamaño original
+             botonAjustes.on('pointerout',function(){
+                this.clearTint();
+                this.setScale(0.25,0.25);
+            });
+
+            //Al hacer click en el boton se va a ajustes
+            botonAjustes.on('pointerdown',(pointer)=>{ 
+                this.scene.sleep('MenuInicio');
+                this.scene.launch('Ajustes');
+                console.log('Pantalla ajustes');
+                
+            });
+
+            //BOTON SALIR
+            //Se añade el boton de salir
+            const botonSalir = this.add.image(975,760,"salir").setInteractive();
+            botonSalir.setScale(0.20,0.20)
+
+            //Al pasar por encima se pone mas oscuro y crece en tamaño
+            botonSalir.on('pointerover',function(){
+                this.setTint(0x555555);
+                this.setScale(0.23,0.23);
+            });
+
+             //Al quitar el cursor el boton vuelve al tamaño original
+             botonSalir.on('pointerout',function(){
+                this.clearTint();
+                this.setScale(0.20,0.20);
+            });
+
+            //Al hacer click en el boton se sale del juego
+            botonSalir.on('pointerdown',(pointer)=>{ 
+                console.log('Saliendo');
+                window.close();
+            });
+           
+        }
+
+        update(){
+            nivelActual = 'MenuInicio';
+            //Otra manera de iniciar el juego, al pulsar enter comienza el juego
+            if(Phaser.Input.Keyboard.JustDown(this.enter)){ //Al hacer enter se inicia el juego
+                console.log('Comenzando Juego');
+                this.scene.start('NivelBosque');
+                //this.scene.resume(nivel);
+                //this.scene.stop('MenuInicio');
+            }
+        }
+    }
+
+    class Ajustes extends Phaser.Scene {
+        constructor() {
+            super('Ajustes');       
+        }
+
+        preload() {
+            this.load.image('fondoAjustes', 'assets/MenúAjuste.jpg');
+            this.load.image('salir', 'assets/BotonSalir.png');
+            this.load.image('cuadradoVolumen', 'assets/Volumen.PNG');
+            this.load.image('circulo', 'assets/Slider.PNG');
+            this.load.image('barra', 'assets/BarraSonido.PNG');
+            this.load.audio('cancion','assets/MusicaPrueba.mp3')
+        }
+
+        create() {
+            //Fondo
+            const fondoAjustes=this.add.image(0, 0, 'fondoAjustes').setDisplaySize(1920,1080);
+            fondoAjustes.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+
+            //Rectangulo volumen
+            const cuadroVolumen = this.add.image(975,500,"cuadradoVolumen");
+            cuadroVolumen.setScale(0.5,0.5)
+            const barraVolumen = this.add.image(975,550,"barra");
+            barraVolumen.setScale(0.5,0.5)
+
+            //BOTON SALIR
+            //Se añade el boton de salir
+            const botonSalir = this.add.image(975,760,"salir").setInteractive();
+            botonSalir.setScale(0.20,0.20)
+
+            //Al pasar por encima se pone mas oscuro y crece en tamaño
+            botonSalir.on('pointerover',function(){
+                this.setTint(0x555555);
+                this.setScale(0.23,0.23);
+            });
+
+             //Al quitar el cursor el boton vuelve al tamaño original
+             botonSalir.on('pointerout',function(){
+                this.clearTint();
+                this.setScale(0.20,0.20);
+            });
+
+            //Al hacer click en el boton se sale del juego
+            botonSalir.on('pointerdown',(pointer)=>{ 
+                console.log('Saliendo de Ajustes');
+                this.scene.wake(nivelActual);
+                //this.scene.resume(nivel);
+                this.scene.stop('Ajustes');
+            });
+           
+            //CANCION
+
+            
+            if (!cancionReproducida) {
+            cancion = this.sound.add('cancion', { loop: true });
+            cancion.play();
+            cancionReproducida = true;
+                }
+            
+            //SLIDER VOLUMEN
+        
+            const controlVol=this.add.image(posicionSliderGlobal,550,"circulo").setInteractive({draggable:true});
+            controlVol.setScale(0.15,0.15);
+            this.input.setDraggable(controlVol);
+            
+            
+            this.input.on('drag',function(pointer,gameObject,dragX,dragY){
+                controlVol.x=Phaser.Math.Clamp(dragX,780,1210);
+                posicionSliderGlobal=controlVol.x;
+                volumenGlobal=(controlVol.x-780)/430;
+                cancion.setVolume(volumenGlobal);
+                console.log(volumenGlobal);
+                console.log("Ajustando volumen");
+                cancion.resume();
+
+            })        
+        }
+
+        update(){}
+    }
+
+    class Elegir extends Phaser.Scene {
+        constructor() {
+            super('Elegir');
+        }
+
+        preload() {
+            this.load.image('sky', 'assets/BotonAjustes.png');
+            //this.load.image('sky', 'assetsEjemplo/sky.png');
+        }
+
+        create() {
+            const OpcionSolo = this.add.image(750,500,"sky").setInteractive();
+                OpcionSolo.setScale(0.25,0.25)
+
+                //Al pasar por encima se pone mas oscuro y crece en tamaño
+                OpcionSolo.on('pointerover',function(){
+                    this.setTint(0x555555);
+                    this.setScale(0.28,0.28);
+                });
+
+                //Al quitar el cursor el boton vuelve al tamaño original
+                OpcionSolo.on('pointerout',function(){
+                    this.clearTint();
+                    this.setScale(0.25,0.25);
+                });
+
+                //Al hacer click en el boton comienza el juego
+                OpcionSolo.on('pointerdown',(pointer)=>{ 
+                    this.scene.start('FinalMalo');
+                });
+
+                //BOTON AJUSTES
+                //Se añade el boton de ajustes
+                const OpcionJuntos = this.add.image(1150,500,"sky").setInteractive();
+                OpcionJuntos.setScale(0.25,0.25)
+
+                //Al pasar por encima se pone mas oscuro y crece en tamaño
+                OpcionJuntos.on('pointerover',function(){
+                    this.setTint(0x555555);
+                    this.setScale(0.28,0.28);
+                });
+
+                //Al quitar el cursor el boton vuelve al tamaño original
+                OpcionJuntos.on('pointerout',function(){
+                    this.clearTint();
+                    this.setScale(0.25,0.25);
+                });
+
+                //Al hacer click en el boton se va a ajustes
+                OpcionJuntos.on('pointerdown',(pointer)=>{ 
+                    this.scene.start('FinalBueno');
+                });
+        }
+
+        update(){}
+    }
+
+
+        var config = {
+            type: Phaser.AUTO,
+            width: 1920,
+            height: 1080,
+            physics: {
+                default: 'arcade',
+                arcade: {
+                    gravity: { y: 300 },
+                    debug: false
+                }
+            },
+            scene: [MenuInicio, Ajustes, NivelBosque, NivelCielo, Elegir] // NivelBosque  NivelCielo
+        };
+
+        var game = new Phaser.Game(config);
 
 </script>
 
