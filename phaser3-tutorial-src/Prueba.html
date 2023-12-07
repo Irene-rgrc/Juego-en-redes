@@ -638,7 +638,7 @@
                 this.boton = this.physics.add.sprite(840, 810, 'botonSCielo').setScale(0.1);
                 // 2
                 this.boton2 = this.physics.add.group();
-                this.boton2 = this.physics.add.sprite(500, 470, 'botonSCielo').setScale(0.1);
+                this.boton2 = this.physics.add.sprite(840, 470, 'botonSCielo').setScale(0.1);
                 // 4 (el 3 es palanca)
                 this.boton4 = this.physics.add.group();
                 this.boton4 = this.physics.add.sprite(700, 470, 'botonSCielo').setScale(0.1);
@@ -712,9 +712,18 @@
 
                 //por cada botón sus físicas
                 ////////////this.physics.add.collider(this.boton1, this.platforms);
-                this.physics.add.collider(this.boton, this.platforms);
-                this.physics.add.overlap(this.Cassadie, this.boton, this.presionar1, null, this);
-                this.physics.add.overlap(this.Seraphina, this.boton, this.presionar1, null, this);
+                // 1
+                //this.physics.add.collider(this.boton, this.platforms);
+                //this.physics.add.overlap(this.Cassadie, this.boton, this.presionar1, null, this);
+                //this.physics.add.overlap(this.Seraphina, this.boton, this.presionar1, null, this);
+                // 2
+                this.physics.add.collider(this.boton2, this.platforms);
+                this.physics.add.overlap(this.Cassadie, this.boton2, this.presionar1, null, this);
+                this.physics.add.overlap(this.Seraphina, this.boton2, this.presionar1, null, this);
+                // 4
+                this.physics.add.collider(this.boton4, this.platforms);
+                this.physics.add.overlap(this.Cassadie, this.boton4, this.presionar2, null, this);
+                this.physics.add.overlap(this.Seraphina, this.boton4, this.presionar2, null, this);
 
                 //creando un nuevo presionar para su pieza (porque estos tienen que detectar también cuando se dejan de tocar)
                 ////////////this.physics.add.overlap(this.Cassadie, this.boton1, this.presionar, null, this);
@@ -738,6 +747,19 @@
                     this.pulsar = true;
                 }*/   //controlMecanismos para poner arriba cuando no esté activado el nuevo botón
 
+                if (!this.Seraphina.body.touching.left && !this.Seraphina.body.touching.right && !this.Seraphina.body.touching.up
+                    && !this.Cassadie.body.touching.left && !this.Cassadie.body.touching.right && !this.Cassadie.body.touching.up) {
+                    this.piezaboton2.enableBody(false, 0, 0, true, true);
+                    this.boton2.anims.play('arriba');
+                    this.pulsar = true;
+                }
+
+                if (!this.Seraphina.body.touching.left && !this.Seraphina.body.touching.right && !this.Seraphina.body.touching.up
+                    && !this.Cassadie.body.touching.left && !this.Cassadie.body.touching.right && !this.Cassadie.body.touching.up) {
+                    this.piezaboton4.enableBody(false, 0, 0, true, true);
+                    this.boton4.anims.play('arriba');
+                    this.pulsar = true;
+                }
 
 
                 //se actualiza el nivel actual para que la pantalla de pausa te devuelva a donde debe
@@ -765,6 +787,23 @@
                 }
                 this.piezaboton.disableBody(true, true);
             }*/
+            presionar1(player, boton) {
+                if (this.pulsar) {
+                    boton2.anims.play('pulsar', false);
+                    this.pulsar = false;
+            
+                }
+                this.piezaboton2.disableBody(true, true);
+            }
+
+            presionar2(player, boton) {
+                if (this.pulsar) {
+                    boton4.anims.play('pulsar', false);
+                    this.pulsar = false;
+            
+                }
+                this.piezaboton4.disableBody(true, true);
+            }
         }
 
         class MenuInicio extends Phaser.Scene {
@@ -1031,8 +1070,8 @@
                     debug: false
                 }
             },
-            scene: [MenuInicio, Ajustes, NivelBosque, NivelCielo, Elegir] // NivelBosque  NivelCielo
-            //scene: [NivelCielo]
+            //scene: [MenuInicio, Ajustes, NivelBosque, NivelCielo, Elegir] // NivelBosque  NivelCielo
+            scene: [NivelCielo]
         };
 
         var game = new Phaser.Game(config);
