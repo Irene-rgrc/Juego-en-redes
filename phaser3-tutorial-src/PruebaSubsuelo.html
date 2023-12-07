@@ -54,6 +54,18 @@
             this.boton = this.physics.add.group();
         }
 
+        iniciarPersonajes(){
+            this.Seraphina = this.physics.add.sprite(100, 450, 'Seraphina').setScale(0.10, 0.10);
+            this.Cassadie = this.physics.add.sprite(100, 450, 'Cassadie').setScale(0.10, 0.10);
+
+            //  Player physics properties. Give the little guy a slight bounce.
+            this.Seraphina.setBounce(0.2);
+            this.Seraphina.setCollideWorldBounds(true);
+
+            this.Cassadie.setBounce(0.2);
+            this.Cassadie.setCollideWorldBounds(true);
+        }
+
         personajesAnimaciones(){
             // The player and its settings
             this.Seraphina = this.physics.add.sprite(1100, 900, 'Seraphina').setScale(0.10, 0.10);
@@ -413,19 +425,29 @@
     //Constructor del nivel
     constructor() {
     super('NivelSubsuelo');
-    this.construir();}
+    this.construir();
+    this.boton1;
+    this.boton2;
+    this.piezaboton1;
+    this.piezaboton2;
+                
+}
 
     preload(){
         this.load.image('fondoSubsuelo','assetsSubsuelo/Subterráneo.png');
         this.load.image('sueloSubsuelo', 'assetsSubsuelo/LazoAzul2Redimensionado.png');
         this.load.image('plataforma1','assetsSubsuelo/CuadradoAzul2Redimensionado.png');
         this.load.image('plataforma2','assetsSubsuelo/CuadradoAzulRedimensionado.png');
+        this.load.spritesheet('boton', 'assetsSubsuelo/botonSubterraneo.png', { frameWidth: 322, frameHeight: 223 });
 
         this.cargarPersonajes();
     }
 
     create(){
         this.iniciarMecanismos();
+        this.Seraphina = this.physics.add.sprite(1100, 900, 'Seraphina').setScale(0.10, 0.10);
+        this.Cassadie = this.physics.add.sprite(800, 900, 'Cassadie').setScale(0.10, 0.10);
+
 
         //Fondo
         const fondo=this.add.image(0, 0, 'fondoSubsuelo').setDisplaySize(1920,1080);
@@ -433,6 +455,15 @@
 
         //Suelo
         this.platforms.create(950, 1100, 'sueloSubsuelo').setScale(6,1.5).refreshBody();
+
+        //Botones
+        this.boton = this.physics.add.sprite(1300, 980, 'boton').setScale(0.15);
+        this.boton1 = this.physics.add.group();
+        this.boton1 = this.physics.add.sprite(100, 830, 'boton').setScale(0.15);
+        this.boton2 = this.physics.add.group();
+        this.boton2 = this.physics.add.sprite(950, 615, 'boton').setScale(0.15);
+
+       
 
         //Plataformas fijas
         this.platforms.create(950, 945, 'plataforma1').setScale(0.1,1.3).refreshBody(); //Muro separador
@@ -458,16 +489,42 @@
         this.platforms.create(70, 300, 'plataforma1').setScale(0.5,0.3).refreshBody();; //Suelo pequeño izquierda
         this.platforms.create(130, 75, 'plataforma1').setScale(0.1,1.3).refreshBody(); //Muro separador 4
 
-        //this.Seraphina.body.setPosition(450,450);
+         //Pltaformas controladas por botones
+        this.piezaboton = this.platforms.create(400, 954, 'plataforma2').setScale(0.1, 1.1).refreshBody();
+        this.piezaboton1 = this.platforms.create(1700, 880, 'plataforma2').setScale(0.5, 0.3).refreshBody();
         this.personajesAnimaciones();
         this.crearControles();
         this.colisiones();
+        
+        this.physics.add.collider(this.boton1, this.platforms);
+        this.physics.add.overlap(this.Cassadie, this.boton1, this.presionar1, null, this);
+        this.physics.add.overlap(this.Seraphina, this.boton1, this.presionar1, null, this);
+        
     }
 
     update(){
         this.movimientoPersonajes();
+        this.controlMecanismos();
+
+        if (!this.Seraphina.body.touching.left && !this.Seraphina.body.touching.right && !this.Seraphina.body.touching.up
+                    && !this.Cassadie.body.touching.left && !this.Cassadie.body.touching.right && !this.Cassadie.body.touching.up) {
+                    this.piezaboton1.enableBody(false, 0, 0, true, true);
+                    this.boton1.anims.play('arriba');
+                    this.pulsar = true;
+                } else { this.pulsar = false; }
+
+        console.log(this.Cassadie.x)
+        console.log(this.Cassadie.y)
 
     }
+    presionar1(player, boton) {
+                if (this.pulsar) {
+                    boton.anims.play('pulsar', false);
+                    this.pulsar = false;
+
+                }
+                this.piezaboton1.disableBody(true, true);
+            }
 
     }
 
