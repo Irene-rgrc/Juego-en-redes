@@ -436,6 +436,7 @@
     let atrapadoS=false;
     let atrapadoC=false;
     this.keyH;
+    
                 
 }
 
@@ -552,6 +553,17 @@
     update(){
         this.movimientoPersonajes();
         this.controlMecanismos();
+        const distance=Phaser.Math.Distance.Between(this.Seraphina.x,this.Seraphina.y,this.Cassadie.x,this.Cassadie.y);
+        console.log('Distancia:'+distance);
+
+        //Si los dos estan atrapados se reinicia
+        if(this.atrapadoC && this.atrapadoS && this.Seraphina.body.touching.down && this.Cassadie.body.touching.down){
+            console.log('Han muerto los dos personajes')
+            this.Seraphina.setPosition(1100, 950);
+            this.Cassadie.setPosition(800, 950);
+            this.atrapadoC=false;
+            this.atrapadoS=false;
+        }
 
         if (!this.Seraphina.body.touching.left && !this.Seraphina.body.touching.right && !this.Seraphina.body.touching.up
                     && !this.Cassadie.body.touching.left && !this.Cassadie.body.touching.right && !this.Cassadie.body.touching.up) {
@@ -585,13 +597,13 @@
         console.log(this.Cassadie.y)
 
         if (Phaser.Input.Keyboard.JustDown(this.keyH)) {
-            if(this.atrapadoS==true){
+            if(this.atrapadoS==true && distance<=150){
                 console.log('Ayudando a Sera'); 
                 this.Seraphina.setPosition(this.Cassadie.x,this.Cassadie.y);
                 this.atrapadoS=false;
                 console.log(this.atrapadoS); 
             }
-            if(this.atrapadoC==true){
+            if(this.atrapadoC==true && distance<=150){
                 console.log('Ayudando a Cas'); 
                 this.Cassadie.setPosition(this.Seraphina.x,this.Seraphina.y);
                 this.atrapadoC=false;
