@@ -403,6 +403,9 @@
                 this.piezaboton3;
                 this.piedraBosque1;
                 this.piedraBosque2;
+                this.piedra;
+                this.piedra1;
+                this.posAct
 
                 //si se necesitan añadir más botones se indican aquí como "this.boton1; this.boton2;"
             }
@@ -431,11 +434,14 @@
                 this.piedraBosque1 = this.physics.add.group();
                 this.piedraBosque2 = this.physics.add.group();
 
-                this.piedraBosque1.create(650, 820, 'piedraBosque')
-                this.piedraBosque2.create(1450, 405, 'piedraBosque')
+                this.piedra = this.piedraBosque1.create(650, 820, 'piedraBosque')
+                this.piedra1 = this.piedraBosque2.create(1450, 405, 'piedraBosque')
 
-                
-             
+                this.piedra.setCollideWorldBounds(true)
+                this.piedra1.setCollideWorldBounds(true)
+                this.piedra.gravity = (100000000)
+
+               
 
                 this.Seraphina = this.physics.add.sprite(100, 810, 'Seraphina').setScale(0.10, 0.10);
                 this.Cassadie = this.physics.add.sprite(1800, 810, 'Cassadie').setScale(0.10, 0.10);
@@ -508,8 +514,7 @@
                 this.physics.add.collider(this.piedraBosque2, this.platforms);
                 this.physics.add.collider(this.piedraBosque2, this.Cassadie);
                 this.physics.add.collider(this.piedraBosque1, this.Cassadie);
-                /*this.piedraBosque1.setCollideWorldBounds(true);
-                this.piedraBosque2.setCollideWorldBounds(true);*/
+               
                 
 
                 //por cada botón sus físicas
@@ -521,6 +526,50 @@
 
             update() {
                 this.movimientoPersonajes();
+
+
+               /* if (this.Cassadie.body.right >= this.piedra.body.left && this.Cassadie.body.right <= this.piedra.body.right) {
+        // Mover la piedra solo si Cassadie está en contacto y dentro del rango horizontal de la piedra
+        this.piedra.setVelocityX(550);
+    } else {
+        // Detener la piedra si Cassadie no está en contacto
+        this.piedra.setVelocityX(0);
+    }*/
+    const distanciaMaxima = 1;
+    this.piedra.setGravityY(0);
+    this.piedra1.setGravityY(0);
+
+    // Condición para mover la piedra solo si Cassadie está en contacto y dentro del rango horizontal de la piedra
+    if (
+        this.Cassadie.body.touching.down &&
+        (
+            (this.Cassadie.body.right >= this.piedra.body.left && this.Cassadie.body.right <= this.piedra.body.right) ||
+            (this.Cassadie.body.bottom >= this.piedra.body.top && this.Cassadie.body.bottom <= this.piedra.body.bottom)
+        ) &&
+        Math.abs(this.Cassadie.x - this.piedra.x) <= distanciaMaxima
+    ) {
+        // Mover la piedra solo si Cassadie está en contacto y dentro del rango
+        this.piedra.setVelocityX(550);
+    } else {
+        // Detener la piedra si Cassadie no está en contacto o no está lo suficientemente cerca
+        this.piedra.setVelocityX(0);
+    }
+
+    if (
+        this.Cassadie.body.touching.down &&
+        (
+            (this.Cassadie.body.right >= this.piedra1.body.left && this.Cassadie.body.right <= this.piedra1.body.right) ||
+            (this.Cassadie.body.bottom >= this.piedra1.body.top && this.Cassadie.body.bottom <= this.piedra1.body.bottom)
+        ) &&
+        Math.abs(this.Cassadie.x - this.piedra1.x) <= distanciaMaxima
+    ) {
+        // Mover la piedra solo si Cassadie está en contacto y dentro del rango
+        this.piedra1.setVelocityX(550);
+    } else {
+        // Detener la piedra si Cassadie no está en contacto o no está lo suficientemente cerca
+        this.piedra1.setVelocityX(0);
+    }
+
                 this.anims.create({
                     key: 'desactivar',
                     frames: this.anims.generateFrameNumbers('palancaInvBosque', { start: 0, end: 4 }),
