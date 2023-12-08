@@ -433,6 +433,7 @@
     this.piezaboton1;
     this.piezaboton2;
     this.piezaboton3;
+    
                 
 }
 
@@ -444,6 +445,7 @@
         this.load.spritesheet('boton', 'assetsSubsuelo/botonSubterraneo.png', { frameWidth: 322, frameHeight: 223 });
         this.load.spritesheet('palanca', 'assetsSubsuelo/palancaPiedra.png', { frameWidth: 446, frameHeight: 345 });
         this.load.spritesheet('palancaInv', 'assetsSubsuelo/palancaPiedraInv.png', { frameWidth: 446, frameHeight: 345 });
+        this.load.image('pulpo','assetsSubsuelo/Pulpo.png');
 
         this.cargarPersonajes();
     }
@@ -461,6 +463,7 @@
         //Suelo
         this.platforms.create(950, 1100, 'sueloSubsuelo').setScale(6,1.5).refreshBody();
 
+        
         //Botones
         this.boton = this.physics.add.sprite(1300, 980, 'boton').setScale(0.15);
         this.boton1 = this.physics.add.group();
@@ -471,7 +474,6 @@
         this.boton3 = this.physics.add.sprite(1850, 250, 'boton').setScale(0.15);
         this.boton4 = this.physics.add.group();
         this.boton4 = this.physics.add.sprite(1200, 180, 'boton').setScale(0.15);
-
        
 
         //Plataformas fijas
@@ -512,6 +514,21 @@
         this.crearControles();
         this.colisiones();
         
+        //Var zona de ayuda
+        
+        //Tentaculos
+        this.pulpos=this.physics.add.group();
+        const tentaculo1=this.pulpos.create(1000,740,'pulpo').setScale(0.1,0.1);
+        const tentaculo2=this.pulpos.create(1070,740,'pulpo').setScale(0.1,0.1);
+        const tentaculo3=this.pulpos.create(900,740,'pulpo').setScale(0.1,0.1);
+        const tentaculo4=this.pulpos.create(830,740,'pulpo').setScale(0.1,0.1);
+
+
+        this.physics.world.enable(this.pulpos);
+        this.physics.add.collider(this.pulpos,this.platforms);
+        this.physics.add.overlap(this.Seraphina,this.pulpos,this.bloquearMovimientoS,null,this);
+        this.physics.add.overlap(this.Cassadie,this.pulpos,this.bloquearMovimientoC,null,this);
+
         this.physics.add.collider(this.boton1, this.platforms);
         this.physics.add.overlap(this.Cassadie, this.boton1, this.presionar1, null, this);
         this.physics.add.overlap(this.Seraphina, this.boton1, this.presionar1, null, this);
@@ -563,6 +580,16 @@
         console.log(this.Cassadie.y)
 
     }
+
+     bloquearMovimientoS(Seraphina,pulpos){
+        Seraphina.setVelocityY(0);
+        Seraphina.setVelocityX(0);
+    }
+    bloquearMovimientoC(Cassadie,pulpos){
+        Cassadie.setVelocityY(0);
+        Cassadie.setVelocityX(0);
+    }
+
     presionar1(player, boton) {
                 if (this.pulsar) {
                     boton.anims.play('pulsar', false);
