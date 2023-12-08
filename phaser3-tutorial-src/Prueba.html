@@ -489,7 +489,7 @@
                 this.flores1.body.allowGravity = false;
 
                 //se colocan las plataformas normales sueltas
-                this.platforms.create(950, 950, 'sueloBosque').setScale(6, 1.5).refreshBody();
+                this.platforms.create(950, 978, 'sueloBosque').setScale(6, 2).refreshBody();
                 this.platforms.create(150, 623, 'plataformaBosque1').setScale(1, 0.3).refreshBody();
                 this.platforms.create(914, 470, 'plataformaBosque1').setScale(4, 0.3).refreshBody();
                 this.platforms.create(1640, 623, 'plataformaBosque1').setScale(1.7, 0.3).refreshBody();
@@ -658,14 +658,15 @@
                     }, 3000);
                 } 
 
-                /*if (this.segundoSalto && this.floresD && !this.flores1D &&
-                    ((this.Seraphina.body.touching.left >= this.flores.body.left && this.Seraphina.body.touching.right <= this.flores.body.right)  )) {
+                if (this.segundoSalto && this.floresD && !this.flores1D &&
+                    ((this.Seraphina.x >= 416 && this.Seraphina.y <= 404))  ) {
                     this.flores1.anims.play('floresDesaparecer');
                    setTimeout(() => {
                         this.flores1.disableBody(true, true);
                         this.flores1D = true;
                     }, 2000);
-                } */ //NO FUNCIONA BIEN!!!
+                }  
+
 
                 //Condición para pasar al siguiente nivel, falta añadirle las posiciones verdaderas.
                 if (this.Cassadie.x >= 1875 && this.Cassadie.y >= 184 && this.Seraphina.x >= 1875 && this.Seraphina.y >= 184) {
@@ -710,9 +711,6 @@
                 this.piezaboton3.disableBody(true, true);
             }
 
-            moverPiedra(){
-
-            }
 
 
             //////////////////////Presionar para hacer otro con cada piezaboton extra
