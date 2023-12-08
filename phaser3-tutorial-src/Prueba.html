@@ -439,7 +439,6 @@
 
                 this.piedra.setCollideWorldBounds(true)
                 this.piedra1.setCollideWorldBounds(true)
-                this.piedra.gravity = (100000000)
 
                
 
@@ -515,8 +514,6 @@
                 this.physics.add.collider(this.piedraBosque2, this.Cassadie);
                 this.physics.add.collider(this.piedraBosque1, this.Cassadie);
                
-                
-
                 //por cada botón sus físicas
                 ////////////this.physics.add.collider(this.boton1, this.platforms);
                 //creando un nuevo presionar para su pieza (porque estos tienen que detectar también cuando se dejan de tocar)
@@ -526,18 +523,8 @@
 
             update() {
                 this.movimientoPersonajes();
-
-
-               /* if (this.Cassadie.body.right >= this.piedra.body.left && this.Cassadie.body.right <= this.piedra.body.right) {
-        // Mover la piedra solo si Cassadie está en contacto y dentro del rango horizontal de la piedra
-        this.piedra.setVelocityX(550);
-    } else {
-        // Detener la piedra si Cassadie no está en contacto
-        this.piedra.setVelocityX(0);
-    }*/
-    const distanciaMaxima = 1;
-    this.piedra.setGravityY(0);
-    this.piedra1.setGravityY(0);
+                this.piedra.setGravityY(0);
+                this.piedra1.setGravityY(0);
 
     // Condición para mover la piedra solo si Cassadie está en contacto y dentro del rango horizontal de la piedra
     if (
@@ -545,30 +532,25 @@
         (
             (this.Cassadie.body.right >= this.piedra.body.left && this.Cassadie.body.right <= this.piedra.body.right) ||
             (this.Cassadie.body.bottom >= this.piedra.body.top && this.Cassadie.body.bottom <= this.piedra.body.bottom)
-        ) &&
-        Math.abs(this.Cassadie.x - this.piedra.x) <= distanciaMaxima
+        ) 
     ) {
         // Mover la piedra solo si Cassadie está en contacto y dentro del rango
-        this.piedra.setVelocityX(550);
-    } else {
-        // Detener la piedra si Cassadie no está en contacto o no está lo suficientemente cerca
         this.piedra.setVelocityX(0);
-    }
+    } 
 
     if (
         this.Cassadie.body.touching.down &&
         (
             (this.Cassadie.body.right >= this.piedra1.body.left && this.Cassadie.body.right <= this.piedra1.body.right) ||
             (this.Cassadie.body.bottom >= this.piedra1.body.top && this.Cassadie.body.bottom <= this.piedra1.body.bottom)
-        ) &&
-        Math.abs(this.Cassadie.x - this.piedra1.x) <= distanciaMaxima
+        ) 
     ) {
         // Mover la piedra solo si Cassadie está en contacto y dentro del rango
-        this.piedra1.setVelocityX(550);
-    } else {
-        // Detener la piedra si Cassadie no está en contacto o no está lo suficientemente cerca
         this.piedra1.setVelocityX(0);
-    }
+    } 
+    
+
+    
 
                 this.anims.create({
                     key: 'desactivar',
