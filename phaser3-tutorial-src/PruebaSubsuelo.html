@@ -433,7 +433,8 @@
     this.piezaboton1;
     this.piezaboton2;
     this.piezaboton3;
-    
+    var atrapadoS=false;
+    var atrapadoC=false;
                 
 }
 
@@ -481,7 +482,7 @@
         this.platforms.create(950, 880, 'plataforma1').setScale(4,0.3).refreshBody();; //Techo muro
         this.platforms.create(80, 880, 'plataforma1').setScale(0.5,0.3).refreshBody();; //Techo muro pequeño izquierda
         this.platforms.create(1850, 880, 'plataforma1').setScale(0.5,0.3).refreshBody();; //Techo muro pequeño derecha
-        this.platforms.create(950, 825, 'plataforma1').setScale(0.1,0.7).refreshBody(); //Muro separador 2
+        this.platforms.create(950, 780, 'plataforma1').setScale(0.1,1.5).refreshBody(); //Muro separador 2
         this.platforms.create(810, 450, 'plataforma1').setScale(5,0.3).refreshBody();; //Techo 2
         this.platforms.create(1200, 790, 'plataforma1').setScale(0.5,0.3).refreshBody();; //Plataforma derecha1
         this.platforms.create(700, 790, 'plataforma1').setScale(0.5,0.3).refreshBody();; //Plataforma izquierda1
@@ -584,10 +585,14 @@
      bloquearMovimientoS(Seraphina,pulpos){
         Seraphina.setVelocityY(0);
         Seraphina.setVelocityX(0);
+        this.atrapadoS=true;
+        console.log('atrapado'+this.atrapadoS);
     }
     bloquearMovimientoC(Cassadie,pulpos){
         Cassadie.setVelocityY(0);
         Cassadie.setVelocityX(0);
+        this.atrapadoC=true;
+        console.log('atrapado'+this.atrapadoC);
     }
 
     presionar1(player, boton) {
