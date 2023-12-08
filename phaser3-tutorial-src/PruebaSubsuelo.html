@@ -435,6 +435,7 @@
     this.piezaboton3;
     var atrapadoS=false;
     var atrapadoC=false;
+    this.keyH;
                 
 }
 
@@ -525,10 +526,12 @@
         const tentaculo4=this.pulpos.create(830,740,'pulpo').setScale(0.1,0.1);
 
 
-        this.physics.world.enable(this.pulpos);
+        //this.physics.world.enable(this.pulpos);
         this.physics.add.collider(this.pulpos,this.platforms);
-        this.physics.add.overlap(this.Seraphina,this.pulpos,this.bloquearMovimientoS,null,this);
-        this.physics.add.overlap(this.Cassadie,this.pulpos,this.bloquearMovimientoC,null,this);
+        this.physics.add.overlap(this.Seraphina,this.pulpos,function(Seraphina, pulpo){
+            this.bloquearMovimientoS(Seraphina,pulpo);},null,this);
+        this.physics.add.overlap(this.Cassadie,this.pulpos,function(Cassadie, pulpo){
+            this.bloquearMovimientoS(Cassadie,pulpo);},null,this);
 
         this.physics.add.collider(this.boton1, this.platforms);
         this.physics.add.overlap(this.Cassadie, this.boton1, this.presionar1, null, this);
@@ -582,15 +585,17 @@
 
     }
 
-     bloquearMovimientoS(Seraphina,pulpos){
+     bloquearMovimientoS(Seraphina,pulpo){
         Seraphina.setVelocityY(0);
         Seraphina.setVelocityX(0);
+        Seraphina.setPosition(pulpo.x,Seraphina.y);
         this.atrapadoS=true;
         console.log('atrapado'+this.atrapadoS);
     }
-    bloquearMovimientoC(Cassadie,pulpos){
+    bloquearMovimientoC(Cassadie,pulpo){
         Cassadie.setVelocityY(0);
         Cassadie.setVelocityX(0);
+        Cassadie.setPosition(pulpo.x,Cassadie.y);
         this.atrapadoC=true;
         console.log('atrapado'+this.atrapadoC);
     }
