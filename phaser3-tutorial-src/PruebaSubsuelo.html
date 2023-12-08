@@ -433,8 +433,8 @@
     this.piezaboton1;
     this.piezaboton2;
     this.piezaboton3;
-    var atrapadoS=false;
-    var atrapadoC=false;
+    let atrapadoS=false;
+    let atrapadoC=false;
     this.keyH;
                 
 }
@@ -516,7 +516,8 @@
         this.crearControles();
         this.colisiones();
         
-        //Var zona de ayuda
+        //Variables para zona de ayuda
+        this.keyH = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.H);
         
         //Tentaculos
         this.pulpos=this.physics.add.group();
@@ -531,7 +532,7 @@
         this.physics.add.overlap(this.Seraphina,this.pulpos,function(Seraphina, pulpo){
             this.bloquearMovimientoS(Seraphina,pulpo);},null,this);
         this.physics.add.overlap(this.Cassadie,this.pulpos,function(Cassadie, pulpo){
-            this.bloquearMovimientoS(Cassadie,pulpo);},null,this);
+            this.bloquearMovimientoC(Cassadie,pulpo);},null,this);
 
         this.physics.add.collider(this.boton1, this.platforms);
         this.physics.add.overlap(this.Cassadie, this.boton1, this.presionar1, null, this);
@@ -582,6 +583,24 @@
 
         console.log(this.Cassadie.x)
         console.log(this.Cassadie.y)
+
+        if (Phaser.Input.Keyboard.JustDown(this.keyH)) {
+            if(this.atrapadoS==true){
+                console.log('Ayudando a Sera'); 
+                this.Seraphina.setPosition(this.Cassadie.x,this.Cassadie.y);
+                this.atrapadoS=false;
+                console.log(this.atrapadoS); 
+            }
+            if(this.atrapadoC==true){
+                console.log('Ayudando a Cas'); 
+                this.Cassadie.setPosition(this.Seraphina.x,this.Seraphina.y);
+                this.atrapadoC=false;
+                console.log(this.atrapadoC); 
+            }
+                
+            }
+
+        
 
     }
 
