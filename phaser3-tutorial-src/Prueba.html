@@ -43,6 +43,9 @@
                 this.tocarC = false;
                 this.tocarS = false;
                 this.pulsar = false;
+                this.floresD = false;
+                this.segundoSalto = false;
+                this.flores1D = false;
             }
 
             cargarPersonajes() {
@@ -201,7 +204,12 @@
 
                 if (this.enter.isDown && !this.Seraphina.body.touching.down && this.salto) {
                     this.Seraphina.setVelocityY(-330);
+                    this.segundoSalto = true;
                     this.salto = false;
+                }
+
+                if(this.Seraphina.body.touching.down){
+                    this.segundoSalto = false;
                 }
 
 
@@ -405,7 +413,8 @@
                 this.piedraBosque2;
                 this.piedra;
                 this.piedra1;
-                this.posAct
+                this.flores;
+                this.flores2;
 
                 //si se necesitan añadir más botones se indican aquí como "this.boton1; this.boton2;"
             }
@@ -420,6 +429,7 @@
                 this.load.spritesheet('palancaBosque', 'assets/palancaBosque.png', { frameWidth: 446, frameHeight: 345 });
                 this.load.spritesheet('palancaInvBosque', 'assets/palancaMaderaInv.png', { frameWidth: 446, frameHeight: 345 });
                 this.load.spritesheet('botonBosque', 'assets/botonBosque.png', { frameWidth: 322, frameHeight: 223 });
+                this.load.spritesheet('floresObstaculo', 'assets/floresObstaculo.png', { frameWidth: 862, frameHeight: 1760 });
 
                 //se carga lo común en el padre que son los personajes
                 this.cargarPersonajes();
@@ -434,7 +444,7 @@
                 this.piedraBosque1 = this.physics.add.group();
                 this.piedraBosque2 = this.physics.add.group();
 
-                this.piedra = this.piedraBosque1.create(650, 820, 'piedraBosque')
+                this.piedra = this.piedraBosque1.create(600, 820, 'piedraBosque')
                 this.piedra1 = this.piedraBosque2.create(1450, 405, 'piedraBosque')
 
                 this.piedra.setCollideWorldBounds(true)
@@ -465,6 +475,18 @@
                 //por cada botón extra se añaden físicas y se coloca porque no es una lista de botones
                 ////////////this.boton1 = this.physics.add.group();
                 ////////////this.boton1 = this.physics.add.sprite(400, 470, 'boton').setScale(0.02);
+
+
+                
+                this.flores = this.physics.add.sprite(800, 694, 'floresObstaculo').setScale(0.2);
+                this.flores1 = this.physics.add.sprite(560, 260, 'floresObstaculo').setScale(0.23);
+
+                this.flores.setImmovable(true);
+                this.flores1.setImmovable(true);
+
+        
+                this.flores.body.allowGravity = false;
+                this.flores1.body.allowGravity = false;
 
                 //se colocan las plataformas normales sueltas
                 this.platforms.create(950, 950, 'sueloBosque').setScale(6, 1.5).refreshBody();
@@ -513,6 +535,15 @@
                 this.physics.add.collider(this.piedraBosque2, this.platforms);
                 this.physics.add.collider(this.piedraBosque2, this.Cassadie);
                 this.physics.add.collider(this.piedraBosque1, this.Cassadie);
+
+                this.physics.add.collider(this.flores, this.platforms);
+                this.physics.add.collider(this.flores1, this.platforms);
+                this.physics.add.collider(this.Cassadie, this.flores);
+                this.physics.add.collider(this.Cassadie, this.flores1);
+                this.physics.add.collider(this.Seraphina, this.flores);
+                this.physics.add.collider(this.Seraphina, this.flores1);
+
+
                
                 //por cada botón sus físicas
                 ////////////this.physics.add.collider(this.boton1, this.platforms);
@@ -549,7 +580,12 @@
         this.piedra1.setVelocityX(0);
     } 
     
-
+                    this.anims.create({
+                    key: 'floresDesaparecer',
+                    frames: this.anims.generateFrameNumbers('floresObstaculo', { start: 0, end: 2 }),
+                    frameRate: 20,
+                    repeat: 0
+                })
     
 
                 this.anims.create({
@@ -611,8 +647,25 @@
                     this.pulsar = true;
                 } else { this.pulsar = false; }
 
-                console.log(this.Cassadie.x)
-                console.log(this.Cassadie.y)
+                if (this.segundoSalto && !this.floresD && !this.flores1D &&
+                    ((this.Seraphina.body.right >= this.flores.body.left && this.Seraphina.body.right <= this.flores.body.right) ||
+                        (this.Seraphina.body.bottom >= this.flores.body.top && this.Seraphina.body.bottom <= this.flores.body.bottom))) {
+                    this.flores.anims.play('floresDesaparecer');
+                   setTimeout(() => {
+                        this.flores.disableBody(true, true);
+                        this.floresD = true;
+                        this.flores1D =false;
+                    }, 3000);
+                } 
+
+                /*if (this.segundoSalto && this.floresD && !this.flores1D &&
+                    ((this.Seraphina.body.touching.left >= this.flores.body.left && this.Seraphina.body.touching.right <= this.flores.body.right)  )) {
+                    this.flores1.anims.play('floresDesaparecer');
+                   setTimeout(() => {
+                        this.flores1.disableBody(true, true);
+                        this.flores1D = true;
+                    }, 2000);
+                } */ //NO FUNCIONA BIEN!!!
 
                 //Condición para pasar al siguiente nivel, falta añadirle las posiciones verdaderas.
                 if (this.Cassadie.x >= 1875 && this.Cassadie.y >= 184 && this.Seraphina.x >= 1875 && this.Seraphina.y >= 184) {
