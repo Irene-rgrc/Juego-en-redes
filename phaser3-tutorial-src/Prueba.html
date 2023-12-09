@@ -737,6 +737,7 @@
                 this.piezaboton4;
                 //si se necesitan añadir más botones se indican aquí como "this.boton1; this.boton2;"
                 this.puerta;
+                this.flores;
             }
 
             preload() {
@@ -749,6 +750,7 @@
                 this.load.spritesheet('palancaCielo', 'assets/palancaCielo.png', { frameWidth: 446, frameHeight: 345 });
                 this.load.spritesheet('palancaInvCielo', 'assets/palancaCieloInv.png', { frameWidth: 446, frameHeight: 345 });
                 this.load.spritesheet('botonSCielo', 'assets/botonCielo.png', { frameWidth: 322, frameHeight: 223 });
+                this.load.spritesheet('floresObstaculo', 'assets/floresObstaculo.png', { frameWidth: 862, frameHeight: 1760 });
 
                 //se carga lo común en el padre que son los personajes
                 this.cargarPersonajes();
@@ -782,6 +784,12 @@
                 ////////////this.boton1 = this.physics.add.group();
                 ////////////this.boton1 = this.physics.add.sprite(400, 470, 'boton').setScale(0.02);
 
+                this.flores = this.physics.add.sprite(400, 694, 'floresObstaculo').setScale(0.2);
+                this.flores.setImmovable(true);
+                this.flores.body.allowGravity = false;
+                
+                
+
                 //se colocan las plataformas normales sueltas -> PLATAFORMAS
                 this.platforms.create(950, 1020, 'sueloCielo').setScale(6, 1.5).refreshBody();
                 this.platforms.create(80, 760, 'plataformaCieloMorado').setScale(1, 0.7).refreshBody();
@@ -814,6 +822,14 @@
                 this.piezaboton2 = this.platforms.create(550, 380, 'plataformaCieloClaro').setScale(2.5, 0.3).refreshBody();
                 this.piezaboton4 = this.platforms.create(1280, 290, 'plataformaCieloClaro').setScale(0.1, 1.3).refreshBody();
                 this.personajesAnimaciones();
+
+                this.anims.create({
+                    key: 'floresDesaparecer',
+                    frames: this.anims.generateFrameNumbers('floresObstaculo', { start: 0, end: 2 }),
+                    frameRate: 20,
+                    repeat: 0
+                })
+
                 this.anims.create({
                     key: 'desactivar',
                     frames: this.anims.generateFrameNumbers('palancaInvCielo', { start: 0, end: 4 }),
@@ -871,6 +887,12 @@
                 this.physics.add.overlap(this.Cassadie, this.puerta, this.elegir, null, this);
                 this.physics.add.overlap(this.Seraphina, this.puerta, this.elegir, null, this);
 
+                this.physics.add.collider(this.flores, this.platforms);
+                this.physics.add.collider(this.Cassadie, this.flores);
+                this.physics.add.collider(this.Seraphina, this.flores);
+                
+
+
             }
 
             update() {
@@ -896,6 +918,17 @@
                     this.boton4.anims.play('arriba');
                     this.pulsar = true;
                 } else { this.pulsar = false; }
+
+                if (this.segundoSalto && !this.floresD &&
+                    ((this.Seraphina.body.right >= this.flores.body.left && this.Seraphina.body.right <= this.flores.body.right) ||
+                        (this.Seraphina.body.bottom >= this.flores.body.top && this.Seraphina.body.bottom <= this.flores.body.bottom))) {
+                    this.flores.anims.play('floresDesaparecer');
+                   setTimeout(() => {
+                        this.flores.disableBody(true, true);
+                        this.floresD = true;
+                        this.flores1D =false;
+                    }, 3000);
+                } 
 
 
                 //se actualiza el nivel actual para que la pantalla de pausa te devuelva a donde debe
@@ -1206,8 +1239,8 @@
                     debug: false
                 }
             },
-            scene: [MenuInicio, Ajustes, NivelBosque, NivelCielo, Elegir] // NivelBosque  NivelCielo
-            //scene: [NivelCielo]
+            //scene: [MenuInicio, Ajustes, NivelBosque, NivelCielo, Elegir] // NivelBosque  NivelCielo
+            scene: [NivelCielo]
         };
 
         var game = new Phaser.Game(config);
