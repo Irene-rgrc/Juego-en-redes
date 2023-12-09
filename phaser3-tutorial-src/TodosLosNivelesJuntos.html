@@ -1278,6 +1278,35 @@
                 this.piezaboton4.disableBody(true, true);
             }
         }
+        class Tutorial extends Phaser.Scene{
+            constructor() {
+                super('Tutorial');
+                this.enter;
+        }
+    
+        preload(){
+            this.load.image('fondoI', 'assets/MenúInicio.PNG');
+        }
+
+        create(){
+            const fondo = this.add.image(0, 0, 'fondoI').setDisplaySize(1920, 1080);
+                fondo.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+
+                this.enter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
+        }
+
+        update(){
+            nivelActual = 'Tutorial';
+                //Otra manera de iniciar el juego, al pulsar enter comienza el juego
+                if (Phaser.Input.Keyboard.JustDown(this.enter)) { //Al hacer enter se inicia el juego
+                    console.log('Comenzando Juego');
+                    this.scene.start('NivelSubsuelo');
+                    //this.scene.resume(nivel);
+                    //this.scene.stop('MenuInicio');
+                }
+
+        }
+    }
 
         class MenuInicio extends Phaser.Scene {
             constructor() {
@@ -1328,7 +1357,7 @@
                 //Al hacer click en el boton comienza el juego
                 botonJugar.on('pointerdown', (pointer) => {
                     console.log('Comenzando Juego');
-                    this.scene.start('NivelSubsuelo');
+                    this.scene.start('Tutorial');
                 });
 
                 //BOTON AJUSTES
@@ -1386,7 +1415,7 @@
                 //Otra manera de iniciar el juego, al pulsar enter comienza el juego
                 if (Phaser.Input.Keyboard.JustDown(this.enter)) { //Al hacer enter se inicia el juego
                     console.log('Comenzando Juego');
-                    this.scene.start('NivelSubsuelo');
+                    this.scene.start('Tutorial');
                     //this.scene.resume(nivel);
                     //this.scene.stop('MenuInicio');
                 }
@@ -1543,7 +1572,7 @@
                     debug: false
                 }
             },
-            scene: [MenuInicio, Ajustes, NivelSubsuelo, NivelCielo, Elegir] // NivelBosque  NivelCielo
+            scene: [MenuInicio, Ajustes,Tutorial, NivelSubsuelo, NivelCielo, Elegir] // NivelBosque  NivelCielo
             //scene: [NivelCielo]
         };
 
