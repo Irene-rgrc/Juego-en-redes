@@ -742,6 +742,7 @@
                 this.flores;
                 this.nube;
                 this.nubeAnimada = false;
+                this.nubeDesapareciendo = false; // Variable para controlar si la nube está desapareciendo
                 this.nube1;
                 this.nube2;
                 this.nube3;
@@ -752,6 +753,8 @@
                 this.nube8;
                 this.nube9;
             }
+
+
 
             preload() {
                 //se cargan sprites de fondo, plataformas, palancas del derecho y del revés y botones para el nivel correspondiente
@@ -873,9 +876,6 @@
                 this.platforms.create(1170, 200, 'plataformaCieloClaro').setScale(1, 0.3).refreshBody();
                 this.platforms.create(900, 200, 'plataformaCieloClaro').setScale(0.2, 0.2).refreshBody();
                 this.platforms.create(1400, 150, 'plataformaCieloClaro').setScale(0.2, 0.2).refreshBody();
-                //this.platforms.create(400, 568, 'plataformaCieloRojo').setScale(2).refreshBody();
-                //this.platforms.create(600, 400, 'sueloCielo');
-
 
                 //El suelo que controlan las palancas se crea como suelo normal pero dentro de las plataformas como data "ground" (para que cada una lo controle y tal)
                 // 3
@@ -888,8 +888,6 @@
                 //this.piezaboton2 = this.platforms.create(550, 380, 'plataformaCieloClaro').setScale(2.5, 0.3).refreshBody();
                 this.piezaboton4 = this.platforms.create(1280, 290, 'plataformaCieloClaro').setScale(0.1, 1.3).refreshBody();
                 this.personajesAnimaciones();
-
-
 
                 this.anims.create({
                     key: 'nubesDesaparecer',
@@ -953,28 +951,38 @@
                 this.physics.add.overlap(this.Cassadie, this.puerta, this.elegir, null, this);
                 this.physics.add.overlap(this.Seraphina, this.puerta, this.elegir, null, this);
 
-                this.physics.add.collider(this.flores, this.platforms);
-                this.physics.add.collider(this.Cassadie, this.flores);
-                this.physics.add.collider(this.Seraphina, this.flores);
+                // Verifica si Cassidie o Seraphine están encima de la nube y no se ha iniciado la animación
+                if (this.physics.overlap(this.Cassadie, this.nube) && !this.nubeDesapareciendo) {
+                    this.nubeDesapareciendo = true; // Marca la nube como desapareciendo
 
-                this.physics.add.collider(this.nube, this.platforms);
-                this.physics.add.overlap(this.Cassadie, this.nube, this.desaparecerNube, null, this);
-                this.physics.add.overlap(this.Seraphina, this.nube, this.desaparecerNube, null, this);
-                /*this.nubes = [
-                    this.nube,
-                    this.nube1,
-                    this.nube2,
-                    this.nube3,
-                    this.nube4,
-                    this.nube5,
-                    this.nube6,
-                    this.nube7,
-                    this.nube8,
-                    this.nube9
-                ];
-                this.physics.add.collider(this.nubes, this.platforms);
-                this.physics.add.overlap(this.Cassadie, this.nubes, this.desaparecerNube, null, this);
-                this.physics.add.overlap(this.Seraphina, this.nubes, this.desaparecerNube, null, this);*/
+                    // Agrega un temporizador para esperar un tiempo antes de desaparecer la nube
+                    this.time.delayedCall(5000, () => {
+                        this.desaparecerNube(this.nube);
+                    }, [], this);
+                }
+
+                if (this.physics.overlap(this.Seraphina, this.nube) && !this.nubeDesapareciendo) {
+                    this.nubeDesapareciendo = true; // Marca la nube como desapareciendo
+
+                    // Agrega un temporizador para esperar un tiempo antes de desaparecer la nube
+                    this.time.delayedCall(2000, () => {
+                        this.desaparecerNube(this.nube);
+                    }, [], this);
+                }
+
+                //this.physics.add.collider(this.flores, this.platforms);
+                //this.physics.add.collider(this.Cassadie, this.flores);
+                //this.physics.add.collider(this.Seraphina, this.flores);
+
+                //this.physics.add.collider(this.nube, this.platforms);
+                //this.physics.add.overlap(this.Cassadie, this.nube, this.desaparecerNube, null, this);
+                //this.physics.add.overlap(this.Seraphina, this.nube, this.desaparecerNube, null, this);
+
+                this.nube.on('animationcomplete', function () {
+                    this.nube.disableBody(true, true);
+                }, this);
+
+
 
             }
 
@@ -1005,16 +1013,29 @@
                     }, 3000);
                 }
 
-                if (this.Seraphina.x >= 400 && this.Seraphina.x <= 410 && this.Seraphina.y == 768.55) {
+                /*  
+                 // Verifica si Cassidie o Seraphine están encima de la nube y no se ha iniciado la animación
+                if (this.physics.overlap(this.Cassadie, this.nube) && !this.nubeDesapareciendo) {
+                    this.nubeDesapareciendo = true; // Marca la nube como desapareciendo
+                    this.desaparecerNube(this.nube);
+                }*/
+
+                if (!this.nubeAnimada &&
+                  (this.physics.overlap(this.Cassadie, this.nube) || this.physics.overlap(this.Seraphina, this.nube))) {
+                this.nube.anims.play('nubesDesaparecer');
+                this.nubeAnimada = true;
+                }
+
+                /*if (this.Seraphina.x >= 400 && this.Seraphina.x <= 410 && this.Seraphina.y == 768.55) {
                     this.nube.anims.play('nubesDesaparecer');
                     setTimeout(() => {
                         this.nube.disableBody(true, true);
                         this.nubeD = true;
                         this.nube1D = false;
                     }, 1000);
-                }
-                console.log(this.Seraphina.x)
-                console.log(this.Seraphina.y)
+                }*/
+                //console.log(this.Seraphina.x)
+                //console.log(this.Seraphina.y)
 
                 //se actualiza el nivel actual para que la pantalla de pausa te devuelva a donde debe
                 nivelActual = 'NivelCielo';
@@ -1032,27 +1053,6 @@
                 this.scene.start('Elegir');
             }
 
-            desaparecerNube(nube, personaje) {
-                if (!this.nubeD && !this.nubeAnimada) {
-                    this.nubeAnimada = true;
-
-                    // Verificar si el personaje toca con la parte inferior de la nube
-                    const tocandoParteInferior = personaje.body.bottom >= nube.body.top && personaje.body.top <= nube.body.top;
-
-                    // Reproducir animación solo si toca con la parte inferior
-                    if (tocandoParteInferior) {
-                        nube.anims.play('nubesDesaparecer');
-
-                        // Manejar el evento de finalización de la animación
-                        nube.once('animationcomplete', () => {
-                            nube.disableBody(true, true);
-                            this.nubeD = true;
-                        });
-                    } else {
-                        this.nubeAnimada = false;
-                    }
-                }
-            }
 
             /*presionar1(player, boton) {
                 if (this.pulsar) {
@@ -1070,6 +1070,38 @@
 
                 }
                 this.piezaboton4.disableBody(true, true);
+            }
+
+            /*desaparecerNube(nube) {
+                nube.anims.play('nubesDesaparecer', true);
+                setTimeout(() => {
+                    nube.disableBody(true, true);
+                    // Puedes agregar más lógica aquí si es necesario
+                }, 500); // Ajusta el tiempo según tus necesidades
+            }*/
+
+            /*desaparecerNube(nube) {
+                // Reproduce la animación de desaparición de la nube
+                nube.anims.play('nubesDesaparecer', true);
+
+                // Espera a que la animación se complete antes de deshabilitar el cuerpo de la nube
+                nube.on('animationcomplete', function () {
+                    nube.disableBody(true, true);
+                    // Puedes agregar más lógica aquí si es necesario
+                }, this);
+            }*/
+            desaparecerNube(nube) {
+                // Reproduce la animación de desaparición de la nube
+                nube.anims.play('nubesDesaparecer', true);
+
+                // Espera a que la animación se complete antes de deshabilitar el cuerpo de la nube
+                nube.on('animationcomplete', function () {
+                    nube.disableBody(true, true);
+                    // Puedes agregar más lógica aquí si es necesario
+
+                    // Reinicia la variable para permitir que la nube aparezca nuevamente después
+                    this.nubeDesapareciendo = false;
+                }, this);
             }
         }
 
