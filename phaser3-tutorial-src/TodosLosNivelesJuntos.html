@@ -1281,23 +1281,35 @@
         class TutorialImagenes extends Phaser.Scene{
             constructor() {
                 super('TutorialImagenes');
+                this.indice=0;
                 
             }
 
             preload(){
                 this.load.image('fondoTutorialI', 'assets/FondoTutorial.png');
                 this.load.image('BotonSiguiente', 'assets/BotonSiguiente.png');
-
+                this.load.image('Imagen1','ImagenesTutorial/ImagenT1.jpeg');
+                this.load.image('Imagen2','ImagenesTutorial/ImagenT2.jpeg');
+                this.load.image('Imagen3','ImagenesTutorial/ImagenT3.jpeg');
             
             }
             create(){
 
-            //Imagenes
-               
+            
 
             //Fondo
             const fondo = this.add.image(0, 0, 'fondoTutorialI').setDisplaySize(1920, 1080);
                     fondo.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+
+            //Imagenes
+               const image1=this.add.image(950, 440, 'Imagen1');
+              image1.setScale(2)
+
+              const image2=this.add.image(950, 440, 'Imagen2').setScale(2);
+              image2.setVisible(false);
+
+              const image3=this.add.image(950, 440, 'Imagen3').setScale(2);
+              image3.setVisible(false);
 
             //BOTON SIGUIENTE
             //Se añade el boton para pasar de imagenes
@@ -1316,10 +1328,29 @@
                     this.setScale(1);
             });
 
-            //Al hacer click en el boton comienza el juego
+            //Al hacer click en el boton se pasan las imagenes
             botonSiguiente.on('pointerdown', (pointer) => {
-                    console.log('Siguiente');
+                this.indice=(this.indice+1)%4;
+                console.log('Indice'+ this.indice);
+
+                if(this.indice==0){
+                    image1.setVisible(true);
+                    
+                }
+                else if(this.indice==1){ 
+                   image1.setVisible(false); 
+                   image2.setVisible(true); 
+                }
+                else if(this.indice==2){
+                   image2.setVisible(false); 
+                   image3.setVisible(true);  
+                }
+
+                if (this.indice==3){
+                    console.log('ComenzandoJuego');
                     this.scene.start('Intro');
+                }
+                    
             });   
 
             }
