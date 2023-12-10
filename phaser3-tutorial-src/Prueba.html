@@ -1038,7 +1038,7 @@
                 } else { this.pulsar = false; }
 
                 if (this.segundoSalto && !this.floresD &&
-                    ((this.Seraphina.x >= 1010 && this.Seraphina.y <= 682))) {
+                    ((this.Seraphina.x >= 1010 && this.Seraphina.y <= 682 && this.Seraphina.y >= 552))) {
                     this.flores.anims.play('floresDesaparecer');
                     setTimeout(() => {
                         this.flores.disableBody(true, true);
@@ -1070,7 +1070,7 @@
                 
                 // 1
                 if (this.Cassadie.x >= 426 && this.Cassadie.x <= 514 && this.Cassadie.y == 513.5) {
-                    this.nube.anims.play('nubesDesaparecer');
+                    this.nube1.anims.play('nubesDesaparecer');
                     setTimeout(() => {
                         this.nube1.disableBody(true, true);
                         this.nubeD = true;
@@ -1079,7 +1079,7 @@
                 }
 
                 if (this.Seraphina.x >= 426 && this.Seraphina.x <= 514 && this.Seraphina.y == 513.5) {
-                    this.nube.anims.play('nubesDesaparecer');
+                    this.nube1.anims.play('nubesDesaparecer');
                     setTimeout(() => {
                         this.nube1.disableBody(true, true);
                         this.nubeD = true;
@@ -1087,28 +1087,28 @@
                     }, 1000);
                 }
                 // 3
-                if (this.Cassadie.x >= 426 && this.Cassadie.x <= 514 && this.Cassadie.y == 513.5) {
-                    this.nube.anims.play('nubesDesaparecer');
+                /*if (this.Cassadie.x >= 426 && this.Cassadie.x <= 514 && this.Cassadie.y == 513.5) {
+                    this.nube3.anims.play('nubesDesaparecer');
                     setTimeout(() => {
-                        this.nube1.disableBody(true, true);
+                        this.nube3.disableBody(true, true);
                         this.nubeD = true;
                         this.nube1D = false;
                     }, 1000);
                 }
 
                 if (this.Seraphina.x >= 426 && this.Seraphina.x <= 514 && this.Seraphina.y == 513.5) {
-                    this.nube.anims.play('nubesDesaparecer');
+                    this.nube3.anims.play('nubesDesaparecer');
                     setTimeout(() => {
-                        this.nube1.disableBody(true, true);
+                        this.nube3.disableBody(true, true);
                         this.nubeD = true;
                         this.nube1D = false;
                     }, 1000);
-                }
+                }*/
 
                 // 5
 
                 if (this.Cassadie.x >= 611 && this.Cassadie.x <= 760 && this.Cassadie.y == 106) {
-                    this.nube.anims.play('nubesDesaparecer');
+                    this.nube5.anims.play('nubesDesaparecer');
                     setTimeout(() => {
                         this.nube5.disableBody(true, true);
                         this.nubeD = true;
@@ -1117,7 +1117,7 @@
                 }
 
                 if (this.Seraphina.x >= 611 && this.Seraphina.x <= 760 && this.Seraphina.y == 106) {
-                    this.nube.anims.play('nubesDesaparecer');
+                    this.nube5.anims.play('nubesDesaparecer');
                     setTimeout(() => {
                         this.nube5.disableBody(true, true);
                         this.nubeD = true;
@@ -1127,7 +1127,7 @@
 
                 // 6
                 if (this.Cassadie.x >= 1554 && this.Cassadie.x <= 1645 && this.Cassadie.y == 133.5) {
-                    this.nube.anims.play('nubesDesaparecer');
+                    this.nube6.anims.play('nubesDesaparecer');
                     setTimeout(() => {
                         this.nube6.disableBody(true, true);
                         this.nubeD = true;
@@ -1136,7 +1136,7 @@
                 }
 
                 if (this.Seraphina.x >= 1554 && this.Seraphina.x <= 1645 && this.Seraphina.y == 133.5) {
-                    this.nube.anims.play('nubesDesaparecer');
+                    this.nube6.anims.play('nubesDesaparecer');
                     setTimeout(() => {
                         this.nube6.disableBody(true, true);
                         this.nubeD = true;
@@ -1146,7 +1146,7 @@
 
                 // 7
                 if (this.Cassadie.x >= 1535 && this.Cassadie.x <= 1644 && this.Cassadie.y == 268) {
-                    this.nube.anims.play('nubesDesaparecer');
+                    this.nube7.anims.play('nubesDesaparecer');
                     setTimeout(() => {
                         this.nube7.disableBody(true, true);
                         this.nubeD = true;
@@ -1155,7 +1155,7 @@
                 }
 
                 if (this.Seraphina.x >= 1535 && this.Seraphina.x <= 1644 && this.Seraphina.y == 268) {
-                    this.nube.anims.play('nubesDesaparecer');
+                    this.nube7.anims.play('nubesDesaparecer');
                     setTimeout(() => {
                         this.nube7.disableBody(true, true);
                         this.nubeD = true;
@@ -1164,7 +1164,7 @@
                 }
                 // 8
                 if (this.Cassadie.x >= 1480 && this.Cassadie.x <= 1656 && this.Cassadie.y == 546) {
-                    this.nube.anims.play('nubesDesaparecer');
+                    this.nube8.anims.play('nubesDesaparecer');
                     setTimeout(() => {
                         this.nube8.disableBody(true, true);
                         this.nubeD = true;
@@ -1173,7 +1173,7 @@
                 }
 
                 if (this.Seraphina.x >= 1480 && this.Seraphina.x <= 1656 && this.Seraphina.y == 546) {
-                    this.nube.anims.play('nubesDesaparecer');
+                    this.nube8.anims.play('nubesDesaparecer');
                     setTimeout(() => {
                         this.nube8.disableBody(true, true);
                         this.nubeD = true;
