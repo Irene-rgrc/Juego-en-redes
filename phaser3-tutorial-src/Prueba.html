@@ -44,8 +44,10 @@
                 this.tocarS = false;
                 this.pulsar = false;
                 this.floresD = false;
+                this.nubesD = false;
                 this.segundoSalto = false;
                 this.flores1D = false;
+                this.nubes1D = false;
             }
 
             cargarPersonajes() {
@@ -738,6 +740,16 @@
                 //si se necesitan añadir más botones se indican aquí como "this.boton1; this.boton2;"
                 this.puerta;
                 this.flores;
+                this.nube;
+                this.nube1;
+                this.nube2;
+                this.nube3;
+                this.nube4;
+                this.nube5;
+                this.nube6;
+                this.nube7;
+                this.nube8;
+                this.nube9;
             }
 
             preload() {
@@ -751,7 +763,7 @@
                 this.load.spritesheet('palancaInvCielo', 'assets/palancaCieloInv.png', { frameWidth: 446, frameHeight: 345 });
                 this.load.spritesheet('botonSCielo', 'assets/botonCielo.png', { frameWidth: 322, frameHeight: 223 });
                 this.load.spritesheet('floresObstaculo', 'assets/floresObstaculo.png', { frameWidth: 862, frameHeight: 1760 });
-
+                this.load.spritesheet('nubesObstaculo', 'assets/nubesObstaculo.png', { frameWidth: 311, frameHeight: 109 });
                 //se carga lo común en el padre que son los personajes
                 this.cargarPersonajes();
             }
@@ -787,7 +799,62 @@
                 this.flores = this.physics.add.sprite(1140, 570, 'floresObstaculo').setScale(0.2);
                 this.flores.setImmovable(true);
                 this.flores.body.allowGravity = false;
+
+                this.nube = this.physics.add.sprite(400, 850, 'nubesObstaculo').setScale(0.59);
+                this.nube.setDepth(1);
+                this.nube.setImmovable(true);
+                this.nube.body.allowGravity = false;
+
+                this.nube1 = this.physics.add.sprite(590, 750, 'nubesObstaculo').setScale(0.5);
+                this.nube1.setDepth(1);
+                this.nube1.setImmovable(true);
+                this.nube1.body.allowGravity = false;
+
+                this.nube2 = this.physics.add.sprite(590, 580, 'nubesObstaculo').setScale(0.7);
+                this.nube2.setDepth(1);
+                this.nube2.setImmovable(true);
+                this.nube2.body.allowGravity = false;
+
+                this.nube3 = this.physics.add.sprite(20, 120, 'nubesObstaculo').setScale(0.5);
+                this.nube3.setDepth(1);
+                this.nube3.setImmovable(true);
+                this.nube3.body.allowGravity = false;
+
+                this.nube4 = this.physics.add.sprite(200, 210, 'nubesObstaculo').setScale(0.5);
+                this.nube4.setDepth(1);
+                this.nube4.setImmovable(true);
+                this.nube4.body.allowGravity = false;
+
+                this.nube5 = this.physics.add.sprite(430, 210, 'nubesObstaculo').setScale(0.7);
+                this.nube5.setDepth(1);
+                this.nube5.setImmovable(true);
+                this.nube5.body.allowGravity = false;
+
+                this.nube5 = this.physics.add.sprite(700, 210, 'nubesObstaculo').setScale(1);
+                this.nube5.setDepth(1);
+                this.nube5.setImmovable(true);
+                this.nube5.body.allowGravity = false;
+
+                this.nube6 = this.physics.add.sprite(1600, 210, 'nubesObstaculo').setScale(0.5);
+                this.nube6.setDepth(1);
+                this.nube6.setImmovable(true);
+                this.nube6.body.allowGravity = false;
                 
+                this.nube7 = this.physics.add.sprite(1590, 350, 'nubesObstaculo').setScale(0.6);
+                this.nube7.setDepth(1);
+                this.nube7.setImmovable(true);
+                this.nube7.body.allowGravity = false;
+
+                this.nube8 = this.physics.add.sprite(1590, 550, 'nubesObstaculo').setScale(1);
+                this.nube8.setDepth(1);
+                this.nube8.setImmovable(true);
+                this.nube8.body.allowGravity = false;
+
+                this.nube9 = this.physics.add.sprite(1690, 750, 'nubesObstaculo').setScale(0.6);
+                this.nube9.setDepth(1);
+                this.nube9.setImmovable(true);
+                this.nube9.body.allowGravity = false;
+
                 
 
                 //se colocan las plataformas normales sueltas -> PLATAFORMAS
@@ -823,10 +890,18 @@
                 this.piezaboton4 = this.platforms.create(1280, 290, 'plataformaCieloClaro').setScale(0.1, 1.3).refreshBody();
                 this.personajesAnimaciones();
 
+
+                this.anims.create({
+                    key: 'nubesDesaparecer',
+                    frames: this.anims.generateFrameNumbers('nubesObstaculo', { start: 0, end: 3 }),
+                    frameRate: 5,
+                    repeat: 0
+                })
+
                 this.anims.create({
                     key: 'floresDesaparecer',
                     frames: this.anims.generateFrameNumbers('floresObstaculo', { start: 0, end: 2 }),
-                    frameRate: 20,
+                    frameRate: 5,
                     repeat: 0
                 })
 
@@ -890,6 +965,10 @@
                 this.physics.add.collider(this.flores, this.platforms);
                 this.physics.add.collider(this.Cassadie, this.flores);
                 this.physics.add.collider(this.Seraphina, this.flores);
+
+                this.physics.add.collider(this.nube, this.platforms);
+                this.physics.add.collider(this.Cassadie, this.nube);
+                this.physics.add.collider(this.Seraphina, this.nube);
                 
 
 
@@ -928,6 +1007,15 @@
                         this.floresD = true;
                         this.flores1D =false;
                     }, 3000);
+                } 
+
+                if (this.Seraphina.body.botton == this.nube.body.top || this.Cassadie.body.botton == this.nube.body.top){
+                    this.nube.anims.play('nubesDesaparecer');
+                   setTimeout(() => {
+                        this.nube.disableBody(true, true);
+                        this.nubeD = true;
+                        this.nube1D =false;
+                    }, 1000);
                 } 
 
 
