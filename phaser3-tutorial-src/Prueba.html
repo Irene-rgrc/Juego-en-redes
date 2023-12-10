@@ -752,6 +752,7 @@
                 this.nube7;
                 this.nube8;
                 this.nube9;
+                this.contadornube = 0;
             }
 
 
@@ -948,6 +949,7 @@
                 this.puerta = this.physics.add.group();
                 this.puerta = this.physics.add.sprite(500, 470, 'botonSCielo').setScale(0.1);
                 this.physics.add.collider(this.puerta, this.platforms);
+                this.physics.add.collider(this.Seraphina, this.nube);
                 this.physics.add.overlap(this.Cassadie, this.puerta, this.elegir, null, this);
                 this.physics.add.overlap(this.Seraphina, this.puerta, this.elegir, null, this);
 
@@ -1013,27 +1015,27 @@
                     }, 3000);
                 }
 
-                /*  
+                /*
                  // Verifica si Cassidie o Seraphine están encima de la nube y no se ha iniciado la animación
                 if (this.physics.overlap(this.Cassadie, this.nube) && !this.nubeDesapareciendo) {
                     this.nubeDesapareciendo = true; // Marca la nube como desapareciendo
                     this.desaparecerNube(this.nube);
                 }*/
 
-                if (!this.nubeAnimada &&
+                /*if (!this.nubeAnimada &&
                   (this.physics.overlap(this.Cassadie, this.nube) || this.physics.overlap(this.Seraphina, this.nube))) {
                 this.nube.anims.play('nubesDesaparecer');
                 this.nubeAnimada = true;
-                }
+                }*/
 
-                /*if (this.Seraphina.x >= 400 && this.Seraphina.x <= 410 && this.Seraphina.y == 768.55) {
+                if (this.Seraphina.x >= 400 && this.Seraphina.x <= 410 && this.Seraphina.y == 768.55) {
                     this.nube.anims.play('nubesDesaparecer');
                     setTimeout(() => {
                         this.nube.disableBody(true, true);
                         this.nubeD = true;
                         this.nube1D = false;
                     }, 1000);
-                }*/
+                }
                 //console.log(this.Seraphina.x)
                 //console.log(this.Seraphina.y)
 
