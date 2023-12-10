@@ -1288,9 +1288,20 @@
             preload(){
                 this.load.image('fondoTutorialI', 'assets/FondoTutorial.png');
                 this.load.image('BotonSiguiente', 'assets/BotonSiguiente.png');
-                this.load.image('Imagen1','ImagenesTutorial/ImagenT1.jpeg');
-                this.load.image('Imagen2','ImagenesTutorial/ImagenT2.jpeg');
-                this.load.image('Imagen3','ImagenesTutorial/ImagenT3.jpeg');
+                this.load.image('Imagen1','ImagenesTutorial/Imagen1.png');
+                this.load.image('Imagen2','ImagenesTutorial/Imagen2.png');
+                this.load.image('Imagen3','ImagenesTutorial/Imagen3.png');
+                this.load.image('Imagen4','ImagenesTutorial/Imagen4.png');
+                this.load.image('Imagen5','ImagenesTutorial/Imagen5.png');
+                this.load.image('Imagen6','ImagenesTutorial/Imagen6.png');
+                this.load.image('Imagen7','ImagenesTutorial/Imagen7.png');
+                this.load.image('Imagen8','ImagenesTutorial/Imagen8.png');
+                this.load.image('Imagen9','ImagenesTutorial/Imagen9.png');
+                this.load.image('Imagen10','ImagenesTutorial/Imagen10.png');
+                this.load.image('Imagen11','ImagenesTutorial/Imagen11.png');
+                this.load.image('Imagen12','ImagenesTutorial/Imagen12.png');
+                this.load.image('Imagen13','ImagenesTutorial/Imagen13.png');
+                this.load.image('Imagen14','ImagenesTutorial/Imagen14.png');
             
             }
             create(){
@@ -1302,18 +1313,65 @@
                     fondo.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
 
             //Imagenes
-               const image1=this.add.image(950, 440, 'Imagen1');
-              image1.setScale(2)
+               const image1=this.add.image(1000, 440, 'Imagen1').setDisplaySize(1920, 1080);
+                image1.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+              
 
-              const image2=this.add.image(950, 440, 'Imagen2').setScale(2);
+              const image2=this.add.image(950, 440, 'Imagen2').setDisplaySize(1920, 1080);
+              image2.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
               image2.setVisible(false);
 
-              const image3=this.add.image(950, 440, 'Imagen3').setScale(2);
+              const image3=this.add.image(950, 440, 'Imagen3').setDisplaySize(1920, 1080);
+              image3.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
               image3.setVisible(false);
+
+              const image4=this.add.image(950, 440, 'Imagen4').setDisplaySize(1920, 1080);
+              image4.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+              image4.setVisible(false);
+
+              const image5=this.add.image(950, 440, 'Imagen5').setDisplaySize(1920, 1080);
+              image5.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+              image5.setVisible(false);
+
+              const image6=this.add.image(950, 440, 'Imagen6').setDisplaySize(1920, 1080);
+              image6.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+              image6.setVisible(false);
+
+              const image7=this.add.image(950, 440, 'Imagen7').setDisplaySize(1920, 1080);
+              image7.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+              image7.setVisible(false);
+
+              const image8=this.add.image(950, 440, 'Imagen8').setDisplaySize(1920, 1080);
+              image8.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+              image8.setVisible(false);
+
+              const image9=this.add.image(950, 440, 'Imagen9').setDisplaySize(1920, 1080);
+              image9.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+              image9.setVisible(false);
+
+              const image10=this.add.image(950, 440, 'Imagen10').setDisplaySize(1920, 1080);
+              image10.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+              image10.setVisible(false);
+
+              const image11=this.add.image(950, 440, 'Imagen11').setDisplaySize(1920, 1080);
+              image11.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+              image11.setVisible(false);
+
+              const image12=this.add.image(950, 440, 'Imagen12').setDisplaySize(1920, 1080);
+              image12.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+              image12.setVisible(false);
+
+              const image13=this.add.image(950, 440, 'Imagen13').setDisplaySize(1920, 1080);
+              image13.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+              image13.setVisible(false);
+
+              const image14=this.add.image(950, 440, 'Imagen14').setDisplaySize(1920, 1080);
+              image14.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+              image14.setVisible(false);
 
             //BOTON SIGUIENTE
             //Se añade el boton para pasar de imagenes
-            const botonSiguiente = this.add.image(990, 900, "BotonSiguiente").setInteractive();
+            const botonSiguiente = this.add.image(990, 980, "BotonSiguiente").setInteractive();
             botonSiguiente.setScale(1)
 
             //Al pasar por encima se pone mas oscuro y crece en tamaño
@@ -1330,7 +1388,7 @@
 
             //Al hacer click en el boton se pasan las imagenes
             botonSiguiente.on('pointerdown', (pointer) => {
-                this.indice=(this.indice+1)%4;
+                this.indice=(this.indice+1)%15;
                 console.log('Indice'+ this.indice);
 
                 if(this.indice==0){
@@ -1345,8 +1403,51 @@
                    image2.setVisible(false); 
                    image3.setVisible(true);  
                 }
-
-                if (this.indice==3){
+                else if (this.indice==3){
+                    image3.setVisible(false); 
+                    image4.setVisible(true); 
+                }
+                else if (this.indice==4){
+                    image4.setVisible(false); 
+                    image5.setVisible(true); 
+                }
+                else if (this.indice==5){
+                    image5.setVisible(false); 
+                    image6.setVisible(true); 
+                }
+                else if (this.indice==6){
+                    image6.setVisible(false); 
+                    image7.setVisible(true); 
+                }
+                else if (this.indice==7){
+                    image7.setVisible(false); 
+                    image8.setVisible(true); 
+                }
+                else if (this.indice==8){
+                    image8.setVisible(false); 
+                    image9.setVisible(true); 
+                }
+                else if (this.indice==9){
+                    image9.setVisible(false); 
+                    image10.setVisible(true); 
+                }
+                else if (this.indice==10){
+                    image10.setVisible(false); 
+                    image11.setVisible(true); 
+                }
+                else if (this.indice==11){
+                    image11.setVisible(false); 
+                    image12.setVisible(true); 
+                }
+                else if (this.indice==12){
+                    image12.setVisible(false); 
+                    image13.setVisible(true); 
+                }
+                else if (this.indice==13){
+                    image13.setVisible(false); 
+                    image14.setVisible(true); 
+                }
+                if (this.indice==14){
                     console.log('ComenzandoJuego');
                     this.scene.start('Intro');
                 }
