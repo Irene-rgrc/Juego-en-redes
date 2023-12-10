@@ -1277,32 +1277,131 @@
                 this.piezaboton4.disableBody(true, true);
             }
         }
+
+        class TutorialImagenes extends Phaser.Scene{
+            constructor() {
+                super('TutorialImagenes');
+                
+            }
+
+            preload(){
+                this.load.image('fondoTutorialI', 'assets/FondoTutorial.png');
+                this.load.image('BotonSiguiente', 'assets/BotonSiguiente.png');
+
+            
+            }
+            create(){
+
+            //Imagenes
+               
+
+            //Fondo
+            const fondo = this.add.image(0, 0, 'fondoTutorialI').setDisplaySize(1920, 1080);
+                    fondo.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+
+            //BOTON SIGUIENTE
+            //Se añade el boton para pasar de imagenes
+            const botonSiguiente = this.add.image(990, 900, "BotonSiguiente").setInteractive();
+            botonSiguiente.setScale(1)
+
+            //Al pasar por encima se pone mas oscuro y crece en tamaño
+            botonSiguiente.on('pointerover', function () {
+                    this.setTint(0x555555);
+                    this.setScale(1.2);
+             });
+
+            //Al quitar el cursor el boton vuelve al tamaño original
+            botonSiguiente.on('pointerout', function () {
+                    this.clearTint();
+                    this.setScale(1);
+            });
+
+            //Al hacer click en el boton comienza el juego
+            botonSiguiente.on('pointerdown', (pointer) => {
+                    console.log('Siguiente');
+                    this.scene.start('Intro');
+            });   
+
+            }
+
+            update(){
+                nivelActual = 'TutorialImagenes';
+
+            }
+
+        }
+
         class Tutorial extends Phaser.Scene{
             constructor() {
                 super('Tutorial');
-                this.enter;
+                
             }
     
             preload(){
-                this.load.image('fondoI', 'assets/MenúInicio.PNG');
+                this.load.image('fondoTutorial', 'assets/MenúInicio.PNG');
+                this.load.image('Botonjugar', 'assets/BotonJuego.png');
+                this.load.image('BotonTutorial', 'assets/BotonTutorial.png');
             }
 
             create(){
-                const fondo = this.add.image(0, 0, 'fondoI').setDisplaySize(1920, 1080);
-                    fondo.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
 
-                    this.enter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
+
+                //Fondo
+                const fondo = this.add.image(0, 0, 'fondoTutorial').setDisplaySize(1920, 1080);
+                    fondo.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+               
+                //BOTON JUGAR
+                //Se añade el boton para jugar
+                const botonJugar = this.add.image(960, 500, "Botonjugar").setInteractive();
+                botonJugar.setScale(1)
+
+                //Al pasar por encima se pone mas oscuro y crece en tamaño
+                botonJugar.on('pointerover', function () {
+                    this.setTint(0x555555);
+                    this.setScale(1.2);
+                });
+
+                //Al quitar el cursor el boton vuelve al tamaño original
+                botonJugar.on('pointerout', function () {
+                    this.clearTint();
+                    this.setScale(1);
+                });
+
+                //Al hacer click en el boton comienza el juego
+                botonJugar.on('pointerdown', (pointer) => {
+                    console.log('Comenzando Juego');
+                    this.scene.start('Intro');
+                });   
+
+                //BOTON TUTORIAL
+                //Se añade el boton para jugar
+                const botonTutorial = this.add.image(960, 700, "BotonTutorial").setInteractive();
+                botonTutorial.setScale(1)
+
+                //Al pasar por encima se pone mas oscuro y crece en tamaño
+                botonTutorial.on('pointerover', function () {
+                    this.setTint(0x555555);
+                    this.setScale(1.2);
+                });
+
+                //Al quitar el cursor el boton vuelve al tamaño original
+                botonTutorial.on('pointerout', function () {
+                    this.clearTint();
+                    this.setScale(1);
+                });
+
+                //Al hacer click en el boton comienza el tutorial
+                botonTutorial.on('pointerdown', (pointer) => {
+                    console.log('Comenzando Tutorial');
+                    this.scene.start('TutorialImagenes');
+                });   
+
+                
+
             }
 
             update(){
                 nivelActual = 'Tutorial';
-                //Otra manera de iniciar el juego, al pulsar enter comienza el juego
-                if (Phaser.Input.Keyboard.JustDown(this.enter)) { //Al hacer enter se inicia el juego
-                    console.log('Comenzando Juego');
-                    this.scene.start('Intro');
-                    //this.scene.resume(nivel);
-                    //this.scene.stop('MenuInicio');
-                }
 
             }
         }
@@ -1315,6 +1414,7 @@
     
             preload(){
                 this.load.image('sky', 'assets/Cielo.jpg');
+                
             }
 
             create(){
@@ -1638,7 +1738,7 @@
                     debug: false
                 }
             },
-            scene: [ MenuInicio, Ajustes, Tutorial, Introducción, NivelSubsuelo, NivelBosque, NivelCielo, Elegir, FinalBueno, FinalMalo] // NivelBosque  NivelCielo
+            scene: [ MenuInicio, Ajustes, Tutorial,TutorialImagenes, Introducción, NivelSubsuelo, NivelBosque, NivelCielo, Elegir, FinalBueno, FinalMalo] // NivelBosque  NivelCielo
             //scene: [NivelCielo]
         };
 
