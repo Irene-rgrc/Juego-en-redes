@@ -439,8 +439,8 @@
 
             this.add.image(960, 500, 'fondoSubsuelo');
 
-            this.Seraphina = this.physics.add.sprite(1100, 900, 'Seraphina').setScale(0.10, 0.10);
-            this.Cassadie = this.physics.add.sprite(800, 900, 'Cassadie').setScale(0.10, 0.10);
+            this.Seraphina = this.physics.add.sprite(1100, 970, 'Seraphina').setScale(0.10, 0.10);
+            this.Cassadie = this.physics.add.sprite(800, 970, 'Cassadie').setScale(0.10, 0.10);
             this.Seraphina.setBounce(0.2);
                 this.Seraphina.setCollideWorldBounds(true);
 
@@ -493,8 +493,8 @@
             this.platforms.create(130, 75, 'plataforma1').setScale(0.1,1.3).refreshBody(); //Muro separador 4
     
             //Plataformas controladas por palancas
-             this.palancas.create(120, 535, 'palanca').setScale(0.2).setData({ ground: this.platforms.create(1500, 535, 'plataforma2').setScale(0.1, 1.2).refreshBody() });
-             this.palancas.create(300, 140, 'palanca').setScale(0.2).setData({ ground: this.platforms.create(130, 215, 'plataforma2').setScale(0.1, 1.2).refreshBody() });
+             this.palancas.create(120, 560, 'palanca').setScale(0.2).setData({ ground: this.platforms.create(1500, 535, 'plataforma2').setScale(0.1, 1.2).refreshBody() });
+             this.palancas.create(370, 170, 'palanca').setScale(0.2).setData({ ground: this.platforms.create(130, 215, 'plataforma2').setScale(0.1, 1.2).refreshBody() });
     
     
              //Pltaformas controladas por botones
@@ -511,17 +511,17 @@
             
             //Tentaculos
             this.pulpos=this.physics.add.group();
-            const tentaculo1=this.pulpos.create(1000,740,'pulpo').setScale(0.1,0.1);
-            const tentaculo2=this.pulpos.create(1070,740,'pulpo').setScale(0.1,0.1);
-            const tentaculo3=this.pulpos.create(900,740,'pulpo').setScale(0.1,0.1);
-            const tentaculo4=this.pulpos.create(830,740,'pulpo').setScale(0.1,0.1);
-            const tentaculo5=this.pulpos.create(1360,200,'pulpo').setScale(0.1,0.1);
-            const tentaculo6=this.pulpos.create(1430,200,'pulpo').setScale(0.1,0.1);
-            const tentaculo7=this.pulpos.create(1240,200,'pulpo').setScale(0.1,0.1);
-            const tentaculo8=this.pulpos.create(1170,200,'pulpo').setScale(0.1,0.1);
-            const tentaculo9=this.pulpos.create(1110,200,'pulpo').setScale(0.1,0.1);
-            const tentaculo10=this.pulpos.create(800,200,'pulpo').setScale(0.1,0.1);
-            const tentaculo11=this.pulpos.create(720,200,'pulpo').setScale(0.1,0.1);
+            const tentaculo1=this.pulpos.create(1000,800,'pulpo').setScale(0.08);
+            const tentaculo2=this.pulpos.create(1070,800,'pulpo').setScale(0.08);
+            const tentaculo3=this.pulpos.create(900,800,'pulpo').setScale(0.08);
+            const tentaculo4=this.pulpos.create(830,800,'pulpo').setScale(0.08);
+            const tentaculo5=this.pulpos.create(1360,370,'pulpo').setScale(0.08);
+            const tentaculo6=this.pulpos.create(1430,370,'pulpo').setScale(0.08);
+            const tentaculo7=this.pulpos.create(1240,370,'pulpo').setScale(0.08);
+            const tentaculo8=this.pulpos.create(1170,370,'pulpo').setScale(0.08);
+            const tentaculo9=this.pulpos.create(1110,370,'pulpo').setScale(0.08);
+            const tentaculo10=this.pulpos.create(820,370,'pulpo').setScale(0.08);
+            const tentaculo11=this.pulpos.create(750,370,'pulpo').setScale(0.08);
             
     
     
@@ -581,7 +581,7 @@
             this.controlMecanismos();
 
                 //Condición para pasar al siguiente nivel, falta añadirle las posiciones verdaderas.
-                if (this.Cassadie.x <=45 && this.Cassadie.y <=215 && this.Seraphina.x <=45 && this.Seraphina.y <=113) {
+                if (this.Cassadie.x <=46 && this.Cassadie.y <=235 && this.Seraphina.x <=46 && this.Seraphina.y <=236) {
                     this.scene.start('NivelBosque');
                 }
 
@@ -637,13 +637,13 @@
             console.log(this.Cassadie.y)
     
             if (Phaser.Input.Keyboard.JustDown(this.keyH)) {
-                if(this.atrapadoS==true && distance<=150){
+                if(this.atrapadoS==true && distance<=250){
                     console.log('Ayudando a Sera'); 
                     this.Seraphina.setPosition(this.Cassadie.x,this.Cassadie.y);
                     this.atrapadoS=false;
                     console.log(this.atrapadoS); 
                 }
-                if(this.atrapadoC==true && distance<=150){
+                if(this.atrapadoC==true && distance<=250){
                     console.log('Ayudando a Cas'); 
                     this.Cassadie.setPosition(this.Seraphina.x,this.Seraphina.y);
                     this.atrapadoC=false;
@@ -1320,7 +1320,7 @@
             create(){
                 this.add.image(960, 500, 'sky');
                 this.enter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
-                this.add.text(40, 50, 'Tras años de torturas por parte del dios del mal,\nCassadie por fin se encontraría con Seraphina. \nOtro ángel caído abandonado en el subsuelo... quizá tenían más en común de lo que parecía. \nY quizá no, quizás eso sería incluso mejor... \n\nquizá podía ser su billete de vuelta.',
+                this.add.text(40, 50, 'Tras años de torturas por parte del dios del mal,\nCassadie por fin se encontraría con Seraphina. \nOtro ángel caído abandonado en el subsuelo... quizá tenían más en común de lo que parecía. \nY quizá no, quizás eso sería incluso mejor... \n\nQuizá podía ser su billete de vuelta.',
                 { fontFamily: 'serif', fontSize: '50px', color: '#000'});
             }
 
