@@ -17,6 +17,7 @@
     <script type="text/javascript">
 
         var nivelActual;
+        var frog;
         let posicionSliderGlobal = 950;
         let volumenGlobal = 0.5;
         let cancionReproducida = false;
@@ -57,7 +58,6 @@
                 //se añaden las physics
                 this.platforms = this.physics.add.staticGroup();
                 this.palancas = this.physics.add.group();
-                this.boton = this.physics.add.group();
             }
 
             iniciarPersonajes() {
@@ -208,7 +208,7 @@
                     this.salto = false;
                 }
 
-                if(this.Seraphina.body.touching.down){
+                if (this.Seraphina.body.touching.down) {
                     this.segundoSalto = false;
                 }
 
@@ -256,14 +256,6 @@
                 else {
                     this.tocarS = false;
                 }
-
-                if (!this.Seraphina.body.touching.left && !this.Seraphina.body.touching.right && !this.Seraphina.body.touching.up
-                    && !this.Cassadie.body.touching.left && !this.Cassadie.body.touching.right && !this.Cassadie.body.touching.up) {
-                    this.piezaboton.enableBody(false, 0, 0, true, true);
-                    this.boton.anims.play('arriba');
-                    this.pulsar = true;
-                }
-                else { this.pulsar = false; }
             }
 
             parar() {
@@ -311,246 +303,161 @@
             }
         }
 
-        class Plantilla extends NivelBase {
 
+        //NIVEL SUBSUELO
+        class NivelSubsuelo extends NivelBase {
+
+            //Constructor del nivel
             constructor() {
-                super('Plantilla');
+                super('NivelSubsuelo');
                 this.construir();
-                //si se necesitan añadir más botones se indican aquí como "this.boton1; this.boton2;"
+                this.boton1;
+                this.boton2;
+                this.boton3;
+                this.boton4;
+                this.piezaboton1;
+                this.piezaboton2;
+                this.piezaboton3;
+                let atrapadoS = false;
+                let atrapadoC = false;
+                this.keyH;
+                this.pulsar1;
+                this.pulsar2;
+                this.pulsar3;
+                this.pulsar4;
             }
 
             preload() {
-                //se cargan sprites de fondo, plataformas, palancas del derecho y del revés y botones para el nivel correspondiente
-                this.load.image('fondo', 'assetsEjemplo/sky.png');
-                this.load.image('ground', 'assetsEjemplo/platform.png');
-                this.load.spritesheet('palanca', 'assets/palancaCielo.png', { frameWidth: 446, frameHeight: 345 });
-                this.load.spritesheet('palancaInv', 'assets/palancaCieloInv.png', { frameWidth: 446, frameHeight: 345 });
-                this.load.spritesheet('boton', 'assets/botonBosque.png', { frameWidth: 322, frameHeight: 223 });
+                this.load.image('fondoSubsuelo', 'assetsSubsuelo/Subterráneo.png');
+                this.load.image('sueloSubsuelo', 'assetsSubsuelo/LazoAzul2Redimensionado.png');
+                this.load.image('plataforma1', 'assetsSubsuelo/CuadradoAzul2Redimensionado.png');
+                this.load.image('plataforma2', 'assetsSubsuelo/CuadradoAzulRedimensionado.png');
+                this.load.spritesheet('botonSubterraneo', 'assetsSubsuelo/botonSubterraneo.png', { frameWidth: 322, frameHeight: 223 });
+                this.load.spritesheet('palanca', 'assetsSubsuelo/palancaPiedra.png', { frameWidth: 446, frameHeight: 345 });
+                this.load.spritesheet('palancaInv', 'assetsSubsuelo/palancaPiedraInv.png', { frameWidth: 446, frameHeight: 345 });
+                this.load.image('pulpo', 'assetsSubsuelo/Pulpo.png');
+                this.load.spritesheet('palancaPiedra', 'assetsSubsuelo/palancaPiedra.png', { frameWidth: 446, frameHeight: 345 });
+                this.load.spritesheet('palancaPiedraInv', 'assetsSubsuelo/palancaPiedraInv.png', { frameWidth: 446, frameHeight: 345 });
 
-                //se carga lo común en el padre que son los personajes
+
                 this.cargarPersonajes();
             }
 
             create() {
-                //se añade que tienen fisicas
                 this.iniciarMecanismos();
-                //se coloca el botón
-                this.boton = this.physics.add.sprite(400, 470, 'boton').setScale(0.02);
-                //por cada botón extra se añaden físicas y se coloca porque no es una lista de botones
-                ////////////this.boton1 = this.physics.add.group();
-                ////////////this.boton1 = this.physics.add.sprite(400, 470, 'boton').setScale(0.02);
 
-                //se colocan las plataformas normales sueltas
-                this.platforms.create(400, 568, 'ground').setScale(2).refreshBody();
-                this.platforms.create(600, 400, 'ground');
+                this.add.image(960, 500, 'fondoSubsuelo');
 
-                //El suelo que controlan las palancas se crea como suelo normal pero dentro de las plataformas como data "ground" (para que cada una lo controle y tal)
-                this.palancas.create(600, 350, 'palanca').setScale(0.2).setData({ ground: this.platforms.create(50, 250, 'ground') });
-                this.palancas.create(660, 470, 'palanca').setScale(0.2).setData({ ground: this.platforms.create(750, 220, 'ground') });
-
-
-
-                //colocar el suelo que controla el boton por separado porque se necesita acceder a este individualmente
-                //fuera de una lista porque fuera de la función de colisión hay que detectar que no se tocan
-                this.piezaboton = this.platforms.create(400, 100, 'ground');
-                this.personajesAnimaciones();
-                this.crearControles();
-                this.colisiones();
-
-                //por cada botón sus físicas
-                ////////////this.physics.add.collider(this.boton1, this.platforms);
-                //creando un nuevo presionar para su pieza (porque estos tienen que detectar también cuando se dejan de tocar)
-                ////////////this.physics.add.overlap(this.Cassadie, this.boton1, this.presionar, null, this);
-                ////////////this.physics.add.overlap(this.Seraphina, this.boton1, this.presionar, null, this);
-            }
-
-            update() {
-                this.movimientoPersonajes();
-                this.controlMecanismos();
-                /*if (!this.Seraphina.body.touching.left && !this.Seraphina.body.touching.right && !this.Seraphina.body.touching.up
-                    && !this.Cassadie.body.touching.left && !this.Cassadie.body.touching.right && !this.Cassadie.body.touching.up) {
-                    this.piezaboton.enableBody(false, 0, 0, true, true);
-                    this.boton.anims.play('arriba');
-                    this.pulsar = true;
-                }*/   //controlMecanismos para poner arriba cuando no esté activado el nuevo botón
-
-                //se actualiza el nivel actual para que la pantalla de pausa te devuelva a donde debe
-                nivelActual = 'Plantilla';
-
-                //Y se manda a pausa desde aquí porque hay que controlarlo metiendo el string que identifica a cada escena y es diferente para cada una
-                if (Phaser.Input.Keyboard.JustDown(this.keyP)) {
-                    //this.scene.pause();
-                    this.scene.sleep('Plantilla');
-                    this.scene.launch('Ajustes');
-                    this.parar();
-                }
-            }
-
-            //////////////////////Presionar para hacer otro con cada piezaboton extra
-            /*presionar(player, boton) {
-                if (this.pulsar) {
-                    boton.anims.play('pulsar', false);
-                    this.pulsar = false;
-    
-                }
-                this.piezaboton.disableBody(true, true);
-            }*/
-        }
-
-         //NIVEL SUBSUELO
-    class NivelSubsuelo extends NivelBase{
-        
-        //Constructor del nivel
-        constructor() {
-        super('NivelSubsuelo');
-        this.construir();
-        this.boton1;
-        this.boton2;
-        this.boton3;
-        this.boton4;
-        this.piezaboton1;
-        this.piezaboton2;
-        this.piezaboton3;
-        let atrapadoS=false;
-        let atrapadoC=false;
-        this.keyH;
-        
-                    
-    }
-    
-        preload(){
-            this.load.image('fondoSubsuelo','assetsSubsuelo/Subterráneo.png');
-            this.load.image('sueloSubsuelo', 'assetsSubsuelo/LazoAzul2Redimensionado.png');
-            this.load.image('plataforma1','assetsSubsuelo/CuadradoAzul2Redimensionado.png');
-            this.load.image('plataforma2','assetsSubsuelo/CuadradoAzulRedimensionado.png');
-            this.load.spritesheet('botonSubterraneo', 'assetsSubsuelo/botonSubterraneo.png', { frameWidth: 322, frameHeight: 223 });
-            this.load.spritesheet('palanca', 'assetsSubsuelo/palancaPiedra.png', { frameWidth: 446, frameHeight: 345 });
-            this.load.spritesheet('palancaInv', 'assetsSubsuelo/palancaPiedraInv.png', { frameWidth: 446, frameHeight: 345 });
-            this.load.image('pulpo','assetsSubsuelo/Pulpo.png');
-            this.load.spritesheet('palancaPiedra', 'assetsSubsuelo/palancaPiedra.png', { frameWidth: 446, frameHeight: 345 });
-            this.load.spritesheet('palancaPiedraInv', 'assetsSubsuelo/palancaPiedraInv.png', { frameWidth: 446, frameHeight: 345 });
-                
-
-            this.cargarPersonajes();
-        }
-    
-        create(){
-            this.iniciarMecanismos();
-
-            this.add.image(960, 500, 'fondoSubsuelo');
-
-            this.Seraphina = this.physics.add.sprite(1100, 970, 'Seraphina').setScale(0.10, 0.10);
-            this.Cassadie = this.physics.add.sprite(800, 970, 'Cassadie').setScale(0.10, 0.10);
-            this.Seraphina.setBounce(0.2);
+                this.Seraphina = this.physics.add.sprite(1100, 970, 'Seraphina').setScale(0.10, 0.10);
+                this.Cassadie = this.physics.add.sprite(800, 970, 'Cassadie').setScale(0.10, 0.10);
+                this.Seraphina.setBounce(0.2);
                 this.Seraphina.setCollideWorldBounds(true);
 
                 this.Cassadie.setBounce(0.2);
                 this.Cassadie.setCollideWorldBounds(true);
 
-    
-            //Fondo
-            //const fondo=this.add.image(0, 0, 'fondoSubsuelo').setDisplaySize(1920,1080);
-            //fondo.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
-    
-            //Suelo
-            this.platforms.create(950, 1100, 'sueloSubsuelo').setScale(6,1.5).refreshBody();
-    
-            
-            //Botones
-            this.boton = this.physics.add.sprite(1300, 980, 'botonSubterraneo').setScale(0.15);
-            this.boton1 = this.physics.add.group();
-            this.boton1 = this.physics.add.sprite(100, 830, 'botonSubterraneo').setScale(0.15);
-            this.boton2 = this.physics.add.group();
-            this.boton2 = this.physics.add.sprite(950, 580, 'botonSubterraneo').setScale(0.15);
-            this.boton3 = this.physics.add.group();
-            this.boton3 = this.physics.add.sprite(1850, 250, 'botonSubterraneo').setScale(0.15);
-            this.boton4 = this.physics.add.group();
-            this.boton4 = this.physics.add.sprite(1200, 180, 'botonSubterraneo').setScale(0.15);
-           
-    
-            //Plataformas fijas
-            this.platforms.create(950, 945, 'plataforma1').setScale(0.1,1.3).refreshBody(); //Muro separador
-            this.platforms.create(950, 880, 'plataforma1').setScale(4,0.3).refreshBody();; //Techo muro
-            this.platforms.create(80, 880, 'plataforma1').setScale(0.5,0.3).refreshBody();; //Techo muro pequeño izquierda
-            this.platforms.create(1850, 880, 'plataforma1').setScale(0.5,0.3).refreshBody();; //Techo muro pequeño derecha
-            this.platforms.create(950, 780, 'plataforma1').setScale(0.1,1.5).refreshBody(); //Muro separador 2
-            this.platforms.create(810, 450, 'plataforma1').setScale(5,0.3).refreshBody();; //Techo 2
-            this.platforms.create(1200, 790, 'plataforma1').setScale(0.5,0.3).refreshBody();; //Plataforma derecha1
-            this.platforms.create(700, 790, 'plataforma1').setScale(0.5,0.3).refreshBody();; //Plataforma izquierda1
-            this.platforms.create(950, 615, 'plataforma1').setScale(0.4,0.3).refreshBody();; //Plataforma centro
-            this.platforms.create(1690, 614, 'plataforma1').setScale(1.5,0.3).refreshBody();; //Suelo muro pequeño derecha
-            this.platforms.create(200, 614, 'plataforma1').setScale(1.5,0.3).refreshBody();; //Suelo muro pequeño izquierda
-            this.platforms.create(1850, 450, 'plataforma1').setScale(0.5,0.3).refreshBody();; //Techo muro pequeño derecha 2
-            this.platforms.create(1300, 322, 'plataforma1').setScale(0.1,2).refreshBody(); //Muro separador 2
-            this.platforms.create(1300, 40, 'plataforma1').setScale(0.1,0.7).refreshBody(); //Muro separador 3
-            this.platforms.create(1260, 220, 'plataforma1').setScale(0.8,0.3).refreshBody();; //Suelo encima muro 2
-            this.platforms.create(1850, 290, 'plataforma1').setScale(0.5,0.3).refreshBody();; //Suelo pequeño derecha 3
-            this.platforms.create(1600, 150, 'plataforma1').setScale(0.5,0.3).refreshBody();; //Suelo pequeño derecha 4
-            this.platforms.create(900, 220, 'plataforma1').setScale(0.4,0.3).refreshBody();; //Plataforma
-            this.platforms.create(600, 300, 'plataforma1').setScale(0.4,0.3).refreshBody();; //Plataforma 2
-            this.platforms.create(350, 220, 'plataforma1').setScale(0.7,0.3).refreshBody();; //Plataforma 3
-            this.platforms.create(70, 300, 'plataforma1').setScale(0.5,0.3).refreshBody();; //Suelo pequeño izquierda
-            this.platforms.create(130, 75, 'plataforma1').setScale(0.1,1.3).refreshBody(); //Muro separador 4
-    
-            //Plataformas controladas por palancas
-             this.palancas.create(120, 560, 'palanca').setScale(0.2).setData({ ground: this.platforms.create(1500, 535, 'plataforma2').setScale(0.1, 1.2).refreshBody() });
-             this.palancas.create(370, 170, 'palanca').setScale(0.2).setData({ ground: this.platforms.create(130, 215, 'plataforma2').setScale(0.1, 1.2).refreshBody() });
-    
-    
-             //Pltaformas controladas por botones
-            this.piezaboton = this.platforms.create(400, 954, 'plataforma2').setScale(0.1, 1.1).refreshBody(); //Puerta izquierda Cassadie
-            this.piezaboton1 = this.platforms.create(1700, 880, 'plataforma2').setScale(0.5, 0.3).refreshBody(); //Techo Seraphine
-            this.piezaboton2 = this.platforms.create(300, 535, 'plataforma2').setScale(0.1, 1.2).refreshBody(); //Puerta 3
-            this.piezaboton3 = this.platforms.create(1300, 140, 'plataforma2').setScale(0.1, 1.1).refreshBody(); //Puerta 4
-            this.personajesAnimaciones();
-            this.crearControles();
-            this.colisiones();
-            
-            //Variables para zona de ayuda
-            this.keyH = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.H);
-            
-            //Tentaculos
-            this.pulpos=this.physics.add.group();
-            const tentaculo1=this.pulpos.create(1000,800,'pulpo').setScale(0.08);
-            const tentaculo2=this.pulpos.create(1070,800,'pulpo').setScale(0.08);
-            const tentaculo3=this.pulpos.create(900,800,'pulpo').setScale(0.08);
-            const tentaculo4=this.pulpos.create(830,800,'pulpo').setScale(0.08);
-            const tentaculo5=this.pulpos.create(1360,370,'pulpo').setScale(0.08);
-            const tentaculo6=this.pulpos.create(1430,370,'pulpo').setScale(0.08);
-            const tentaculo7=this.pulpos.create(1240,370,'pulpo').setScale(0.08);
-            const tentaculo8=this.pulpos.create(1170,370,'pulpo').setScale(0.08);
-            const tentaculo9=this.pulpos.create(1110,370,'pulpo').setScale(0.08);
-            const tentaculo10=this.pulpos.create(820,370,'pulpo').setScale(0.08);
-            const tentaculo11=this.pulpos.create(750,370,'pulpo').setScale(0.08);
-            
-    
-    
-            //this.physics.world.enable(this.pulpos);
-            this.physics.add.collider(this.pulpos,this.platforms);
-            this.physics.add.overlap(this.Seraphina,this.pulpos,function(Seraphina, pulpo){
-                this.bloquearMovimientoS(Seraphina,pulpo);},null,this);
-            this.physics.add.overlap(this.Cassadie,this.pulpos,function(Cassadie, pulpo){
-                this.bloquearMovimientoC(Cassadie,pulpo);},null,this);
-    
-            this.physics.add.collider(this.boton1, this.platforms);
-            this.physics.add.overlap(this.Cassadie, this.boton1, this.presionar1, null, this);
-            this.physics.add.overlap(this.Seraphina, this.boton1, this.presionar1, null, this);
-            this.physics.add.collider(this.boton2, this.platforms);
-            this.physics.add.overlap(this.Cassadie, this.boton2, this.presionar2, null, this);
-            this.physics.add.overlap(this.Seraphina, this.boton2, this.presionar2, null, this);
-            this.physics.add.collider(this.boton3, this.platforms);
-            this.physics.add.overlap(this.Cassadie, this.boton3, this.presionar3, null, this);
-            this.physics.add.overlap(this.Seraphina, this.boton3, this.presionar3, null, this);
-            this.physics.add.collider(this.boton4, this.platforms);
-            this.physics.add.overlap(this.Cassadie, this.boton4, this.presionar3, null, this);
-            this.physics.add.overlap(this.Seraphina, this.boton4, this.presionar3, null, this);
-            
-        }
-    
-        update(){
-            this.movimientoPersonajes();
 
-            this.anims.create({
+                //Fondo
+                //const fondo=this.add.image(0, 0, 'fondoSubsuelo').setDisplaySize(1920,1080);
+                //fondo.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+
+                //Suelo
+                this.platforms.create(950, 1100, 'sueloSubsuelo').setScale(6, 1.5).refreshBody();
+
+
+                //Botones
+                this.boton = this.physics.add.sprite(1300, 980, 'botonSubterraneo').setScale(0.15);
+                this.boton1 = this.physics.add.sprite(100, 830, 'botonSubterraneo').setScale(0.15);
+                this.boton2 = this.physics.add.sprite(950, 580, 'botonSubterraneo').setScale(0.15);
+                this.boton3 = this.physics.add.sprite(1850, 250, 'botonSubterraneo').setScale(0.15);
+                this.boton4 = this.physics.add.sprite(1200, 180, 'botonSubterraneo').setScale(0.15);
+
+
+                //Plataformas fijas
+                this.platforms.create(950, 945, 'plataforma1').setScale(0.1, 1.3).refreshBody(); //Muro separador
+                this.platforms.create(950, 880, 'plataforma1').setScale(4, 0.3).refreshBody();; //Techo muro
+                this.platforms.create(80, 880, 'plataforma1').setScale(0.5, 0.3).refreshBody();; //Techo muro pequeño izquierda
+                this.platforms.create(1850, 880, 'plataforma1').setScale(0.5, 0.3).refreshBody();; //Techo muro pequeño derecha
+                this.platforms.create(950, 780, 'plataforma1').setScale(0.1, 1.5).refreshBody(); //Muro separador 2
+                this.platforms.create(810, 450, 'plataforma1').setScale(5, 0.3).refreshBody();; //Techo 2
+                this.platforms.create(1200, 790, 'plataforma1').setScale(0.5, 0.3).refreshBody();; //Plataforma derecha1
+                this.platforms.create(700, 790, 'plataforma1').setScale(0.5, 0.3).refreshBody();; //Plataforma izquierda1
+                this.platforms.create(950, 615, 'plataforma1').setScale(0.4, 0.3).refreshBody();; //Plataforma centro
+                this.platforms.create(1690, 614, 'plataforma1').setScale(1.5, 0.3).refreshBody();; //Suelo muro pequeño derecha
+                this.platforms.create(200, 614, 'plataforma1').setScale(1.5, 0.3).refreshBody();; //Suelo muro pequeño izquierda
+                this.platforms.create(1850, 450, 'plataforma1').setScale(0.5, 0.3).refreshBody();; //Techo muro pequeño derecha 2
+                this.platforms.create(1300, 322, 'plataforma1').setScale(0.1, 2).refreshBody(); //Muro separador 2
+                this.platforms.create(1300, 40, 'plataforma1').setScale(0.1, 0.7).refreshBody(); //Muro separador 3
+                this.platforms.create(1260, 220, 'plataforma1').setScale(0.8, 0.3).refreshBody();; //Suelo encima muro 2
+                this.platforms.create(1850, 290, 'plataforma1').setScale(0.5, 0.3).refreshBody();; //Suelo pequeño derecha 3
+                this.platforms.create(1600, 150, 'plataforma1').setScale(0.5, 0.3).refreshBody();; //Suelo pequeño derecha 4
+                this.platforms.create(900, 220, 'plataforma1').setScale(0.4, 0.3).refreshBody();; //Plataforma
+                this.platforms.create(600, 300, 'plataforma1').setScale(0.4, 0.3).refreshBody();; //Plataforma 2
+                this.platforms.create(350, 220, 'plataforma1').setScale(0.7, 0.3).refreshBody();; //Plataforma 3
+                this.platforms.create(70, 300, 'plataforma1').setScale(0.5, 0.3).refreshBody();; //Suelo pequeño izquierda
+                this.platforms.create(130, 75, 'plataforma1').setScale(0.1, 1.3).refreshBody(); //Muro separador 4
+
+                //Plataformas controladas por palancas
+                this.palancas.create(120, 560, 'palanca').setScale(0.2).setData({ ground: this.platforms.create(1500, 535, 'plataforma2').setScale(0.1, 1.2).refreshBody() });
+                this.palancas.create(370, 170, 'palanca').setScale(0.2).setData({ ground: this.platforms.create(130, 215, 'plataforma2').setScale(0.1, 1.2).refreshBody() });
+
+
+                //Pltaformas controladas por botones
+                this.piezaboton = this.platforms.create(400, 954, 'plataforma2').setScale(0.1, 1.1).refreshBody(); //Puerta izquierda Cassadie
+                this.piezaboton1 = this.platforms.create(1700, 880, 'plataforma2').setScale(0.5, 0.3).refreshBody(); //Techo Seraphine
+                this.piezaboton2 = this.platforms.create(300, 535, 'plataforma2').setScale(0.1, 1.2).refreshBody(); //Puerta 3
+                this.piezaboton3 = this.platforms.create(1300, 140, 'plataforma2').setScale(0.1, 1.1).refreshBody(); //Puerta 4
+                this.personajesAnimaciones();
+                this.crearControles();
+                this.colisiones();
+
+                //Variables para zona de ayuda
+                this.keyH = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.H);
+
+                //Tentaculos
+                this.pulpos = this.physics.add.group();
+                const tentaculo1 = this.pulpos.create(1000, 800, 'pulpo').setScale(0.08);
+                const tentaculo2 = this.pulpos.create(1070, 800, 'pulpo').setScale(0.08);
+                const tentaculo3 = this.pulpos.create(900, 800, 'pulpo').setScale(0.08);
+                const tentaculo4 = this.pulpos.create(830, 800, 'pulpo').setScale(0.08);
+                const tentaculo5 = this.pulpos.create(1360, 370, 'pulpo').setScale(0.08);
+                const tentaculo6 = this.pulpos.create(1430, 370, 'pulpo').setScale(0.08);
+                const tentaculo7 = this.pulpos.create(1240, 370, 'pulpo').setScale(0.08);
+                const tentaculo8 = this.pulpos.create(1170, 370, 'pulpo').setScale(0.08);
+                const tentaculo9 = this.pulpos.create(1110, 370, 'pulpo').setScale(0.08);
+                const tentaculo10 = this.pulpos.create(820, 370, 'pulpo').setScale(0.08);
+                const tentaculo11 = this.pulpos.create(750, 370, 'pulpo').setScale(0.08);
+
+
+
+                //this.physics.world.enable(this.pulpos);
+                this.physics.add.collider(this.pulpos, this.platforms);
+                this.physics.add.overlap(this.Seraphina, this.pulpos, function (Seraphina, pulpo) {
+                    this.bloquearMovimientoS(Seraphina, pulpo);
+                }, null, this);
+                this.physics.add.overlap(this.Cassadie, this.pulpos, function (Cassadie, pulpo) {
+                    this.bloquearMovimientoC(Cassadie, pulpo);
+                }, null, this);
+
+                this.physics.add.collider(this.boton1, this.platforms);
+                this.physics.add.overlap(this.Cassadie, this.boton1, this.presionar1, null, this);
+                this.physics.add.overlap(this.Seraphina, this.boton1, this.presionar1, null, this);
+                this.physics.add.collider(this.boton2, this.platforms);
+                this.physics.add.overlap(this.Cassadie, this.boton2, this.presionar2, null, this);
+                this.physics.add.overlap(this.Seraphina, this.boton2, this.presionar2, null, this);
+                this.physics.add.collider(this.boton3, this.platforms);
+                this.physics.add.overlap(this.Cassadie, this.boton3, this.presionar3, null, this);
+                this.physics.add.overlap(this.Seraphina, this.boton3, this.presionar3, null, this);
+                this.physics.add.collider(this.boton4, this.platforms);
+                this.physics.add.overlap(this.Cassadie, this.boton4, this.presionar4, null, this);
+                this.physics.add.overlap(this.Seraphina, this.boton4, this.presionar4, null, this);
+
+            }
+
+            update() {
+                this.movimientoPersonajes();
+
+                this.anims.create({
                     key: 'desactivar',
                     frames: this.anims.generateFrameNumbers('palancaPiedraInv', { start: 0, end: 4 }),
                     frameRate: 10,
@@ -578,126 +485,139 @@
                     repeat: 0
                 })
 
-            this.controlMecanismos();
+                this.controlMecanismos();
 
                 //Condición para pasar al siguiente nivel, falta añadirle las posiciones verdaderas.
-                if (this.Cassadie.x <=46 && this.Cassadie.y <=235 && this.Seraphina.x <=46 && this.Seraphina.y <=236) {
+                if (this.Cassadie.x <= 46 && this.Cassadie.y <= 235 && this.Seraphina.x <= 46 && this.Seraphina.y <= 236) {
                     this.scene.start('NivelBosque');
                 }
 
-            nivelActual = 'NivelSubsuelo';
-            if (Phaser.Input.Keyboard.JustDown(this.keyP)) {
+                nivelActual = 'NivelSubsuelo';
+                if (Phaser.Input.Keyboard.JustDown(this.keyP)) {
                     //this.scene.pause();
                     this.scene.sleep('NivelSubsuelo');
                     this.scene.launch('Ajustes');
                     this.parar();
                 }
 
-            const distance=Phaser.Math.Distance.Between(this.Seraphina.x,this.Seraphina.y,this.Cassadie.x,this.Cassadie.y);
-            console.log('Distancia:'+distance);
-    
-            //Si los dos estan atrapados se reinicia
-            if(this.atrapadoC && this.atrapadoS && this.Seraphina.body.touching.down && this.Cassadie.body.touching.down){
-                console.log('Han muerto los dos personajes')
-                this.Seraphina.setPosition(1100, 950);
-                this.Cassadie.setPosition(800, 950);
-                this.atrapadoC=false;
-                this.atrapadoS=false;
+                const distance = Phaser.Math.Distance.Between(this.Seraphina.x, this.Seraphina.y, this.Cassadie.x, this.Cassadie.y);
+                console.log('Distancia:' + distance);
+
+                //Si los dos estan atrapados se reinicia
+                if (this.atrapadoC && this.atrapadoS && this.Seraphina.body.touching.down && this.Cassadie.body.touching.down) {
+                    console.log('Han muerto los dos personajes')
+                    this.Seraphina.setPosition(1100, 950);
+                    this.Cassadie.setPosition(800, 950);
+                    this.atrapadoC = false;
+                    this.atrapadoS = false;
+                }
+
+                if (!this.physics.overlap(this.boton,this.Cassadie) && !this.physics.overlap(this.boton,this.Seraphina)) {
+                    this.piezaboton.enableBody(false, 0, 0, true, true);
+                    this.boton.anims.play('arriba');
+                    this.pulsar = true;
+                }
+                else { this.pulsar = false; }
+
+                if (!this.physics.overlap(this.boton1,this.Cassadie) && !this.physics.overlap(this.boton1,this.Seraphina)) {
+                    this.piezaboton1.enableBody(false, 0, 0, true, true);
+                    this.boton1.anims.play('arriba');
+                    this.pulsar1 = true;
+                } else { this.pulsar1 = false; }
+
+                if (!this.physics.overlap(this.boton2,this.Cassadie) && !this.physics.overlap(this.boton2,this.Seraphina)) {
+                    this.piezaboton2.enableBody(false, 0, 0, true, true);
+                    this.boton2.anims.play('arriba');
+                    this.pulsar2 = true;
+                } else { this.pulsar2 = false; }
+
+                if (!this.physics.overlap(this.boton3,this.Cassadie) && !this.physics.overlap(this.boton3,this.Seraphina)) {
+                    this.boton3.anims.play('arriba');
+                    this.pulsar3 = true;
+                } else { this.pulsar3 = false; }
+
+                if (!this.physics.overlap(this.boton4,this.Cassadie) && !this.physics.overlap(this.boton4,this.Seraphina)) {
+                    this.boton4.anims.play('arriba');
+                    this.pulsar4 = true;
+                } else { this.pulsar4 = false; }
+                if (!this.physics.overlap(this.boton3,this.Cassadie) && !this.physics.overlap(this.boton3,this.Seraphina)
+                && !this.physics.overlap(this.boton4,this.Cassadie) && !this.physics.overlap(this.boton4,this.Seraphina)) {
+                this.piezaboton3.enableBody(false, 0, 0, true, true);
+                }
+
+                console.log(this.Cassadie.x)
+                console.log(this.Cassadie.y)
+
+                if (Phaser.Input.Keyboard.JustDown(this.keyH)) {
+                    if (this.atrapadoS == true && distance <= 250) {
+                        console.log('Ayudando a Sera');
+                        this.Seraphina.setPosition(this.Cassadie.x, this.Cassadie.y);
+                        this.atrapadoS = false;
+                        console.log(this.atrapadoS);
+                    }
+                    if (this.atrapadoC == true && distance <= 250) {
+                        console.log('Ayudando a Cas');
+                        this.Cassadie.setPosition(this.Seraphina.x, this.Seraphina.y);
+                        this.atrapadoC = false;
+                        console.log(this.atrapadoC);
+                    }
+
+                }
+
+
+
             }
-    
-            if (!this.Seraphina.body.touching.left && !this.Seraphina.body.touching.right && !this.Seraphina.body.touching.up
-                        && !this.Cassadie.body.touching.left && !this.Cassadie.body.touching.right && !this.Cassadie.body.touching.up) {
-                        this.piezaboton1.enableBody(false, 0, 0, true, true);
-                        this.boton1.anims.play('arriba');
-                        this.pulsar = true;
-                    } else { this.pulsar = false; }
-    
-            if (!this.Seraphina.body.touching.left && !this.Seraphina.body.touching.right && !this.Seraphina.body.touching.up
-                        && !this.Cassadie.body.touching.left && !this.Cassadie.body.touching.right && !this.Cassadie.body.touching.up) {
-                        this.piezaboton2.enableBody(false, 0, 0, true, true);
-                        this.boton2.anims.play('arriba');
-                        this.pulsar = true;
-                    } else { this.pulsar = false; }
-    
-            if (!this.Seraphina.body.touching.left && !this.Seraphina.body.touching.right && !this.Seraphina.body.touching.up
-                        && !this.Cassadie.body.touching.left && !this.Cassadie.body.touching.right && !this.Cassadie.body.touching.up) {
-                        this.piezaboton3.enableBody(false, 0, 0, true, true);
-                        this.boton3.anims.play('arriba');
-                        this.pulsar = true;
-                    } else { this.pulsar = false; }
-    
-            if (!this.Seraphina.body.touching.left && !this.Seraphina.body.touching.right && !this.Seraphina.body.touching.up
-                        && !this.Cassadie.body.touching.left && !this.Cassadie.body.touching.right && !this.Cassadie.body.touching.up) {
-                        this.piezaboton3.enableBody(false, 0, 0, true, true);
-                        this.boton4.anims.play('arriba');
-                        this.pulsar = true;
-                    } else { this.pulsar = false; }
-    
-            console.log(this.Cassadie.x)
-            console.log(this.Cassadie.y)
-    
-            if (Phaser.Input.Keyboard.JustDown(this.keyH)) {
-                if(this.atrapadoS==true && distance<=250){
-                    console.log('Ayudando a Sera'); 
-                    this.Seraphina.setPosition(this.Cassadie.x,this.Cassadie.y);
-                    this.atrapadoS=false;
-                    console.log(this.atrapadoS); 
+
+            bloquearMovimientoS(Seraphina, pulpo) {
+                Seraphina.setVelocityY(0);
+                Seraphina.setVelocityX(0);
+                Seraphina.setPosition(pulpo.x, Seraphina.y);
+                this.atrapadoS = true;
+                console.log('atrapado' + this.atrapadoS);
+            }
+            bloquearMovimientoC(Cassadie, pulpo) {
+                Cassadie.setVelocityY(0);
+                Cassadie.setVelocityX(0);
+                Cassadie.setPosition(pulpo.x, Cassadie.y);
+                this.atrapadoC = true;
+                console.log('atrapado' + this.atrapadoC);
+            }
+
+            presionar1(player, boton) {
+                if (this.pulsar1) {
+                    boton.anims.play('pulsar', false);
+                    this.pulsar1 = false;
                 }
-                if(this.atrapadoC==true && distance<=250){
-                    console.log('Ayudando a Cas'); 
-                    this.Cassadie.setPosition(this.Seraphina.x,this.Seraphina.y);
-                    this.atrapadoC=false;
-                    console.log(this.atrapadoC); 
+                this.piezaboton1.disableBody(true, true);
+            }
+
+            presionar2(player, boton) {
+                if (this.pulsar2) {
+                    boton.anims.play('pulsar', false);
+                    this.pulsar2 = false;
                 }
-                    
+                this.piezaboton2.disableBody(true, true);
+            }
+
+            presionar3(player, boton) {
+                if (this.pulsar3) {
+                    boton.anims.play('pulsar', false);
+                    this.pulsar3 = false;
                 }
-    
-            
-    
+                this.piezaboton3.disableBody(true, true);
+            }
+
+            presionar4(player, boton) {
+                if (this.pulsar4) {
+                    boton.anims.play('pulsar', false);
+                    this.pulsar4 = false;
+                }
+                this.piezaboton3.disableBody(true, true);
+            }
+
         }
-    
-         bloquearMovimientoS(Seraphina,pulpo){
-            Seraphina.setVelocityY(0);
-            Seraphina.setVelocityX(0);
-            Seraphina.setPosition(pulpo.x,Seraphina.y);
-            this.atrapadoS=true;
-            console.log('atrapado'+this.atrapadoS);
-        }
-        bloquearMovimientoC(Cassadie,pulpo){
-            Cassadie.setVelocityY(0);
-            Cassadie.setVelocityX(0);
-            Cassadie.setPosition(pulpo.x,Cassadie.y);
-            this.atrapadoC=true;
-            console.log('atrapado'+this.atrapadoC);
-        }
-    
-        presionar1(player, boton) {
-                    if (this.pulsar) {
-                        boton.anims.play('pulsar', false);
-                        this.pulsar = false;
-                    }
-                    this.piezaboton1.disableBody(true, true);
-                }
-    
-        presionar2(player, boton) {
-                    if (this.pulsar) {
-                        boton.anims.play('pulsar', false);
-                        this.pulsar = false;
-                    }
-                    this.piezaboton2.disableBody(true, true);
-                }
-    
-        presionar3(player, boton) {
-                    if (this.pulsar) {
-                        boton.anims.play('pulsar', false);
-                        this.pulsar = false;
-                    }
-                    this.piezaboton3.disableBody(true, true);
-                }
-    
-        }
-    
-    
+
+
 
 
         //Nivel Bosque
@@ -717,8 +637,13 @@
                 this.piedraBosque2;
                 this.piedra;
                 this.piedra1;
+                this.pulsar1;
+                this.pulsar2;
+                this.pulsar3;
+                this.pulsar4;
                 this.flores;
                 this.flores2;
+                this.combo;
 
                 //si se necesitan añadir más botones se indican aquí como "this.boton1; this.boton2;"
             }
@@ -734,6 +659,7 @@
                 this.load.spritesheet('palancaInvBosque', 'assets/palancaMaderaInv.png', { frameWidth: 446, frameHeight: 345 });
                 this.load.spritesheet('botonBosque', 'assets/botonBosque.png', { frameWidth: 322, frameHeight: 223 });
                 this.load.spritesheet('floresObstaculo', 'assets/floresObstaculo.png', { frameWidth: 862, frameHeight: 1760 });
+                this.load.image('frog', 'assets/Rana.png');
 
                 //se carga lo común en el padre que son los personajes
                 this.cargarPersonajes();
@@ -754,7 +680,7 @@
                 this.piedra.setCollideWorldBounds(true)
                 this.piedra1.setCollideWorldBounds(true)
 
-               
+
 
                 this.Seraphina = this.physics.add.sprite(100, 810, 'Seraphina').setScale(0.10, 0.10);
                 this.Cassadie = this.physics.add.sprite(1800, 810, 'Cassadie').setScale(0.10, 0.10);
@@ -768,27 +694,22 @@
 
                 //se coloca el botón
                 this.boton = this.physics.add.sprite(800, 850, 'botonBosque').setScale(0.15);
-                this.boton1 = this.physics.add.group();
                 this.boton1 = this.physics.add.sprite(1000, 437, 'botonBosque').setScale(0.15);
-                this.boton2 = this.physics.add.group();
                 this.boton2 = this.physics.add.sprite(560, 440, 'botonBosque').setScale(0.15);
-                this.boton3 = this.physics.add.group();
                 this.boton3 = this.physics.add.sprite(1560, 850, 'botonBosque').setScale(0.15);
-                this.boton4 = this.physics.add.group();
                 this.boton4 = this.physics.add.sprite(1700, 220, 'botonBosque').setScale(0.15);
                 //por cada botón extra se añaden físicas y se coloca porque no es una lista de botones
-                ////////////this.boton1 = this.physics.add.group();
                 ////////////this.boton1 = this.physics.add.sprite(400, 470, 'boton').setScale(0.02);
 
 
-                
+
                 this.flores = this.physics.add.sprite(800, 694, 'floresObstaculo').setScale(0.2);
                 this.flores1 = this.physics.add.sprite(560, 260, 'floresObstaculo').setScale(0.23);
 
                 this.flores.setImmovable(true);
                 this.flores1.setImmovable(true);
 
-        
+
                 this.flores.body.allowGravity = false;
                 this.flores1.body.allowGravity = false;
 
@@ -822,31 +743,31 @@
                     frameRate: 20,
                     repeat: 0
                 })
-    
+
 
                 this.anims.create({
-                    key: 'desactivar',
+                    key: 'desactivarB',
                     frames: this.anims.generateFrameNumbers('palancaInvBosque', { start: 0, end: 4 }),
                     frameRate: 10,
                     repeat: 0
                 })
 
                 this.anims.create({
-                    key: 'activar',
+                    key: 'activarB',
                     frames: this.anims.generateFrameNumbers('palancaBosque', { start: 0, end: 4 }),
                     frameRate: 10,
                     repeat: 0
                 })
 
                 this.anims.create({
-                    key: 'arriba',
+                    key: 'arribaB',
                     frames: [{ key: 'botonBosque', frame: 0 }],
                     frameRate: 7,
                     repeat: 0
                 })
 
                 this.anims.create({
-                    key: 'pulsar',
+                    key: 'pulsarB',
                     frames: this.anims.generateFrameNumbers('botonBosque', { start: 0, end: 2 }),
                     frameRate: 7,
                     repeat: 0
@@ -882,13 +803,37 @@
                 this.physics.add.collider(this.Seraphina, this.flores);
                 this.physics.add.collider(this.Seraphina, this.flores1);
 
-
-               
                 //por cada botón sus físicas
                 ////////////this.physics.add.collider(this.boton1, this.platforms);
                 //creando un nuevo presionar para su pieza (porque estos tienen que detectar también cuando se dejan de tocar)
                 ////////////this.physics.add.overlap(this.Cassadie, this.boton1, this.presionar, null, this);
                 ////////////this.physics.add.overlap(this.Seraphina, this.boton1, this.presionar, null, this);
+
+                this.combo = this.input.keyboard.createCombo('FROG');
+                frog = this.physics.add.group({
+                    key: 'frog',
+                    repeat: 86,
+                    setXY: { x: 100, y: -30, stepX: 110 },
+                    setScale: 0.02,
+                });
+                var i = 0;
+                frog.children.iterate(function (child) {
+                    i++;
+                    child.setScale(0.2);
+                    if(i%2===0){child.setPosition(child.x - 15, child.y)}
+                    else{child.setPosition(child.x, child.y + 15)}
+                    if(i>17 && i<=35){child.setPosition(child.x - 1920, child.y - 90)}
+                    if(i>34 && i<=52){child.setPosition(child.x - 3840, child.y - 180)}
+                    if(i>52 && i<=69){child.setPosition(child.x - 5760, child.y - 270)}
+                    if(i>69 && i<=86){child.setPosition(child.x - 7600, child.y - 360)}
+                    child.disableBody();
+                });
+                this.input.keyboard.on('keycombomatch', function (event) {
+                    
+                    frog.children.iterate(function (child) {
+                        child.enableBody(false, 0, 0, true, true);
+                    });
+                });
             }
 
             update() {
@@ -896,79 +841,84 @@
                 this.piedra.setGravityY(0);
                 this.piedra1.setGravityY(0);
 
-    // Condición para mover la piedra solo si Cassadie está en contacto y dentro del rango horizontal de la piedra
-    if (
-        this.Cassadie.body.touching.down &&
-        (
-            (this.Cassadie.body.right >= this.piedra.body.left && this.Cassadie.body.right <= this.piedra.body.right) ||
-            (this.Cassadie.body.bottom >= this.piedra.body.top && this.Cassadie.body.bottom <= this.piedra.body.bottom)
-        ) 
-    ) {
-        // Mover la piedra solo si Cassadie está en contacto y dentro del rango
-        this.piedra.setVelocityX(0);
-    } 
+                // Condición para mover la piedra solo si Cassadie está en contacto y dentro del rango horizontal de la piedra
+                if (
+                    this.Cassadie.body.touching.down &&
+                    (
+                        (this.Cassadie.body.right >= this.piedra.body.left && this.Cassadie.body.right <= this.piedra.body.right) ||
+                        (this.Cassadie.body.bottom >= this.piedra.body.top && this.Cassadie.body.bottom <= this.piedra.body.bottom)
+                    )
+                ) {
+                    // Mover la piedra solo si Cassadie está en contacto y dentro del rango
+                    this.piedra.setVelocityX(0);
+                }
 
-    if (
-        this.Cassadie.body.touching.down &&
-        (
-            (this.Cassadie.body.right >= this.piedra1.body.left && this.Cassadie.body.right <= this.piedra1.body.right) ||
-            (this.Cassadie.body.bottom >= this.piedra1.body.top && this.Cassadie.body.bottom <= this.piedra1.body.bottom)
-        ) 
-    ) {
-        // Mover la piedra solo si Cassadie está en contacto y dentro del rango
-        this.piedra1.setVelocityX(0);
-    } 
+                if (
+                    this.Cassadie.body.touching.down &&
+                    (
+                        (this.Cassadie.body.right >= this.piedra1.body.left && this.Cassadie.body.right <= this.piedra1.body.right) ||
+                        (this.Cassadie.body.bottom >= this.piedra1.body.top && this.Cassadie.body.bottom <= this.piedra1.body.bottom)
+                    )
+                ) {
+                    // Mover la piedra solo si Cassadie está en contacto y dentro del rango
+                    this.piedra1.setVelocityX(0);
+                }
 
                 this.controlMecanismos();
-                /*if (!this.Seraphina.body.touching.left && !this.Seraphina.body.touching.right && !this.Seraphina.body.touching.up
-                    && !this.Cassadie.body.touching.left && !this.Cassadie.body.touching.right && !this.Cassadie.body.touching.up) {
+                /*if (!this.physics.overlap(this.boton,this.Cassadie) && !this.physics.overlap(this.boton,this.Seraphina)) {
                     this.piezaboton.enableBody(false, 0, 0, true, true);
                     this.boton.anims.play('arriba');
                     this.pulsar = true;
+                }
+                else { this.pulsar = false; }
                 }*/   //controlMecanismos para poner arriba cuando no esté activado el nuevo botón
 
                 //se actualiza el nivel actual para que la pantalla de pausa te devuelva a donde debe
 
-                if (!this.Seraphina.body.touching.left && !this.Seraphina.body.touching.right && !this.Seraphina.body.touching.up
-                    && !this.Cassadie.body.touching.left && !this.Cassadie.body.touching.right && !this.Cassadie.body.touching.up) {
+                if (!this.physics.overlap(this.boton,this.Cassadie) && !this.physics.overlap(this.boton,this.Seraphina)) {
+                    this.piezaboton.enableBody(false, 0, 0, true, true);
+                    this.boton.anims.play('arribaB');
+                    this.pulsar = true;
+                }
+                else { this.pulsar = false; }
+
+                if (!this.physics.overlap(this.boton1,this.Cassadie) && !this.physics.overlap(this.boton1,this.Seraphina)) {
                     this.piezaboton1.enableBody(false, 0, 0, true, true);
-                    this.boton1.anims.play('arriba');
-                    this.pulsar = true;
-                } else { this.pulsar = false; }
+                    this.boton1.anims.play('arribaB');
+                    this.pulsar1 = true;
+                } else { this.pulsar1 = false; }
 
-                if (!this.Seraphina.body.touching.left && !this.Seraphina.body.touching.right && !this.Seraphina.body.touching.up
-                    && !this.Cassadie.body.touching.left && !this.Cassadie.body.touching.right && !this.Cassadie.body.touching.up) {
+                if (!this.physics.overlap(this.boton2,this.Cassadie) && !this.physics.overlap(this.boton2,this.Seraphina)) {
                     this.piezaboton2.enableBody(false, 0, 0, true, true);
-                    this.boton2.anims.play('arriba');
-                    this.pulsar = true;
-                } else { this.pulsar = false; }
+                    this.boton2.anims.play('arribaB');
+                    this.pulsar2 = true;
+                } else { this.pulsar2 = false; }
 
-                if (!this.Seraphina.body.touching.left && !this.Seraphina.body.touching.right && !this.Seraphina.body.touching.up
-                    && !this.Cassadie.body.touching.left && !this.Cassadie.body.touching.right && !this.Cassadie.body.touching.up) {
+                if (!this.physics.overlap(this.boton3,this.Cassadie) && !this.physics.overlap(this.boton3,this.Seraphina)) {
                     this.piezaboton3.enableBody(false, 0, 0, true, true);
-                    this.boton3.anims.play('arriba');
-                    this.pulsar = true;
-                } else { this.pulsar = false; }
+                    this.boton3.anims.play('arribaB');
+                    this.pulsar3 = true;
+                } else { this.pulsar3 = false; }
 
                 if (this.segundoSalto && !this.floresD && !this.flores1D &&
                     ((this.Seraphina.body.right >= this.flores.body.left && this.Seraphina.body.right <= this.flores.body.right) ||
                         (this.Seraphina.body.bottom >= this.flores.body.top && this.Seraphina.body.bottom <= this.flores.body.bottom))) {
                     this.flores.anims.play('floresDesaparecer');
-                   setTimeout(() => {
+                    setTimeout(() => {
                         this.flores.disableBody(true, true);
                         this.floresD = true;
-                        this.flores1D =false;
+                        this.flores1D = false;
                     }, 3000);
-                } 
+                }
 
                 if (this.segundoSalto && this.floresD && !this.flores1D &&
-                    ((this.Seraphina.x >= 416 && this.Seraphina.y <= 404))  ) {
+                    ((this.Seraphina.x >= 416 && this.Seraphina.y <= 404))) {
                     this.flores1.anims.play('floresDesaparecer');
-                   setTimeout(() => {
+                    setTimeout(() => {
                         this.flores1.disableBody(true, true);
                         this.flores1D = true;
                     }, 2000);
-                }  
+                }
 
 
                 //Condición para pasar al siguiente nivel, falta añadirle las posiciones verdaderas.
@@ -987,28 +937,63 @@
                 }
             }
 
-            presionar1(player, boton) {
+            activarC(player, palanca) {
+                if (!palanca.getData('on') && this.tocarC) {
+                    palanca.anims.play('activarB', false);
+                    palanca.getData('ground').disableBody(true, true);
+                    palanca.setData({ on: true });
+                }
+                else if (palanca.getData('on') && this.tocarC) {
+                    palanca.anims.play('desactivarB', false);
+                    palanca.getData('ground').enableBody(false, 0, 0, true, true);
+                    palanca.setData({ on: false });
+                }
+            }
+
+            activarS(player, palanca) {
+                if (!palanca.getData('on') && this.tocarS) {
+                    palanca.anims.play('activarB', false);
+                    palanca.getData('ground').disableBody(true, true);
+                    palanca.setData({ on: true });
+                }
+                else if (palanca.getData('on') && this.tocarS) {
+                    palanca.anims.play('desactivarB', false);
+                    palanca.getData('ground').enableBody(false, 0, 0, true, true);
+                    palanca.setData({ on: false });
+                }
+            }
+
+            presionar(player, boton) {
                 if (this.pulsar) {
-                    boton.anims.play('pulsar', false);
+                    boton.anims.play('pulsarB', false);
                     this.pulsar = false;
+
+                }
+                this.piezaboton.disableBody(true, true);
+            }
+
+            presionar1(player, boton) {
+                if (this.pulsar1) {
+                    boton.anims.play('pulsarB', false);
+                    this.pulsar1 = false;
 
                 }
                 this.piezaboton1.disableBody(true, true);
             }
 
             presionar2(player, boton) {
-                if (this.pulsar) {
-                    boton.anims.play('pulsar', false);
-                    this.pulsar = false;
+                if (this.pulsar2) {
+                    boton.anims.play('pulsarB', false);
+                    this.pulsar2 = false;
 
                 }
                 this.piezaboton2.disableBody(true, true);
             }
 
             presionar3(player, boton) {
-                if (this.pulsar) {
-                    boton.anims.play('pulsar', false);
-                    this.pulsar = false;
+                if (this.pulsar3) {
+                    boton.anims.play('pulsarB', false);
+                    this.pulsar3 = false;
 
                 }
                 this.piezaboton3.disableBody(true, true);
@@ -1031,7 +1016,6 @@
             constructor() {
                 super('NivelCielo');
                 this.construir();
-                this.boton;
                 this.boton2;
                 this.boton4;
                 this.piezaboton;
@@ -1041,6 +1025,8 @@
                 //si se necesitan añadir más botones se indican aquí como "this.boton1; this.boton2;"
                 this.puerta;
                 this.flores;
+                this.pulsar2;
+                this.pulsar3;
             }
 
             preload() {
@@ -1054,6 +1040,7 @@
                 this.load.spritesheet('palancaInvCielo', 'assets/palancaCieloInv.png', { frameWidth: 446, frameHeight: 345 });
                 this.load.spritesheet('botonSCielo', 'assets/botonCielo.png', { frameWidth: 322, frameHeight: 223 });
                 this.load.spritesheet('floresObstaculo', 'assets/floresObstaculo.png', { frameWidth: 862, frameHeight: 1760 });
+                this.load.spritesheet('puerta', 'assets/PuertaCielo.png', { frameWidth: 1920, frameHeight: 1080 })
 
                 //se carga lo común en el padre que son los personajes
                 this.cargarPersonajes();
@@ -1078,10 +1065,8 @@
                 // 1
                 this.boton = this.physics.add.sprite(840, 810, 'botonSCielo').setScale(0.1);
                 // 2
-                this.boton2 = this.physics.add.group();
                 this.boton2 = this.physics.add.sprite(940, 470, 'botonSCielo').setScale(0.1);
                 // 4 (el 3 es palanca)
-                this.boton4 = this.physics.add.group();
                 this.boton4 = this.physics.add.sprite(1140, 810, 'botonSCielo').setScale(0.1);
                 //por cada botón extra se añaden físicas y se coloca porque no es una lista de botones
                 ////////////this.boton1 = this.physics.add.group();
@@ -1090,8 +1075,8 @@
                 this.flores = this.physics.add.sprite(1400, 694, 'floresObstaculo').setScale(0.2);
                 this.flores.setImmovable(true);
                 this.flores.body.allowGravity = false;
-                
-                
+
+
 
                 //se colocan las plataformas normales sueltas -> PLATAFORMAS
                 this.platforms.create(950, 1020, 'sueloCielo').setScale(6, 1.5).refreshBody();
@@ -1134,28 +1119,28 @@
                 })
 
                 this.anims.create({
-                    key: 'desactivar',
+                    key: 'desactivarC',
                     frames: this.anims.generateFrameNumbers('palancaInvCielo', { start: 0, end: 4 }),
                     frameRate: 10,
                     repeat: 0
                 })
 
                 this.anims.create({
-                    key: 'activar',
+                    key: 'activarC',
                     frames: this.anims.generateFrameNumbers('palancaCielo', { start: 0, end: 4 }),
                     frameRate: 10,
                     repeat: 0
                 })
 
                 this.anims.create({
-                    key: 'arriba',
+                    key: 'arribaC',
                     frames: [{ key: 'botonSCielo', frame: 0 }],
                     frameRate: 7,
                     repeat: 0
                 })
 
                 this.anims.create({
-                    key: 'pulsar',
+                    key: 'pulsarC',
                     frames: this.anims.generateFrameNumbers('botonSCielo', { start: 0, end: 2 }),
                     frameRate: 7,
                     repeat: 0
@@ -1185,7 +1170,7 @@
                 ////////////this.physics.add.overlap(this.Seraphina, this.boton1, this.presionar, null, this);
 
                 this.puerta = this.physics.add.group();
-                this.puerta = this.physics.add.sprite(500, 470, 'botonSCielo').setScale(0.1);
+                this.puerta = this.physics.add.sprite(1169.433, 310, 'puerta').setScale(0.1);
                 this.physics.add.collider(this.puerta, this.platforms);
                 this.physics.add.overlap(this.Cassadie, this.puerta, this.elegir, null, this);
                 this.physics.add.overlap(this.Seraphina, this.puerta, this.elegir, null, this);
@@ -1193,7 +1178,7 @@
                 this.physics.add.collider(this.flores, this.platforms);
                 this.physics.add.collider(this.Cassadie, this.flores);
                 this.physics.add.collider(this.Seraphina, this.flores);
-                
+
 
 
             }
@@ -1208,30 +1193,35 @@
                     this.pulsar = true;
                 }*/   //controlMecanismos para poner arriba cuando no esté activado el nuevo botón
 
-                if (!this.Seraphina.body.touching.left && !this.Seraphina.body.touching.right && !this.Seraphina.body.touching.up
-                    && !this.Cassadie.body.touching.left && !this.Cassadie.body.touching.right && !this.Cassadie.body.touching.up) {
-                    this.piezaboton2.enableBody(false, 0, 0, true, true);
-                    this.boton2.anims.play('arriba');
+                if (!this.physics.overlap(this.boton,this.Cassadie) && !this.physics.overlap(this.boton,this.Seraphina)) {
+                    this.piezaboton.enableBody(false, 0, 0, true, true);
+                    this.boton.anims.play('arribaC');
                     this.pulsar = true;
-                } else { this.pulsar = false; }
+                }
+                else { this.pulsar = false; }
 
-                if (!this.Seraphina.body.touching.left && !this.Seraphina.body.touching.right && !this.Seraphina.body.touching.up
-                    && !this.Cassadie.body.touching.left && !this.Cassadie.body.touching.right && !this.Cassadie.body.touching.up) {
+                if (!this.physics.overlap(this.boton2,this.Cassadie) && !this.physics.overlap(this.boton2,this.Seraphina)) {
+                    this.piezaboton2.enableBody(false, 0, 0, true, true);
+                    this.boton2.anims.play('arribaC');
+                    this.pulsar2 = true;
+                } else { this.pulsar2 = false; }
+
+                if (!this.physics.overlap(this.boton4,this.Cassadie) && !this.physics.overlap(this.boton4,this.Seraphina)) {
                     this.piezaboton4.enableBody(false, 0, 0, true, true);
-                    this.boton4.anims.play('arriba');
-                    this.pulsar = true;
-                } else { this.pulsar = false; }
+                    this.boton4.anims.play('arribaC');
+                    this.pulsar3 = true;
+                } else { this.pulsar3 = false; }
 
                 if (this.segundoSalto && !this.floresD &&
                     ((this.Seraphina.body.right >= this.flores.body.left && this.Seraphina.body.right <= this.flores.body.right) ||
                         (this.Seraphina.body.bottom >= this.flores.body.top && this.Seraphina.body.bottom <= this.flores.body.bottom))) {
                     this.flores.anims.play('floresDesaparecer');
-                   setTimeout(() => {
+                    setTimeout(() => {
                         this.flores.disableBody(true, true);
                         this.floresD = true;
-                        this.flores1D =false;
+                        this.flores1D = false;
                     }, 3000);
-                } 
+                }
 
 
                 //se actualiza el nivel actual para que la pantalla de pausa te devuelva a donde debe
@@ -1259,229 +1249,265 @@
                 }
                 this.piezaboton.disableBody(true, true);
             }*/
-            presionar1(player, boton) {
+
+            activarC(player, palanca) {
+                if (!palanca.getData('on') && this.tocarC) {
+                    palanca.anims.play('activarC', false);
+                    palanca.getData('ground').disableBody(true, true);
+                    palanca.setData({ on: true });
+                }
+                else if (palanca.getData('on') && this.tocarC) {
+                    palanca.anims.play('desactivarC', false);
+                    palanca.getData('ground').enableBody(false, 0, 0, true, true);
+                    palanca.setData({ on: false });
+                }
+            }
+
+            activarS(player, palanca) {
+                if (!palanca.getData('on') && this.tocarS) {
+                    palanca.anims.play('activarC', false);
+                    palanca.getData('ground').disableBody(true, true);
+                    palanca.setData({ on: true });
+                }
+                else if (palanca.getData('on') && this.tocarS) {
+                    palanca.anims.play('desactivarC', false);
+                    palanca.getData('ground').enableBody(false, 0, 0, true, true);
+                    palanca.setData({ on: false });
+                }
+            }
+
+            presionar(player, boton) {
                 if (this.pulsar) {
-                    boton.anims.play('pulsar', false);
+                    boton.anims.play('pulsarC', false);
                     this.pulsar = false;
-            
+
+                }
+                this.piezaboton.disableBody(true, true);
+            }
+
+            presionar1(player, boton) {
+                if (this.pulsar2) {
+                    boton.anims.play('pulsarC', false);
+                    this.pulsar2 = false;
+
                 }
                 this.piezaboton2.disableBody(true, true);
             }
 
             presionar2(player, boton) {
-                if (this.pulsar) {
-                    boton.anims.play('pulsar', false);
-                    this.pulsar = false;
-            
+                if (this.pulsar3) {
+                    boton.anims.play('pulsarC', false);
+                    this.pulsar3 = false;
+
                 }
                 this.piezaboton4.disableBody(true, true);
             }
         }
 
-        class TutorialImagenes extends Phaser.Scene{
+        class TutorialImagenes extends Phaser.Scene {
             constructor() {
                 super('TutorialImagenes');
-                this.indice=0;
-                
+                this.indice = 0;
+
             }
 
-            preload(){
+            preload() {
                 this.load.image('fondoTutorialI', 'assets/FondoTutorial.png');
                 this.load.image('BotonSiguiente', 'assets/BotonSiguiente.png');
-                this.load.image('Imagen1','ImagenesTutorial/Imagen1.png');
-                this.load.image('Imagen2','ImagenesTutorial/Imagen2.png');
-                this.load.image('Imagen3','ImagenesTutorial/Imagen3.png');
-                this.load.image('Imagen4','ImagenesTutorial/Imagen4.png');
-                this.load.image('Imagen5','ImagenesTutorial/Imagen5.png');
-                this.load.image('Imagen6','ImagenesTutorial/Imagen6.png');
-                this.load.image('Imagen7','ImagenesTutorial/Imagen7.png');
-                this.load.image('Imagen8','ImagenesTutorial/Imagen8.png');
-                this.load.image('Imagen9','ImagenesTutorial/Imagen9.png');
-                this.load.image('Imagen10','ImagenesTutorial/Imagen10.png');
-                this.load.image('Imagen11','ImagenesTutorial/Imagen11.png');
-                this.load.image('Imagen12','ImagenesTutorial/Imagen12.png');
-                this.load.image('Imagen13','ImagenesTutorial/Imagen13.png');
-                this.load.image('Imagen14','ImagenesTutorial/Imagen14.png');
-            
+                this.load.image('Imagen1', 'ImagenesTutorial/Imagen1.png');
+                this.load.image('Imagen2', 'ImagenesTutorial/Imagen2.png');
+                this.load.image('Imagen3', 'ImagenesTutorial/Imagen3.png');
+                this.load.image('Imagen4', 'ImagenesTutorial/Imagen4.png');
+                this.load.image('Imagen5', 'ImagenesTutorial/Imagen5.png');
+                this.load.image('Imagen6', 'ImagenesTutorial/Imagen6.png');
+                this.load.image('Imagen7', 'ImagenesTutorial/Imagen7.png');
+                this.load.image('Imagen8', 'ImagenesTutorial/Imagen8.png');
+                this.load.image('Imagen9', 'ImagenesTutorial/Imagen9.png');
+                this.load.image('Imagen10', 'ImagenesTutorial/Imagen10.png');
+                this.load.image('Imagen11', 'ImagenesTutorial/Imagen11.png');
+                this.load.image('Imagen12', 'ImagenesTutorial/Imagen12.png');
+                this.load.image('Imagen13', 'ImagenesTutorial/Imagen13.png');
+                this.load.image('Imagen14', 'ImagenesTutorial/Imagen14.png');
+
             }
-            create(){
+            create() {
 
-            
 
-            //Fondo
-            const fondo = this.add.image(0, 0, 'fondoTutorialI').setDisplaySize(1920, 1080);
-                    fondo.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
 
-            //Imagenes
-               const image1=this.add.image(1000, 440, 'Imagen1').setDisplaySize(1920, 1080);
+                //Fondo
+                const fondo = this.add.image(0, 0, 'fondoTutorialI').setDisplaySize(1920, 1080);
+                fondo.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+
+                //Imagenes
+                const image1 = this.add.image(1000, 440, 'Imagen1').setDisplaySize(1920, 1080);
                 image1.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
-              
 
-              const image2=this.add.image(950, 440, 'Imagen2').setDisplaySize(1920, 1080);
-              image2.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
-              image2.setVisible(false);
 
-              const image3=this.add.image(950, 440, 'Imagen3').setDisplaySize(1920, 1080);
-              image3.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
-              image3.setVisible(false);
+                const image2 = this.add.image(950, 440, 'Imagen2').setDisplaySize(1920, 1080);
+                image2.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+                image2.setVisible(false);
 
-              const image4=this.add.image(950, 440, 'Imagen4').setDisplaySize(1920, 1080);
-              image4.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
-              image4.setVisible(false);
+                const image3 = this.add.image(950, 440, 'Imagen3').setDisplaySize(1920, 1080);
+                image3.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+                image3.setVisible(false);
 
-              const image5=this.add.image(950, 440, 'Imagen5').setDisplaySize(1920, 1080);
-              image5.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
-              image5.setVisible(false);
+                const image4 = this.add.image(950, 440, 'Imagen4').setDisplaySize(1920, 1080);
+                image4.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+                image4.setVisible(false);
 
-              const image6=this.add.image(950, 440, 'Imagen6').setDisplaySize(1920, 1080);
-              image6.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
-              image6.setVisible(false);
+                const image5 = this.add.image(950, 440, 'Imagen5').setDisplaySize(1920, 1080);
+                image5.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+                image5.setVisible(false);
 
-              const image7=this.add.image(950, 440, 'Imagen7').setDisplaySize(1920, 1080);
-              image7.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
-              image7.setVisible(false);
+                const image6 = this.add.image(950, 440, 'Imagen6').setDisplaySize(1920, 1080);
+                image6.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+                image6.setVisible(false);
 
-              const image8=this.add.image(950, 440, 'Imagen8').setDisplaySize(1920, 1080);
-              image8.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
-              image8.setVisible(false);
+                const image7 = this.add.image(950, 440, 'Imagen7').setDisplaySize(1920, 1080);
+                image7.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+                image7.setVisible(false);
 
-              const image9=this.add.image(950, 440, 'Imagen9').setDisplaySize(1920, 1080);
-              image9.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
-              image9.setVisible(false);
+                const image8 = this.add.image(950, 440, 'Imagen8').setDisplaySize(1920, 1080);
+                image8.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+                image8.setVisible(false);
 
-              const image10=this.add.image(950, 440, 'Imagen10').setDisplaySize(1920, 1080);
-              image10.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
-              image10.setVisible(false);
+                const image9 = this.add.image(950, 440, 'Imagen9').setDisplaySize(1920, 1080);
+                image9.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+                image9.setVisible(false);
 
-              const image11=this.add.image(950, 440, 'Imagen11').setDisplaySize(1920, 1080);
-              image11.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
-              image11.setVisible(false);
+                const image10 = this.add.image(950, 440, 'Imagen10').setDisplaySize(1920, 1080);
+                image10.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+                image10.setVisible(false);
 
-              const image12=this.add.image(950, 440, 'Imagen12').setDisplaySize(1920, 1080);
-              image12.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
-              image12.setVisible(false);
+                const image11 = this.add.image(950, 440, 'Imagen11').setDisplaySize(1920, 1080);
+                image11.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+                image11.setVisible(false);
 
-              const image13=this.add.image(950, 440, 'Imagen13').setDisplaySize(1920, 1080);
-              image13.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
-              image13.setVisible(false);
+                const image12 = this.add.image(950, 440, 'Imagen12').setDisplaySize(1920, 1080);
+                image12.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+                image12.setVisible(false);
 
-              const image14=this.add.image(950, 440, 'Imagen14').setDisplaySize(1920, 1080);
-              image14.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
-              image14.setVisible(false);
+                const image13 = this.add.image(950, 440, 'Imagen13').setDisplaySize(1920, 1080);
+                image13.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+                image13.setVisible(false);
 
-            //BOTON SIGUIENTE
-            //Se añade el boton para pasar de imagenes
-            const botonSiguiente = this.add.image(990, 980, "BotonSiguiente").setInteractive();
-            botonSiguiente.setScale(1)
+                const image14 = this.add.image(950, 440, 'Imagen14').setDisplaySize(1920, 1080);
+                image14.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+                image14.setVisible(false);
 
-            //Al pasar por encima se pone mas oscuro y crece en tamaño
-            botonSiguiente.on('pointerover', function () {
+                //BOTON SIGUIENTE
+                //Se añade el boton para pasar de imagenes
+                const botonSiguiente = this.add.image(990, 980, "BotonSiguiente").setInteractive();
+                botonSiguiente.setScale(1)
+
+                //Al pasar por encima se pone mas oscuro y crece en tamaño
+                botonSiguiente.on('pointerover', function () {
                     this.setTint(0x555555);
                     this.setScale(1.2);
-             });
+                });
 
-            //Al quitar el cursor el boton vuelve al tamaño original
-            botonSiguiente.on('pointerout', function () {
+                //Al quitar el cursor el boton vuelve al tamaño original
+                botonSiguiente.on('pointerout', function () {
                     this.clearTint();
                     this.setScale(1);
-            });
+                });
 
-            //Al hacer click en el boton se pasan las imagenes
-            botonSiguiente.on('pointerdown', (pointer) => {
-                this.indice=(this.indice+1)%15;
-                console.log('Indice'+ this.indice);
+                //Al hacer click en el boton se pasan las imagenes
+                botonSiguiente.on('pointerdown', (pointer) => {
+                    this.indice = (this.indice + 1) % 15;
+                    console.log('Indice' + this.indice);
 
-                if(this.indice==0){
-                    image1.setVisible(true);
-                    
-                }
-                else if(this.indice==1){ 
-                   image1.setVisible(false); 
-                   image2.setVisible(true); 
-                }
-                else if(this.indice==2){
-                   image2.setVisible(false); 
-                   image3.setVisible(true);  
-                }
-                else if (this.indice==3){
-                    image3.setVisible(false); 
-                    image4.setVisible(true); 
-                }
-                else if (this.indice==4){
-                    image4.setVisible(false); 
-                    image5.setVisible(true); 
-                }
-                else if (this.indice==5){
-                    image5.setVisible(false); 
-                    image6.setVisible(true); 
-                }
-                else if (this.indice==6){
-                    image6.setVisible(false); 
-                    image7.setVisible(true); 
-                }
-                else if (this.indice==7){
-                    image7.setVisible(false); 
-                    image8.setVisible(true); 
-                }
-                else if (this.indice==8){
-                    image8.setVisible(false); 
-                    image9.setVisible(true); 
-                }
-                else if (this.indice==9){
-                    image9.setVisible(false); 
-                    image10.setVisible(true); 
-                }
-                else if (this.indice==10){
-                    image10.setVisible(false); 
-                    image11.setVisible(true); 
-                }
-                else if (this.indice==11){
-                    image11.setVisible(false); 
-                    image12.setVisible(true); 
-                }
-                else if (this.indice==12){
-                    image12.setVisible(false); 
-                    image13.setVisible(true); 
-                }
-                else if (this.indice==13){
-                    image13.setVisible(false); 
-                    image14.setVisible(true); 
-                }
-                if (this.indice==14){
-                    console.log('ComenzandoJuego');
-                    this.scene.start('Intro');
-                }
-                    
-            });   
+                    if (this.indice == 0) {
+                        image1.setVisible(true);
+
+                    }
+                    else if (this.indice == 1) {
+                        image1.setVisible(false);
+                        image2.setVisible(true);
+                    }
+                    else if (this.indice == 2) {
+                        image2.setVisible(false);
+                        image3.setVisible(true);
+                    }
+                    else if (this.indice == 3) {
+                        image3.setVisible(false);
+                        image4.setVisible(true);
+                    }
+                    else if (this.indice == 4) {
+                        image4.setVisible(false);
+                        image5.setVisible(true);
+                    }
+                    else if (this.indice == 5) {
+                        image5.setVisible(false);
+                        image6.setVisible(true);
+                    }
+                    else if (this.indice == 6) {
+                        image6.setVisible(false);
+                        image7.setVisible(true);
+                    }
+                    else if (this.indice == 7) {
+                        image7.setVisible(false);
+                        image8.setVisible(true);
+                    }
+                    else if (this.indice == 8) {
+                        image8.setVisible(false);
+                        image9.setVisible(true);
+                    }
+                    else if (this.indice == 9) {
+                        image9.setVisible(false);
+                        image10.setVisible(true);
+                    }
+                    else if (this.indice == 10) {
+                        image10.setVisible(false);
+                        image11.setVisible(true);
+                    }
+                    else if (this.indice == 11) {
+                        image11.setVisible(false);
+                        image12.setVisible(true);
+                    }
+                    else if (this.indice == 12) {
+                        image12.setVisible(false);
+                        image13.setVisible(true);
+                    }
+                    else if (this.indice == 13) {
+                        image13.setVisible(false);
+                        image14.setVisible(true);
+                    }
+                    if (this.indice == 14) {
+                        console.log('ComenzandoJuego');
+                        this.scene.start('Intro');
+                    }
+
+                });
 
             }
 
-            update(){
+            update() {
                 nivelActual = 'TutorialImagenes';
 
             }
 
         }
 
-        class Tutorial extends Phaser.Scene{
+        class Tutorial extends Phaser.Scene {
             constructor() {
                 super('Tutorial');
-                
+
             }
-    
-            preload(){
+
+            preload() {
                 this.load.image('fondoTutorial', 'assets/MenúInicio.PNG');
                 this.load.image('Botonjugar', 'assets/BotonJuego.png');
                 this.load.image('BotonTutorial', 'assets/BotonTutorial.png');
             }
 
-            create(){
+            create() {
 
 
                 //Fondo
                 const fondo = this.add.image(0, 0, 'fondoTutorial').setDisplaySize(1920, 1080);
-                    fondo.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
-               
+                fondo.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+
                 //BOTON JUGAR
                 //Se añade el boton para jugar
                 const botonJugar = this.add.image(960, 500, "Botonjugar").setInteractive();
@@ -1503,7 +1529,7 @@
                 botonJugar.on('pointerdown', (pointer) => {
                     console.log('Comenzando Juego');
                     this.scene.start('Intro');
-                });   
+                });
 
                 //BOTON TUTORIAL
                 //Se añade el boton para jugar
@@ -1526,37 +1552,37 @@
                 botonTutorial.on('pointerdown', (pointer) => {
                     console.log('Comenzando Tutorial');
                     this.scene.start('TutorialImagenes');
-                });   
+                });
 
-                
+
 
             }
 
-            update(){
+            update() {
                 nivelActual = 'Tutorial';
 
             }
         }
 
-        class Introducción extends Phaser.Scene{
+        class Introducción extends Phaser.Scene {
             constructor() {
                 super('Intro');
                 this.enter;
             }
-    
-            preload(){
+
+            preload() {
                 this.load.image('sky', 'assets/Cielo.jpg');
-                
+
             }
 
-            create(){
+            create() {
                 this.add.image(960, 500, 'sky');
                 this.enter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
                 this.add.text(40, 50, 'Tras años de torturas por parte del dios del mal,\nCassadie por fin se encontraría con Seraphina. \nOtro ángel caído abandonado en el subsuelo... quizá tenían más en común de lo que parecía. \nY quizá no, quizás eso sería incluso mejor... \n\nQuizá podía ser su billete de vuelta.',
-                { fontFamily: 'serif', fontSize: '50px', color: '#000'});
+                    { fontFamily: 'serif', fontSize: '50px', color: '#000' });
             }
 
-            update(){
+            update() {
                 if (Phaser.Input.Keyboard.JustDown(this.enter)) {
                     this.scene.start('NivelSubsuelo');
                 }
@@ -1820,41 +1846,41 @@
         }
 
 
-        class FinalBueno extends Phaser.Scene{
+        class FinalBueno extends Phaser.Scene {
             constructor() {
                 super('FinalBueno');
             }
-    
-            preload(){
+
+            preload() {
                 this.load.image('puerta', 'assets/Piedra.png');
             }
 
-            create(){
+            create() {
                 this.add.image(960, 500, 'sky');
                 this.add.text(50, 50, '-Os he estado observando. \n-El apoyo desinteresado para ayudar a otro a redimir sus pecados muestra un gran cambio. \n-Estoy orgulloso. \n\nY con eso, las puertas con las que tanto habían soñado... \nfinalmente se abrieron.',
-                { fontFamily: 'serif', fontSize: '50px', color: '#000'});
+                    { fontFamily: 'serif', fontSize: '50px', color: '#000' });
             }
 
-            update(){
+            update() {
             }
         }
 
-        class FinalMalo extends Phaser.Scene{
+        class FinalMalo extends Phaser.Scene {
             constructor() {
                 super('FinalMalo');
             }
-    
-            preload(){
+
+            preload() {
                 this.load.image('puerta', 'assets/Piedra.png');
             }
 
-            create(){
+            create() {
                 this.add.image(960, 500, 'sky');
                 this.add.text(100, 600, '-Te has vuelto egoísta. \n-Me has decepcionado. \n-Tus actos te condenarán a ti y a tu compañero al sufrimiento eterno. \n\nY con eso, ambos ángeles caíados fueron definitivamente expulsados... \npara toda le eternidad.',
-                { fontFamily: 'serif', fontSize: '50px', color: '#fff'});
+                    { fontFamily: 'serif', fontSize: '50px', color: '#fff' });
             }
 
-            update(){
+            update() {
             }
         }
 
@@ -1870,7 +1896,7 @@
                     debug: false
                 }
             },
-            scene: [ MenuInicio, Ajustes, Tutorial,TutorialImagenes, Introducción, NivelSubsuelo, NivelBosque, NivelCielo, Elegir, FinalBueno, FinalMalo] // NivelBosque  NivelCielo
+            scene: [/*MenuInicio, Ajustes, Tutorial, TutorialImagenes, Introducción, NivelSubsuelo, NivelBosque,*/ NivelCielo, Elegir, FinalBueno, FinalMalo] // NivelBosque  NivelCielo
             //scene: [NivelCielo]
         };
 
