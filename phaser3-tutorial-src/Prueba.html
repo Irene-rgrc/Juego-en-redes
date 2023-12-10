@@ -963,15 +963,6 @@
                     }, [], this);
                 }
 
-                if (this.physics.overlap(this.Seraphina, this.nube) && !this.nubeDesapareciendo) {
-                    this.nubeDesapareciendo = true; // Marca la nube como desapareciendo
-
-                    // Agrega un temporizador para esperar un tiempo antes de desaparecer la nube
-                    this.time.delayedCall(2000, () => {
-                        this.desaparecerNube(this.nube);
-                    }, [], this);
-                }
-
                 //this.physics.add.collider(this.flores, this.platforms);
                 //this.physics.add.collider(this.Cassadie, this.flores);
                 //this.physics.add.collider(this.Seraphina, this.flores);
@@ -979,10 +970,6 @@
                 //this.physics.add.collider(this.nube, this.platforms);
                 //this.physics.add.overlap(this.Cassadie, this.nube, this.desaparecerNube, null, this);
                 //this.physics.add.overlap(this.Seraphina, this.nube, this.desaparecerNube, null, this);
-
-                this.nube.on('animationcomplete', function () {
-                    this.nube.disableBody(true, true);
-                }, this);
 
 
 
