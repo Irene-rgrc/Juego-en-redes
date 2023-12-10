@@ -1854,16 +1854,30 @@
         class FinalBueno extends Phaser.Scene {
             constructor() {
                 super('FinalBueno');
+                this.puerta;
+                this.suelo;
             }
 
             preload() {
-                this.load.image('puerta', 'assets/Piedra.png');
+                this.load.spritesheet('puerta', 'assets/PuertaCielo.png', { frameWidth: 1920, frameHeight: 1080 })
+                this.load.image('sueloCielo', 'assets/PlataformaMoradaLado.png');
             }
 
             create() {
                 this.add.image(960, 500, 'sky');
                 this.add.text(50, 50, '-Os he estado observando. \n-El apoyo desinteresado para ayudar a otro a redimir sus pecados muestra un gran cambio. \n-Estoy orgulloso. \n\nY con eso, las puertas con las que tanto habían soñado... \nfinalmente se abrieron.',
                     { fontFamily: 'serif', fontSize: '50px', color: '#000' });
+                this.suelo = this.physics.add.staticGroup();
+                this.suelo.create(950, 978, 'sueloCielo').setScale(6, 2).refreshBody();
+                this.anims.create({
+                    key: 'abrirPuerta',
+                    frames: this.anims.generateFrameNumbers('puerta', { start: 0, end: 4 }),
+                    frameRate: 10,
+                    repeat: 0,
+                })
+                this.puerta = this.physics.add.sprite(1370, 540, 'puerta').setScale(0.6);
+                this.physics.add.collider(this.puerta, this.suelo);
+                this.puerta.anims.play('abrirPuerta', false);
             }
 
             update() {
