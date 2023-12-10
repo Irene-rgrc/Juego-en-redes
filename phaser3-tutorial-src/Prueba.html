@@ -210,7 +210,7 @@
                     this.salto = false;
                 }
 
-                if(this.Seraphina.body.touching.down){
+                if (this.Seraphina.body.touching.down) {
                     this.segundoSalto = false;
                 }
 
@@ -452,7 +452,7 @@
                 this.piedra.setCollideWorldBounds(true)
                 this.piedra1.setCollideWorldBounds(true)
 
-               
+
 
                 this.Seraphina = this.physics.add.sprite(100, 810, 'Seraphina').setScale(0.10, 0.10);
                 this.Cassadie = this.physics.add.sprite(1800, 810, 'Cassadie').setScale(0.10, 0.10);
@@ -479,14 +479,14 @@
                 ////////////this.boton1 = this.physics.add.sprite(400, 470, 'boton').setScale(0.02);
 
 
-                
+
                 this.flores = this.physics.add.sprite(800, 694, 'floresObstaculo').setScale(0.2);
                 this.flores1 = this.physics.add.sprite(560, 260, 'floresObstaculo').setScale(0.23);
 
                 this.flores.setImmovable(true);
                 this.flores1.setImmovable(true);
 
-        
+
                 this.flores.body.allowGravity = false;
                 this.flores1.body.allowGravity = false;
 
@@ -546,7 +546,7 @@
                 this.physics.add.collider(this.Seraphina, this.flores1);
 
 
-               
+
                 //por cada botón sus físicas
                 ////////////this.physics.add.collider(this.boton1, this.platforms);
                 //creando un nuevo presionar para su pieza (porque estos tienen que detectar también cuando se dejan de tocar)
@@ -559,36 +559,36 @@
                 this.piedra.setGravityY(0);
                 this.piedra1.setGravityY(0);
 
-    // Condición para mover la piedra solo si Cassadie está en contacto y dentro del rango horizontal de la piedra
-    if (
-        this.Cassadie.body.touching.down &&
-        (
-            (this.Cassadie.body.right >= this.piedra.body.left && this.Cassadie.body.right <= this.piedra.body.right) ||
-            (this.Cassadie.body.bottom >= this.piedra.body.top && this.Cassadie.body.bottom <= this.piedra.body.bottom)
-        ) 
-    ) {
-        // Mover la piedra solo si Cassadie está en contacto y dentro del rango
-        this.piedra.setVelocityX(0);
-    } 
+                // Condición para mover la piedra solo si Cassadie está en contacto y dentro del rango horizontal de la piedra
+                if (
+                    this.Cassadie.body.touching.down &&
+                    (
+                        (this.Cassadie.body.right >= this.piedra.body.left && this.Cassadie.body.right <= this.piedra.body.right) ||
+                        (this.Cassadie.body.bottom >= this.piedra.body.top && this.Cassadie.body.bottom <= this.piedra.body.bottom)
+                    )
+                ) {
+                    // Mover la piedra solo si Cassadie está en contacto y dentro del rango
+                    this.piedra.setVelocityX(0);
+                }
 
-    if (
-        this.Cassadie.body.touching.down &&
-        (
-            (this.Cassadie.body.right >= this.piedra1.body.left && this.Cassadie.body.right <= this.piedra1.body.right) ||
-            (this.Cassadie.body.bottom >= this.piedra1.body.top && this.Cassadie.body.bottom <= this.piedra1.body.bottom)
-        ) 
-    ) {
-        // Mover la piedra solo si Cassadie está en contacto y dentro del rango
-        this.piedra1.setVelocityX(0);
-    } 
-    
-                    this.anims.create({
+                if (
+                    this.Cassadie.body.touching.down &&
+                    (
+                        (this.Cassadie.body.right >= this.piedra1.body.left && this.Cassadie.body.right <= this.piedra1.body.right) ||
+                        (this.Cassadie.body.bottom >= this.piedra1.body.top && this.Cassadie.body.bottom <= this.piedra1.body.bottom)
+                    )
+                ) {
+                    // Mover la piedra solo si Cassadie está en contacto y dentro del rango
+                    this.piedra1.setVelocityX(0);
+                }
+
+                this.anims.create({
                     key: 'floresDesaparecer',
                     frames: this.anims.generateFrameNumbers('floresObstaculo', { start: 0, end: 2 }),
                     frameRate: 20,
                     repeat: 0
                 })
-    
+
 
                 this.anims.create({
                     key: 'desactivar',
@@ -653,21 +653,21 @@
                     ((this.Seraphina.body.right >= this.flores.body.left && this.Seraphina.body.right <= this.flores.body.right) ||
                         (this.Seraphina.body.bottom >= this.flores.body.top && this.Seraphina.body.bottom <= this.flores.body.bottom))) {
                     this.flores.anims.play('floresDesaparecer');
-                   setTimeout(() => {
+                    setTimeout(() => {
                         this.flores.disableBody(true, true);
                         this.floresD = true;
-                        this.flores1D =false;
+                        this.flores1D = false;
                     }, 3000);
-                } 
+                }
 
                 if (this.segundoSalto && this.floresD && !this.flores1D &&
-                    ((this.Seraphina.x >= 416 && this.Seraphina.y <= 404))  ) {
+                    ((this.Seraphina.x >= 416 && this.Seraphina.y <= 404))) {
                     this.flores1.anims.play('floresDesaparecer');
-                   setTimeout(() => {
+                    setTimeout(() => {
                         this.flores1.disableBody(true, true);
                         this.flores1D = true;
                     }, 2000);
-                }  
+                }
 
 
                 //Condición para pasar al siguiente nivel, falta añadirle las posiciones verdaderas.
@@ -741,6 +741,7 @@
                 this.puerta;
                 this.flores;
                 this.nube;
+                this.nubeAnimada = false;
                 this.nube1;
                 this.nube2;
                 this.nube3;
@@ -751,6 +752,16 @@
                 this.nube8;
                 this.nube9;
             }
+
+            /*desaparecerNube(nube, personaje) {
+                if (!this.nubeD) {
+                    nube.anims.play('nubesDesaparecer');
+                    setTimeout(() => {
+                        nube.disableBody(true, true);
+                        this.nubeD = true;
+                    }, 1000);
+                }
+            }*/
 
             preload() {
                 //se cargan sprites de fondo, plataformas, palancas del derecho y del revés y botones para el nivel correspondiente
@@ -773,8 +784,8 @@
                 //se añade que tienen fisicas
                 this.iniciarMecanismos();
                 // Poner los personajes en las posiciones que se desen: las quiero poner juntas en el centro
-                this.Seraphina = this.physics.add.sprite(955, 800, 'Seraphina').setScale(0.10, 0.10);
-                this.Cassadie = this.physics.add.sprite(995, 800, 'Cassadie').setScale(0.10, 0.10);
+                this.Seraphina = this.physics.add.sprite(955, 880, 'Seraphina').setScale(0.10, 0.10);
+                this.Cassadie = this.physics.add.sprite(995, 880, 'Cassadie').setScale(0.10, 0.10);
 
                 //  Player physics properties. Give the little guy a slight bounce.
                 this.Seraphina.setBounce(0.2);
@@ -805,7 +816,7 @@
                 this.nube.setImmovable(true);
                 this.nube.body.allowGravity = false;
 
-                this.nube1 = this.physics.add.sprite(590, 750, 'nubesObstaculo').setScale(0.5);
+                this.nube1 = this.physics.add.sprite(490, 750, 'nubesObstaculo').setScale(0.5);
                 this.nube1.setDepth(1);
                 this.nube1.setImmovable(true);
                 this.nube1.body.allowGravity = false;
@@ -839,7 +850,7 @@
                 this.nube6.setDepth(1);
                 this.nube6.setImmovable(true);
                 this.nube6.body.allowGravity = false;
-                
+
                 this.nube7 = this.physics.add.sprite(1590, 350, 'nubesObstaculo').setScale(0.6);
                 this.nube7.setDepth(1);
                 this.nube7.setImmovable(true);
@@ -854,8 +865,6 @@
                 this.nube9.setDepth(1);
                 this.nube9.setImmovable(true);
                 this.nube9.body.allowGravity = false;
-
-                
 
                 //se colocan las plataformas normales sueltas -> PLATAFORMAS
                 this.platforms.create(950, 1020, 'sueloCielo').setScale(6, 1.5).refreshBody();
@@ -882,13 +891,13 @@
                 // 3
                 this.palancas.create(1855, 100, 'palancaCielo').setScale(0.3).setData({ ground: this.platforms.create(1200, 862, 'plataformaCieloMorado').setScale(0.1, 1.3).refreshBody() });
 
-
                 //colocar el suelo que controla el boton por separado porque se necesita acceder a este individualmente
                 //fuera de una lista porque fuera de la función de colisión hay que detectar que no se tocan
                 this.piezaboton = this.platforms.create(760, 862, 'plataformaCieloMorado').setScale(0.1, 1.3).refreshBody();
                 this.piezaboton2 = this.platforms.create(550, 380, 'plataformaCieloClaro').setScale(2.5, 0.3).refreshBody();
                 this.piezaboton4 = this.platforms.create(1280, 290, 'plataformaCieloClaro').setScale(0.1, 1.3).refreshBody();
                 this.personajesAnimaciones();
+
 
 
                 this.anims.create({
@@ -936,13 +945,6 @@
 
                 this.crearControles();
                 this.colisiones();
-
-                //por cada botón sus físicas
-                ////////////this.physics.add.collider(this.boton1, this.platforms);
-                // 1
-                //this.physics.add.collider(this.boton, this.platforms);
-                //this.physics.add.overlap(this.Cassadie, this.boton, this.presionar1, null, this);
-                //this.physics.add.overlap(this.Seraphina, this.boton, this.presionar1, null, this);
                 // 2
                 this.physics.add.collider(this.boton2, this.platforms);
                 this.physics.add.overlap(this.Cassadie, this.boton2, this.presionar1, null, this);
@@ -952,9 +954,7 @@
                 this.physics.add.overlap(this.Cassadie, this.boton4, this.presionar2, null, this);
                 this.physics.add.overlap(this.Seraphina, this.boton4, this.presionar2, null, this);
 
-                //creando un nuevo presionar para su pieza (porque estos tienen que detectar también cuando se dejan de tocar)
-                ////////////this.physics.add.overlap(this.Cassadie, this.boton1, this.presionar, null, this);
-                ////////////this.physics.add.overlap(this.Seraphina, this.boton1, this.presionar, null, this);
+
 
                 this.puerta = this.physics.add.group();
                 this.puerta = this.physics.add.sprite(500, 470, 'botonSCielo').setScale(0.1);
@@ -966,23 +966,30 @@
                 this.physics.add.collider(this.Cassadie, this.flores);
                 this.physics.add.collider(this.Seraphina, this.flores);
 
-                this.physics.add.collider(this.nube, this.platforms);
-                this.physics.add.collider(this.Cassadie, this.nube);
-                this.physics.add.collider(this.Seraphina, this.nube);
-                
-
+                //this.physics.add.collider(this.nube, this.platforms);
+                //this.physics.add.overlap(this.Cassadie, this.nube, this.desaparecerNube, null, this);
+                //this.physics.add.overlap(this.Seraphina, this.nube, this.desaparecerNube, null, this);
+                this.nubes = [
+                    this.nube,
+                    this.nube1,
+                    this.nube2,
+                    this.nube3,
+                    this.nube4,
+                    this.nube5,
+                    this.nube6,
+                    this.nube7,
+                    this.nube8,
+                    this.nube9
+                ];
+                this.physics.add.collider(this.nubes, this.platforms);
+                this.physics.add.overlap(this.Cassadie, this.nubes, this.desaparecerNube, null, this);
+                this.physics.add.overlap(this.Seraphina, this.nubes, this.desaparecerNube, null, this);
 
             }
 
             update() {
                 this.movimientoPersonajes();
                 this.controlMecanismos();
-                /*if (!this.Seraphina.body.touching.left && !this.Seraphina.body.touching.right && !this.Seraphina.body.touching.up
-                    && !this.Cassadie.body.touching.left && !this.Cassadie.body.touching.right && !this.Cassadie.body.touching.up) {
-                    this.piezaboton.enableBody(false, 0, 0, true, true);
-                    this.boton.anims.play('arriba');
-                    this.pulsar = true;
-                }*/   //controlMecanismos para poner arriba cuando no esté activado el nuevo botón
 
                 if (!this.Seraphina.body.touching.left && !this.Seraphina.body.touching.right && !this.Seraphina.body.touching.up
                     && !this.Cassadie.body.touching.left && !this.Cassadie.body.touching.right && !this.Cassadie.body.touching.up) {
@@ -1001,12 +1008,11 @@
                 if (this.segundoSalto && !this.floresD &&
                     ((this.Seraphina.x >= 1010 && this.Seraphina.y <= 682))) {
                     this.flores.anims.play('floresDesaparecer');
-                   setTimeout(() => {
+                    setTimeout(() => {
                         this.flores.disableBody(true, true);
                         this.floresD = true;
-                        this.flores1D =false;
                     }, 3000);
-                } 
+                }
 
                 if (this.Seraphina.x >= 400 && this.Seraphina.x <= 410 && this.Seraphina.y == 768.55){
                     this.nube.anims.play('nubesDesaparecer');
@@ -1035,20 +1041,36 @@ console.log(this.Seraphina.y)
                 this.scene.start('Elegir');
             }
 
-            //////////////////////Presionar para hacer otro con cada piezaboton extra
-            /*presionar(player, boton) {
-                if (this.pulsar) {
-                    boton.anims.play('pulsar', false);
-                    this.pulsar = false;
-            
+            desaparecerNube(nube, personaje) {
+                if (!this.nubeD && !this.nubeAnimada) {
+                    this.nubeAnimada = true;
+
+                    // Verificar si el personaje toca con la parte inferior de la nube
+                    const tocandoParteInferior = personaje.body.bottom >= nube.body.top && personaje.body.top <= nube.body.top;
+
+                    // Reproducir animación solo si toca con la parte inferior
+                    if (tocandoParteInferior) {
+                        nube.anims.play('nubesDesaparecer');
+
+                        // Manejar el evento de finalización de la animación
+                        nube.once('animationcomplete', () => {
+                            nube.disableBody(true, true);
+                            this.nubeD = true;
+                        });
+                    } else {
+                        this.nubeAnimada = false;
+                    }
                 }
-                this.piezaboton.disableBody(true, true);
-            }*/
+            }
+
+
+
+
             presionar1(player, boton) {
                 if (this.pulsar) {
                     boton.anims.play('pulsar', false);
                     this.pulsar = false;
-            
+
                 }
                 this.piezaboton2.disableBody(true, true);
             }
@@ -1057,7 +1079,7 @@ console.log(this.Seraphina.y)
                 if (this.pulsar) {
                     boton.anims.play('pulsar', false);
                     this.pulsar = false;
-            
+
                 }
                 this.piezaboton4.disableBody(true, true);
             }
