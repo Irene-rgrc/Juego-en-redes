@@ -999,8 +999,7 @@
                 } else { this.pulsar = false; }
 
                 if (this.segundoSalto && !this.floresD &&
-                    ((this.Seraphina.body.right >= this.flores.body.left && this.Seraphina.body.right <= this.flores.body.right) ||
-                        (this.Seraphina.body.bottom >= this.flores.body.top && this.Seraphina.body.bottom <= this.flores.body.bottom))) {
+                    ((this.Seraphina.x >= 1010 && this.Seraphina.y <= 682))) {
                     this.flores.anims.play('floresDesaparecer');
                    setTimeout(() => {
                         this.flores.disableBody(true, true);
@@ -1009,7 +1008,7 @@
                     }, 3000);
                 } 
 
-                if (this.Seraphina.body.botton == this.nube.body.top || this.Cassadie.body.botton == this.nube.body.top){
+                if (this.Seraphina.x >= 400 && this.Seraphina.x <= 410 && this.Seraphina.y == 768.55){
                     this.nube.anims.play('nubesDesaparecer');
                    setTimeout(() => {
                         this.nube.disableBody(true, true);
@@ -1017,7 +1016,8 @@
                         this.nube1D =false;
                     }, 1000);
                 } 
-
+console.log(this.Seraphina.x)
+console.log(this.Seraphina.y)
 
                 //se actualiza el nivel actual para que la pantalla de pausa te devuelva a donde debe
                 nivelActual = 'NivelCielo';
