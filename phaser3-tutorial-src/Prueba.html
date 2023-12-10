@@ -816,7 +816,7 @@
                 this.nube.setImmovable(true);
                 this.nube.body.allowGravity = false;
 
-                this.nube1 = this.physics.add.sprite(590, 750, 'nubesObstaculo').setScale(0.5);
+                this.nube1 = this.physics.add.sprite(490, 750, 'nubesObstaculo').setScale(0.5);
                 this.nube1.setDepth(1);
                 this.nube1.setImmovable(true);
                 this.nube1.body.allowGravity = false;
@@ -866,8 +866,6 @@
                 this.nube9.setImmovable(true);
                 this.nube9.body.allowGravity = false;
 
-
-
                 //se colocan las plataformas normales sueltas -> PLATAFORMAS
                 this.platforms.create(950, 1020, 'sueloCielo').setScale(6, 1.5).refreshBody();
                 this.platforms.create(80, 760, 'plataformaCieloMorado').setScale(1, 0.7).refreshBody();
@@ -899,6 +897,7 @@
                 this.piezaboton2 = this.platforms.create(550, 380, 'plataformaCieloClaro').setScale(2.5, 0.3).refreshBody();
                 this.piezaboton4 = this.platforms.create(1280, 290, 'plataformaCieloClaro').setScale(0.1, 1.3).refreshBody();
                 this.personajesAnimaciones();
+
 
 
                 this.anims.create({
@@ -955,7 +954,7 @@
                 this.physics.add.overlap(this.Cassadie, this.boton4, this.presionar2, null, this);
                 this.physics.add.overlap(this.Seraphina, this.boton4, this.presionar2, null, this);
 
-            
+
 
                 this.puerta = this.physics.add.group();
                 this.puerta = this.physics.add.sprite(500, 470, 'botonSCielo').setScale(0.1);
@@ -967,9 +966,24 @@
                 this.physics.add.collider(this.Cassadie, this.flores);
                 this.physics.add.collider(this.Seraphina, this.flores);
 
-                this.physics.add.collider(this.nube, this.platforms);
-                this.physics.add.overlap(this.Cassadie, this.nube, this.desaparecerNube, null, this);
-                this.physics.add.overlap(this.Seraphina, this.nube, this.desaparecerNube, null, this);
+                //this.physics.add.collider(this.nube, this.platforms);
+                //this.physics.add.overlap(this.Cassadie, this.nube, this.desaparecerNube, null, this);
+                //this.physics.add.overlap(this.Seraphina, this.nube, this.desaparecerNube, null, this);
+                this.nubes = [
+                    this.nube,
+                    this.nube1,
+                    this.nube2,
+                    this.nube3,
+                    this.nube4,
+                    this.nube5,
+                    this.nube6,
+                    this.nube7,
+                    this.nube8,
+                    this.nube9
+                ];
+                this.physics.add.collider(this.nubes, this.platforms);
+                this.physics.add.overlap(this.Cassadie, this.nubes, this.desaparecerNube, null, this);
+                this.physics.add.overlap(this.Seraphina, this.nubes, this.desaparecerNube, null, this);
 
             }
 
@@ -992,24 +1006,34 @@
                 } else { this.pulsar = false; }
 
                 if (this.segundoSalto && !this.floresD &&
-                    ((this.Seraphina.body.right >= this.flores.body.left && this.Seraphina.body.right <= this.flores.body.right) ||
-                        (this.Seraphina.body.bottom >= this.flores.body.top && this.Seraphina.body.bottom <= this.flores.body.bottom))) {
+                    ((this.Seraphina.x >= 1010 && this.Seraphina.y <= 682))) {
                     this.flores.anims.play('floresDesaparecer');
                     setTimeout(() => {
                         this.flores.disableBody(true, true);
                         this.floresD = true;
-                        this.flores1D = false;
                     }, 3000);
                 }
 
-                const cassadieEncima = this.Cassadie.body.bottom >= this.nube.body.top && this.Cassadie.body.top <= this.nube.body.top;
+                // NUBE
+                /*const cassadieEncima = this.Cassadie.body.bottom >= this.nube.body.top && this.Cassadie.body.top <= this.nube.body.top;
                 const seraphinaEncima = this.Seraphina.body.bottom >= this.nube.body.top && this.Seraphina.body.top <= this.nube.body.top;
 
                 if (cassadieEncima || seraphinaEncima) {
                     this.desaparecerNube(this.nube, cassadieEncima ? this.Cassadie : this.Seraphina);
                 } else {
                     this.nubeAnimada = false;
-                }
+                }*/
+
+                this.nubes.forEach((nube) => {
+                    const cassadieEncima = this.Cassadie.body.bottom >= nube.body.top && this.Cassadie.body.top <= nube.body.top;
+                    const seraphinaEncima = this.Seraphina.body.bottom >= nube.body.top && this.Seraphina.body.top <= nube.body.top;
+
+                    if (cassadieEncima || seraphinaEncima) {
+                        this.desaparecerNube(nube, cassadieEncima ? this.Cassadie : this.Seraphina);
+                    } else {
+                        nube.nubeAnimada = false;
+                    }
+                });
 
 
                 //se actualiza el nivel actual para que la pantalla de pausa te devuelva a donde debe
@@ -1031,13 +1055,27 @@
             desaparecerNube(nube, personaje) {
                 if (!this.nubeD && !this.nubeAnimada) {
                     this.nubeAnimada = true;
-                    nube.anims.play('nubesDesaparecer');
-                    this.time.delayedCall(1000, () => {
-                        nube.disableBody(true, true);
-                        this.nubeD = true;
-                    });
+
+                    // Verificar si el personaje toca con la parte inferior de la nube
+                    const tocandoParteInferior = personaje.body.bottom >= nube.body.top && personaje.body.top <= nube.body.top;
+
+                    // Reproducir animación solo si toca con la parte inferior
+                    if (tocandoParteInferior) {
+                        nube.anims.play('nubesDesaparecer');
+
+                        // Manejar el evento de finalización de la animación
+                        nube.once('animationcomplete', () => {
+                            nube.disableBody(true, true);
+                            this.nubeD = true;
+                        });
+                    } else {
+                        this.nubeAnimada = false;
+                    }
                 }
             }
+
+
+
 
             presionar1(player, boton) {
                 if (this.pulsar) {
