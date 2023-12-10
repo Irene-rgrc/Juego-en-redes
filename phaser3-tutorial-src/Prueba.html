@@ -784,7 +784,7 @@
                 ////////////this.boton1 = this.physics.add.group();
                 ////////////this.boton1 = this.physics.add.sprite(400, 470, 'boton').setScale(0.02);
 
-                this.flores = this.physics.add.sprite(400, 694, 'floresObstaculo').setScale(0.2);
+                this.flores = this.physics.add.sprite(1140, 570, 'floresObstaculo').setScale(0.2);
                 this.flores.setImmovable(true);
                 this.flores.body.allowGravity = false;
                 
@@ -1239,8 +1239,8 @@
                     debug: false
                 }
             },
-            scene: [MenuInicio, Ajustes, NivelBosque, NivelCielo, Elegir] // NivelBosque  NivelCielo
-            //scene: [NivelCielo]
+            //scene: [MenuInicio, Ajustes, NivelBosque, NivelCielo, Elegir] // NivelBosque  NivelCielo
+            scene: [NivelCielo]
         };
 
         var game = new Phaser.Game(config);
