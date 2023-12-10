@@ -744,14 +744,10 @@
                 this.nubeAnimada = false;
                 this.nubeDesapareciendo = false; // Variable para controlar si la nube está desapareciendo
                 this.nube1;
-                this.nube2;
-                this.nube3;
-                this.nube4;
                 this.nube5;
                 this.nube6;
                 this.nube7;
                 this.nube8;
-                this.nube9;
                 this.contadornube = 0;
             }
 
@@ -810,30 +806,10 @@
                 this.nube.setImmovable(true);
                 this.nube.body.allowGravity = false;
 
-                this.nube1 = this.physics.add.sprite(490, 750, 'nubesObstaculo').setScale(0.5);
+                this.nube1 = this.physics.add.sprite(490, 590, 'nubesObstaculo').setScale(0.5);
                 this.nube1.setDepth(1);
                 this.nube1.setImmovable(true);
                 this.nube1.body.allowGravity = false;
-
-                this.nube2 = this.physics.add.sprite(590, 580, 'nubesObstaculo').setScale(0.7);
-                this.nube2.setDepth(1);
-                this.nube2.setImmovable(true);
-                this.nube2.body.allowGravity = false;
-
-                this.nube3 = this.physics.add.sprite(20, 120, 'nubesObstaculo').setScale(0.5);
-                this.nube3.setDepth(1);
-                this.nube3.setImmovable(true);
-                this.nube3.body.allowGravity = false;
-
-                this.nube4 = this.physics.add.sprite(200, 210, 'nubesObstaculo').setScale(0.5);
-                this.nube4.setDepth(1);
-                this.nube4.setImmovable(true);
-                this.nube4.body.allowGravity = false;
-
-                this.nube5 = this.physics.add.sprite(430, 210, 'nubesObstaculo').setScale(0.7);
-                this.nube5.setDepth(1);
-                this.nube5.setImmovable(true);
-                this.nube5.body.allowGravity = false;
 
                 this.nube5 = this.physics.add.sprite(700, 210, 'nubesObstaculo').setScale(1);
                 this.nube5.setDepth(1);
@@ -850,15 +826,12 @@
                 this.nube7.setImmovable(true);
                 this.nube7.body.allowGravity = false;
 
-                this.nube8 = this.physics.add.sprite(1590, 550, 'nubesObstaculo').setScale(1);
+                this.nube8 = this.physics.add.sprite(1590, 650, 'nubesObstaculo').setScale(1);
                 this.nube8.setDepth(1);
                 this.nube8.setImmovable(true);
                 this.nube8.body.allowGravity = false;
 
-                this.nube9 = this.physics.add.sprite(1690, 750, 'nubesObstaculo').setScale(0.6);
-                this.nube9.setDepth(1);
-                this.nube9.setImmovable(true);
-                this.nube9.body.allowGravity = false;
+                
 
                 //se colocan las plataformas normales sueltas -> PLATAFORMAS
                 this.platforms.create(950, 1020, 'sueloCielo').setScale(6, 1.5).refreshBody();
@@ -877,6 +850,8 @@
                 this.platforms.create(1170, 200, 'plataformaCieloClaro').setScale(1, 0.3).refreshBody();
                 this.platforms.create(900, 200, 'plataformaCieloClaro').setScale(0.2, 0.2).refreshBody();
                 this.platforms.create(1400, 150, 'plataformaCieloClaro').setScale(0.2, 0.2).refreshBody();
+                this.platforms.create(550, 380, 'plataformaCieloClaro').setScale(0.2, 0.2).refreshBody();
+                this.platforms.create(1690, 810, 'plataformaCieloMorado').setScale(0.5, 0.2).refreshBody();
 
                 //El suelo que controlan las palancas se crea como suelo normal pero dentro de las plataformas como data "ground" (para que cada una lo controle y tal)
                 // 3
@@ -935,11 +910,7 @@
 
                 this.crearControles();
                 this.colisiones();
-                // 2
-                //this.physics.add.collider(this.boton2, this.platforms);
-                //this.physics.add.overlap(this.Cassadie, this.boton2, this.presionar1, null, this);
-                //this.physics.add.overlap(this.Seraphina, this.boton2, this.presionar1, null, this);
-                // 4
+    
                 this.physics.add.collider(this.boton4, this.platforms);
                 this.physics.add.overlap(this.Cassadie, this.boton4, this.presionar2, null, this);
                 this.physics.add.overlap(this.Seraphina, this.boton4, this.presionar2, null, this);
@@ -949,12 +920,12 @@
                 this.puerta = this.physics.add.group();
                 this.puerta = this.physics.add.sprite(500, 470, 'botonSCielo').setScale(0.1);
                 this.physics.add.collider(this.puerta, this.platforms);
-                this.physics.add.collider(this.Seraphina, this.nube);
                 this.physics.add.overlap(this.Cassadie, this.puerta, this.elegir, null, this);
                 this.physics.add.overlap(this.Seraphina, this.puerta, this.elegir, null, this);
 
+                // 0
                 // Verifica si Cassidie o Seraphine están encima de la nube y no se ha iniciado la animación
-                if (this.physics.overlap(this.Cassadie, this.nube) && !this.nubeDesapareciendo) {
+                if (this.physics.overlap(this.Cassadie, this.nube) && !this.nubeDesapareciendo || this.physics.overlap(this.Seraphina, this.nube)) {
                     this.nubeDesapareciendo = true; // Marca la nube como desapareciendo
 
                     // Agrega un temporizador para esperar un tiempo antes de desaparecer la nube
@@ -963,28 +934,101 @@
                     }, [], this);
                 }
 
-                //this.physics.add.collider(this.flores, this.platforms);
-                //this.physics.add.collider(this.Cassadie, this.flores);
-                //this.physics.add.collider(this.Seraphina, this.flores);
+                // 1
+                // Verifica si Cassidie o Seraphine están encima de la nube y no se ha iniciado la animación
+                if (this.physics.overlap(this.Cassadie, this.nube1) && !this.nubeDesapareciendo || this.physics.overlap(this.Seraphina, this.nube1)) {
+                    this.nubeDesapareciendo = true; // Marca la nube como desapareciendo
 
-                //this.physics.add.collider(this.nube, this.platforms);
-                //this.physics.add.overlap(this.Cassadie, this.nube, this.desaparecerNube, null, this);
-                //this.physics.add.overlap(this.Seraphina, this.nube, this.desaparecerNube, null, this);
+                    // Agrega un temporizador para esperar un tiempo antes de desaparecer la nube
+                    this.time.delayedCall(3000, () => {
+                        this.desaparecerNube(this.nube1);
+                    }, [], this);
+                }
+                // 5
+                if (this.physics.overlap(this.Cassadie, this.nube5) && !this.nubeDesapareciendo || this.physics.overlap(this.Seraphina, this.nube5)) {
+                    this.nubeDesapareciendo = true; // Marca la nube como desapareciendo
+
+                    // Agrega un temporizador para esperar un tiempo antes de desaparecer la nube
+                    this.time.delayedCall(3000, () => {
+                        this.desaparecerNube(this.nube5);
+                    }, [], this);
+                }
+                // 6
+                if (this.physics.overlap(this.Cassadie, this.nube6) && !this.nubeDesapareciendo || this.physics.overlap(this.Seraphina, this.nube6)) {
+                    this.nubeDesapareciendo = true; // Marca la nube como desapareciendo
+
+                    // Agrega un temporizador para esperar un tiempo antes de desaparecer la nube
+                    this.time.delayedCall(3000, () => {
+                        this.desaparecerNube(this.nube6);
+                    }, [], this);
+                }
+                // 7
+                if (this.physics.overlap(this.Cassadie, this.nube7) && !this.nubeDesapareciendo || this.physics.overlap(this.Seraphina, this.nube7)) {
+                    this.nubeDesapareciendo = true; // Marca la nube como desapareciendo
+
+                    // Agrega un temporizador para esperar un tiempo antes de desaparecer la nube
+                    this.time.delayedCall(3000, () => {
+                        this.desaparecerNube(this.nube7);
+                    }, [], this);
+                }
+                // 8
+                if (this.physics.overlap(this.Cassadie, this.nube8) && !this.nubeDesapareciendo || this.physics.overlap(this.Seraphina, this.nube8)) {
+                    this.nubeDesapareciendo = true; // Marca la nube como desapareciendo
+
+                    // Agrega un temporizador para esperar un tiempo antes de desaparecer la nube
+                    this.time.delayedCall(3000, () => {
+                        this.desaparecerNube(this.nube8);
+                    }, [], this);
+                }
 
 
+                this.physics.add.collider(this.flores, this.platforms);
+                this.physics.add.collider(this.Cassadie, this.flores);
+                this.physics.add.collider(this.Seraphina, this.flores);
 
+                // 0
+                this.physics.add.collider(this.nube, this.platforms);
+                this.physics.add.collider(this.Cassadie, this.nube);
+                this.physics.add.collider(this.Seraphina, this.nube);
+                this.physics.add.overlap(this.Cassadie, this.nube, this.desaparecerNube, null, this);
+                this.physics.add.overlap(this.Seraphina, this.nube, this.desaparecerNube, null, this);
+                // 1
+                this.physics.add.collider(this.nube1, this.platforms);
+                this.physics.add.collider(this.Cassadie, this.nube1);
+                this.physics.add.collider(this.Seraphina, this.nube1);
+                this.physics.add.overlap(this.Cassadie, this.nube1, this.desaparecerNube, null, this);
+                this.physics.add.overlap(this.Seraphina, this.nube1, this.desaparecerNube, null, this);
+    
+                // 5
+                this.physics.add.collider(this.nube5, this.platforms);
+                this.physics.add.collider(this.Cassadie, this.nube5);
+                this.physics.add.collider(this.Seraphina, this.nube5);
+                this.physics.add.overlap(this.Cassadie, this.nube5, this.desaparecerNube, null, this);
+                this.physics.add.overlap(this.Seraphina, this.nube5, this.desaparecerNube, null, this);
+
+                // 6
+                this.physics.add.collider(this.nube6, this.platforms);
+                this.physics.add.collider(this.Cassadie, this.nube6);
+                this.physics.add.collider(this.Seraphina, this.nube6);
+                this.physics.add.overlap(this.Cassadie, this.nube6, this.desaparecerNube, null, this);
+                this.physics.add.overlap(this.Seraphina, this.nube6, this.desaparecerNube, null, this);
+                // 7
+                this.physics.add.collider(this.nube7, this.platforms);
+                this.physics.add.collider(this.Cassadie, this.nube7);
+                this.physics.add.collider(this.Seraphina, this.nube7);
+                this.physics.add.overlap(this.Cassadie, this.nube7, this.desaparecerNube, null, this);
+                this.physics.add.overlap(this.Seraphina, this.nube7, this.desaparecerNube, null, this);
+                // 8
+                this.physics.add.collider(this.nube8, this.platforms);
+                this.physics.add.collider(this.Cassadie, this.nube8);
+                this.physics.add.collider(this.Seraphina, this.nube8);
+                this.physics.add.overlap(this.Cassadie, this.nube8, this.desaparecerNube, null, this);
+                this.physics.add.overlap(this.Seraphina, this.nube8, this.desaparecerNube, null, this);
             }
 
             update() {
                 this.movimientoPersonajes();
                 this.controlMecanismos();
-
-                /*if (!this.Seraphina.body.touching.left && !this.Seraphina.body.touching.right && !this.Seraphina.body.touching.up
-                    && !this.Cassadie.body.touching.left && !this.Cassadie.body.touching.right && !this.Cassadie.body.touching.up) {
-                    this.piezaboton2.enableBody(false, 0, 0, true, true);
-                    this.boton2.anims.play('arriba');
-                    this.pulsar = true;
-                } else { this.pulsar = false; }*/
 
                 if (!this.Seraphina.body.touching.left && !this.Seraphina.body.touching.right && !this.Seraphina.body.touching.up
                     && !this.Cassadie.body.touching.left && !this.Cassadie.body.touching.right && !this.Cassadie.body.touching.up) {
@@ -1002,19 +1046,10 @@
                     }, 3000);
                 }
 
-                /*
-                 // Verifica si Cassidie o Seraphine están encima de la nube y no se ha iniciado la animación
-                if (this.physics.overlap(this.Cassadie, this.nube) && !this.nubeDesapareciendo) {
-                    this.nubeDesapareciendo = true; // Marca la nube como desapareciendo
-                    this.desaparecerNube(this.nube);
-                }*/
+                
 
-                /*if (!this.nubeAnimada &&
-                  (this.physics.overlap(this.Cassadie, this.nube) || this.physics.overlap(this.Seraphina, this.nube))) {
-                this.nube.anims.play('nubesDesaparecer');
-                this.nubeAnimada = true;
-                }*/
-
+                // NUBES
+                // 0
                 if (this.Seraphina.x >= 400 && this.Seraphina.x <= 410 && this.Seraphina.y == 768.55) {
                     this.nube.anims.play('nubesDesaparecer');
                     setTimeout(() => {
@@ -1023,8 +1058,133 @@
                         this.nube1D = false;
                     }, 1000);
                 }
-                //console.log(this.Seraphina.x)
-                //console.log(this.Seraphina.y)
+
+                if (this.Cassadie.x >= 400 && this.Cassadie.x <= 410 && this.Cassadie.y == 768.55) {
+                    this.nube.anims.play('nubesDesaparecer');
+                    setTimeout(() => {
+                        this.nube.disableBody(true, true);
+                        this.nubeD = true;
+                        this.nube1D = false;
+                    }, 1000);
+                }
+                
+                // 1
+                if (this.Cassadie.x >= 426 && this.Cassadie.x <= 514 && this.Cassadie.y == 513.5) {
+                    this.nube.anims.play('nubesDesaparecer');
+                    setTimeout(() => {
+                        this.nube1.disableBody(true, true);
+                        this.nubeD = true;
+                        this.nube1D = false;
+                    }, 1000);
+                }
+
+                if (this.Seraphina.x >= 426 && this.Seraphina.x <= 514 && this.Seraphina.y == 513.5) {
+                    this.nube.anims.play('nubesDesaparecer');
+                    setTimeout(() => {
+                        this.nube1.disableBody(true, true);
+                        this.nubeD = true;
+                        this.nube1D = false;
+                    }, 1000);
+                }
+                // 3
+                if (this.Cassadie.x >= 426 && this.Cassadie.x <= 514 && this.Cassadie.y == 513.5) {
+                    this.nube.anims.play('nubesDesaparecer');
+                    setTimeout(() => {
+                        this.nube1.disableBody(true, true);
+                        this.nubeD = true;
+                        this.nube1D = false;
+                    }, 1000);
+                }
+
+                if (this.Seraphina.x >= 426 && this.Seraphina.x <= 514 && this.Seraphina.y == 513.5) {
+                    this.nube.anims.play('nubesDesaparecer');
+                    setTimeout(() => {
+                        this.nube1.disableBody(true, true);
+                        this.nubeD = true;
+                        this.nube1D = false;
+                    }, 1000);
+                }
+
+                // 5
+
+                if (this.Cassadie.x >= 611 && this.Cassadie.x <= 760 && this.Cassadie.y == 106) {
+                    this.nube.anims.play('nubesDesaparecer');
+                    setTimeout(() => {
+                        this.nube5.disableBody(true, true);
+                        this.nubeD = true;
+                        this.nube1D = false;
+                    }, 1000);
+                }
+
+                if (this.Seraphina.x >= 611 && this.Seraphina.x <= 760 && this.Seraphina.y == 106) {
+                    this.nube.anims.play('nubesDesaparecer');
+                    setTimeout(() => {
+                        this.nube5.disableBody(true, true);
+                        this.nubeD = true;
+                        this.nube1D = false;
+                    }, 1000);
+                }
+
+                // 6
+                if (this.Cassadie.x >= 1554 && this.Cassadie.x <= 1645 && this.Cassadie.y == 133.5) {
+                    this.nube.anims.play('nubesDesaparecer');
+                    setTimeout(() => {
+                        this.nube6.disableBody(true, true);
+                        this.nubeD = true;
+                        this.nube1D = false;
+                    }, 1000);
+                }
+
+                if (this.Seraphina.x >= 1554 && this.Seraphina.x <= 1645 && this.Seraphina.y == 133.5) {
+                    this.nube.anims.play('nubesDesaparecer');
+                    setTimeout(() => {
+                        this.nube6.disableBody(true, true);
+                        this.nubeD = true;
+                        this.nube1D = false;
+                    }, 1000);
+                }
+
+                // 7
+                if (this.Cassadie.x >= 1535 && this.Cassadie.x <= 1644 && this.Cassadie.y == 268) {
+                    this.nube.anims.play('nubesDesaparecer');
+                    setTimeout(() => {
+                        this.nube7.disableBody(true, true);
+                        this.nubeD = true;
+                        this.nube1D = false;
+                    }, 1000);
+                }
+
+                if (this.Seraphina.x >= 1535 && this.Seraphina.x <= 1644 && this.Seraphina.y == 268) {
+                    this.nube.anims.play('nubesDesaparecer');
+                    setTimeout(() => {
+                        this.nube7.disableBody(true, true);
+                        this.nubeD = true;
+                        this.nube1D = false;
+                    }, 1000);
+                }
+                // 8
+                if (this.Cassadie.x >= 1480 && this.Cassadie.x <= 1656 && this.Cassadie.y == 546) {
+                    this.nube.anims.play('nubesDesaparecer');
+                    setTimeout(() => {
+                        this.nube8.disableBody(true, true);
+                        this.nubeD = true;
+                        this.nube1D = false;
+                    }, 1000);
+                }
+
+                if (this.Seraphina.x >= 1480 && this.Seraphina.x <= 1656 && this.Seraphina.y == 546) {
+                    this.nube.anims.play('nubesDesaparecer');
+                    setTimeout(() => {
+                        this.nube8.disableBody(true, true);
+                        this.nubeD = true;
+                        this.nube1D = false;
+                    }, 1000);
+                }
+
+                // POSICION META X: 1169,33 Y: 546
+                
+                console.log(this.Seraphina.x)
+                console.log(this.Seraphina.y)
 
                 //se actualiza el nivel actual para que la pantalla de pausa te devuelva a donde debe
                 nivelActual = 'NivelCielo';
@@ -1061,37 +1221,14 @@
                 this.piezaboton4.disableBody(true, true);
             }
 
-            /*desaparecerNube(nube) {
+            desaparecerNube(nube) {
                 nube.anims.play('nubesDesaparecer', true);
                 setTimeout(() => {
                     nube.disableBody(true, true);
                     // Puedes agregar más lógica aquí si es necesario
-                }, 500); // Ajusta el tiempo según tus necesidades
-            }*/
-
-            /*desaparecerNube(nube) {
-                // Reproduce la animación de desaparición de la nube
-                nube.anims.play('nubesDesaparecer', true);
-
-                // Espera a que la animación se complete antes de deshabilitar el cuerpo de la nube
-                nube.on('animationcomplete', function () {
-                    nube.disableBody(true, true);
-                    // Puedes agregar más lógica aquí si es necesario
-                }, this);
-            }*/
-            desaparecerNube(nube) {
-                // Reproduce la animación de desaparición de la nube
-                nube.anims.play('nubesDesaparecer', true);
-
-                // Espera a que la animación se complete antes de deshabilitar el cuerpo de la nube
-                nube.on('animationcomplete', function () {
-                    nube.disableBody(true, true);
-                    // Puedes agregar más lógica aquí si es necesario
-
-                    // Reinicia la variable para permitir que la nube aparezca nuevamente después
-                    this.nubeDesapareciendo = false;
-                }, this);
+                }, 3000); // Ajusta el tiempo según tus necesidades
             }
+
         }
 
         class MenuInicio extends Phaser.Scene {
