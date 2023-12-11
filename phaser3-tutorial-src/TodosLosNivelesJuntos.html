@@ -46,6 +46,7 @@
                 this.pulsar = false;
                 this.floresD = false;
                 this.segundoSalto = false;
+                this.sprintActivado = false;
                 this.flores1D = false;
             }
 
@@ -799,7 +800,7 @@
                 this.physics.add.collider(this.piedraBosque1, this.platforms);
                 this.physics.add.collider(this.piedraBosque2, this.platforms);
                 this.physics.add.collider(this.piedraBosque2, this.Cassadie);
-                this.physics.add.collider(this.piedraBosque1, this.Cassadie);
+                
 
                 this.physics.add.collider(this.flores, this.platforms);
                 this.physics.add.collider(this.flores1, this.platforms);
@@ -845,26 +846,31 @@
                 this.movimientoPersonajes();
                 this.piedra.setGravityY(0);
                 this.piedra1.setGravityY(0);
+                this.piedra.setVelocityX(0);
+                this.piedra1.setVelocityX(0);
 
                 // Condición para mover la piedra solo si Cassadie está en contacto y dentro del rango horizontal de la piedra
                 if (
-                    this.Cassadie.body.touching.down &&
+                    this.Cassadie.body.touching.down && !this.empujon &&
                     (
                         (this.Cassadie.body.right >= this.piedra.body.left && this.Cassadie.body.right <= this.piedra.body.right) ||
                         (this.Cassadie.body.bottom >= this.piedra.body.top && this.Cassadie.body.bottom <= this.piedra.body.bottom)
                     )
                 ) {
+                    this.physics.add.collider(this.piedra, this.Cassadie);
                     // Mover la piedra solo si Cassadie está en contacto y dentro del rango
                     this.piedra.setVelocityX(0);
                 }
 
                 if (
-                    this.Cassadie.body.touching.down &&
+                    this.Cassadie.body.touching.down && !this.empujon &&
                     (
                         (this.Cassadie.body.right >= this.piedra1.body.left && this.Cassadie.body.right <= this.piedra1.body.right) ||
                         (this.Cassadie.body.bottom >= this.piedra1.body.top && this.Cassadie.body.bottom <= this.piedra1.body.bottom)
                     )
                 ) {
+
+                    this.physics.add.collider(this.piedra1, this.Cassadie);
                     // Mover la piedra solo si Cassadie está en contacto y dentro del rango
                     this.piedra1.setVelocityX(0);
                 }
