@@ -1,103 +1,103 @@
 {
 	"frames": {
-		"IMG_0483.PNG": {
+		"IMG_0483.png": {
 			"frame": {
 				"x": 1,
 				"y": 1,
-				"w": 1920,
-				"h": 1080
+				"w": 960,
+				"h": 540
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 1920,
-				"h": 1080
+				"w": 960,
+				"h": 540
 			},
 			"sourceSize": {
-				"w": 1920,
-				"h": 1080
+				"w": 960,
+				"h": 540
 			}
 		},
-		"IMG_0484.PNG": {
+		"IMG_0484.png": {
 			"frame": {
-				"x": 1923,
+				"x": 963,
 				"y": 1,
-				"w": 1920,
-				"h": 1080
+				"w": 960,
+				"h": 540
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 1920,
-				"h": 1080
+				"w": 960,
+				"h": 540
 			},
 			"sourceSize": {
-				"w": 1920,
-				"h": 1080
+				"w": 960,
+				"h": 540
 			}
 		},
-		"IMG_0485.PNG": {
+		"IMG_0485.png": {
 			"frame": {
-				"x": 3845,
+				"x": 1925,
 				"y": 1,
-				"w": 1920,
-				"h": 1080
+				"w": 960,
+				"h": 540
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 1920,
-				"h": 1080
+				"w": 960,
+				"h": 540
 			},
 			"sourceSize": {
-				"w": 1920,
-				"h": 1080
+				"w": 960,
+				"h": 540
 			}
 		},
-		"IMG_0486.PNG": {
+		"IMG_0486.png": {
 			"frame": {
-				"x": 5767,
+				"x": 2887,
 				"y": 1,
-				"w": 1920,
-				"h": 1080
+				"w": 960,
+				"h": 540
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 1920,
-				"h": 1080
+				"w": 960,
+				"h": 540
 			},
 			"sourceSize": {
-				"w": 1920,
-				"h": 1080
+				"w": 960,
+				"h": 540
 			}
 		},
-		"IMG_0487.PNG": {
+		"IMG_0487.png": {
 			"frame": {
-				"x": 7689,
+				"x": 3849,
 				"y": 1,
-				"w": 1920,
-				"h": 1080
+				"w": 960,
+				"h": 540
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 1920,
-				"h": 1080
+				"w": 960,
+				"h": 540
 			},
 			"sourceSize": {
-				"w": 1920,
-				"h": 1080
+				"w": 960,
+				"h": 540
 			}
 		}
 	},
@@ -107,8 +107,8 @@
 		"image": "PuertaCielo.png",
 		"format": "RGBA8888",
 		"size": {
-			"w": 9610,
-			"h": 1082
+			"w": 4810,
+			"h": 542
 		},
 		"scale": "1"
 	}
