@@ -822,7 +822,7 @@
                 this.nube6.setImmovable(true);
                 this.nube6.body.allowGravity = false;
 
-                this.nube7 = this.physics.add.sprite(1590, 350, 'nubesObstaculo').setScale(0.6);
+                this.nube7 = this.physics.add.sprite(1590, 350, 'nubesObstaculo').setScale(0.2);
                 this.nube7.setDepth(1);
                 this.nube7.setImmovable(true);
                 this.nube7.body.allowGravity = false;
@@ -852,7 +852,10 @@
                 this.platforms.create(900, 200, 'plataformaCieloClaro').setScale(0.2, 0.2).refreshBody();
                 this.platforms.create(1400, 150, 'plataformaCieloClaro').setScale(0.2, 0.2).refreshBody();
                 this.platforms.create(550, 380, 'plataformaCieloClaro').setScale(0.2, 0.2).refreshBody();
-                this.platforms.create(1690, 810, 'plataformaCieloMorado').setScale(0.5, 0.2).refreshBody();
+                this.platforms.create(1690, 510, 'plataformaCieloRojo').setScale(0.2, 0.2).refreshBody();
+                this.platforms.create(1410, 480, 'plataformaCieloRojo').setScale(0.2, 0.2).refreshBody();
+                this.platforms.create(1650, 730, 'plataformaCieloMorado').setScale(0.5, 0.2).refreshBody();
+                //this.platforms.create(1690, 810, 'plataformaCieloMorado').setScale(0.5, 0.2).refreshBody();
 
                 //El suelo que controlan las palancas se crea como suelo normal pero dentro de las plataformas como data "ground" (para que cada una lo controle y tal)
                 // 3
