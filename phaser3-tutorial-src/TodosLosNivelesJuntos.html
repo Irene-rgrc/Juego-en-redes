@@ -709,7 +709,7 @@
 
 
                 this.flores = this.physics.add.sprite(800, 736, 'floresObstaculo').setScale(0.2);
-                this.flores1 = this.physics.add.sprite(560, 260, 'floresObstaculo').setScale(0.23);
+                this.flores1 = this.physics.add.sprite(560, 280, 'floresObstaculo').setScale(0.23);
 
                 this.flores.setImmovable(true);
                 this.flores1.setImmovable(true);
@@ -721,25 +721,25 @@
                 //se colocan las plataformas normales sueltas
                 this.platforms.create(950, 1020, 'sueloBosque').setScale(6, 2).refreshBody();
                 this.platforms.create(150, 665, 'plataformaBosque1').setScale(1, 0.3).refreshBody();
-                this.platforms.create(914, 470, 'plataformaBosque1').setScale(4, 0.3).refreshBody();
+                this.platforms.create(914, 490, 'plataformaBosque1').setScale(4, 0.3).refreshBody();
                 this.platforms.create(1640, 665, 'plataformaBosque1').setScale(1.7, 0.3).refreshBody();
-                this.platforms.create(850, 310, 'plataformaBosque1').setScale(0.2, 2.6).refreshBody();
+                this.platforms.create(850, 330, 'plataformaBosque1').setScale(0.2, 2.6).refreshBody();
                 this.platforms.create(1824, 250, 'plataformaBosque1').setScale(1.5, 0.3).refreshBody();
                 this.platforms.create(1090, 200, 'plataformaBosque1').setScale(0.3, 0.1).refreshBody();
                 this.platforms.create(1350, 200, 'plataformaBosque1').setScale(0.3, 0.1).refreshBody();
 
 
                 //El suelo que controlan las palancas se crea como suelo normal pero dentro de las plataformas como data "ground" (para que cada una lo controle y tal)
-                this.palancas.create(220, 554, 'palancaBosque').setScale(0.3).setData({ ground: this.platforms.create(1754, 470, 'plataformaBosque2').setScale(1, 0.3).refreshBody() });
-                this.palancas.create(1550, 554, 'palancaBosque').setScale(0.3).setData({ ground: this.platforms.create(150, 470, 'plataformaBosque2').setScale(1, 0.3).refreshBody() });
+                this.palancas.create(220, 554, 'palancaBosque').setScale(0.3).setData({ ground: this.platforms.create(1754, 490, 'plataformaBosque2').setScale(1, 0.3).refreshBody() });
+                this.palancas.create(1550, 554, 'palancaBosque').setScale(0.3).setData({ ground: this.platforms.create(150, 490, 'plataformaBosque2').setScale(1, 0.3).refreshBody() });
 
 
                 //colocar el suelo que controla el boton por separado porque se necesita acceder a este individualmente
                 //fuera de una lista porque fuera de la función de colisión hay que detectar que no se tocan
 
                 this.piezaboton = this.platforms.create(1374, 795, 'plataformaBosque2').setScale(0.1, 2).refreshBody();
-                this.piezaboton1 = this.platforms.create(1574, 123, 'plataformaBosque2').setScale(0.1, 2.3).refreshBody();
-                this.piezaboton2 = this.platforms.create(1574, 370, 'plataformaBosque2').setScale(0.1, 2.1).refreshBody();
+                this.piezaboton1 = this.platforms.create(1574, 133, 'plataformaBosque2').setScale(0.1, 2.5).refreshBody();
+                this.piezaboton2 = this.platforms.create(1574, 390, 'plataformaBosque2').setScale(0.1, 2.1).refreshBody();
                 this.piezaboton3 = this.platforms.create(300, 795, 'plataformaBosque2').setScale(0.1, 2).refreshBody();
                 this.personajesAnimaciones();
                 this.anims.create({
@@ -1915,8 +1915,8 @@
                     debug: false
                 }
             },
-            scene: [MenuInicio, Ajustes, Tutorial, TutorialImagenes, Introducción, NivelSubsuelo, NivelBosque, NivelCielo, Elegir, FinalBueno, FinalMalo] // NivelBosque  NivelCielo
-            //scene: [NivelBosque]
+            //scene: [MenuInicio, Ajustes, Tutorial, TutorialImagenes, Introducción, NivelSubsuelo, NivelBosque, NivelCielo, Elegir, FinalBueno, FinalMalo] // NivelBosque  NivelCielo
+            scene: [NivelBosque]
         };
 
         var game = new Phaser.Game(config);
