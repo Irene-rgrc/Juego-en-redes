@@ -621,407 +621,437 @@
 
 
 
-        //Nivel Bosque
-        class NivelBosque extends NivelBase {
-
-            constructor() {
-                super('NivelBosque');
-                this.construir();
-                this.boton1;
-                this.boton2;
-                this.boton3;
-                this.boton4;
-                this.piezaboton1;
-                this.piezaboton2;
-                this.piezaboton3;
-                this.piedraBosque1;
-                this.piedraBosque2;
-                this.piedra;
-                this.piedra1;
-                this.pulsar1;
-                this.pulsar2;
-                this.pulsar3;
-                this.pulsar4;
-                this.flores;
-                this.flores2;
-                this.combo;
-
-                //si se necesitan añadir más botones se indican aquí como "this.boton1; this.boton2;"
-            }
-
-            preload() {
-                //se cargan sprites de fondo, plataformas, palancas del derecho y del revés y botones para el nivel correspondiente
-                this.load.image('fondoB', 'assets/Bosque.png');
-                this.load.image('sueloBosque', 'assets/CuadradoMarron.png');
-                this.load.image('plataformaBosque1', 'assets/LadoVerde.png');
-                this.load.image('plataformaBosque2', 'assets/LadoOscuro.png');
-                this.load.image('piedraBosque', 'assets/piedra.png');
-                this.load.spritesheet('palancaBosque', 'assets/palancaBosque.png', { frameWidth: 446, frameHeight: 345 });
-                this.load.spritesheet('palancaInvBosque', 'assets/palancaMaderaInv.png', { frameWidth: 446, frameHeight: 345 });
-                this.load.spritesheet('botonBosque', 'assets/botonBosque.png', { frameWidth: 322, frameHeight: 223 });
-                this.load.spritesheet('floresObstaculo', 'assets/floresObstaculo.png', { frameWidth: 862, frameHeight: 1760 });
-                this.load.image('frog', 'assets/Rana.png');
-
-                //se carga lo común en el padre que son los personajes
-                this.cargarPersonajes();
-            }
-
-            create() {
-                //carga el fondo
-                this.add.image(960, 500, 'fondoB');
-                //se añade que tienen fisicas
-                this.iniciarMecanismos();
-
-                this.piedraBosque1 = this.physics.add.group();
-                this.piedraBosque2 = this.physics.add.group();
-
-                this.piedra = this.piedraBosque1.create(600, 862, 'piedraBosque')
-                this.piedra1 = this.piedraBosque2.create(1450, 405, 'piedraBosque')
-
-                this.piedra.setCollideWorldBounds(true)
-                this.piedra1.setCollideWorldBounds(true)
-
-
-
-                this.Seraphina = this.physics.add.sprite(100, 852, 'Seraphina').setScale(0.10, 0.10);
-                this.Cassadie = this.physics.add.sprite(1800, 852, 'Cassadie').setScale(0.10, 0.10);
-
-                //  Player physics properties. Give the little guy a slight bounce.
-                this.Seraphina.setBounce(0.2);
-                this.Seraphina.setCollideWorldBounds(true);
-
-                this.Cassadie.setBounce(0.2);
-                this.Cassadie.setCollideWorldBounds(true);
-
-                //se coloca el botón
-                this.boton = this.physics.add.sprite(800, 850, 'botonBosque').setScale(0.15);
-                this.boton1 = this.physics.add.group();
-                this.boton1 = this.physics.add.sprite(1000, 437, 'botonBosque').setScale(0.15);
-                this.boton2 = this.physics.add.group();
-                this.boton2 = this.physics.add.sprite(560, 440, 'botonBosque').setScale(0.15);
-                this.boton3 = this.physics.add.group();
-                this.boton3 = this.physics.add.sprite(1560, 850, 'botonBosque').setScale(0.15);
-                this.boton4 = this.physics.add.group();
-                this.boton4 = this.physics.add.sprite(1700, 220, 'botonBosque').setScale(0.15);
-                //por cada botón extra se añaden físicas y se coloca porque no es una lista de botones
-                ////////////this.boton1 = this.physics.add.group();
-                ////////////this.boton1 = this.physics.add.sprite(400, 470, 'boton').setScale(0.02);
-
-
-
-                this.flores = this.physics.add.sprite(800, 736, 'floresObstaculo').setScale(0.2);
-                this.flores1 = this.physics.add.sprite(560, 280, 'floresObstaculo').setScale(0.23);
-
-                this.flores.setImmovable(true);
-                this.flores1.setImmovable(true);
-
-
-                this.flores.body.allowGravity = false;
-                this.flores1.body.allowGravity = false;
-
-                //se colocan las plataformas normales sueltas
-                this.platforms.create(950, 1020, 'sueloBosque').setScale(6, 2).refreshBody();
-                this.platforms.create(150, 665, 'plataformaBosque1').setScale(1, 0.3).refreshBody();
-                this.platforms.create(914, 490, 'plataformaBosque1').setScale(4, 0.3).refreshBody();
-                this.platforms.create(1640, 665, 'plataformaBosque1').setScale(1.7, 0.3).refreshBody();
-                this.platforms.create(850, 330, 'plataformaBosque1').setScale(0.2, 2.6).refreshBody();
-                this.platforms.create(1824, 250, 'plataformaBosque1').setScale(1.5, 0.3).refreshBody();
-                this.platforms.create(1090, 200, 'plataformaBosque1').setScale(0.3, 0.1).refreshBody();
-                this.platforms.create(1350, 200, 'plataformaBosque1').setScale(0.3, 0.1).refreshBody();
-
-
-                //El suelo que controlan las palancas se crea como suelo normal pero dentro de las plataformas como data "ground" (para que cada una lo controle y tal)
-                this.palancas.create(220, 554, 'palancaBosque').setScale(0.3).setData({ ground: this.platforms.create(1754, 490, 'plataformaBosque2').setScale(1, 0.3).refreshBody() });
-                this.palancas.create(1550, 554, 'palancaBosque').setScale(0.3).setData({ ground: this.platforms.create(150, 490, 'plataformaBosque2').setScale(1, 0.3).refreshBody() });
-
-
-                //colocar el suelo que controla el boton por separado porque se necesita acceder a este individualmente
-                //fuera de una lista porque fuera de la función de colisión hay que detectar que no se tocan
-
-                this.piezaboton = this.platforms.create(1374, 795, 'plataformaBosque2').setScale(0.1, 2).refreshBody();
-                this.piezaboton1 = this.platforms.create(1574, 133, 'plataformaBosque2').setScale(0.1, 2.5).refreshBody();
-                this.piezaboton2 = this.platforms.create(1574, 390, 'plataformaBosque2').setScale(0.1, 2.1).refreshBody();
-                this.piezaboton3 = this.platforms.create(300, 795, 'plataformaBosque2').setScale(0.1, 2).refreshBody();
-                this.personajesAnimaciones();
-                this.anims.create({
-                    key: 'floresDesaparecer',
-                    frames: this.anims.generateFrameNumbers('floresObstaculo', { start: 0, end: 2 }),
-                    frameRate: 20,
-                    repeat: 0
-                })
-
-
-                this.anims.create({
-                    key: 'desactivarB',
-                    frames: this.anims.generateFrameNumbers('palancaInvBosque', { start: 0, end: 4 }),
-                    frameRate: 10,
-                    repeat: 0
-                })
-
-                this.anims.create({
-                    key: 'activarB',
-                    frames: this.anims.generateFrameNumbers('palancaBosque', { start: 0, end: 4 }),
-                    frameRate: 10,
-                    repeat: 0
-                })
-
-                this.anims.create({
-                    key: 'arribaB',
-                    frames: [{ key: 'botonBosque', frame: 0 }],
-                    frameRate: 7,
-                    repeat: 0
-                })
-
-                this.anims.create({
-                    key: 'pulsarB',
-                    frames: this.anims.generateFrameNumbers('botonBosque', { start: 0, end: 2 }),
-                    frameRate: 7,
-                    repeat: 0
-                })
-                this.crearControles();
-                this.colisiones();
-
-
-                this.physics.add.collider(this.boton1, this.platforms);
-                this.physics.add.overlap(this.Cassadie, this.boton1, this.presionar1, null, this);
-                this.physics.add.overlap(this.Seraphina, this.boton1, this.presionar1, null, this);
-                this.physics.add.collider(this.boton2, this.platforms);
-                this.physics.add.overlap(this.Cassadie, this.boton2, this.presionar2, null, this);
-                this.physics.add.overlap(this.Seraphina, this.boton2, this.presionar2, null, this);
-                this.physics.add.collider(this.boton3, this.platforms);
-                this.physics.add.overlap(this.Cassadie, this.boton3, this.presionar3, null, this);
-                this.physics.add.overlap(this.Seraphina, this.boton3, this.presionar3, null, this);
-                this.physics.add.collider(this.boton4, this.platforms);
-                this.physics.add.overlap(this.Cassadie, this.boton4, this.presionar1, null, this);
-                this.physics.add.overlap(this.Seraphina, this.boton4, this.presionar1, null, this);
-
-                /*this.physics.add.overlap(this.Cassadie, this.piedraBosque1, this.moverPiedra, null, this);
-                this.physics.add.overlap(this.Cassadie, this.piedraBosque2, this.moverPiedra, null, this);*/
-                this.physics.add.collider(this.piedraBosque1, this.platforms);
-                this.physics.add.collider(this.piedraBosque2, this.platforms);
-                this.physics.add.collider(this.piedraBosque2, this.Cassadie);
-                
-
-                this.physics.add.collider(this.flores, this.platforms);
-                this.physics.add.collider(this.flores1, this.platforms);
-                this.physics.add.collider(this.Cassadie, this.flores);
-                this.physics.add.collider(this.Cassadie, this.flores1);
-                this.physics.add.collider(this.Seraphina, this.flores);
-                this.physics.add.collider(this.Seraphina, this.flores1);
-
-                //por cada botón sus físicas
-                ////////////this.physics.add.collider(this.boton1, this.platforms);
-                //creando un nuevo presionar para su pieza (porque estos tienen que detectar también cuando se dejan de tocar)
-                ////////////this.physics.add.overlap(this.Cassadie, this.boton1, this.presionar, null, this);
-                ////////////this.physics.add.overlap(this.Seraphina, this.boton1, this.presionar, null, this);
-
-                this.combo = this.input.keyboard.createCombo('FROG');
-                frog = this.physics.add.group({
-                    key: 'frog',
-                    repeat: 86,
-                    setXY: { x: 100, y: -30, stepX: 110 },
-                    setScale: 0.02,
-                });
-                var i = 0;
-                frog.children.iterate(function (child) {
-                    i++;
-                    child.setScale(0.2);
-                    if(i%2===0){child.setPosition(child.x - 15, child.y)}
-                    else{child.setPosition(child.x, child.y + 15)}
-                    if(i>17 && i<=35){child.setPosition(child.x - 1920, child.y - 90)}
-                    if(i>34 && i<=52){child.setPosition(child.x - 3840, child.y - 180)}
-                    if(i>52 && i<=69){child.setPosition(child.x - 5760, child.y - 270)}
-                    if(i>69 && i<=86){child.setPosition(child.x - 7600, child.y - 360)}
-                    child.disableBody();
-                });
-                this.input.keyboard.on('keycombomatch', function (event) {
-                    
-                    frog.children.iterate(function (child) {
-                        child.enableBody(false, 0, 0, true, true);
-                    });
-                });
-            }
-
-            update() {
-                this.movimientoPersonajes();
-                this.piedra.setGravityY(0);
-                this.piedra1.setGravityY(0);
-                this.piedra.setVelocityX(0);
-                this.piedra1.setVelocityX(0);
-
-                // Condición para mover la piedra solo si Cassadie está en contacto y dentro del rango horizontal de la piedra
-                if (
-                    this.Cassadie.body.touching.down && !this.empujon &&
-                    (
-                        (this.Cassadie.body.right >= this.piedra.body.left && this.Cassadie.body.right <= this.piedra.body.right) ||
-                        (this.Cassadie.body.bottom >= this.piedra.body.top && this.Cassadie.body.bottom <= this.piedra.body.bottom)
-                    )
-                ) {
-                    this.physics.add.collider(this.piedra, this.Cassadie);
-                    // Mover la piedra solo si Cassadie está en contacto y dentro del rango
-                    this.piedra.setVelocityX(0);
-                }
-
-                if (
-                    this.Cassadie.body.touching.down && !this.empujon &&
-                    (
-                        (this.Cassadie.body.right >= this.piedra1.body.left && this.Cassadie.body.right <= this.piedra1.body.right) ||
-                        (this.Cassadie.body.bottom >= this.piedra1.body.top && this.Cassadie.body.bottom <= this.piedra1.body.bottom)
-                    )
-                ) {
-
-                    this.physics.add.collider(this.piedra1, this.Cassadie);
-                    // Mover la piedra solo si Cassadie está en contacto y dentro del rango
-                    this.piedra1.setVelocityX(0);
-                }
-
-                this.controlMecanismos();
-                /*if (!this.physics.overlap(this.boton,this.Cassadie) && !this.physics.overlap(this.boton,this.Seraphina)) {
-                    this.piezaboton.enableBody(false, 0, 0, true, true);
-                    this.boton.anims.play('arriba');
-                    this.pulsar = true;
-                }
-                else { this.pulsar = false; }
-                }*/   //controlMecanismos para poner arriba cuando no esté activado el nuevo botón
-
-                //se actualiza el nivel actual para que la pantalla de pausa te devuelva a donde debe
-
-                if (!this.physics.overlap(this.boton,this.Cassadie) && !this.physics.overlap(this.boton,this.Seraphina)) {
-                    this.piezaboton.enableBody(false, 0, 0, true, true);
-                    this.boton.anims.play('arribaB');
-                    this.pulsar = true;
-                }
-                else { this.pulsar = false; }
-
-                if (!this.physics.overlap(this.boton1,this.Cassadie) && !this.physics.overlap(this.boton1,this.Seraphina)) {
-                    this.piezaboton1.enableBody(false, 0, 0, true, true);
-                    this.boton1.anims.play('arribaB');
-                    this.pulsar1 = true;
-                } else { this.pulsar1 = false; }
-
-                if (!this.physics.overlap(this.boton2,this.Cassadie) && !this.physics.overlap(this.boton2,this.Seraphina)) {
-                    this.piezaboton2.enableBody(false, 0, 0, true, true);
-                    this.boton2.anims.play('arribaB');
-                    this.pulsar2 = true;
-                } else { this.pulsar2 = false; }
-
-                if (!this.physics.overlap(this.boton3,this.Cassadie) && !this.physics.overlap(this.boton3,this.Seraphina)) {
-                    this.piezaboton3.enableBody(false, 0, 0, true, true);
-                    this.boton3.anims.play('arribaB');
-                    this.pulsar3 = true;
-                } else { this.pulsar3 = false; }
-
-                if (this.segundoSalto && !this.floresD && !this.flores1D &&
-                    ((this.Seraphina.body.right >= this.flores.body.left && this.Seraphina.body.right <= this.flores.body.right) ||
-                        (this.Seraphina.body.bottom >= this.flores.body.top && this.Seraphina.body.bottom <= this.flores.body.bottom))) {
-                    this.flores.anims.play('floresDesaparecer');
-                    setTimeout(() => {
-                        this.flores.disableBody(true, true);
-                        this.floresD = true;
-                        this.flores1D = false;
-                    }, 3000);
-                }
-
-                if (this.segundoSalto && this.floresD && !this.flores1D &&
-                    ((this.Seraphina.x >= 416 && this.Seraphina.y <= 404))) {
-                    this.flores1.anims.play('floresDesaparecer');
-                    setTimeout(() => {
-                        this.flores1.disableBody(true, true);
-                        this.flores1D = true;
-                    }, 2000);
-                }
-
-
-                //Condición para pasar al siguiente nivel, falta añadirle las posiciones verdaderas.
-                if (this.Cassadie.x >= 1875 && this.Cassadie.y >= 184 && this.Seraphina.x >= 1875 && this.Seraphina.y >= 184) {
-                    this.scene.start('NivelCielo');
-                }
-
-                nivelActual = 'NivelBosque';
-
-                //Y se manda a pausa desde aquí porque hay que controlarlo metiendo el string que identifica a cada escena y es diferente para cada una
-                if (Phaser.Input.Keyboard.JustDown(this.keyP)) {
-                    //this.scene.pause();
-                    this.scene.sleep('NivelBosque');
-                    this.scene.launch('Ajustes');
-                    this.parar();
-                }
-            }
-
-            activarC(player, palanca) {
-                if (!palanca.getData('on') && this.tocarC) {
-                    palanca.anims.play('activarB', false);
-                    palanca.getData('ground').disableBody(true, true);
-                    palanca.setData({ on: true });
-                }
-                else if (palanca.getData('on') && this.tocarC) {
-                    palanca.anims.play('desactivarB', false);
-                    palanca.getData('ground').enableBody(false, 0, 0, true, true);
-                    palanca.setData({ on: false });
-                }
-            }
-
-            activarS(player, palanca) {
-                if (!palanca.getData('on') && this.tocarS) {
-                    palanca.anims.play('activarB', false);
-                    palanca.getData('ground').disableBody(true, true);
-                    palanca.setData({ on: true });
-                }
-                else if (palanca.getData('on') && this.tocarS) {
-                    palanca.anims.play('desactivarB', false);
-                    palanca.getData('ground').enableBody(false, 0, 0, true, true);
-                    palanca.setData({ on: false });
-                }
-            }
-
-            presionar(player, boton) {
-                if (this.pulsar) {
-                    boton.anims.play('pulsarB', false);
-                    this.pulsar = false;
-
-                }
-                this.piezaboton.disableBody(true, true);
-            }
-
-            presionar1(player, boton) {
-                if (this.pulsar1) {
-                    boton.anims.play('pulsarB', false);
-                    this.pulsar1 = false;
-
-                }
-                this.piezaboton1.disableBody(true, true);
-            }
-
-            presionar2(player, boton) {
-                if (this.pulsar2) {
-                    boton.anims.play('pulsarB', false);
-                    this.pulsar2 = false;
-
-                }
-                this.piezaboton2.disableBody(true, true);
-            }
-
-            presionar3(player, boton) {
-                if (this.pulsar3) {
-                    boton.anims.play('pulsarB', false);
-                    this.pulsar3 = false;
-
-                }
-                this.piezaboton3.disableBody(true, true);
-            }
-
-
-
-            //////////////////////Presionar para hacer otro con cada piezaboton extra
-            /*presionar(player, boton) {
-                if (this.pulsar) {
-                    boton.anims.play('pulsar', false);
-                    this.pulsar = false;
-            
-                }
-                this.piezaboton.disableBody(true, true);
-            }*/
-        }
+    //Nivel Bosque
+    class NivelBosque extends NivelBase {
+
+constructor() {
+    super('NivelBosque');
+    this.construir();
+    this.boton1;
+    this.boton2;
+    this.boton3;
+    this.boton4;
+    this.piezaboton1;
+    this.piezaboton2;
+    this.piezaboton3;
+    this.piedraBosque1;
+    this.piedraBosque2;
+    this.piedra;
+    this.piedra1;
+    this.pulsar1;
+    this.pulsar2;
+    this.pulsar3;
+    this.pulsar4;
+    this.flores;
+    this.flores2;
+    this.combo;
+    this.collider;
+    this.timeoutId;
+
+    //si se necesitan añadir más botones se indican aquí como "this.boton1; this.boton2;"
+}
+
+preload() {
+    //se cargan sprites de fondo, plataformas, palancas del derecho y del revés y botones para el nivel correspondiente
+    this.load.image('fondoB', 'assets/Bosque.png');
+    this.load.image('sueloBosque', 'assets/CuadradoMarron.png');
+    this.load.image('plataformaBosque1', 'assets/LadoVerde.png');
+    this.load.image('plataformaBosque2', 'assets/LadoOscuro.png');
+    this.load.image('piedraBosque', 'assets/piedra.png');
+    this.load.spritesheet('palancaBosque', 'assets/palancaBosque.png', { frameWidth: 446, frameHeight: 345 });
+    this.load.spritesheet('palancaInvBosque', 'assets/palancaMaderaInv.png', { frameWidth: 446, frameHeight: 345 });
+    this.load.spritesheet('botonBosque', 'assets/botonBosque.png', { frameWidth: 322, frameHeight: 223 });
+    this.load.spritesheet('floresObstaculo', 'assets/floresObstaculo.png', { frameWidth: 862, frameHeight: 1760 });
+    this.load.image('frog', 'assets/Rana.png');
+
+    //se carga lo común en el padre que son los personajes
+    this.cargarPersonajes();
+}
+
+create() {
+    //carga el fondo
+    this.add.image(960, 500, 'fondoB');
+    //se añade que tienen fisicas
+    this.iniciarMecanismos();
+
+    this.piedraBosque1 = this.physics.add.group();
+    this.piedraBosque2 = this.physics.add.group();
+
+    this.piedra = this.piedraBosque1.create(600, 862, 'piedraBosque')
+    this.piedra1 = this.piedraBosque2.create(1450, 405, 'piedraBosque')
+
+    this.piedra.setCollideWorldBounds(true)
+    this.piedra1.setCollideWorldBounds(true)
+
+    this.Seraphina = this.physics.add.sprite(100, 852, 'Seraphina').setScale(0.10, 0.10);
+    this.Cassadie = this.physics.add.sprite(1800, 852, 'Cassadie').setScale(0.10, 0.10);
+
+    //  Player physics properties. Give the little guy a slight bounce.
+    this.Seraphina.setBounce(0.2);
+    this.Seraphina.setCollideWorldBounds(true);
+
+    this.Cassadie.setBounce(0.2);
+    this.Cassadie.setCollideWorldBounds(true);
+
+    //se coloca el botón
+    this.boton = this.physics.add.sprite(800, 850, 'botonBosque').setScale(0.15);
+    this.boton1 = this.physics.add.group();
+    this.boton1 = this.physics.add.sprite(1000, 437, 'botonBosque').setScale(0.15);
+    this.boton2 = this.physics.add.group();
+    this.boton2 = this.physics.add.sprite(560, 440, 'botonBosque').setScale(0.15);
+    this.boton3 = this.physics.add.group();
+    this.boton3 = this.physics.add.sprite(1560, 850, 'botonBosque').setScale(0.15);
+    this.boton4 = this.physics.add.group();
+    this.boton4 = this.physics.add.sprite(1700, 220, 'botonBosque').setScale(0.15);
+    //por cada botón extra se añaden físicas y se coloca porque no es una lista de botones
+    ////////////this.boton1 = this.physics.add.group();
+    ////////////this.boton1 = this.physics.add.sprite(400, 470, 'boton').setScale(0.02);
+
+
+
+    this.flores = this.physics.add.sprite(800, 736, 'floresObstaculo').setScale(0.2);
+    this.flores1 = this.physics.add.sprite(560, 280, 'floresObstaculo').setScale(0.23);
+
+    this.flores.setImmovable(true);
+    this.flores1.setImmovable(true);
+
+
+    this.flores.body.allowGravity = false;
+    this.flores1.body.allowGravity = false;
+
+    //se colocan las plataformas normales sueltas
+    this.platforms.create(950, 1020, 'sueloBosque').setScale(6, 2).refreshBody();
+    this.platforms.create(150, 665, 'plataformaBosque1').setScale(1, 0.3).refreshBody();
+    this.platforms.create(914, 490, 'plataformaBosque1').setScale(4, 0.3).refreshBody();
+    this.platforms.create(1640, 665, 'plataformaBosque1').setScale(1.7, 0.3).refreshBody();
+    this.platforms.create(850, 330, 'plataformaBosque1').setScale(0.2, 2.6).refreshBody();
+    this.platforms.create(1824, 250, 'plataformaBosque1').setScale(1.5, 0.3).refreshBody();
+    this.platforms.create(1090, 200, 'plataformaBosque1').setScale(0.3, 0.1).refreshBody();
+    this.platforms.create(1350, 200, 'plataformaBosque1').setScale(0.3, 0.1).refreshBody();
+
+
+    //El suelo que controlan las palancas se crea como suelo normal pero dentro de las plataformas como data "ground" (para que cada una lo controle y tal)
+    this.palancas.create(220, 554, 'palancaBosque').setScale(0.3).setData({ ground: this.platforms.create(1754, 490, 'plataformaBosque2').setScale(1, 0.3).refreshBody() });
+    this.palancas.create(1550, 554, 'palancaBosque').setScale(0.3).setData({ ground: this.platforms.create(150, 490, 'plataformaBosque2').setScale(1, 0.3).refreshBody() });
+
+
+    //colocar el suelo que controla el boton por separado porque se necesita acceder a este individualmente
+    //fuera de una lista porque fuera de la función de colisión hay que detectar que no se tocan
+
+    this.piezaboton = this.platforms.create(1374, 795, 'plataformaBosque2').setScale(0.1, 2).refreshBody();
+    this.piezaboton1 = this.platforms.create(1574, 133, 'plataformaBosque2').setScale(0.1, 2.5).refreshBody();
+    this.piezaboton2 = this.platforms.create(1574, 390, 'plataformaBosque2').setScale(0.1, 2.1).refreshBody();
+    this.piezaboton3 = this.platforms.create(300, 795, 'plataformaBosque2').setScale(0.1, 2).refreshBody();
+    this.personajesAnimaciones();
+    this.anims.create({
+        key: 'floresDesaparecer',
+        frames: this.anims.generateFrameNumbers('floresObstaculo', { start: 0, end: 2 }),
+        frameRate: 20,
+        repeat: 0
+    })
+
+
+    this.anims.create({
+        key: 'desactivarB',
+        frames: this.anims.generateFrameNumbers('palancaInvBosque', { start: 0, end: 4 }),
+        frameRate: 10,
+        repeat: 0
+    })
+
+    this.anims.create({
+        key: 'activarB',
+        frames: this.anims.generateFrameNumbers('palancaBosque', { start: 0, end: 4 }),
+        frameRate: 10,
+        repeat: 0
+    })
+
+    this.anims.create({
+        key: 'arribaB',
+        frames: [{ key: 'botonBosque', frame: 0 }],
+        frameRate: 7,
+        repeat: 0
+    })
+
+    this.anims.create({
+        key: 'pulsarB',
+        frames: this.anims.generateFrameNumbers('botonBosque', { start: 0, end: 2 }),
+        frameRate: 7,
+        repeat: 0
+    })
+    this.crearControles();
+    this.colisiones();
+
+
+    this.physics.add.collider(this.boton1, this.platforms);
+    this.physics.add.overlap(this.Cassadie, this.boton1, this.presionar1, null, this);
+    this.physics.add.overlap(this.Seraphina, this.boton1, this.presionar1, null, this);
+    this.physics.add.collider(this.boton2, this.platforms);
+    this.physics.add.overlap(this.Cassadie, this.boton2, this.presionar2, null, this);
+    this.physics.add.overlap(this.Seraphina, this.boton2, this.presionar2, null, this);
+    this.physics.add.collider(this.boton3, this.platforms);
+    this.physics.add.overlap(this.Cassadie, this.boton3, this.presionar3, null, this);
+    this.physics.add.overlap(this.Seraphina, this.boton3, this.presionar3, null, this);
+    this.physics.add.collider(this.boton4, this.platforms);
+    this.physics.add.overlap(this.Cassadie, this.boton4, this.presionar4, null, this);
+    this.physics.add.overlap(this.Seraphina, this.boton4, this.presionar4, null, this);
+
+    /*this.physics.add.overlap(this.Cassadie, this.piedraBosque1, this.moverPiedra, null, this);
+    this.physics.add.overlap(this.Cassadie, this.piedraBosque2, this.moverPiedra, null, this);*/
+    this.physics.add.collider(this.piedraBosque1, this.platforms);
+    this.physics.add.collider(this.piedraBosque2, this.platforms);
+   
+    
+    
+
+    this.physics.add.collider(this.flores, this.platforms);
+    this.physics.add.collider(this.flores1, this.platforms);
+    this.physics.add.collider(this.Cassadie, this.flores);
+    this.physics.add.collider(this.Cassadie, this.flores1);
+    this.physics.add.collider(this.Seraphina, this.flores);
+    this.physics.add.collider(this.Seraphina, this.flores1);
+
+    //por cada botón sus físicas
+    ////////////this.physics.add.collider(this.boton1, this.platforms);
+    //creando un nuevo presionar para su pieza (porque estos tienen que detectar también cuando se dejan de tocar)
+    ////////////this.physics.add.overlap(this.Cassadie, this.boton1, this.presionar, null, this);
+    ////////////this.physics.add.overlap(this.Seraphina, this.boton1, this.presionar, null, this);
+
+    this.combo = this.input.keyboard.createCombo('FROG');
+    frog = this.physics.add.group({
+        key: 'frog',
+        repeat: 86,
+        setXY: { x: 100, y: -30, stepX: 110 },
+        setScale: 0.02,
+    });
+    var i = 0;
+    frog.children.iterate(function (child) {
+        i++;
+        child.setScale(0.2);
+        if(i%2===0){child.setPosition(child.x - 15, child.y)}
+        else{child.setPosition(child.x, child.y + 15)}
+        if(i>17 && i<=35){child.setPosition(child.x - 1920, child.y - 90)}
+        if(i>34 && i<=52){child.setPosition(child.x - 3840, child.y - 180)}
+        if(i>52 && i<=69){child.setPosition(child.x - 5760, child.y - 270)}
+        if(i>69 && i<=86){child.setPosition(child.x - 7600, child.y - 360)}
+        child.disableBody();
+    });
+    this.input.keyboard.on('keycombomatch', function (event) {
+        
+        frog.children.iterate(function (child) {
+            child.enableBody(false, 0, 0, true, true);
+        });
+    });
+}
+
+update() {
+    this.movimientoPersonajes();
+    this.piedra.setGravityY(0);
+    this.piedra1.setGravityY(0);
+    this.piedra.setVelocityX(0);
+    this.piedra1.setVelocityX(0);
+
+
+    // Condición para mover la piedra solo si Cassadie está en contacto y dentro del rango horizontal de la piedra
+    if (
+        this.Cassadie.body.touching.down && this.sprintActivado &&
+        (
+            (this.Cassadie.body.right >= this.piedra.body.left && this.Cassadie.body.right <= this.piedra.body.right) ||
+            (this.Cassadie.body.bottom >= this.piedra.body.top && this.Cassadie.body.bottom <= this.piedra.body.bottom)
+        )
+    ) {
+
+        clearTimeout(this.timeoutId);
+        this.collider = this.physics.add.collider(this.piedra, this.Cassadie);
+       
+        // Mover la piedra solo si Cassadie está en contacto y dentro del rango
+        this.piedra.setVelocityX(0);
+        this.timeoutId = setTimeout(() => {
+        this.desactivarCollider(this.collider);
+        }, 1000);
+
+        
+       
+    } 
+
+    if (
+        this.Cassadie.body.touching.down && this.sprintActivado &&
+        (
+            (this.Cassadie.body.right >= this.piedra1.body.left && this.Cassadie.body.right <= this.piedra1.body.right) ||
+            (this.Cassadie.body.bottom >= this.piedra1.body.top && this.Cassadie.body.bottom <= this.piedra1.body.bottom)
+        )
+    ) {
+
+        this.physics.add.collider(this.piedra1, this.Cassadie);
+        // Mover la piedra solo si Cassadie está en contacto y dentro del rango
+        this.piedra1.setVelocityX(0);
+    }
+
+    this.controlMecanismos();
+    /*if (!this.physics.overlap(this.boton,this.Cassadie) && !this.physics.overlap(this.boton,this.Seraphina)) {
+        this.piezaboton.enableBody(false, 0, 0, true, true);
+        this.boton.anims.play('arriba');
+        this.pulsar = true;
+    }
+    else { this.pulsar = false; }
+    }*/   //controlMecanismos para poner arriba cuando no esté activado el nuevo botón
+
+    //se actualiza el nivel actual para que la pantalla de pausa te devuelva a donde debe
+
+    if (!this.physics.overlap(this.boton,this.Cassadie) && !this.physics.overlap(this.boton,this.Seraphina)) {
+        this.piezaboton.enableBody(false, 0, 0, true, true);
+        this.boton.anims.play('arribaB');
+        this.pulsar = true;
+    }
+    else { this.pulsar = false; }
+
+    if (!this.physics.overlap(this.boton1,this.Cassadie) && !this.physics.overlap(this.boton1,this.Seraphina) && (!this.physics.overlap(this.boton4,this.Cassadie) && !this.physics.overlap(this.boton4,this.Seraphina))) {
+        this.piezaboton1.enableBody(false, 0, 0, true, true);
+        this.boton1.anims.play('arribaB');
+        this.pulsar1 = true;
+    } else { this.pulsar1 = false; }
+
+    if (!this.physics.overlap(this.boton2,this.Cassadie) && !this.physics.overlap(this.boton2,this.Seraphina)) {
+        this.piezaboton2.enableBody(false, 0, 0, true, true);
+        this.boton2.anims.play('arribaB');
+        this.pulsar2 = true;
+    } else { this.pulsar2 = false; }
+
+    if (!this.physics.overlap(this.boton3,this.Cassadie) && !this.physics.overlap(this.boton3,this.Seraphina)) {
+        this.piezaboton3.enableBody(false, 0, 0, true, true);
+        this.boton3.anims.play('arribaB');
+        this.pulsar3 = true;
+    } else { this.pulsar3 = false; }
+
+    if (!this.physics.overlap(this.boton4,this.Cassadie) && !this.physics.overlap(this.boton4,this.Seraphina) && (!this.physics.overlap(this.boton1,this.Cassadie) && !this.physics.overlap(this.boton1,this.Seraphina))) {
+        this.piezaboton1.enableBody(false, 0, 0, true, true);
+        this.boton4.anims.play('arribaB');
+        this.pulsar4 = true;
+        
+    } else { this.pulsar4 = false; this.pulsar1 = false; }
+
+    if (this.segundoSalto && !this.floresD && !this.flores1D &&
+        ((this.Seraphina.body.right >= this.flores.body.left && this.Seraphina.body.right <= this.flores.body.right) ||
+            (this.Seraphina.body.bottom >= this.flores.body.top && this.Seraphina.body.bottom <= this.flores.body.bottom))) {
+        this.flores.anims.play('floresDesaparecer');
+        setTimeout(() => {
+            this.flores.disableBody(true, true);
+            this.floresD = true;
+            this.flores1D = false;
+        }, 3000);
+    }
+
+    if (this.segundoSalto && this.floresD && !this.flores1D &&
+        ((this.Seraphina.x >= 416 && this.Seraphina.y <= 404))) {
+        this.flores1.anims.play('floresDesaparecer');
+        setTimeout(() => {
+            this.flores1.disableBody(true, true);
+            this.flores1D = true;
+        }, 2000);
+    }
+
+
+    //Condición para pasar al siguiente nivel, falta añadirle las posiciones verdaderas.
+    if (this.Cassadie.x >= 1875 && this.Cassadie.y >= 184 && this.Seraphina.x >= 1875 && this.Seraphina.y >= 184) {
+        this.scene.start('NivelCielo');
+    }
+
+    nivelActual = 'NivelBosque';
+
+    //Y se manda a pausa desde aquí porque hay que controlarlo metiendo el string que identifica a cada escena y es diferente para cada una
+    if (Phaser.Input.Keyboard.JustDown(this.keyP)) {
+        //this.scene.pause();
+        this.scene.sleep('NivelBosque');
+        this.scene.launch('Ajustes');
+        this.parar();
+    }
+}
+
+activarC(player, palanca) {
+    if (!palanca.getData('on') && this.tocarC) {
+        palanca.anims.play('activarB', false);
+        palanca.getData('ground').disableBody(true, true);
+        palanca.setData({ on: true });
+    }
+    else if (palanca.getData('on') && this.tocarC) {
+        palanca.anims.play('desactivarB', false);
+        palanca.getData('ground').enableBody(false, 0, 0, true, true);
+        palanca.setData({ on: false });
+    }
+}
+
+activarS(player, palanca) {
+    if (!palanca.getData('on') && this.tocarS) {
+        palanca.anims.play('activarB', false);
+        palanca.getData('ground').disableBody(true, true);
+        palanca.setData({ on: true });
+    }
+    else if (palanca.getData('on') && this.tocarS) {
+        palanca.anims.play('desactivarB', false);
+        palanca.getData('ground').enableBody(false, 0, 0, true, true);
+        palanca.setData({ on: false });
+    }
+}
+
+presionar(player, boton) {
+    if (this.pulsar) {
+        boton.anims.play('pulsarB', false);
+        this.pulsar = false;
+
+    }
+    this.piezaboton.disableBody(true, true);
+}
+
+presionar1(player, boton) {
+    if (this.pulsar1) {
+        boton.anims.play('pulsarB', false);
+        this.pulsar1 = false;
+
+    }
+    this.piezaboton1.disableBody(true, true);
+}
+
+presionar2(player, boton) {
+    if (this.pulsar2) {
+        boton.anims.play('pulsarB', false);
+        this.pulsar2 = false;
+
+    }
+    this.piezaboton2.disableBody(true, true);
+}
+
+presionar3(player, boton) {
+    if (this.pulsar3) {
+        boton.anims.play('pulsarB', false);
+        this.pulsar3 = false;
+
+    }
+    this.piezaboton3.disableBody(true, true);
+}
+
+presionar4(player, boton) {
+    if (this.pulsar4) {
+        boton.anims.play('pulsarB', false);
+        this.pulsar4 = false;
+
+    }
+    this.piezaboton1.disableBody(true, true);
+}
+
+
+
+
+
+//////////////////////Presionar para hacer otro con cada piezaboton extra
+/*presionar(player, boton) {
+    if (this.pulsar) {
+        boton.anims.play('pulsar', false);
+        this.pulsar = false;
+
+    }
+    this.piezaboton.disableBody(true, true);
+}*/
+}
+
 
         class NivelCielo extends NivelBase {
             constructor() {
