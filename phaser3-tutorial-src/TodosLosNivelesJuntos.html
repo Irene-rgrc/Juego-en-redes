@@ -217,25 +217,30 @@
                 if (this.keyA.isDown) {
                     if (Phaser.Input.Keyboard.JustDown(this.space)) {
                         this.Cassadie.setVelocityX(-600);
+                        this.sprintActivado = true;
                         this.empujon = false;
                     }
                     else {
                         this.Cassadie.setVelocityX(-160);
+                        this.sprintActivado = false;
                         this.Cassadie.anims.play('leftC', true);
                     }
                 } else if (this.keyD.isDown) {
                     if (Phaser.Input.Keyboard.JustDown(this.space)) {
                         this.Cassadie.setVelocityX(600);
+                        this.sprintActivado = true;
                         this.empujon = false;
                     }
                     else {
                         this.Cassadie.setVelocityX(160);
+                        this.sprintActivado = false;
                         this.Cassadie.anims.play('rightC', true);
                     }
                 }
                 else {
                     this.Cassadie.setVelocityX(0);
                     this.Cassadie.anims.play('turnC');
+                    this.sprintActivado = false;
                     this.empujon = true;
                 }
 
@@ -646,7 +651,7 @@ constructor() {
     this.flores2;
     this.combo;
     this.collider;
-    this.timeoutId;
+    this.collider1;
 
     //si se necesitan añadir más botones se indican aquí como "this.boton1; this.boton2;"
 }
@@ -860,13 +865,12 @@ update() {
         )
     ) {
 
-        clearTimeout(this.timeoutId);
         this.collider = this.physics.add.collider(this.piedra, this.Cassadie);
        
         // Mover la piedra solo si Cassadie está en contacto y dentro del rango
         this.piedra.setVelocityX(0);
-        this.timeoutId = setTimeout(() => {
-        this.desactivarCollider(this.collider);
+        setTimeout(() => {
+        this.collider.active = false;
         }, 1000);  
     } 
 
@@ -878,9 +882,13 @@ update() {
         )
     ) {
 
-        this.physics.add.collider(this.piedra1, this.Cassadie);
+        this.collider1 = this.physics.add.collider(this.piedra, this.Cassadie);
+       
         // Mover la piedra solo si Cassadie está en contacto y dentro del rango
-        this.piedra1.setVelocityX(0);
+        this.piedra.setVelocityX(0);
+        setTimeout(() => {
+        this.collider1.active = false;
+        }, 1000);  
     }
 
     this.controlMecanismos();
@@ -2169,8 +2177,8 @@ presionar4(player, boton) {
                     debug: false
                 }
             },
-            scene: [/*MenuInicio, Ajustes, Tutorial, TutorialImagenes, Introducción, NivelSubsuelo, NivelBosque,*/ NivelCielo, Elegir, FinalBueno, FinalMalo] // NivelBosque  NivelCielo
-            //scene: [NivelBosque]
+            //scene: [/*MenuInicio, Ajustes, Tutorial, TutorialImagenes, Introducción, NivelSubsuelo, NivelBosque,*/ NivelCielo, Elegir, FinalBueno, FinalMalo] // NivelBosque  NivelCielo
+            scene: [NivelBosque]
         };
 
         var game = new Phaser.Game(config);
