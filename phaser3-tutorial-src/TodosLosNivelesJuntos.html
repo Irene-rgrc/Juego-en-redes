@@ -1756,10 +1756,114 @@ presionar4(player, boton) {
 
         }
 
+
+        class IrCreditos extends Phaser.Scene{
+            constructor(){
+                super('IrCreditos');
+            }
+
+            preload() {
+                this.load.image('GraciasPorJugar', 'CreditosImagenes/GraciasPorJugar.png');   
+                this.load.image('IrCreditos', 'CreditosImagenes/BotonCreditos.png');   
+            }
+
+            create(){
+            const fondo = this.add.image(0, 0, 'GraciasPorJugar').setDisplaySize(1920, 1080);
+            fondo.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+
+            //BOTON TUTORIAL
+                //Se añade el boton para jugar
+                const botonTutorial = this.add.image(960, 800, "IrCreditos").setInteractive();
+                botonTutorial.setScale(1)
+
+                //Al pasar por encima se pone mas oscuro y crece en tamaño
+                botonTutorial.on('pointerover', function () {
+                    this.setTint(0x555555);
+                    this.setScale(1.2);
+                });
+
+                //Al quitar el cursor el boton vuelve al tamaño original
+                botonTutorial.on('pointerout', function () {
+                    this.clearTint();
+                    this.setScale(1);
+                });
+
+                //Al hacer click en el boton comienza el juego
+                botonTutorial.on('pointerdown', (pointer) => {
+                    console.log('IrCreditos');
+                    this.scene.start('Creditos');
+                });
+            }
+
+            update(){}
+        }
+
+        class Creditos extends Phaser.Scene{
+            constructor(){
+                super('Creditos');
+                this.enter;
+            }
+            preload() {
+                this.load.image('Imagen1', 'CreditosImagenes/Creditos2.png');
+                this.load.image('Imagen2', 'CreditosImagenes/Creditos2.png'); 
+                this.load.image('Imagen3', 'CreditosImagenes/Creditos3.png');    
+            }
+            create(){
+          
+            this.enter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
+            const imagen1 = this.add.image(0, 0, 'Imagen1').setDisplaySize(1920, 1080);
+            imagen1.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+            }
+            update(){
+                if (Phaser.Input.Keyboard.JustDown(this.enter)) {
+                    this.scene.start('VolverAJugar');
+                }
+            }
+        }
+
+        class VolverAJugar extends Phaser.Scene{
+            constructor(){
+                super('VolverAJugar');
+            }
+            preload() {
+                this.load.image('Fondo', 'CreditosImagenes/Creditos3.png');    
+                this.load.image('Boton', 'CreditosImagenes/BotonVolverJugar.png'); 
+            }
+            create(){
+            this.enter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
+            const fondo = this.add.image(0, 0, 'Fondo').setDisplaySize(1920, 1080);
+            fondo.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+
+            //BOTON VOLVER A JUGAR
+                //Se añade el boton para jugar
+                const botonTutorial = this.add.image(960, 800, "Boton").setInteractive();
+                botonTutorial.setScale(1)
+
+                //Al pasar por encima se pone mas oscuro y crece en tamaño
+                botonTutorial.on('pointerover', function () {
+                    this.setTint(0x555555);
+                    this.setScale(1.2);
+                });
+
+                //Al quitar el cursor el boton vuelve al tamaño original
+                botonTutorial.on('pointerout', function () {
+                    this.clearTint();
+                    this.setScale(1);
+                });
+
+                //Al hacer click en el boton comienza el juego
+                botonTutorial.on('pointerdown', (pointer) => {
+                    console.log('VolverAJugar');
+                    this.scene.start('MenuInicio');
+                });
+          }
+          update(){}
+        }
+
+
         class Tutorial extends Phaser.Scene {
             constructor() {
                 super('Tutorial');
-
             }
 
             preload() {
@@ -2177,8 +2281,9 @@ presionar4(player, boton) {
                     debug: false
                 }
             },
-            //scene: [/*MenuInicio, Ajustes, Tutorial, TutorialImagenes, Introducción, NivelSubsuelo, NivelBosque,*/ NivelCielo, Elegir, FinalBueno, FinalMalo] // NivelBosque  NivelCielo
-            scene: [NivelBosque]
+            //scene: [MenuInicio, Ajustes, Tutorial, TutorialImagenes, Introducción, NivelSubsuelo, NivelBosque, NivelCielo, Elegir, FinalBueno, FinalMalo] // NivelBosque  NivelCielo
+            //scene: [NivelBosque]
+            scene: [IrCreditos,Creditos,VolverAJugar,MenuInicio]
         };
 
         var game = new Phaser.Game(config);
