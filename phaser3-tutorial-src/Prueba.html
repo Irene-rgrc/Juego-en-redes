@@ -765,6 +765,7 @@
                 this.load.spritesheet('botonSCielo', 'assets/botonCielo.png', { frameWidth: 322, frameHeight: 223 });
                 this.load.spritesheet('floresObstaculo', 'assets/floresObstaculo.png', { frameWidth: 862, frameHeight: 1760 });
                 this.load.spritesheet('nubesObstaculo', 'assets/nubesObstaculo.png', { frameWidth: 311, frameHeight: 109 });
+                this.load.spritesheet('puerta', 'assets/PuertaCielo.png', { frameWidth: 1920, frameHeight: 1080 })
                 //se carga lo común en el padre que son los personajes
                 this.cargarPersonajes();
             }
@@ -918,7 +919,7 @@
 
 
                 this.puerta = this.physics.add.group();
-                this.puerta = this.physics.add.sprite(1169.433, 314, 'botonSCielo').setScale(0.1);
+                this.puerta = this.physics.add.sprite(1169.433, 310, 'puerta').setScale(0.1);
                 this.physics.add.collider(this.puerta, this.platforms);
                 this.physics.add.overlap(this.Cassadie, this.puerta, this.elegir, null, this);
                 this.physics.add.overlap(this.Seraphina, this.puerta, this.elegir, null, this);
@@ -1495,8 +1496,8 @@
                     debug: false
                 }
             },
-            scene: [MenuInicio, Ajustes, NivelBosque, NivelCielo, Elegir] // NivelBosque  NivelCielo
-            //scene: [NivelCielo]
+            //scene: [MenuInicio, Ajustes, NivelBosque, NivelCielo, Elegir] // NivelBosque  NivelCielo
+            scene: [NivelCielo]
         };
 
         var game = new Phaser.Game(config);
