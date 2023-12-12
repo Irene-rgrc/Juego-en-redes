@@ -18,8 +18,8 @@
 
         var nivelActual;
         var frog;
-        let posicionSliderGlobal = 950;
-        let volumenGlobal = 0.5;
+        let posicionSliderGlobal = 955;
+        let volumenGlobal = 0.3;
         let cancionReproducida = false;
         let cancion;
 
@@ -331,6 +331,7 @@
                 this.pulsar2;
                 this.pulsar3;
                 this.pulsar4;
+                this.numAleatorio;
             }
 
             preload() {
@@ -345,6 +346,9 @@
                 this.load.spritesheet('palancaPiedra', 'assetsSubsuelo/palancaPiedra.png', { frameWidth: 446, frameHeight: 345 });
                 this.load.spritesheet('palancaPiedraInv', 'assetsSubsuelo/palancaPiedraInv.png', { frameWidth: 446, frameHeight: 345 });
 
+                this.load.audio('golpe1', 'Sonidos/Golpe1.wav');
+                this.load.audio('golpe2', 'Sonidos/Golpe2.wav');
+                this.load.audio('golpe3', 'Sonidos/Golpe3.wav');
 
                 this.cargarPersonajes();
             }
@@ -555,17 +559,47 @@
                 console.log(this.Cassadie.y)
 
                 if (Phaser.Input.Keyboard.JustDown(this.keyH)) {
+                    this.golpe1 = this.sound.add('golpe1', { loop: false });
+                    this.golpe1.setVolume(0.1);
+
+                    this.golpe2 = this.sound.add('golpe2', { loop: false });
+                    this.golpe2.setVolume(0.1);
+
+                    this.golpe3 = this.sound.add('golpe3', { loop: false });
+                    this.golpe3.setVolume(0.1);
+
+                    this.numAleatorio=Math.floor(Math.random()*3 +1);
+
                     if (this.atrapadoS == true && distance <= 250) {
                         console.log('Ayudando a Sera');
                         this.Seraphina.setPosition(this.Cassadie.x, this.Cassadie.y);
                         this.atrapadoS = false;
                         console.log(this.atrapadoS);
+                        if(this.numAleatorio===1){
+                            this.golpe1.play();
+                        }
+                        else if(this.numAleatorio===2){
+                            this.golpe2.play();
+                        }
+                        else if(this.numAleatorio===3){
+                            this.golpe3.play();
+                        }
+                        
                     }
                     if (this.atrapadoC == true && distance <= 250) {
                         console.log('Ayudando a Cas');
                         this.Cassadie.setPosition(this.Seraphina.x, this.Seraphina.y);
                         this.atrapadoC = false;
                         console.log(this.atrapadoC);
+                        if(this.numAleatorio===1){
+                            this.golpe1.play();
+                        }
+                        else if(this.numAleatorio===2){
+                            this.golpe2.play();
+                        }
+                        else if(this.numAleatorio===3){
+                            this.golpe3.play();
+                        }
                     }
 
                 }
@@ -668,6 +702,7 @@ preload() {
     this.load.spritesheet('botonBosque', 'assets/botonBosque.png', { frameWidth: 322, frameHeight: 223 });
     this.load.spritesheet('floresObstaculo', 'assets/floresObstaculo.png', { frameWidth: 862, frameHeight: 1760 });
     this.load.image('frog', 'assets/Rana.png');
+    
 
     //se carga lo común en el padre que son los personajes
     this.cargarPersonajes();
@@ -2086,7 +2121,7 @@ presionar4(player, boton) {
                 this.load.image('cuadradoVolumen', 'assets/Volumen.PNG');
                 this.load.image('circulo', 'assets/Slider.PNG');
                 this.load.image('barra', 'assets/BarraSonido.PNG');
-                this.load.audio('cancion', 'assets/MusicaPrueba.mp3')
+                this.load.audio('cancion', 'Sonidos/Musica.wav')
             }
 
             create() {
