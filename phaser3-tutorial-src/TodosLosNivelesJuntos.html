@@ -917,10 +917,10 @@ update() {
         )
     ) {
 
-        this.collider1 = this.physics.add.collider(this.piedra, this.Cassadie);
+        this.collider1 = this.physics.add.collider(this.piedra1, this.Cassadie);
        
         // Mover la piedra solo si Cassadie está en contacto y dentro del rango
-        this.piedra.setVelocityX(0);
+        this.piedra1.setVelocityX(0);
         setTimeout(() => {
         this.collider1.active = false;
         }, 1000);  
