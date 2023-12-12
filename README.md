@@ -409,17 +409,47 @@ Para que el jugador no tenga que volver a pasar por las distintas explicaciones 
 
 En cuanto al tutorial, presenta una serie de imagenes explicativas sobre como mover al personaje, instrucciones sobre enemigos y objetos, además de los objetivos. En la imagen presenta instrucciones iconograficas de como manejarse por el juego, las cuales se pueden pasar pulsando el botón de siguiente en el inferior centrar de la pantalla. Una vez pasada la presentación comienza la pantalla de juego.
 
-![](CONCEPTS/FINALES/MenuEleccion.PNG)
+![](CONCEPTS/FINALES/Tutorial.PNG)
 
 *Img. Tutorial*
 
+4.2 **Pantalla de juego** 
+
+En este menú cuenta “el juego en sí”, se refiere a la interfaz gráfica que se muestra en el monitor cuando una persona está jugando un videojuego, la pantalla de juego es la ventana a la acción y la experiencia del juego. Es la ventana a la experiencia interactiva que ofrece el videojuego. 
+
+La pantalla de juego cuenta con cuatro niveles los cuales simbolizan el ascenso de los personajes para remontar el cielo:historia, subsuelo, bosque y cielo. En cuanto la historia es solo una pantalla explicativa de la iniciación del viaje de los personajes, el porque están ahí y en dicha situación.
+
+![](CONCEPTS/FINALES/Historia.PNG)
+
+*Img. Historia*
+
+El primer nivel es el subterraneo el cual tendra una atmosfera de ‘cloaca’. Esta atmosfera consta de un agua en la cuales estan unos enemigos mortales que si las dos personajes se quedan atrapadas esto implicara un reinicio de nivel. Usando los mecanismos botones y palancas, los cuales abren plataformas deberan ascender ‘hacia la luz’ asi pasando de nivel. Ambas deberan de situarse en la esquina superior izquierda.
+
+![](CONCEPTS/FINALES/NivelSubterraneo.PNG)
+
+*Img. Nivel Subsuelo*
+
+En el nivel intermedio ascienden por lo cual tienen más luz y más vida el mundo además que la mécanica debe de ser más complicada. a aparte de un sentido de historia de que va costando más subir, también para manter al jugador enganchado con el juego incrementando la dificultad de pasarse el nivel. Es por ello, que se le ha agregado dos mecanicas la cual una solo la puede hacer Cassidy y otra solo Seraphine. Las flores son un obstaculo la cual Cassidy no puede atravesar pero en cambio con el shift de Seraphine estas pueden desaparecer y abrir el paso. En cambio,  Cassidy al no tener el salto de Seraphine ella pose un incremento de velocidad con espacio la cual le permite mover rocas para acceder a los sitios altos. Todo esto junto a las mécanicas anteriores crean un nivel divertido nuevo e intuitivo. El nivel se completa al llegar a la esquina superior derecha.
+
+![](CONCEPTS/FINALES/NivelBosque.PNG)
+
+*Img. Nivel Bosque*
+
+En el nivel Cielo, este cuenta con las mécanicas anteriores agregando otra dificultad, las nubes. Estas nubes los dos personajes podran estar encima de ellas y saltar pero una vez estando encima de ellas tras 5 segundos dicha nube desaparece pudiendo quedarse el jugador sin opciones de avanzar, además de tener que juntar todas las mecanicas anteriores excepto la piedra que no pegaba con la estetica de estar en el cielo. El objetivo final es pasar a las puertas del cielo. Dependiendo de si hay uno o dos jugadores en la puerta supondra finales distintos.
+
+![](CONCEPTS/FINALES/NivelCielo.PNG)
+
+*Img. Nivel Cielo*
+
 5. ***Fin de nivel*** 
 
-Se presentan distintos niveles que pueden salir debido a las acciones de cada jugador, es por ello que se incluye una interfaz recogiendo a los posibles finales de la historia. Tras el desenlace de los finales se dan paso a los créditos. 
+Se presentan distintos finales que pueden salir debido a las acciones de cada jugador, es por ello que se incluye una interfaz recogiendo a los posibles finales de la historia. Tras el desenlace de los finales se dan paso a los créditos. 
+
+Estos finales dependen de si en la puerta del nivel del cielo esta solo un jugador o los dos. Si solamente esta uno se presentaria el final malo y si estan los dos, se presenta el final bueno.
 
 6. ***Créditos*** 
 
-En los créditos se expondrá los participantes del proyecto y una vez acabado se volverá al menú principal por si quiere crear una nueva partida o finalizar la experiencia.*** 
+En los créditos se expondrá los participantes del proyecto junto a la empresa y una vez acabado se volverá al menú principal por si quiere crear una nueva partida o finalizar la experiencia.*** 
 
 ## ***5 Audio*** 
 
@@ -427,21 +457,11 @@ A continuación se describen los recursos audiovisuales que serán empleados en 
 
 1. ***Música*** 
 
-La música en el menú principal será instrumental, suave y relajada. Se busca transmitir paz y tranquilidad en el jugador. 
-
-Durante el juego la música irá cambiando en relación al escenario en el que se encuentren los jugadores. 
-
-Al inicio de la partida los jugadores se encuentran en el subsuelo, por lo que la melodía será algo más tétrica y siniestra. Se pretende generar tensión e incertidumbre, los jugadores acaban de empezar el juego y aún no saben lo que les espera. 
-
-En el bosque la instrumentación será más alegre y fantástica. Junto a los instrumentos sonarán elementos de la naturaleza, aumentando de esta manera la sensación de paz y misticismo natural. 
-
-Cuando los jugadores llegan al último escenario, el cielo; la música se vuelve aún más relajante; a medida que se va ascendiendo aumenta su intensidad, tomando un tono más orquestal y divino. 
+La música se presenta una idea que en el menú principal será instrumental, suave y relajada buscando transmitir paz y tranquilidad en el jugador. Además de que durante el juego la música irá cambiando en relación al escenario en el que se encuentren los jugadores. Esto se ha modificado, se tiene dos canciones debido a que el juego no es muy largo y también porque cambiar la musica del menu al juego es muy desconcentrarte por lo que la música que se usa en el menú principal pasa a todas las pantallas. La siguiente canción es más angelical simbolizando como que ya se escuchan los cantos de los angeles por lo cual las protagonistas deben de estar cerca de la meta.
 
 2. ***Voces*** 
 
-Tanto ambos personajes principales, como la figura de Dios que les recibe en su regreso al cielo para hacerles tomar una decisión que implica un cambio en su futuro, contarán con voces distorsionadas  y  confusas  aunque  dulces  y  amigables.  Estas  voces  no  producirán  frases coherentes en un idioma específico, sino que su diálogo estará conformado por sonidos aislados que se combinan para  dar la sensación  de un  discurso sólido y  coherente en un idioma desconocido. 
-
-Cassadie cuenta con una voz ligeramente más grave debido a que es de más avanzada edad, mientras que la de Dios se percibe con un eco que resuena para mostrar su autoridad y omnipotencia no concentrada en un punto del espacio físico. Seraphina tiene la voz más aguda y suave del elenco. 
+Se habia diseñado que tanto ambos personajes principales, como la figura de Dios que les recibe en su regreso al cielo para hacerles tomar una decisión que implica un cambio en su futuro, contarán con voces distorsionadas  y  confusas  aunque  dulces  y  amigables.  Estas  voces  no  producirán  frases coherentes en un idioma específico, sino que su diálogo estará conformado por sonidos aislados que se combinan para  dar la sensación  de un  discurso sólido y  coherente en un idioma desconocido. Esto no se ha implementado debido a que con la utilización de texto era suficientemente coherente y entendible la situación.
 
 3. ***Efectos de sonido*** 
 
