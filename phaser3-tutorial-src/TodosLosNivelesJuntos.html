@@ -1764,7 +1764,7 @@ presionar4(player, boton) {
 
             preload() {
                 this.load.image('GraciasPorJugar', 'CreditosImagenes/GraciasPorJugar.png');   
-                this.load.image('IrCreditos', 'CreditosImagenes/BotonCreditos.png');   
+                this.load.image('IrCreditos', 'CreditosImagenes/BotonCreditos.PNG');   
             }
 
             create(){
@@ -1774,18 +1774,18 @@ presionar4(player, boton) {
             //BOTON TUTORIAL
                 //Se añade el boton para jugar
                 const botonTutorial = this.add.image(960, 800, "IrCreditos").setInteractive();
-                botonTutorial.setScale(1)
+                botonTutorial.setScale(0.5)
 
                 //Al pasar por encima se pone mas oscuro y crece en tamaño
                 botonTutorial.on('pointerover', function () {
                     this.setTint(0x555555);
-                    this.setScale(1.2);
+                    this.setScale(0.55);
                 });
 
                 //Al quitar el cursor el boton vuelve al tamaño original
                 botonTutorial.on('pointerout', function () {
                     this.clearTint();
-                    this.setScale(1);
+                    this.setScale(0.5);
                 });
 
                 //Al hacer click en el boton comienza el juego
