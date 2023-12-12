@@ -383,6 +383,12 @@ El menú principal consta del título del juego que ocupe un tamaño razonable p
 
 *Img. Esquema del menú principal*
 
+El menú principal consta del título con un fondo de las puertas las cuales es el objetivo final del juego. En el centro se puede ver tres botones que destacán los cuales son Jugar, Ajustes y Salir. Al pulsar Salir se cierra el ejecutable, el botón de Ajustes lleva a la pantalla de ajustes y la de jugar a la selección de juego o tutorial.
+
+![](CONCEPTS/Concept_MenuPrincipal.jpeg)
+
+*Img. Menú principal*
+
 3. ***Menú de opciones/Pantalla de Pausa*** 
 
 Se puede acceder a través del menú principal o mientras se está jugando, el menú es el mismo para ambas. En este se encuentra el botón de Salir que cierra el programa y en la misma pantalla, para poder ajustar el volumen general del juego. En la versión en red el juego se pausa para ambos jugadores cada vez que uno entre en el menú de opciones. 
