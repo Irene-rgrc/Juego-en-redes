@@ -36,7 +36,7 @@ descripción de la temática: "Se trata de un juego cooperativo para dos jugador
 1. Estilo Visual 
 1. Modelo de negocio y Plataformas 
 
-**2 Guión**  
+**2 Guion**  
 
 1. Historia principal 
 1. Presentación de los personajes 
@@ -122,13 +122,13 @@ En cuanto a los recursos y actividades clave; son necesarios dos jugadores y dos
 
 *Img. Modelo de Negocio* 
 
-## ***2 Guión*** 
+## ***2 Guion*** 
 
 A continuación se presenta la historia del videojuego y todos sus finales alternativos. Asimismo se presentarán y describirán los personajes y el mundo en el que se encuentran. 
 
 1. ***Historia Principal*** 
 
-***(Guión de la historia sujeta a futuros posibles cambios)*** 
+***(Guion de la historia sujeta a futuros posibles cambios)*** 
 
 El subsuelo, un lugar temido por los ángeles, guardianes de Dios, debido a su esencia oscura y a los rumores que corren sobre que es un lugar gobernado por el mal. Durante muchos años hubo un solo habitante en este lugar, Cassadie, el cual, a pesar de las fuertes alucinaciones y torturas a las que le sometía el dios de mal pudo mantener una pizca de bondad y del bien en su corazón para no caer del todo al infierno y perderse completamente a sí mismo. Se puede observar el fruto de las acciones del dios del mal en el aspecto del pequeño ángel caído y también en su mentalidad y forma de comportarse.  
 
