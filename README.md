@@ -178,15 +178,15 @@ Tras esto las puertas del cielo se abren y ambos son capaces de volver a entrar 
 
 “SEGUNDO FINAL. EL PRIMERO EN LLEGAR ES SERAPHINA.” 
 
--Te estaba esperando, has logrado regresar aquí sin embargo, antes de dejarte pasar por estas puertas debes tomar una decisión.- Dijo Dios con voz firme.- ¿Deseas regresar tú solo o deseas que tu compañero y tú podáis regresar?. 
+-Te estaba esperando, has logrado regresar aquí, sin embargo, antes de dejarte pasar por estas puertas debes tomar una decisión.- Dijo Dios con voz firme.- ¿Deseas regresar tú solo o deseas que tu compañero y tú podáis regresar?. 
 
-Dentro  del  propio  juego  se  muestran  dos  opciones  para  que  el  jugador  correspondiente seleccione su elección. Regresar él solo o regresar ambos. 
+Dentro del  propio juego  se muestran  dos opciones  para que  el jugador  correspondiente seleccione su elección. Regresar él solo o regresar ambos. 
 
 “RAMIFICACIÓN” 
 
 “PRIMERA OPCIÓN. SE DECIDE REGRESAR SOLO.” 
 
-Dios mira a Seraphina con una cara que expresa tristeza, sin embargo esto no puede observarse ya que, antes ellos, se presenta como una simple luz. -A pesar de que tu pecado no fue tan grande, te has vuelto una persona egoísta. -El tono con el que habla Dios transmite una profunda tristeza y decepción. -Me has decepcionado. Esperaba más de ti. Tus actos te condenarán a ti y a tu compañero para siempre. Tras estas palabras Dios envía a ambos de nuevo al subsuelo. 
+Dios mira a Seraphina con una cara que expresa tristeza, sin embargo, esto no puede observarse ya que, antes ellos, se presenta como una simple luz. -A pesar de que tu pecado no fue tan grande, te has vuelto una persona egoísta. -El tono con el que habla Dios transmite una profunda tristeza y decepción. -Me has decepcionado. Esperaba más de ti. Tus actos te condenarán a ti y a tu compañero para siempre. Tras estas palabras Dios envía a ambos de nuevo al subsuelo. 
 
 “SEGUNDA OPCIÓN. SE DECIDE REGRESAR AMBOS.” 
 
@@ -296,7 +296,7 @@ Cassadie, pese a tener un ala dañada y contar con una movilidad más reducida e
 
 2. ***Movimiento*** 
 
-El movimiento es, como expresado anteriormente, en las cuatro direcciones del espacio en dos dimensiones del juego, y los jugadores son capaces de controlarlo mediante el teclado. También pueden moverse por el menú con el cursor haciendo clic derecho en los botones. También pueden moverse por el menú con el cursor haciendo click derecho en los botones.
+El movimiento es, como expresado anteriormente, en las cuatro direcciones del espacio en dos dimensiones del juego, y los jugadores son capaces de controlarlo mediante el teclado. También pueden moverse por el menú con el cursor haciendo clic derecho en los botones. También pueden moverse por el menú con el cursor haciendo clic derecho en los botones.
 
 ***3.2.1 Controles*** 
 
@@ -312,7 +312,7 @@ La tecla “P” sirve para pausar la escena y abrir el menú de ajustes, mientr
 
 3. ***Locaciones*** 
 
-Tanto los diferentes paisajes y territorios que los personajes recorren y exploran en su camino de vuelta al cielo, como estos mismos personajes principales, cuentan con mecánicas únicas propias de estos. Objetos que conforman parte de los puzzles que solo se encuentran en determinados entornos o con los que solo puede interactuar uno de los dos personajes. 
+Tanto los diferentes paisajes y territorios que los personajes recorren y exploran en su camino de vuelta al cielo, como estos mismos personajes principales, cuentan con mecánicas únicas propias de estos. Objetos que conforman parte de los puzles que solo se encuentran en determinados entornos o con los que solo puede interactuar uno de los dos personajes. 
 
 4. ***Objetos, elementos interactuables*** 
 1) Las peligrosas criaturas que habitan las aguas subterráneas del inicio del mapa impedirán a cualquiera de los jugadores salir de estas y continuar su viaje si caen en ellas, necesitando que el otro jugador lo libere.
@@ -357,7 +357,7 @@ Tanto los diferentes paisajes y territorios que los personajes recorren y explor
 
 ## ***4 Interfaz*** 
 
-El juego contendrá una serie de “menús” los cuales le permitirán al jugador empezar el juego, salir y ciertos aspectos de configuración del juego, para que pueda ajustarlos a su gusto. El aspecto estético será diseñado en Canva debido a que tienen muchas funcionalidades específicas para crear una interfaz como herramientas de selección, color, formato etc. Además, todos los sprites implementados como título, spritesheets, fondos serán dibujados por el equipo con la herramienta procreate.
+El juego contendrá una serie de “menús” los cuales le permitirán al jugador empezar el juego, salir y ciertos aspectos de configuración del juego, para que pueda ajustarlos a su gusto. El aspecto estético será diseñado en Canva debido a que tienen muchas funcionalidades específicas para crear una interfaz como herramientas de selección, color, formato etc. Además, todos los sprites implementados como título, spritesheets, fondos serán dibujados por el equipo con la herramienta Procreate.
 
 1. ***Diagrama de flujo*** 
 
@@ -370,7 +370,7 @@ A continuación, se explicará en qué consiste el diagrama de flujo de las inte
 
 Una vez se abre el ejecutable se encuentra en el menú principal o pantalla de menú principal en la cual aparecerán cuatro botones importantes: Jugar, Ajustes y Salir. Si se ha pulsado salir la página se cierra, si se ha pulsado ajustes aparecerá una barra para ajustar el volumen y se ha pulsado Jugar se puede seleccionar entre el juego o el tutorial. En jugar presenta dos botones debido a que así si los jugadores ya han jugado anteriormente/y o saben las mecánicas pues que no tengan que ver de nuevo la presentación larga explicativa e ir directamente a la pantalla de juego. 
 
-Si se ha pulsado el botón de tutorial esto llevará a una secuencia explicativa de como moverse, manejarse e interactuar con el entorno, una vez acaba dicha explicación llevará a la pantalla de juego en la cual consta de una pequeña historia y al pulsar enter se pasará a los tres niveles.  Los niveles son tres, el primero es el subtsubterráneo/suelo el cual presenta unos tentáculos enemigos que si las dos se quedan atascadas entonces se reinicia el nivel. Una vez acabado el nivel del subsuelo, se pasa al del bosque y luego al del cielo. En cualquier momento pulsando la p se puede ir a la pantalla de ajustes y de ella se puede volver a la escena de juego. Dependiendo de si han llegado las dos o solo una saldrá un final u otro. 
+Si se ha pulsado el botón de tutorial esto llevará a una secuencia explicativa de como moverse, manejarse e interactuar con el entorno, una vez acaba dicha explicación llevará a la pantalla de juego en la cual consta de una pequeña historia y al pulsar 'enter' se pasará a los tres niveles.  Los niveles son tres, el primero es el subtsubterráneo/suelo el cual presenta unos tentáculos enemigos que si las dos se quedan atascadas entonces se reinicia el nivel. Una vez acabado el nivel del subsuelo, se pasa al del bosque y luego al del cielo. En cualquier momento pulsando la p se puede ir a la pantalla de ajustes y de ella se puede volver a la escena de juego. Dependiendo de si han llegado las dos o solo una saldrá un final u otro. 
 
 ![](CONCEPTS/Concept_Boton_Continuar.png)
 
@@ -400,7 +400,7 @@ Se puede acceder a través del menú principal o mientras se está jugando, el m
 
 4. ***Pantalla del tutorial & juego*** 
 
-Para que el jugador no tenga que volver a pasar por las distintas explicaciones que se otorgan al principio se han implementado dos botones extras. El cual uno te lleva directamente al juego donde se encuentra los tres niveles solamente con una breve explicación de historia. El otro llevara a una secuencia de explicaciones de mécanicas de como usar los personajes, interactuar con el entorno y con el otro jugador para diversas amenazas.
+Para que el jugador no tenga que volver a pasar por las distintas explicaciones que se otorgan al principio se han implementado dos botones extras. El cual uno te lleva directamente al juego donde se encuentra los tres niveles solamente con una breve explicación de historia. El otro llevara a una secuencia de explicaciones de mecánicas de cómo usar los personajes, interactuar con el entorno y con el otro jugador para diversas amenazas.
 
 ![](CONCEPTS/FINALES/MenuEleccion.PNG)
 
@@ -408,7 +408,7 @@ Para que el jugador no tenga que volver a pasar por las distintas explicaciones 
 
 4.1 **Pantalla del tutorial** 
 
-En cuanto al tutorial, presenta una serie de imagenes explicativas sobre como mover al personaje, instrucciones sobre enemigos y objetos, además de los objetivos. En la imagen presenta instrucciones iconograficas de como manejarse por el juego, las cuales se pueden pasar pulsando el botón de siguiente en el inferior centrar de la pantalla. Una vez pasada la presentación comienza la pantalla de juego.
+En cuanto al tutorial, presenta una serie de imágenes explicativas sobre como mover al personaje, instrucciones sobre enemigos y objetos, además de los objetivos. En la imagen presenta instrucciones iconográficas de cómo manejarse por el juego, las cuales se pueden pasar pulsando el botón de siguiente en el inferior centrar de la pantalla. Una vez pasada la presentación comienza la pantalla de juego.
 
 ![](CONCEPTS/FINALES/Tutorial.PNG)
 
@@ -418,25 +418,25 @@ En cuanto al tutorial, presenta una serie de imagenes explicativas sobre como mo
 
 En este menú cuenta “el juego en sí”, se refiere a la interfaz gráfica que se muestra en el monitor cuando una persona está jugando un videojuego, la pantalla de juego es la ventana a la acción y la experiencia del juego. Es la ventana a la experiencia interactiva que ofrece el videojuego. 
 
-La pantalla de juego cuenta con cuatro niveles los cuales simbolizan el ascenso de los personajes para remontar el cielo:historia, subsuelo, bosque y cielo. En cuanto la historia es solo una pantalla explicativa de la iniciación del viaje de los personajes, el porque están ahí y en dicha situación.
+La pantalla de juego cuenta con cuatro niveles los cuales simbolizan el ascenso de los personajes para remontar el cielo:historia, subsuelo, bosque y cielo. En cuanto la historia es solo una pantalla explicativa de la iniciación del viaje de los personajes, por qué están ahí y en dicha situación.
 
 ![](CONCEPTS/FINALES/Historia.PNG)
 
 *Img. Historia*
 
-El primer nivel es el subterraneo el cual tendra una atmosfera de ‘cloaca’. Esta atmosfera consta de un agua en la cuales estan unos enemigos mortales que si las dos personajes se quedan atrapadas esto implicara un reinicio de nivel. Usando los mecanismos botones y palancas, los cuales abren plataformas deberan ascender ‘hacia la luz’ asi pasando de nivel. Ambas deberan de situarse en la esquina superior izquierda.
+El primer nivel es el subterráneo el cual tendrá una atmosfera de ‘cloaca’. Esta atmosfera consta de un agua en la cuales están unos enemigos mortales que si los dos personajes se quedan atrapadas esto implicara un reinicio de nivel. Usando los mecanismos botones y palancas, los cuales abren plataformas deberán ascender ‘hacia la luz’ así pasando de nivel. Ambas deberán de situarse en la esquina superior izquierda.
 
 ![](CONCEPTS/FINALES/NivelSubterraneo.PNG)
 
 *Img. Nivel Subsuelo*
 
-En el nivel intermedio ascienden por lo cual tienen más luz y más vida el mundo además que la mécanica debe de ser más complicada. a aparte de un sentido de historia de que va costando más subir, también para manter al jugador enganchado con el juego incrementando la dificultad de pasarse el nivel. Es por ello, que se le ha agregado dos mecanicas la cual una solo la puede hacer Cassidy y otra solo Seraphine. Las flores son un obstaculo la cual Cassidy no puede atravesar pero en cambio con el shift de Seraphine estas pueden desaparecer y abrir el paso. En cambio,  Cassidy al no tener el salto de Seraphine ella pose un incremento de velocidad con espacio la cual le permite mover rocas para acceder a los sitios altos. Todo esto junto a las mécanicas anteriores crean un nivel divertido nuevo e intuitivo. El nivel se completa al llegar a la esquina superior derecha.
+En el nivel intermedio ascienden por lo cual tienen más luz y más vida el mundo además que la mecánica debe de ser más complicada. a aparte de un sentido de historia de que va costando más subir, también para mantener al jugador enganchado con el juego incrementando la dificultad de pasarse el nivel. Es por ello, que se le ha agregado dos mecánicas la cual una solo la puede hacer Cassidy y otra solo Seraphine. Las flores son un obstáculo la cual Cassidy no puede atravesar, pero en cambio con el shift de Seraphine estas pueden desaparecer y abrir el paso. En cambio,  Cassidy al no tener el salto de Seraphine ella pose un incremento de velocidad con espacio la cual le permite mover rocas para acceder a los sitios altos. Todo esto junto a las mecánicas anteriores crean un nivel divertido nuevo e intuitivo. El nivel se completa al llegar a la esquina superior derecha.
 
 ![](CONCEPTS/FINALES/NivelBosque.PNG)
 
 *Img. Nivel Bosque*
 
-En el nivel Cielo, este cuenta con las mécanicas anteriores agregando otra dificultad, las nubes. Estas nubes los dos personajes podran estar encima de ellas y saltar pero una vez estando encima de ellas tras 5 segundos dicha nube desaparece pudiendo quedarse el jugador sin opciones de avanzar, además de tener que juntar todas las mecanicas anteriores excepto la piedra que no pegaba con la estetica de estar en el cielo. El objetivo final es pasar a las puertas del cielo. Dependiendo de si hay uno o dos jugadores en la puerta supondra finales distintos.
+En el nivel Cielo, este cuenta con las mecánicas anteriores agregando otra dificultad, las nubes. Estas nubes los dos personajes podrán estar encima de ellas y saltar, pero una vez estando encima de ellas tras 5 segundos dicha nube desaparece pudiendo quedarse el jugador sin opciones de avanzar, además de tener que juntar todas mecánismos anteriores excepto la piedra que no pegaba con la estética de estar en el cielo. El objetivo final es pasar a las puertas del cielo. Dependiendo de si hay uno o dos jugadores en la puerta supondrá finales distintos.
 
 ![](CONCEPTS/FINALES/NivelCielo.PNG)
 
@@ -446,7 +446,7 @@ En el nivel Cielo, este cuenta con las mécanicas anteriores agregando otra difi
 
 Se presentan distintos finales que pueden salir debido a las acciones de cada jugador, es por ello que se incluye una interfaz recogiendo a los posibles finales de la historia. Tras el desenlace de los finales se dan paso a los créditos. 
 
-Estos finales dependen de si en la puerta del nivel del cielo esta solo un jugador o los dos. Si solamente esta uno se presentaria el final malo y si estan los dos, se presenta el final bueno.
+Estos finales dependen de si en la puerta del nivel del cielo esta solo un jugador o los dos. Si solamente esta uno se presentaría el final malo y si están los dos, se presenta el final bueno.
 
 6. ***Créditos*** 
 
@@ -454,15 +454,15 @@ En los créditos se expondrá los participantes del proyecto junto a la empresa 
 
 ## ***5 Audio*** 
 
-A continuación se describen los recursos audiovisuales que serán empleados en el videojuego: 
+A continuación, se describen los recursos audiovisuales que serán empleados en el videojuego: 
 
 1. ***Música*** 
 
-La música se presenta una idea que en el menú principal será instrumental, suave y relajada buscando transmitir paz y tranquilidad en el jugador. Además de que durante el juego la música irá cambiando en relación al escenario en el que se encuentren los jugadores. Esto se ha modificado, se tiene dos canciones debido a que el juego no es muy largo y también porque cambiar la musica del menu al juego es muy desconcentrarte por lo que la música que se usa en el menú principal pasa a todas las pantallas. La siguiente canción es más angelical simbolizando como que ya se escuchan los cantos de los angeles por lo cual las protagonistas deben de estar cerca de la meta.
+La música se presenta una idea que en el menú principal será instrumental, suave y relajada buscando transmitir paz y tranquilidad en el jugador. Además de que durante el juego la música irá cambiando en relación al escenario en el que se encuentren los jugadores. Esto se ha modificado, se tiene dos canciones debido a que el juego no es muy largo y también porque cambiar la música del menú al juego es muy desconcentrarte por lo que la música que se usa en el menú principal pasa a todas las pantallas. La siguiente canción es más angelical simbolizando como que ya se escuchan los cantos de los ángeles por lo cual las protagonistas deben de estar cerca de la meta.
 
 2. ***Voces*** 
 
-Se habia diseñado que tanto ambos personajes principales, como la figura de Dios que les recibe en su regreso al cielo para hacerles tomar una decisión que implica un cambio en su futuro, contarán con voces distorsionadas  y  confusas  aunque  dulces  y  amigables.  Estas  voces  no  producirán  frases coherentes en un idioma específico, sino que su diálogo estará conformado por sonidos aislados que se combinan para  dar la sensación  de un  discurso sólido y  coherente en un idioma desconocido. Esto no se ha implementado debido a que con la utilización de texto era suficientemente coherente y entendible la situación.
+Se había diseñado que tanto ambos personajes principales, como la figura de Dios que les recibe en su regreso al cielo para hacerles tomar una decisión que implica un cambio en su futuro, contarán con voces distorsionadas  y  confusas  aunque  dulces  y  amigables.  Estas  voces  no  producirán  frases coherentes en un idioma específico, sino que su diálogo estará conformado por sonidos aislados que se combinan para  dar la sensación  de un  discurso sólido y  coherente en un idioma desconocido. Esto no se ha implementado debido a que con la utilización de texto era suficientemente coherente y entendible la situación.
 
 3. ***Efectos de sonido*** 
 
