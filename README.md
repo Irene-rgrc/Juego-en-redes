@@ -6,10 +6,8 @@ Cristina Valero Abella c.valero.2021@alumnos.urjc.es
 Rosa Ghaudy Bellido Euribe rg.bellido.2021@alumnos.urjc.es"
 descripción de la temática: "Se trata de un juego cooperativo para dos jugadores. Se toma el control de dos Ángeles que se encuentran en el subsuelo y deben regresar al cielo, colaborando entre ellos para lograr dicho objetivo. Durante el trayecto se enfrentarán a  una serie de puzles, los cuales podrán ser resueltos mediante el uso de sus habilidades e ingenio. El juego consta de varios finales, dependiendo de las acciones que decidan tomar los jugadores; el conseguir entrar al cielo está en sus manos."
 ---
-# Caída Celestial: El Desafío de los Exiliados
-
 ![](phaser3-tutorial-src/assets/Título.png)
-
+# Caída Celestial: El Desafío de los Exiliados
 ## Documento de diseño  
 
 ### *Diseño y Desarrollo de Videojuegos (Quintana 2023-2024) Juegos en Red* 
