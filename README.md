@@ -72,13 +72,13 @@ descripción de la temática: "Se trata de un juego cooperativo para dos jugador
 
 ## ***1. Introducción*** 
 
-Este es el documento de diseño del videojuego Caída Celestial: el desafío de los exiliados. Este GDD forma parte de la Fase 1 (Equipo de Desarrollo y Temática del Juego) de la práctica de la asignatura de Juegos en Red. 
+Se presenta el documento de desarrollo del videojuego Caída Celestial: el desafío de los exiliados. Este GDD forma parte de la Fase 2 (Equipo de Desarrollo y Temática del Juego) de la práctica de la asignatura de Juegos en Red.
 
-El objetivo de esta primera fase es formar el equipo de desarrollo, elegir la temática del juego e identificar sus funcionalidades y mecánicas principales. 
+El objetivo de la anterior fase era formar el equipo de desarrollo, elegir la temática del juego e identificar sus funcionalidades y mecánicas principales, en esta nueva fase se pide implementarlo en javascript con el framework de Phaser 3 y que los jugadores puedan jugar por via local únicamente. Esta fase será la base para la siguiente fase.
 
-El equipo de desarrollo está formado por  *Irene Rodríguez García*, *Miriam Sanz Tardón*, *Cristina Valero Abell*a y *Rosa Ghaudy Bellido Euribe*; el nombre que se le ha dado a dicho equipo es “*McAcos”.* 
+El equipo de desarrollo está formado por Irene Rodríguez García, Miriam Sanz Tardón, Cristina Valero Abella y Rosa Ghaudy Bellido Euribe; el nombre que se le ha dado a dicho equipo es “McAcos”.
 
-El concepto del equipo está basado en los macacos, los animales más inteligentes de la selva, que con gran adaptabilidad y destreza trepan lianas y árboles estratégicamente, del mismo modo  en  el  que  nosotras  inesperadamente  dominamos  el  mercado,  con  una  popularidad exponencialmente  creciente  que  se  eleva  por  encima  de  la  competencia  rápidamente. Imparables,  graciosos,  con  un  ingenio  incansable  y  un  encanto  que  no  pasa  de  moda, demostrando tenacidad que no se rinde acompañada de frescas ideas y siempre dispuestos a darlo todo para conseguir lo que quieren, son la mejor representación del espíritu e ideales del equipo dedicado y trabajador. 
+El concepto del equipo está basado en los macacos, los animales más inteligentes de la selva, que con gran adaptabilidad y destreza trepan lianas y árboles estratégicamente, del mismo modo en el que nosotras inesperadamente dominamos el mercado, con una popularidad exponencialmente creciente que se eleva por encima de la competencia rápidamente. Imparables, graciosos, con un ingenio incansable y un encanto que no pasa de moda, demostrando tenacidad que no se rinde acompañada de frescas ideas y siempre dispuestos a darlo todo para conseguir lo que quieren, son la mejor representación del espíritu e ideales del equipo dedicado y trabajador.
 
 ![](CONCEPTS/McAcos.png)
 
