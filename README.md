@@ -306,7 +306,7 @@ Seraphina tendrá su movimiento por el mundo controlado por las “flechas de di
 
 La tecla “P” sirve para pausar la escena y abrir el menú de ajustes, mientras que la tecla “H” se emplea en el nivel subterráneo para liberar al compañero si este se encuentra atrapado por tentáculos.
 
-![](CONCEPTS/Teclado.jpeg)
+![](CONCEPTS/FINALES/Controles.PNG)
 
 *Img. Controles de los jugadores en local*
 
