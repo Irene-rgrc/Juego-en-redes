@@ -221,27 +221,36 @@ Dios del mal: nacido del Dios del bien para otorgar un equilibrio. No puede crea
 
 3. ***Presentación del mundo*** 
 
-Este universo está guiado por un dios, el ser que gobierna todo. Este reside en el cielo cuyos guardianes son los ángeles. Aunque estos seres son creados por Dios no son perfectos, es decir, ellos mismos tienen su propia conciencia y son responsables de sus actos y tienen su propia moral y sus valores. En resumen, los ángeles no son necesariamente buenos, sin embargo, el cielo tiene ciertas normas que deben cumplirse y hay una moral y una ética que debe seguirse y por lo tanto, si vas en contra de ello, vas en contra de Dios y dejas de ser merecedor de estar a su lado y de ser un guardián del cielo.  
+Este universo está guiado por un dios, el ser que gobierna todo. Este reside en el cielo cuyos guardianes son los ángeles. Aunque estos seres son creados por Dios no son perfectos, es decir, ellos mismos tienen su propia conciencia y son responsables de sus actos y tienen su propia moral y sus valores. En resumen, los ángeles no son necesariamente buenos, sin embargo, el cielo tiene ciertas normas que deben cumplirse y hay una moral y una ética que debe seguirse y, por lo tanto, si vas en contra de ello, vas en contra de Dios y dejas de ser merecedor de estar a su lado y de ser un guardián del cielo.  
 
 Si Dios te expulsa pasas a ser un ángel caído y acabas en el subsuelo y lugar vacío y solitario cuyo objetivo inicial era el de ser un lugar para la reflexión, para poder expiar los pecados, sin embargo, igual que hay un Dios que gobierna el bien, también hay un Dios que gobierna el mal, de forma que existe un equilibrio entre ellos. Este segundo dios vive en el infierno y los guardianes de este lugar son los ángeles caídos, ya que una vez que están en el subsuelo este aprovecha para terminar de corromperlos y conducirles al mal. Sin que el Dios del bien lo sepa tomó el control del subsuelo, de forma que cuando un ángel cae este lo corrompe tanto físicamente como mentalmente hasta que es merecedor de entrar en el infierno, les somete a alucinaciones de todo tipo y a ciertas torturas para cumplir su objetivo, por lo que es muy complicado lograr regresar de nuevo al cielo si se ha caído allí.* 
 
 En cuanto al mundo observable dentro del juego, este se divide en tres zonas o escenarios.  
 
-El primer escenario que se podrá ver y donde se comenzará el juego es el subsuelo, siendo el lugar más oscuro y fúnebre de todos. Este lugar es un sitio vacío y solitario donde se encontrará inicialmente Cassadie y al cual caerá después Seraphina. Este primer escenario simboliza la decadencia  y  el  punto  más  bajo  al  que  puede  caer  un  ser  a  causa  de  una  determinada circunstancia y donde habrá un punto de inflexión en el desarrollo del personaje debido a la desesperación. 
+El primer escenario que se podrá ver y donde se comenzará el juego es el subsuelo, siendo el lugar más oscuro y fúnebre de todos. Este lugar es un sitio vacío y solitario donde se encontrará inicialmente Cassadie y al cual caerá después Seraphina. Este primer escenario simboliza la decadencia y  el punto  más bajo  al que  puede caer  un ser  a causa  de una  determinada circunstancia y donde habrá un punto de inflexión en el desarrollo del personaje debido a la desesperación. 
+
+![](CONCEPTS/FINALES/Subterráneo.png)
+
+*Img. Fondo final subsuelo* 
 
 ![](CONCEPTS/Concept_Subterraneo_principal.jpeg)
 
 *Img. Concept Subsuelo Principal* 
 
-![](CONCEPTS/Concept_Subterraneo_I.png) ![](CONCEPTS/Concept_Subterraneo_II.png)
+![](CONCEPTS/Concept_Subterraneo_I.png) 
+![](CONCEPTS/Concept_Subterraneo_II.png)
 
-*Img. concept Subsuelo prueba de colores* 
+*Img. Concepts Subsuelo pruebas de colores* 
 
 ![](CONCEPTS/Concept_Subterraneo_EscalaDeGris.jpeg)
 
 *Img. Subsuelo concept escala de grises.*
 
-Se ascenderá de este escenario y se llegará al siguiente, el cual es la tierra como tal, en este caso, los jugadores llegarán a un bosque, el cual visualmente tiene ciertos toques místicos y de fantasía. Esta zona, como tal, no simboliza nada, aparte del hecho que para los personajes, dentro de la historia como tal sería como su momento de reflexionar cómo quieren evolucionar. 
+Se ascenderá de este escenario y se llegará al siguiente, el cual es la tierra como tal, en este caso, los jugadores llegarán a un bosque, el cual visualmente tiene ciertos toques místicos y de fantasía. Esta zona, como tal, no simboliza nada, aparte del hecho que, para los personajes, dentro de la historia como tal sería como su momento de reflexionar cómo quieren evolucionar. 
+
+![](CONCEPTS/FINALES/Bosque.png)
+
+*Img. Fondo final Bosque* 
 
 ![](CONCEPTS/Concept_Tierra_Principal.jpeg)
 
@@ -251,7 +260,11 @@ Se ascenderá de este escenario y se llegará al siguiente, el cual es la tierra
 
 *Img. Concept Tierra Base escala de grises* 
 
-Por último se ascenderá al cielo, el último escenario del juego y donde culmina la historia y el juego. Esta escena tendrá colores más brillantes y claros, para simbolizar la pureza del lugar. Aquí se deberá culminar el desarrollo del personaje y las decisiones que debe tomar en base a eso. 
+Por último, se ascenderá al cielo, el último escenario del juego y donde culmina la historia y el juego. Esta escena tendrá colores más brillantes y claros, para simbolizar la pureza del lugar. Aquí se deberá culminar el desarrollo del personaje y las decisiones que debe tomar en base a eso. 
+
+![](CONCEPTS/FINALES/Cielo.jpg)
+
+*Img. Fondo final Cielo* 
 
 ![](CONCEPTS/Concept_Cielo_Principal.jpeg)
 
@@ -269,27 +282,29 @@ El poder regresar al cielo de alguna forma refleja una prueba que pone el dios s
 
 Si gana Seraphina, se ramifica a su vez en otros dos posibles finales. Dios le dará la oportunidad de decidir si entra el solo al cielo o si entran ambos. Si el jugador escoge que solo entra su personaje, entonces se habrá fallado la prueba y ninguno de los dos podrá entrar en el cielo nunca más, volviendo a caer en el subsuelo. En cambio, si el jugador escoge que entren ambos en el cielo se verá, ante los ojos de Dios, como una muestra de bondad y misericordia, otorgándoles a ambos otra oportunidad. 
 
-Si  gana  Cassadie,  se  ramifica,  de  igual  forma,  en  dos  posibles  finales.  Dios  le  dará  la oportunidad, también, de decidir si entra el solo al cielo o si entran ambos. Si el jugador decide que solo entra su personaje, entonces Dios lo tomará como un acto egoísta y malicioso, lo cual le cabreará mucho y será enviado directamente al infierno. Si el jugador decide que entran ambos, Dios lo tomará como un acto de arrepentimiento por los actos pasados de Cassadie y como una evolución hacia bien de él, dándoles a ambos otra oportunidad. 
+Si gana  Cassadie, se  ramifica, de igual forma, en  dos posibles finales.  Dios le dará la oportunidad, también, de decidir si entra el solo al cielo o si entran ambos. Si el jugador decide que solo entra su personaje, entonces Dios lo tomará como un acto egoísta y malicioso, lo cual le cabreará mucho y será enviado directamente al infierno. Si el jugador decide que entran ambos, Dios lo tomará como un acto de arrepentimiento por los actos pasados de Cassadie y como una evolución hacia bien de él, dándoles a ambos otra oportunidad. 
 
 ## ***3 Mecánicas del juego*** 
 
-Ambos personajes podrán desplazarse en las cuatro direcciones (izquierda, derecha, arriba y abajo) e interactuar con diversos elementos del entorno con el objetivo de resolver puzzles o rompecabezas necesarios para despejar el camino y continuar subiendo.
+Ambos personajes podrán desplazarse en las cuatro direcciones (izquierda, derecha, arriba y abajo) e interactuar con diversos elementos del entorno con el objetivo de resolver puzles o rompecabezas necesarios para despejar el camino y continuar subiendo.
 
 1. ***Personajes*** 
 
-Cada uno de los dos personajes principales cuenta con habilidades características propias que los diferencian según sus condiciones de vida inmediatamente anteriores al inicio del juego. Seraphina, que habitaba los cielos hasta el principio de la historia, acostumbrado a volar y a pesar de haber perdido esta capacidad, se encuentra todavía en pleno control de sus alas, por lo que  es  capaz  de  emplearlas  para  dar  un  pequeño  empujón  en  el  aire.  Contando  así  el protagonista principal con un salto prolongado de mayor altura. 
+Cada uno de los dos personajes principales cuenta con habilidades características propias que los diferencian según sus condiciones de vida inmediatamente anteriores al inicio del juego. Seraphina, que habitaba los cielos hasta el principio de la historia, acostumbrado a volar y a pesar de haber perdido esta capacidad, se encuentra todavía en pleno control de sus alas, por lo que es capaz de emplearlas para dar un pequeño el aire.  Contando así el protagonista principal con un salto prolongado de mayor altura. 
 
 Cassadie, pese a tener un ala dañada y contar con una movilidad más reducida en vertical, se encuentra, tras tantos años, con un dominio completo sobre sus piernas, lo que le permite un pequeño sprint que le aporta más velocidad y fuerza. 
 
 2. ***Movimiento*** 
 
-El movimiento es, como expresado anteriormente, en las cuatro direcciones del espacio en dos dimensiones del juego, y los jugadores son capaces de controlarlo mediante el teclado. 
+El movimiento es, como expresado anteriormente, en las cuatro direcciones del espacio en dos dimensiones del juego, y los jugadores son capaces de controlarlo mediante el teclado. También pueden moverse por el menú con el cursor haciendo clic derecho en los botones. También pueden moverse por el menú con el cursor haciendo click derecho en los botones.
 
 ***3.2.1 Controles*** 
 
-Seraphina se desplazará por el escenario mediante las teclas “W” (para el movimiento hacia arriba), “A” (para dirigirse hacia la izquierda de la pantalla), “S” (para retroceder hacia abajo en las plataformas que lo permitan), “D” (para moverse hacia la derecha de la pantalla) y mantener pulsada la tecla “shift” al presionar “W” activará su salto prolongado de mayor altura. 
+Cassadie se desplazará por el escenario mediante las teclas “W” (para el movimiento hacia arriba), “A” (para dirigirse hacia la izquierda de la pantalla), “D” (para moverse hacia la derecha de la pantalla). Su sprint se activará mediante la tecla “espacio”, al presionarla mientras se mueve en el eje horizontal (mediante “A” o “D”) su velocidad aumentará considerablemente durante un pequeñísimo período de tiempo.
 
-Cassadie tendrá su movimiento por el mundo controlado por las “flechas de dirección” del teclado, cada una de estas desplazará al personaje en la dirección que señalan. Su sprint se activará mediante la tecla “control”, al mantenerla presionada al indicar un movimiento en horizontal. 
+Seraphina tendrá su movimiento por el mundo controlado por las “flechas de dirección” del teclado o “cursores” (menos la que señala hacia abajo ya que no se pueden agachar), cada una de estas desplazará al personaje en la dirección que señalan. Al pulsar la tecla “enter” tras haber realizado un primer salto con “W”, se activará su salto prolongado de mayor altura tan solo una vez hasta que vuelva a tocar el suelo y realizar un primer salto.
+
+La tecla “P” sirve para pausar la escena y abrir el menú de ajustes, mientras que la tecla “H” se emplea en el nivel subterráneo para liberar al compañero si este se encuentra atrapado por tentáculos.
 
 ![](CONCEPTS/Teclado.jpeg)
 
@@ -300,21 +315,21 @@ Cassadie tendrá su movimiento por el mundo controlado por las “flechas de dir
 Tanto los diferentes paisajes y territorios que los personajes recorren y exploran en su camino de vuelta al cielo, como estos mismos personajes principales, cuentan con mecánicas únicas propias de estos. Objetos que conforman parte de los puzzles que solo se encuentran en determinados entornos o con los que solo puede interactuar uno de los dos personajes. 
 
 4. ***Objetos, elementos interactuables*** 
-1) Las  peligrosas  criaturas  que  habitan  las  aguas  subterráneas  del  inicio  del  mapa impedirán a cualquiera de los jugadores salir de estas y continuar su viaje si caen en ellas, necesitando que el otro jugador lo libere.
+1) Las peligrosas criaturas que habitan las aguas subterráneas del inicio del mapa impedirán a cualquiera de los jugadores salir de estas y continuar su viaje si caen en ellas, necesitando que el otro jugador lo libere.
 
 ![](CONCEPTS/IdeaAgua1.png) ![](CONCEPTS/IdeaAgua2.png)
 ![](CONCEPTS/IdeaAgua3.png) ![](CONCEPTS/IdeaAgua4.png)
 
-*Img. Idea Enemigos Acuaticos*
+*Img. Idea Enemigos Acuáticos*
   
-2) Las nubes que actúan como plataformas en la parte final del mapa solo se encuentran en esta última etapa y no son capaces de soportar el peso de ambos protagonistas al mismo tiempo.
+2) Las nubes que actúan como plataformas en la parte final del mapa solo se encuentran en esta última etapa, en el cielo y no son capaces de soportar el peso de una persona, por tanto, estos se pueden posar una sola vez en ellas, una vez posados en la nube, esta desaparecerá en 5 segundos.
 
 ![](CONCEPTS/IdeaNube1.png) ![](CONCEPTS/IdeaNube2.png)
 ![](CONCEPTS/IdeaNube3.png)
 
 *Img. Idea Nubes*
    
-3) Algunas  grandes  y frondosas ramas de los  árboles del  bosque pueden bloquear o entorpecer la visión de los jugadores. El leve viento producido por el aleteo (salto prolongado de mayor altura) de Seraphina revela lo que se oculta tras estas hojas haciéndolas volar lejos.
+3) Algunas grandes  y frondosas ramas de los árboles del bosque pueden bloquear o entorpecer la visión de los jugadores. El leve viento producido por el aleteo (salto prolongado de mayor altura) de Seraphina revela lo que se oculta tras estas hojas haciéndolas volar lejos.
 
 ![](CONCEPTS/IdeaHojas1.png) ![](CONCEPTS/IdeaHojas2.png)
 ![](CONCEPTS/IdeaHojas3.png)
@@ -329,7 +344,7 @@ Tanto los diferentes paisajes y territorios que los personajes recorren y explor
 
 *Img. Idea Rocas*
    
-5) La mecánica principal del juego se basa en presionar botones y activar palancas que alteran el entorno en el orden y momento adecuado para permitir o acelerar el viaje hacia arriba de vuelta al cielo. Hacer aparecer y desaparecer plataformas y paredes o activar el movimiento de las plataformas dinámicas son los cambios controlados por estos mecanismos. Estos se activan al entrar en contacto con el jugador sin necesidad de pulsar un botón para interactuar y se diferencian en que las palancas cambian de estado al ser activadas y se mantienen en el nuevo estado hasta entrar nuevamente en contacto con un jugador, mientras que los botones deben mantenerse presionados para estar activos y solo producirán el cambio mientras uno de los jugadores se encuentre sobre estos.
+5) La mecánica principal del juego se basa en presionar botones y activar palancas que alteran el entorno en el orden y momento adecuado para permitir o acelerar el viaje hacia arriba de vuelta al cielo. Hacer aparecer y desaparecer plataformas y paredes o activar el movimiento de las plataformas dinámicas son los cambios controlados por estos mecanismos. Estos se activan al entrar en contacto con el jugador sin necesidad de pulsar un botón para interactuar y se diferencian en que las palancas cambian de estado al ser activadas y se mantienen en el nuevo estado hasta entrar nuevamente en contacto con un jugador (hay plataformas especiales en las cuales una vez pulsadas se mantiene su estado, creado para engatusar al jugador), mientras que los botones deben mantenerse presionados para estar activos y solo producirán el cambio mientras uno de los jugadores se encuentre sobre estos.
 
 ![](CONCEPTS/IdeaPalanca1.png) ![](CONCEPTS/IdeaPalanca2.png)
 ![](CONCEPTS/IdeaPalanca3.png)
@@ -342,17 +357,19 @@ Tanto los diferentes paisajes y territorios que los personajes recorren y explor
 
 ## ***4 Interfaz*** 
 
-El juego contendrá una serie de “menús” los cuales les permitirán al jugador empezar el juego, salir y ciertos aspectos de configuración del juego, para que pueda ajustarlos a su gusto. El aspecto estético será diseñado en canva debido a que tienen muchas funcionalidades específicas para crear una interfaz como herramientas de selección, color, formato etc. 
+El juego contendrá una serie de “menús” los cuales le permitirán al jugador empezar el juego, salir y ciertos aspectos de configuración del juego, para que pueda ajustarlos a su gusto. El aspecto estético será diseñado en Canva debido a que tienen muchas funcionalidades específicas para crear una interfaz como herramientas de selección, color, formato etc. Además, todos los sprites implementados como título, spritesheets, fondos serán dibujados por el equipo con la herramienta procreate.
 
 1. ***Diagrama de flujo*** 
 
-A continuación, se explicará en qué consiste el diagrama de flujo de las interfaces. Un diagrama de  flujo  de  una  interfaz,  a  menudo  denominado  diagrama  de  flujo  de  usuario,  es  una representación  gráfica  que  muestra  cómo  un  usuario  interactúa  con  una  interfaz  del juego/software.*** 
+A continuación, se explicará en qué consiste el diagrama de flujo de las interfaces. Un diagrama de flujo  de una  interfaz, a  menudo denominado  diagrama de  flujo de  usuario, es  una representación gráfica  que muestra  cómo un  usuario interactúa  con una  interfaz del juego/software.*** 
 
-![](CONCEPTS/Interfaz.jpeg)
+![](CONCEPTS/FINALES/Diagrama_De_Interfaces.png)
 
-*Img. Diagrama de flujo de interfaz.* 
+*Img. Diagrama de flujo de las interfazes.* 
 
-Se comienza con una interfaz principal denominada menú en la cual se podrá pulsar con el ratón a tres opciones: Comenzar, Ajustes y Salir. En Comenzar empezará a ejecutarse el juego, es decir pantalla de juego sin embargo podremos acceder a la pantalla de pausa siempre que se esté jugando. También si el jugador finaliza el nivel se encuentra en el menú de fin de nivel y después unos créditos con los participantes del proyecto, una vez visto todos los créditos se volverá al menú principal. En ajustes nos encontramos con una pantalla de pausa en la cual podrá ajustar el volumen en la misma pantalla y finalizar el juego. Por último se encuentra el botón de Salir que inmediatamente tras accionarlo se finaliza el programa. 
+Una vez se abre el ejecutable se encuentra en el menú principal o pantalla de menú principal en la cual aparecerán cuatro botones importantes: Jugar, Ajustes y Salir. Si se ha pulsado salir la página se cierra, si se ha pulsado ajustes aparecerá una barra para ajustar el volumen y se ha pulsado Jugar se puede seleccionar entre el juego o el tutorial. En jugar presenta dos botones debido a que así si los jugadores ya han jugado anteriormente/y o saben las mecánicas pues que no tengan que ver de nuevo la presentación larga explicativa e ir directamente a la pantalla de juego. 
+
+Si se ha pulsado el botón de tutorial esto llevará a una secuencia explicativa de como moverse, manejarse e interactuar con el entorno, una vez acaba dicha explicación llevará a la pantalla de juego en la cual consta de una pequeña historia y al pulsar enter se pasará a los tres niveles.  Los niveles son tres, el primero es el subtsubterráneo/suelo el cual presenta unos tentáculos enemigos que si las dos se quedan atascadas entonces se reinicia el nivel. Una vez acabado el nivel del subsuelo, se pasa al del bosque y luego al del cielo. En cualquier momento pulsando la p se puede ir a la pantalla de ajustes y de ella se puede volver a la escena de juego. Dependiendo de si han llegado las dos o solo una saldrá un final u otro. 
 
 ![](CONCEPTS/Concept_Boton_Continuar.png)
 
@@ -360,9 +377,7 @@ Se comienza con una interfaz principal denominada menú en la cual se podrá pul
 
 2. ***Menú principal*** 
 
-El menú principal consta del título del juego que ocupe un tamaño razonable para captar la atención del jugador y luego abajo estarán enfiladas céntricas tres botones: Comenzar, Ajustes y Salir. 
-
-Al pulsar comenzar, se iniciará el juego; Si se pincha ajustes, entrará en otra intro menú; por último si se pincha salir, se cierra el programa. 
+El menú principal consta del título del juego que ocupe un tamaño razonable para captar la atención del jugador y luego abajo estarán enfiladas céntricas tres botones: Comenzar que se ha cambiado por Jugar, Ajustes y Salir.
 
 ![](CONCEPTS/Concept_MenuPrincipal.jpeg)
 
