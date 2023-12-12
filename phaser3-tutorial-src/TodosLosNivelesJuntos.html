@@ -1994,7 +1994,6 @@ presionar4(player, boton) {
                 if (Phaser.Input.Keyboard.JustDown(this.enter)) {
                     this.scene.start('NivelSubsuelo');
                 }
-
             }
         }
 
@@ -2259,6 +2258,7 @@ presionar4(player, boton) {
                 super('FinalBueno');
                 this.puerta;
                 this.suelo;
+                this.enter;
             }
 
             preload() {
@@ -2278,18 +2278,23 @@ presionar4(player, boton) {
                     frameRate: 10,
                     repeat: 0,
                 })
-                this.puerta = this.physics.add.sprite(1370, 540, 'puerta').setScale(0.6);
+                this.puerta = this.physics.add.sprite(1370, 580, 'puerta').setScale(1);
                 this.physics.add.collider(this.puerta, this.suelo);
                 this.puerta.anims.play('abrirPuerta', false);
+                this.enter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
             }
 
             update() {
+                if (Phaser.Input.Keyboard.JustDown(this.enter)) {
+                    this.scene.start('IrCreditos');
+                }
             }
         }
 
         class FinalMalo extends Phaser.Scene {
             constructor() {
                 super('FinalMalo');
+                this.enter;
             }
 
             preload() {
@@ -2300,9 +2305,13 @@ presionar4(player, boton) {
                 this.add.image(960, 500, 'sky');
                 this.add.text(100, 600, '-Te has vuelto egoísta. \n-Me has decepcionado. \n-Tus actos te condenarán a ti y a tu compañero al sufrimiento eterno. \n\nY con eso, ambos ángeles caíados fueron definitivamente expulsados... \npara toda le eternidad.',
                     { fontFamily: 'serif', fontSize: '50px', color: '#fff' });
+                this.enter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
             }
 
             update() {
+                if (Phaser.Input.Keyboard.JustDown(this.enter)) {
+                    this.scene.start('IrCreditos');
+                }
             }
         }
 
@@ -2318,9 +2327,9 @@ presionar4(player, boton) {
                     debug: false
                 }
             },
-            //scene: [MenuInicio, Ajustes, Tutorial, TutorialImagenes, Introducción, NivelSubsuelo, NivelBosque, NivelCielo, Elegir, FinalBueno, FinalMalo] // NivelBosque  NivelCielo
+            scene: [/*MenuInicio, Ajustes, Tutorial, TutorialImagenes, Introducción, NivelSubsuelo, NivelBosque,*/ NivelCielo, Elegir, FinalBueno, FinalMalo, IrCreditos, Creditos, VolverAJugar]
             //scene: [NivelBosque]
-            scene: [NivelCielo]
+            //scene: [NivelCielo]
             //scene: [IrCreditos,Creditos,VolverAJugar,MenuInicio]
         };
 
