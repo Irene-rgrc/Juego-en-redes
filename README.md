@@ -385,17 +385,33 @@ El menú principal consta del título del juego que ocupe un tamaño razonable p
 
 El menú principal consta del título con un fondo de las puertas las cuales es el objetivo final del juego. En el centro se puede ver tres botones que destacán los cuales son Jugar, Ajustes y Salir. Al pulsar Salir se cierra el ejecutable, el botón de Ajustes lleva a la pantalla de ajustes y la de jugar a la selección de juego o tutorial.
 
-![](CONCEPTS/Concept_MenuPrincipal.jpeg)
+![](CONCEPTS/FINALES/MenuPrincipal.PNG)
 
 *Img. Menú principal*
 
 3. ***Menú de opciones/Pantalla de Pausa*** 
 
-Se puede acceder a través del menú principal o mientras se está jugando, el menú es el mismo para ambas. En este se encuentra el botón de Salir que cierra el programa y en la misma pantalla, para poder ajustar el volumen general del juego. En la versión en red el juego se pausa para ambos jugadores cada vez que uno entre en el menú de opciones. 
+Se puede acceder a través del menú principal o mientras se está jugando, el menú es el mismo para ambas. En este se encuentra el botón de Salir que se vuelve a la pantalla en la que los jugadores estaban antes y en la misma pantalla, para poder ajustar el volumen general del juego mediante un slider. En la versión en red el juego se pausa para ambos jugadores cada vez que uno entre en el menú de opciones.
 
-4. ***Pantalla de juego*** 
+![](CONCEPTS/FINALES/MenuAjustes.PNG)
 
-En este menú cuenta “el juego en sí”, se refiere a la interfaz gráfica que se muestra en el monitor cuando una persona está jugando un videojuego, la pantalla de juego es la ventana a la acción y la experiencia del juego. Es la ventana a la experiencia interactiva que ofrece el videojuego. Una vez acabada la experiencia interactiva pasará a Fin de nivel.
+*Img. Menú de ajuste*
+
+4. ***Pantalla del tutorial & juego*** 
+
+Para que el jugador no tenga que volver a pasar por las distintas explicaciones que se otorgan al principio se han implementado dos botones extras. El cual uno te lleva directamente al juego donde se encuentra los tres niveles solamente con una breve explicación de historia. El otro llevara a una secuencia de explicaciones de mécanicas de como usar los personajes, interactuar con el entorno y con el otro jugador para diversas amenazas.
+
+![](CONCEPTS/FINALES/MenuEleccion.PNG)
+
+*Img. Elección de Jugar o tutorial*
+
+4.1 **Pantalla del tutorial** 
+
+En cuanto al tutorial, presenta una serie de imagenes explicativas sobre como mover al personaje, instrucciones sobre enemigos y objetos, además de los objetivos. En la imagen presenta instrucciones iconograficas de como manejarse por el juego, las cuales se pueden pasar pulsando el botón de siguiente en el inferior centrar de la pantalla. Una vez pasada la presentación comienza la pantalla de juego.
+
+![](CONCEPTS/FINALES/MenuEleccion.PNG)
+
+*Img. Tutorial*
 
 5. ***Fin de nivel*** 
 
