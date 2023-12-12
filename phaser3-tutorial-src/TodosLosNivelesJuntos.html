@@ -1140,8 +1140,8 @@ presionar4(player, boton) {
                 //se añade que tienen fisicas
                 this.iniciarMecanismos();
                 // Poner los personajes en las posiciones que se desen: las quiero poner juntas en el centro
-                this.Seraphina = this.physics.add.sprite(955, 800, 'Seraphina').setScale(0.10, 0.10);
-                this.Cassadie = this.physics.add.sprite(995, 800, 'Cassadie').setScale(0.10, 0.10);
+                this.Seraphina = this.physics.add.sprite(955, 880, 'Seraphina').setScale(0.10, 0.10);
+                this.Cassadie = this.physics.add.sprite(995, 880, 'Cassadie').setScale(0.10, 0.10);
 
                 //  Player physics properties. Give the little guy a slight bounce.
                 this.Seraphina.setBounce(0.2);
@@ -1152,9 +1152,9 @@ presionar4(player, boton) {
 
                 //se coloca el botón X Y
                 // 1
-                this.boton = this.physics.add.sprite(840, 810, 'botonSCielo').setScale(0.1);
+                this.boton = this.physics.add.sprite(870, 920, 'botonSCielo').setScale(0.1);
                 // 4 (el 3 es palanca)
-                this.boton4 = this.physics.add.sprite(1140, 810, 'botonSCielo').setScale(0.1);
+                this.boton4 = this.physics.add.sprite(1140, 920, 'botonSCielo').setScale(0.1);
                 //por cada botón extra se añaden físicas y se coloca porque no es una lista de botones
                 ////////////this.boton1 = this.physics.add.group();
                 ////////////this.boton1 = this.physics.add.sprite(400, 470, 'boton').setScale(0.02);
@@ -1183,7 +1183,7 @@ presionar4(player, boton) {
                 this.nube6.setImmovable(true);
                 this.nube6.body.allowGravity = false;
 
-                this.nube7 = this.physics.add.sprite(1590, 350, 'nubesObstaculo').setScale(0.6);
+                this.nube7 = this.physics.add.sprite(1590, 350, 'nubesObstaculo').setScale(0.2);
                 this.nube7.setDepth(1);
                 this.nube7.setImmovable(true);
                 this.nube7.body.allowGravity = false;
@@ -1211,13 +1211,15 @@ presionar4(player, boton) {
                 this.platforms.create(900, 200, 'plataformaCieloClaro').setScale(0.2, 0.2).refreshBody();
                 this.platforms.create(1400, 150, 'plataformaCieloClaro').setScale(0.2, 0.2).refreshBody();
                 this.platforms.create(550, 380, 'plataformaCieloClaro').setScale(0.2, 0.2).refreshBody();
-                this.platforms.create(1690, 810, 'plataformaCieloMorado').setScale(0.5, 0.2).refreshBody();
+                this.platforms.create(1690, 510, 'plataformaCieloRojo').setScale(0.2, 0.2).refreshBody();
+                this.platforms.create(1410, 480, 'plataformaCieloRojo').setScale(0.2, 0.2).refreshBody();
+                this.platforms.create(1650, 730, 'plataformaCieloMorado').setScale(0.5, 0.2).refreshBody();
 
 
                 //El suelo que controlan las palancas se crea como suelo normal pero dentro de las plataformas como data "ground" (para que cada una lo controle y tal)
                 // 3
-                this.palancas.create(1855, 100, 'palancaCielo').setScale(0.3).setData({ ground: this.platforms.create(1200, 862, 'plataformaCieloMorado').setScale(0.1, 1.3).refreshBody() });
-                this.palancas.create(940, 470, 'palancaCielo').setScale(0.3).setData({ ground: this.platforms.create(550, 380, 'plataformaCieloClaro').setScale(2.5, 0.3).refreshBody() });
+                this.palancas.create(1855, 220, 'palancaCielo').setScale(0.3).setData({ ground: this.platforms.create(1200, 862, 'plataformaCieloMorado').setScale(0.1, 1.3).refreshBody() });
+                this.palancas.create(940, 680, 'palancaCielo').setScale(0.3).setData({ ground: this.platforms.create(550, 380, 'plataformaCieloClaro').setScale(2.5, 0.3).refreshBody() });
 
                 //colocar el suelo que controla el boton por separado porque se necesita acceder a este individualmente
                 //fuera de una lista porque fuera de la función de colisión hay que detectar que no se tocan
@@ -2316,9 +2318,9 @@ presionar4(player, boton) {
                     debug: false
                 }
             },
-            scene: [MenuInicio, Ajustes, Tutorial, TutorialImagenes, Introducción, NivelSubsuelo, NivelBosque, NivelCielo, Elegir, FinalBueno, FinalMalo] // NivelBosque  NivelCielo
+            //scene: [MenuInicio, Ajustes, Tutorial, TutorialImagenes, Introducción, NivelSubsuelo, NivelBosque, NivelCielo, Elegir, FinalBueno, FinalMalo] // NivelBosque  NivelCielo
             //scene: [NivelBosque]
-            //scene: [NivelCielo]
+            scene: [NivelCielo]
             //scene: [IrCreditos,Creditos,VolverAJugar,MenuInicio]
         };
 
