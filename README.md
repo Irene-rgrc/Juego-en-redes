@@ -468,7 +468,7 @@ Se había diseñado que tanto ambos personajes principales, como la figura de Di
 
 El videojuego contará con una serie de efectos de sonido  con el objetivo de aumentar la inmersión de los jugadores en el mundo lúdico. 
 
-Los  efectos  de  sonido  serán  los  siguientes:  Al  saltar,  al  abrir  una  puerta,  al  activar  un mecanismo, al caer un objeto o interactuar con algún elemento. 
+Los  efectos  de  sonido pensados para el diseño eran:  Al  saltar,  al  abrir  una  puerta,  al  activar  un mecanismo, al caer un objeto o interactuar con algún elemento. Al final en el desarrolo, se han métido sonidos de golpe que son aleatorios cuando luchan contra los tentáculos.
 
 ## ***6 Bibliografía*** 
 
