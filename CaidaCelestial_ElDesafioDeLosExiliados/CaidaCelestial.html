@@ -935,8 +935,7 @@ update() {
     }
     else { this.pulsar = false; }
 
-    if (!this.physics.overlap(this.boton1,this.Cassadie) && !this.physics.overlap(this.boton1,this.Seraphina) && (!this.physics.overlap(this.boton4,this.Cassadie) && !this.physics.overlap(this.boton4,this.Seraphina))) {
-        this.piezaboton1.enableBody(false, 0, 0, true, true);
+    if (!this.physics.overlap(this.boton1,this.Cassadie) && !this.physics.overlap(this.boton1,this.Seraphina)) {
         this.boton1.anims.play('arribaB');
         this.pulsar1 = true;
     } else { this.pulsar1 = false; }
@@ -953,12 +952,15 @@ update() {
         this.pulsar3 = true;
     } else { this.pulsar3 = false; }
 
-    if (!this.physics.overlap(this.boton4,this.Cassadie) && !this.physics.overlap(this.boton4,this.Seraphina) && (!this.physics.overlap(this.boton1,this.Cassadie) && !this.physics.overlap(this.boton1,this.Seraphina))) {
-        this.piezaboton1.enableBody(false, 0, 0, true, true);
+    if (!this.physics.overlap(this.boton4,this.Cassadie) && !this.physics.overlap(this.boton4,this.Seraphina)) {
         this.boton4.anims.play('arribaB');
         this.pulsar4 = true;
         
-    } else { this.pulsar4 = false; this.pulsar1 = false; }
+    } else { this.pulsar4 = false; }
+    if (!this.physics.overlap(this.boton1,this.Cassadie) && !this.physics.overlap(this.boton1,this.Seraphina)
+        && !this.physics.overlap(this.boton4,this.Cassadie) && !this.physics.overlap(this.boton4,this.Seraphina)) {
+        this.piezaboton1.enableBody(false, 0, 0, true, true);
+        }
 
     if (this.segundoSalto && !this.floresD && !this.flores1D &&
         ((this.Seraphina.body.right >= this.flores.body.left && this.Seraphina.body.right <= this.flores.body.right) ||
