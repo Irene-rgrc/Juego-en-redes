@@ -347,7 +347,7 @@ Tanto los diferentes paisajes y territorios que los personajes recorren y explor
 
 *Img. Idea Enemigos Acuáticos*
 
-![](CONCEPTS/FINALES/Pulpo.PNG)
+![](CONCEPTS/FINALES/Pulpo.png)
 
 *Img. Tentáculos*
   
@@ -357,7 +357,7 @@ Tanto los diferentes paisajes y territorios que los personajes recorren y explor
 
 *Img. Idea Nubes*
 
-![](CONCEPTS/FINALES/nubesObstaculo.PNG)
+![](CONCEPTS/FINALES/nubesObstaculo.png)
 
 *Img. Sprite nubes*
    
@@ -368,7 +368,7 @@ Tanto los diferentes paisajes y territorios que los personajes recorren y explor
 
 *Img. Idea Hojas*
 
-![](CONCEPTS/FINALES/floresObstaculo.PNG)
+![](CONCEPTS/FINALES/floresObstaculo.png)
 
 *Img. Sprite hojas*
 
@@ -380,7 +380,7 @@ Tanto los diferentes paisajes y territorios que los personajes recorren y explor
 
 *Img. Idea Rocas*
 
-![](CONCEPTS/FINALES/Piedra.PNG)
+![](CONCEPTS/FINALES/Piedra.png)
 
 *Img. Roca*
    
@@ -391,7 +391,7 @@ Tanto los diferentes paisajes y territorios que los personajes recorren y explor
 
 *Img. Palancas Idea*
 
-![](CONCEPTS/FINALES/palancaBosque.PNG)
+![](CONCEPTS/FINALES/palancaBosque.png)
 
 *Img. Sprite palancas*
 
@@ -400,7 +400,7 @@ Tanto los diferentes paisajes y territorios que los personajes recorren y explor
 
 *Img. Botones Idea*
 
-![](CONCEPTS/FINALES/botonCielo.PNG)
+![](CONCEPTS/FINALES/botonCielo.png)
 
 *Img. Sprite botones*
 
