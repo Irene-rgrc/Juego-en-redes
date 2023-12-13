@@ -324,8 +324,7 @@ Tanto los diferentes paisajes y territorios que los personajes recorren y explor
   
 2) Las nubes que actúan como plataformas en la parte final del mapa solo se encuentran en esta última etapa, en el cielo y no son capaces de soportar el peso de una persona, por tanto, estos se pueden posar una sola vez en ellas, una vez posados en la nube, esta desaparecerá en 5 segundos.
 
-![](CONCEPTS/IdeaNube1.png) ![](CONCEPTS/IdeaNube2.png)
-![](CONCEPTS/IdeaNube3.png)
+![](CONCEPTS/FINALES/Nube_1.png) ![](CONCEPTS/FINALES/Nube_2.png)
 
 *Img. Idea Nubes*
    
