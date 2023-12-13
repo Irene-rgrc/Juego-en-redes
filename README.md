@@ -194,6 +194,23 @@ Dios mira a Seraphina con una cara de orgullo, sin embargo esto no puede observa
 
 Se mostrará una pequeña ilustración correspondiente a cada final.
 
+Tomando como base este guión/historia se pasó a escribir una pequeña introducción de la historia al principio del juego. Esta introducción es:
+-'Tras años de torturas por parte del dios del mal, Cassadie por fin se encontraría con Seraphina. Otro ángel caído abandonado en el subsuelo... Quizá tenían más en común de lo que parecía. Y quizá no, quizás eso sería incluso mejor... Quizá podía ser su billete de vuelta.'
+
+En cada final se muestra un dialógo diferente en función de lo que se haya escogido, también se basó en la historia completa escrita anteriormente, sin embargo, el dialogo es el mismo en cada tipo de final, es decir, que no varía en función de que personaje llegue primero.
+
+El final en el que se escoge entrar solo el personaje que ha llegado primero es el siguiente:
+-'-Te has vuelto egoísta. 
+-Me has decepcionado. 
+-Tus actos te condenarán a ti y a tu compañero al sufrimiento eterno. 
+Y con eso, ambos ángeles caíados fueron definitivamente expulsados... para toda le eternidad.'
+
+El final en el que se escoge entrar entrar ambos personajes es el siguiente:
+-'-Os he estado observando. 
+-El apoyo desinteresado para ayudar a otro a redimir sus pecados muestra un gran cambio. 
+-Estoy orgulloso. 
+Y con eso, las puertas con las que tanto habían soñado... Finalmente se abrieron.'
+
 2. ***Presentación de los personajes*** 
 
 Los ángeles carecen de género, por lo tanto, se decidió tratarlos con pronombres masculinos de forma general. 
@@ -204,6 +221,10 @@ Cassadie: Un ángel que fue echado del cielo hace muchos años, por cometer el p
 
 *Img. Concept de Cassadie (Concepto Final)* 
 
+![](CONCEPTS/Cassadie.png)
+
+*Img. Sprite de Cassadie* 
+
 Seraphina: Un ángel que echaron recientemente del cielo por el pecado de hurto. Es un ser miedoso e inocente, lo cual se refleja en su aspecto, además de verse de forma pura, ya que acaba de llegar al subsuelo al inicio de la historia. 
 
 ![](CONCEPTS/Seraphina.png)
@@ -213,6 +234,10 @@ Seraphina: Un ángel que echaron recientemente del cielo por el pecado de hurto.
 ![](CONCEPTS/ConceptPersonajeSeraphina.png)
 
 *Img. Concept de Seraphina Pruebas* 
+
+![](CONCEPTS/ConceptPersonajeSeraphina.png)
+
+*Img. Sprite de Seraphina Pruebas* 
 
 
 Dios del bien, superior: es un ente, el cual se muestra ante sus ángeles como una luz con una voz. Es un ser superior y creado de la nada para gobernar todo. Es duro contra los que rompen sus reglas, pero también es misericordioso. 
@@ -315,18 +340,26 @@ La tecla “P” sirve para pausar la escena y abrir el menú de ajustes, mientr
 Tanto los diferentes paisajes y territorios que los personajes recorren y exploran en su camino de vuelta al cielo, como estos mismos personajes principales, cuentan con mecánicas únicas propias de estos. Objetos que conforman parte de los puzles que solo se encuentran en determinados entornos o con los que solo puede interactuar uno de los dos personajes. 
 
 4. ***Objetos, elementos interactuables*** 
-1) Las peligrosas criaturas que habitan las aguas subterráneas del inicio del mapa impedirán a cualquiera de los jugadores salir de estas y continuar su viaje si caen en ellas, necesitando que el otro jugador lo libere.
+1) Las peligrosas criaturas que habitan las aguas subterráneas, también llamados tentáculos, del inicio del mapa impedirán a cualquiera de los jugadores salir de estas y continuar su viaje si caen en ellas, necesitando que el otro jugador lo libere.
 
 ![](CONCEPTS/IdeaAgua1.png) ![](CONCEPTS/IdeaAgua2.png)
 ![](CONCEPTS/IdeaAgua3.png) ![](CONCEPTS/IdeaAgua4.png)
 
 *Img. Idea Enemigos Acuáticos*
+
+![](CONCEPTS/FINALES/Controles.PNG)
+
+*Img. Tentáculos*
   
 2) Las nubes que actúan como plataformas en la parte final del mapa solo se encuentran en esta última etapa, en el cielo y no son capaces de soportar el peso de una persona, por tanto, estos se pueden posar una sola vez en ellas, una vez posados en la nube, esta desaparecerá en 5 segundos.
 
 ![](CONCEPTS/FINALES/Nube_1.png) ![](CONCEPTS/FINALES/Nube_2.png)
 
 *Img. Idea Nubes*
+
+![](CONCEPTS/FINALES/Controles.PNG)
+
+*Img. Sprite nubes*
    
 3) Algunas grandes  y frondosas ramas de los árboles del bosque pueden bloquear o entorpecer la visión de los jugadores. El leve viento producido por el aleteo (salto prolongado de mayor altura) de Seraphina revela lo que se oculta tras estas hojas haciéndolas volar lejos.
 
@@ -335,6 +368,10 @@ Tanto los diferentes paisajes y territorios que los personajes recorren y explor
 
 *Img. Idea Hojas*
 
+![](CONCEPTS/FINALES/Controles.PNG)
+
+*Img. Sprite hojas*
+
    
 4) Ciertos elementos de gran tamaño (rocas) pueden bloquear el paso o ser necesarios como alturas intermedias para alcanzar plataformas. Estos objetos solo pueden ser desplazados mediante la fuerza extra del sprint de Cassadie.
 
@@ -342,17 +379,30 @@ Tanto los diferentes paisajes y territorios que los personajes recorren y explor
 ![](CONCEPTS/IdeaRoca3.png)
 
 *Img. Idea Rocas*
+
+![](CONCEPTS/FINALES/Controles.PNG)
+
+*Img. Roca*
    
 5) La mecánica principal del juego se basa en presionar botones y activar palancas que alteran el entorno en el orden y momento adecuado para permitir o acelerar el viaje hacia arriba de vuelta al cielo. Hacer aparecer y desaparecer plataformas y paredes o activar el movimiento de las plataformas dinámicas son los cambios controlados por estos mecanismos. Estos se activan al entrar en contacto con el jugador sin necesidad de pulsar un botón para interactuar y se diferencian en que las palancas cambian de estado al ser activadas y se mantienen en el nuevo estado hasta entrar nuevamente en contacto con un jugador (hay plataformas especiales en las cuales una vez pulsadas se mantiene su estado, creado para engatusar al jugador), mientras que los botones deben mantenerse presionados para estar activos y solo producirán el cambio mientras uno de los jugadores se encuentre sobre estos.
 
 ![](CONCEPTS/IdeaPalanca1.png) ![](CONCEPTS/IdeaPalanca2.png)
 ![](CONCEPTS/IdeaPalanca3.png)
 
+*Img. Palancas Idea*
+
+![](CONCEPTS/FINALES/Controles.PNG)
+
+*Img. Sprite palancas*
+
 ![](CONCEPTS/IdeaBoton1.png) ![](CONCEPTS/IdeaBoton2.png)
 ![](CONCEPTS/IdeaBoton3.png)
 
-
 *Img. Botones Idea*
+
+![](CONCEPTS/FINALES/Controles.PNG)
+
+*Img. Sprite botones*
 
 ## ***4 Interfaz*** 
 
@@ -461,14 +511,16 @@ La música se presenta una idea que en el menú principal será instrumental, su
 
 2. ***Voces*** 
 
-Se había diseñado que tanto ambos personajes principales, como la figura de Dios que les recibe en su regreso al cielo para hacerles tomar una decisión que implica un cambio en su futuro, contarán con voces distorsionadas  y  confusas  aunque  dulces  y  amigables.  Estas  voces  no  producirán  frases coherentes en un idioma específico, sino que su diálogo estará conformado por sonidos aislados que se combinan para  dar la sensación  de un  discurso sólido y  coherente en un idioma desconocido. Esto no se ha implementado debido a que con la utilización de texto era suficientemente coherente y entendible la situación.
+Se había diseñado que tanto ambos personajes principales, como la figura de Dios que les recibe en su regreso al cielo para hacerles tomar una decisión que implica un cambio en su futuro, contarán con voces distorsionadas  y  confusas  aunque  dulces  y  amigables.  Estas  voces  no  producirán  frases coherentes en un idioma específico, sino que su diálogo estará conformado por sonidos aislados que se combinan para  dar la sensación  de un  discurso sólido y  coherente en un idioma desconocido. Esto no se ha implementado debido a que con la utilización de texto era suficientemente coherente y entendible la situación. Para la entrega de la fase 2 no ha sido posible la realización de esta idea.
 
 3. ***Efectos de sonido*** 
 
 El videojuego contará con una serie de efectos de sonido  con el objetivo de aumentar la inmersión de los jugadores en el mundo lúdico. 
 
-Los  efectos  de  sonido pensados para el diseño eran:  Al  saltar,  al  abrir  una  puerta,  al  activar  un mecanismo, al caer un objeto o interactuar con algún elemento. Al final en el desarrolo, se han métido sonidos de golpe que son aleatorios cuando luchan contra los tentáculos.
+Los  efectos  de  sonido pensados para el diseño eran:  Al  saltar,  al  abrir  una  puerta,  al  activar  un mecanismo, al caer un objeto o interactuar con algún elemento. Para la entrega de la fase 2 no ha sido posible la realización de esta idea, sin embargo al final en el desarrolo, se han métido sonidos de golpe que son aleatorios cuando luchan contra los tentáculos.
 
 ## ***6 Bibliografía*** 
 
-Todos los recursos empleados han sido creación del equipo desarrollador; no se han utilizado assets ni concepts externos. 
+Todos los recursos empleados han sido creación del equipo desarrollador; no se han utilizado assets ni concepts externos, excepto la página 'splice' para los sonidos.
+https://splice.com/features/sounds-2?utm_source=google&utm_medium=cpc&utm_campaign=row-en_multi_gs_ua_sounds_20231103_brand_trials_plans_blueprint&utm_content=row-en_multi_gs_kw_brand-splice_x_x_x_exact&utm_term=splice&campaignid=20747631547&adgroupid=162107982384&adid=679553326927&gad_source=1&gclid=Cj0KCQiAyeWrBhDDARIsAGP1mWSgoAmf46-7wZWo9OWvWeey4dPKvrTzT7ntIl5bqRxKRsBH9FQ6yVkaAnSkEALw_wcB
+
