@@ -221,7 +221,7 @@ Cassadie: Un ángel que fue echado del cielo hace muchos años, por cometer el p
 
 *Img. Concept de Cassadie (Concepto Final)* 
 
-![](CONCEPTS/Cassadie.png)
+![](CONCEPTS/FINALES/cassadie.png)
 
 *Img. Sprite de Cassadie* 
 
@@ -235,9 +235,9 @@ Seraphina: Un ángel que echaron recientemente del cielo por el pecado de hurto.
 
 *Img. Concept de Seraphina Pruebas* 
 
-![](CONCEPTS/ConceptPersonajeSeraphina.png)
+![](CONCEPTS/FINALES/spritesheet.png)
 
-*Img. Sprite de Seraphina Pruebas* 
+*Img. Sprite de Seraphina* 
 
 
 Dios del bien, superior: es un ente, el cual se muestra ante sus ángeles como una luz con una voz. Es un ser superior y creado de la nada para gobernar todo. Es duro contra los que rompen sus reglas, pero también es misericordioso. 
@@ -347,7 +347,7 @@ Tanto los diferentes paisajes y territorios que los personajes recorren y explor
 
 *Img. Idea Enemigos Acuáticos*
 
-![](CONCEPTS/FINALES/Controles.PNG)
+![](CONCEPTS/FINALES/Pulpo.PNG)
 
 *Img. Tentáculos*
   
@@ -357,7 +357,7 @@ Tanto los diferentes paisajes y territorios que los personajes recorren y explor
 
 *Img. Idea Nubes*
 
-![](CONCEPTS/FINALES/Controles.PNG)
+![](CONCEPTS/FINALES/nubesObstaculo.PNG)
 
 *Img. Sprite nubes*
    
@@ -368,7 +368,7 @@ Tanto los diferentes paisajes y territorios que los personajes recorren y explor
 
 *Img. Idea Hojas*
 
-![](CONCEPTS/FINALES/Controles.PNG)
+![](CONCEPTS/FINALES/floresObstaculo.PNG)
 
 *Img. Sprite hojas*
 
@@ -380,7 +380,7 @@ Tanto los diferentes paisajes y territorios que los personajes recorren y explor
 
 *Img. Idea Rocas*
 
-![](CONCEPTS/FINALES/Controles.PNG)
+![](CONCEPTS/FINALES/Piedra.PNG)
 
 *Img. Roca*
    
@@ -391,7 +391,7 @@ Tanto los diferentes paisajes y territorios que los personajes recorren y explor
 
 *Img. Palancas Idea*
 
-![](CONCEPTS/FINALES/Controles.PNG)
+![](CONCEPTS/FINALES/palancaBosque.PNG)
 
 *Img. Sprite palancas*
 
@@ -400,7 +400,7 @@ Tanto los diferentes paisajes y territorios que los personajes recorren y explor
 
 *Img. Botones Idea*
 
-![](CONCEPTS/FINALES/Controles.PNG)
+![](CONCEPTS/FINALES/botonCielo.PNG)
 
 *Img. Sprite botones*
 
