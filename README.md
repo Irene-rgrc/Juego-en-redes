@@ -205,7 +205,7 @@ El final en el que se escoge entrar solo el personaje que ha llegado primero es 
 -Tus actos te condenarán a ti y a tu compañero al sufrimiento eterno. 
 Y con eso, ambos ángeles caíados fueron definitivamente expulsados... para toda le eternidad.'
 
-El final en el que se escoge entrar entrar ambos personajes es el siguiente:
+El final en el que se escoge entrar ambos personajes es el siguiente:
 -'-Os he estado observando. 
 -El apoyo desinteresado para ayudar a otro a redimir sus pecados muestra un gran cambio. 
 -Estoy orgulloso. 
