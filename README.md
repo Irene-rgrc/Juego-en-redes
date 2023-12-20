@@ -542,6 +542,6 @@ Como resultado de estas consideraciones, se ha desarrollado una interfaz que req
 4. **Puntuaciones/Temporizador**
 Se ha implementado un temporizador de 5 minutos de cuenta atrás el cual al llegar a 0 directamente lleva al final malo y al menú principal. Esto esta creado con Date que posteriormente se pasa a string. Este valor se llama cuando ya ha conseguido llegar a los finales. Debido a que javascript no permite que el cliente envie este se guarda en local con el método localStorage.setItem() y posteriormente en el index.html se hace el post para tenerlo para la comunicación cliente/servidor. Esto se guarda en un txt llamado puntuación que guarda al nombre del usuario con su puntuación.
 
-![](CONCEPTS/McAcos.png)
+![](CONCEPTS/FINALES/DiagramadeclasesAPIREST.png)
 
-**McAcos** 
+*Img. Sprite nubes*
