@@ -29,6 +29,7 @@
         var tiempoTranscurrido; // VARIABLE QUE HAY QUE DEVOLVER PARA HOMECONTROLLER
 
         function actualizarTiempo() {
+                
             tiempoInicio = Date.now(); // Guardar el tiempo de inicio en milisegundos
             var tiempoTotal = 5 * 60; // 5 minutos en segundos
             var display = document.getElementById('tiempo');
@@ -42,7 +43,8 @@
                 if (--tiempoTotal < 0) {
                     clearInterval(tiempo);
                     tiempoTranscurrido = (Date.now() - tiempoInicio) / 1000; // Calcular el tiempo transcurrido en segundos
-                    display.textContent = '¡Tiempo terminado!';
+                    display.textContent = 'Se acabo el tiempo';
+                    scene[FinalMalo, VolverAJugar];
                     mostrarTiempoTranscurrido();
                 }
             }, 1000);
@@ -743,6 +745,10 @@
 
                 //se carga lo común en el padre que son los personajes
                 this.cargarPersonajes();
+
+                // ---------------------------------------------------------------------------------------------------------------------------------------- PRUEBA!"!!!!!!!!!!!!!!!!
+                var highscore = tiempo.toLocaleString();
+                console.log(highscore);
             }
 
             create() {
@@ -1833,7 +1839,7 @@
                 this.load.image('GraciasPorJugar', 'CreditosImagenes/GraciasPorJugar.png');
                 this.load.image('IrCreditos', 'CreditosImagenes/BotonCreditos.PNG');
                 // ----------------------------------------------------------------------------------------- HIGHSCORE
-                var highscore = getTiempoTranscurrido();
+                var highscore = tiempo.now();
                 console.log(highscore);
                 pararContador();
             }
