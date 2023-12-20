@@ -71,10 +71,11 @@
         }
 
         function guardarPuntuacion(data) {
-            var fso = new ActiveXObject("Scripting.FileSystemObject"); // SOLO FUNCIONA CON INTERNET EXPLORER NO SOPORTADO POR OTROS NAVEGADORES
+            /*var fso = new ActiveXObject("Scripting.FileSystemObject"); // SOLO FUNCIONA CON INTERNET EXPLORER NO SOPORTADO POR OTROS NAVEGADORES
             var fh = fso.CreateTextFile("C://Users/usuario/Documents/GitHub/Juego-en-redes/CaidaCelestial_ElDesafioDeLosExiliados/puntuaciones.txt", true);
             fh.WriteLine(data);
-            fh.Close();
+            fh.Close();*/
+            localStorage.setItem('puntuaciones', data); // Se guarda en el localStorage y luego se hace un post desde AJAX :)
         }
 
         class NivelBase extends Phaser.Scene {
@@ -766,7 +767,7 @@
                 this.cargarPersonajes();
                 // ---------------------------------------------------------------------------------------------------------------------------------------- PRUEBA!"!!!!!!!!!!!!!!!!
                 var highscore = mostrarTiempoTranscurrido();
-                guardarPuntuacion(highscore);
+                guardarPuntuacion(highscore); // Se guarda en localStorage
                 // METER PARA GUARDAR FICHERO.
             }
 
@@ -1601,14 +1602,6 @@
             }
 
             //////////////////////Presionar para hacer otro con cada piezaboton extra
-            /*presionar(player, boton) {
-                if (this.pulsar) {
-                    boton.anims.play('pulsar', false);
-                    this.pulsar = false;
-            
-                }
-                this.piezaboton.disableBody(true, true);
-            }*/
 
             activarC(player, palanca) {
                 if (!palanca.getData('on') && this.tocarC) {
@@ -1859,6 +1852,7 @@
                 this.load.image('IrCreditos', 'CreditosImagenes/BotonCreditos.PNG');
                 // ----------------------------------------------------------------------------------------- HIGHSCORE
                 var highscore = mostrarTiempoTranscurrido();
+                guardarPuntuacion(highscore);
                 pararContador();
             }
 
