@@ -27,9 +27,11 @@
         // HIGHSCORE
         var tiempoInicio; // Variable para guardar el tiempo de inicio
         var tiempoTranscurrido; // VARIABLE QUE HAY QUE DEVOLVER PARA HOMECONTROLLER
+        //var tiempoTranscurrido = new Date();
+
 
         function actualizarTiempo() {
-                
+
             tiempoInicio = Date.now(); // Guardar el tiempo de inicio en milisegundos
             var tiempoTotal = 5 * 60; // 5 minutos en segundos
             var display = document.getElementById('tiempo');
@@ -43,15 +45,16 @@
                 if (--tiempoTotal < 0) {
                     clearInterval(tiempo);
                     tiempoTranscurrido = (Date.now() - tiempoInicio) / 1000; // Calcular el tiempo transcurrido en segundos
+                    //tiempoTranscurrido = (tiempoTranscurrido - tiempoInicio) / 1000; // Calcular el tiempo transcurrido en segundos
                     display.textContent = 'Se acabo el tiempo';
                     scene[FinalMalo, VolverAJugar];
-                    mostrarTiempoTranscurrido();
                 }
             }, 1000);
         }
 
-        function getTiempoTranscurrido() { // Un getter de el tiempo que ha pasado 
-            return tiempoTranscurrido;
+        function mostrarTiempoTranscurrido() {
+            console.log('Tiempo transcurrido: ' + tiempoTranscurrido.getSeconds() + ' segundos');
+            console.log(tiempoTranscurrido); // Llama a la función para guardar en un archivo
         }
 
         function pararContador() {
@@ -59,7 +62,6 @@
             var display = document.getElementById('tiempo');
             display.textContent = 'Felicidades!!!';
         }
-
 
         class NivelBase extends Phaser.Scene {
 
@@ -506,6 +508,7 @@
             update() {
                 this.movimientoPersonajes();
 
+
                 this.anims.create({
                     key: 'desactivar',
                     frames: this.anims.generateFrameNumbers('palancaPiedraInv', { start: 0, end: 4 }),
@@ -596,6 +599,8 @@
 
                 console.log(this.Cassadie.x)
                 console.log(this.Cassadie.y)
+                // ................................................................................................................................................
+                mostrarTiempoTranscurrido()
 
                 if (Phaser.Input.Keyboard.JustDown(this.keyH)) {
                     this.golpe1 = this.sound.add('golpe1', { loop: false });
@@ -747,8 +752,9 @@
                 this.cargarPersonajes();
 
                 // ---------------------------------------------------------------------------------------------------------------------------------------- PRUEBA!"!!!!!!!!!!!!!!!!
-                var highscore = tiempo.toLocaleString();
-                console.log(highscore);
+                //var highscore = tiempo.getTime();
+                //console.log(highscore);
+                //var highscore = getHighscore(tiempoTranscurrido);
             }
 
             create() {
@@ -1839,8 +1845,8 @@
                 this.load.image('GraciasPorJugar', 'CreditosImagenes/GraciasPorJugar.png');
                 this.load.image('IrCreditos', 'CreditosImagenes/BotonCreditos.PNG');
                 // ----------------------------------------------------------------------------------------- HIGHSCORE
-                var highscore = tiempo.now();
-                console.log(highscore);
+                //var highscore = tiempo.now();
+                //console.log(highscore);
                 pararContador();
             }
 
