@@ -532,3 +532,11 @@ Se ha implementado en 4 dias una arquitectura cliente-servidor usando API REST (
 ![](CONCEPTS/APIRESTIMAGEN.png)
 
 Debido al poco tiempo y que no se ha podido examinar en detalle la teoria los dos primeros dias han sido usados para un exhaustivo busqueda de información hasta poder llegar a una idea general e ir resolviendo las dudas especificas poco a poco. Se han propuesto 3 objetivos a conseguir: intercambio de información entre clientes y persistencia de datos podría incluir una API REST que gestione la autenticación, registro y consultas de información de usuarios conectados, mientras se complementa con tecnologías de tiempo real (como WebSocket para la fase 4) para permitir el intercambio instantáneo de mensajes entre clientes, además de almacenar datos en una base de datos o archivos para asegurar la persistencia de información, como por ejemplo almacenar credenciales de usuarios. Esto permitiría al servidor conocer clientes conectados, ofrecer funcionalidades de chat y mantener datos disponibles incluso después de reiniciar el servidor.
+
+Debido a esto se ha creado una página donde el cliente/usuario debera de iniciar sesión, si no la tiene no le dejará jugar. Por ello hay tres botones fundamentales: Iniciar sesión, registrase, cambiar de contraseña y eliminar usuario. Para llegar a esta pantalla se debe dar al botón de inicio. Además que se ha planteado la implementación de una puntuación a base del feedback recibido por los profesores
+
+1. **Iniciar sesión**
+2. **Registrase**
+3. **Cambiar Sesión**
+4. **Eliminar usuario**
+5. **Puntuación**
