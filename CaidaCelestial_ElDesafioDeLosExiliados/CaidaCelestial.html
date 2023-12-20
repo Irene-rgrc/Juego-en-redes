@@ -14,7 +14,7 @@
 
 <body>
 
-    <button onclick="actualizarTiempo()">click</button>
+    <!-- <button onclick="actualizarTiempo()">click</button> -->
     <p id="tiempo"></p>
     <script type="text/javascript">
 
@@ -371,6 +371,7 @@
                 this.load.audio('golpe3', 'Sonidos/Golpe3.wav');
 
                 this.cargarPersonajes();
+                actualizarTiempo();
             }
 
             create() {
@@ -2117,6 +2118,7 @@
                 //Otra manera de iniciar el juego, al pulsar enter comienza el juego
                 if (Phaser.Input.Keyboard.JustDown(this.enter)) { //Al hacer enter se inicia el juego
                     console.log('Comenzando Juego');
+                    // -----------------------------------------------------------------------------------------------------------HIGHSCORE
                     this.scene.start('Tutorial');
                     //this.scene.resume(nivel);
                     //this.scene.stop('MenuInicio');
