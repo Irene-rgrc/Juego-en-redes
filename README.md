@@ -526,3 +526,5 @@ https://splice.com/features/sounds-2?utm_source=google&utm_medium=cpc&utm_campai
 
 
 ## API REST
+
+Se ha implementado en 4 dias una arquitectura cliente-servidor usando API REST (Representational State Transfer) es un conjunto de reglas y convenciones para construir servicios web que permiten la comunicación entre sistemas a través del protocolo HTTP. Las API REST son ampliamente utilizadas para integrar sistemas, ya que proporcionan una forma estándar y flexible para que diferentes aplicaciones y servicios se comuniquen entre sí. Permiten que los desarrolladores creen aplicaciones que consuman datos o servicios de otras plataformas o sistemas, lo que fomenta la interoperabilidad y la reutilización de recursos.
