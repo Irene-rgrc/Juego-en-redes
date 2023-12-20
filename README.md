@@ -535,6 +535,7 @@ Dadas las limitaciones temporales y la necesidad de realizar una investigación 
 
 Como resultado de estas consideraciones, se ha desarrollado una interfaz que requiere que el cliente o usuario inicie sesión antes de acceder al juego; en caso de no tener una sesión iniciada, se le denegará el acceso al mismo. Esta interfaz presenta tres botones principales: "Iniciar sesión", "Registrarse", "Cambiar contraseña" y "Eliminar usuario". Para acceder a esta pantalla inicial, se debe activar el botón de inicio. Asimismo, se ha contemplado la incorporación de un sistema de puntuación basado en el feedback proporcionado por los profesores. Esta puntuación se conforma de un contador que, transcurridos 5 minutos sin completar el juego, resulta en una situación de "game over". En caso de finalizar el juego dentro del tiempo establecido, la puntuación se determinará por el tiempo empleado, reflejándose mediante una solicitud de tipo POST en una base de datos aparte destinada a las puntuaciones. Adjunto se presenta el diagrama de clases, el cual contribuye a la comprensión y visualización de estos procesos y métodos.
 
+
 1. **Iniciar sesión**
 2. **Registrase**
 3. **Cambiar Sesión**
