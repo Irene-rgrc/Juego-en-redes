@@ -18,6 +18,8 @@
     <p id="tiempo"></p>
     <script type="text/javascript">
 
+        // FICHERO DE PUNTUACIONES
+
         var nivelActual;
         var frog;
         let posicionSliderGlobal = 955;
@@ -26,8 +28,8 @@
         let cancion;
         // HIGHSCORE
         var tiempoInicio; // Variable para guardar el tiempo de inicio
-        var tiempoTranscurrido; // VARIABLE QUE HAY QUE DEVOLVER PARA HOMECONTROLLER
-        //var tiempoTranscurrido = new Date();
+        var tiempoTranscurrido = new Date(); // VARIABLE QUE HAY QUE DEVOLVER PARA HOMECONTROLLER
+        //var tiempoTranscurrido;
 
 
         function actualizarTiempo() {
@@ -40,12 +42,15 @@
                 var minutos = Math.floor(tiempoTotal / 60);
                 var segundos = tiempoTotal % 60;
 
+                tiempoTranscurrido = (Date.now() - tiempoInicio) / 1000; // Calcular el tiempo transcurrido en segundos
+
                 display.textContent = minutos.toString().padStart(2, '0') + 'm ' + segundos.toString().padStart(2, '0') + 's';
+                
 
                 if (--tiempoTotal < 0) {
                     clearInterval(tiempo);
-                    tiempoTranscurrido = (Date.now() - tiempoInicio) / 1000; // Calcular el tiempo transcurrido en segundos
-                    //tiempoTranscurrido = (tiempoTranscurrido - tiempoInicio) / 1000; // Calcular el tiempo transcurrido en segundos
+                    //tiempoTranscurrido = (Date.now() - tiempoInicio) / 1000; // Calcular el tiempo transcurrido en segundos
+                    //tiempoTranscurrido = (tiempoTotal - tiempoInicio) / 1000; // Calcular el tiempo transcurrido en segundos
                     display.textContent = 'Se acabo el tiempo';
                     scene[FinalMalo, VolverAJugar];
                 }
@@ -53,8 +58,7 @@
         }
 
         function mostrarTiempoTranscurrido() {
-            console.log('Tiempo transcurrido: ' + tiempoTranscurrido.getSeconds() + ' segundos');
-            console.log(tiempoTranscurrido); // Llama a la función para guardar en un archivo
+            console.log('Tiempo transcurrido: ' + tiempoTranscurrido + ' segundos');
         }
 
         function pararContador() {
