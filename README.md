@@ -541,18 +541,10 @@ Como resultado de estas consideraciones, se ha desarrollado una interfaz que req
 
 
 1. **User**
-   
-La clase User en el paquete com.caidacelestial.entity se presenta como una entidad destinada a representar y almacenar información de usuarios dentro de un sistema. Implementa la interfaz Serializable, lo que indica su capacidad para ser convertida en una secuencia de bytes, permitiendo su almacenamiento o transferencia a través de la red.
 
-Dentro de la estructura de la clase, se definen tres atributos principales: id, username y password. El atributo id representa un identificador único para cada usuario y se utiliza para diferenciarlos en la base de datos o en el contexto de persistencia. Este identificador se encuentra de tipo primitivo long.
+La clase User en el paquete com.caidacelestial.entity se presenta como una entidad destinada a representar y almacenar información de usuarios dentro de un sistema. Implementa la interfaz Serializable, lo que indica su capacidad para ser convertida en una secuencia de bytes, permitiendo su almacenamiento o transferencia a través de la red. Dentro de la estructura de la clase, se definen tres atributos principales: id, username y password. El atributo id representa un identificador único para cada usuario y se utiliza para diferenciarlos en la base de datos o en el contexto de persistencia. Este identificador se encuentra de tipo primitivo long.
 
-Los atributos username y password almacenan respectivamente el nombre de usuario y la contraseña asociados a cada instancia de la clase User. Ambos atributos se encuentran de tipo String, lo que permite almacenar cadenas de caracteres representativas de los datos de acceso del usuario.
-
-La clase incluye métodos accesores y modificadores (getters y setters) para interactuar con estos atributos de manera controlada. Los métodos getUsername, getPassword y getId permiten acceder a los valores de los atributos, mientras que los métodos setPassword, setUsername y setId posibilitan establecer nuevos valores para estos atributos, aplicando lógica y restricciones si es necesario.
-
-La anotación Entity indica que esta clase es una entidad persistente, es decir, que puede ser almacenada en una base de datos. Las anotaciones Id y GeneratedValue se utilizan para marcar el atributo id como la clave primaria de la entidad y para especificar que su valor será generado automáticamente por la base de datos según la estrategia definida por GenerationType.
-
-Por último, la anotación EmbeddedId está presente pero no se utiliza en esta implementación, lo que podría indicar un fragmento de código que fue desechado o que fue parte de una versión anterior y ya no es relevante en el contexto actual.
+Los atributos username y password almacenan respectivamente el nombre de usuario y la contraseña asociados a cada instancia de la clase User. Ambos atributos se encuentran de tipo String, lo que permite almacenar cadenas de caracteres representativas de los datos de acceso del usuario. La clase incluye métodos accesores y modificadores (getters y setters) para interactuar con estos atributos de manera controlada. Los métodos getUsername, getPassword y getId permiten acceder a los valores de los atributos, mientras que los métodos setPassword, setUsername y setId posibilitan establecer nuevos valores para estos atributos, aplicando lógica y restricciones si es necesario. La anotación Entity indica que esta clase es una entidad persistente, es decir, que puede ser almacenada en una base de datos. Las anotaciones Id y GeneratedValue se utilizan para marcar el atributo id como la clave primaria de la entidad y para especificar que su valor será generado automáticamente por la base de datos según la estrategia definida por GenerationType. Por último, la anotación EmbeddedId está presente pero no se utiliza en esta implementación, lo que podría indicar un fragmento de código que fue desechado o que fue parte de una versión anterior y ya no es relevante en el contexto actual.
 
 2. **HomeController**
 3. **Index**
