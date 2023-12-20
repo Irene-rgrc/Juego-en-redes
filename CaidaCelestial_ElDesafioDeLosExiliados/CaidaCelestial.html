@@ -45,7 +45,7 @@
                 tiempoTranscurrido = (Date.now() - tiempoInicio) / 1000; // Calcular el tiempo transcurrido en segundos
 
                 display.textContent = minutos.toString().padStart(2, '0') + 'm ' + segundos.toString().padStart(2, '0') + 's';
-                
+
 
                 if (--tiempoTotal < 0) {
                     clearInterval(tiempo);
@@ -61,12 +61,20 @@
             console.log('Tiempo transcurrido: ' + tiempoTranscurrido + ' segundos');
             var highscore = tiempoTranscurrido.toLocaleString();
             console.log(highscore);
+            return highscore; // DEVUELVE EL TIEMPO TRANSCURRIDO
         }
 
         function pararContador() {
             clearInterval(tiempo); // Detener el contador
             var display = document.getElementById('tiempo');
             display.textContent = 'Felicidades!!!';
+        }
+
+        function guardarPuntuacion(data) {
+            var fso = new ActiveXObject("Scripting.FileSystemObject"); // SOLO FUNCIONA CON INTERNET EXPLORER NO SOPORTADO POR OTROS NAVEGADORES
+            var fh = fso.CreateTextFile("C://Users/usuario/Documents/GitHub/Juego-en-redes/CaidaCelestial_ElDesafioDeLosExiliados/puntuaciones.txt", true);
+            fh.WriteLine(data);
+            fh.Close();
         }
 
         class NivelBase extends Phaser.Scene {
@@ -756,11 +764,10 @@
 
                 //se carga lo común en el padre que son los personajes
                 this.cargarPersonajes();
-
                 // ---------------------------------------------------------------------------------------------------------------------------------------- PRUEBA!"!!!!!!!!!!!!!!!!
-                //var highscore = tiempo.getTime();
-                //console.log(highscore);
-                //var highscore = getHighscore(tiempoTranscurrido);
+                var highscore = mostrarTiempoTranscurrido();
+                guardarPuntuacion(highscore);
+                // METER PARA GUARDAR FICHERO.
             }
 
             create() {
@@ -1851,8 +1858,7 @@
                 this.load.image('GraciasPorJugar', 'CreditosImagenes/GraciasPorJugar.png');
                 this.load.image('IrCreditos', 'CreditosImagenes/BotonCreditos.PNG');
                 // ----------------------------------------------------------------------------------------- HIGHSCORE
-                //var highscore = tiempo.now();
-                //console.log(highscore);
+                var highscore = mostrarTiempoTranscurrido();
                 pararContador();
             }
 
