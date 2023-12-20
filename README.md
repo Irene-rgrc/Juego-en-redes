@@ -544,4 +544,4 @@ Se ha implementado un temporizador de 5 minutos de cuenta atrás el cual al lleg
 
 ![](CONCEPTS/FINALES/DiagramadeclasesAPIREST.png)
 
-*Img. Sprite nubes*
+*Img. Diagrama de Clases API REST*
