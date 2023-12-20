@@ -48,6 +48,16 @@
             }, 1000);
         }
 
+        function getTiempoTranscurrido() { // Un getter de el tiempo que ha pasado 
+            return tiempoTranscurrido;
+        }
+
+        function pararContador() {
+            clearInterval(tiempo); // Detener el contador
+            var display = document.getElementById('tiempo');
+            display.textContent = 'Felicidades!!!';
+        }
+
 
         class NivelBase extends Phaser.Scene {
 
@@ -1822,6 +1832,10 @@
             preload() {
                 this.load.image('GraciasPorJugar', 'CreditosImagenes/GraciasPorJugar.png');
                 this.load.image('IrCreditos', 'CreditosImagenes/BotonCreditos.PNG');
+                // ----------------------------------------------------------------------------------------- HIGHSCORE
+                var highscore = getTiempoTranscurrido();
+                console.log(highscore);
+                pararContador();
             }
 
             create() {
@@ -2124,7 +2138,6 @@
                 //Otra manera de iniciar el juego, al pulsar enter comienza el juego
                 if (Phaser.Input.Keyboard.JustDown(this.enter)) { //Al hacer enter se inicia el juego
                     console.log('Comenzando Juego');
-                    // -----------------------------------------------------------------------------------------------------------HIGHSCORE
                     this.scene.start('Tutorial');
                     //this.scene.resume(nivel);
                     //this.scene.stop('MenuInicio');
