@@ -535,6 +535,10 @@ Dadas las limitaciones temporales y la necesidad de realizar una investigación 
 
 Como resultado de estas consideraciones, se ha desarrollado una interfaz que requiere que el cliente o usuario inicie sesión antes de acceder al juego; en caso de no tener una sesión iniciada, se le denegará el acceso al mismo. Esta interfaz presenta tres botones principales: "Iniciar sesión", "Registrarse", "Cambiar contraseña" y "Eliminar usuario". Para acceder a esta pantalla inicial, se debe activar el botón de inicio. Asimismo, se ha contemplado la incorporación de un sistema de puntuación basado en el feedback proporcionado por los profesores. Esta puntuación se conforma de un contador que, transcurridos 5 minutos sin completar el juego, resulta en una situación de "game over". En caso de finalizar el juego dentro del tiempo establecido, la puntuación se determinará por el tiempo empleado, reflejándose mediante una solicitud de tipo POST en una base de datos aparte destinada a las puntuaciones. Adjunto se presenta el diagrama de clases, el cual contribuye a la comprensión y visualización de estos procesos y métodos.
 
+![](CONCEPTS/FINALES/DiagramadeclasesAPIREST.png)
+
+*Img. Diagrama de Clases API REST*
+
 
 1. **User**
 2. **HomeController**
@@ -542,6 +546,4 @@ Como resultado de estas consideraciones, se ha desarrollado una interfaz que req
 4. **Puntuaciones/Temporizador**
 Se ha implementado un temporizador de 5 minutos de cuenta atrás el cual al llegar a 0 directamente lleva al final malo y al menú principal. Esto esta creado con Date que posteriormente se pasa a string. Este valor se llama cuando ya ha conseguido llegar a los finales. Debido a que javascript no permite que el cliente envie este se guarda en local con el método localStorage.setItem() y posteriormente en el index.html se hace el post para tenerlo para la comunicación cliente/servidor. Esto se guarda en un txt llamado puntuación que guarda al nombre del usuario con su puntuación.
 
-![](CONCEPTS/FINALES/DiagramadeclasesAPIREST.png)
 
-*Img. Diagrama de Clases API REST*
