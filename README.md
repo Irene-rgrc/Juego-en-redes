@@ -568,4 +568,31 @@ La anotación @SpringBootApplication marca esta clase como la clase de inicio de
 
 Se ha implementado un temporizador de 5 minutos de cuenta atrás el cual al llegar a 0 directamente lleva al final malo y al menú principal. Esto esta creado con Date que posteriormente se pasa a string. Este valor se llama cuando ya ha conseguido llegar a los finales. Debido a que javascript no permite que el cliente envie este se guarda en local con el método localStorage.setItem() y posteriormente en el index.html se hace el post para tenerlo para la comunicación cliente/servidor. Esto se guarda en un txt llamado puntuación que guarda al nombre del usuario con su puntuación.
 
+**Instrucciones**
 
+
+¡Claro! Aquí te explico cómo compilar y ejecutar un proyecto Java basado en Spring Boot, además de los pasos para jugar:
+
+- Compilación y Ejecución:
+Compilar el Proyecto:
+
+Para compilar un proyecto Java con Spring Boot, primero, necesitas tener Maven o Gradle instalado. Ambas son herramientas de construcción de proyectos que administran dependencias y automatizan la construcción del proyecto. Maven es más comúnmente utilizado con Spring Boot.
+
+Si estás utilizando Maven, ejecuta mvn clean package en la terminal dentro del directorio del proyecto. Esto compilará el código, ejecutará las pruebas y generará un archivo JAR en la carpeta /target.
+
+- Ejecutar el JAR:
+
+Una vez que se haya generado el archivo JAR, puedes ejecutarlo con el comando java -jar nombre_del_archivo.jar en la terminal. Asegúrate de tener instalado Java en tu máquina.
+Requisitos en la Máquina:
+Java: Necesitarás tener instalado Java en tu máquina para ejecutar aplicaciones Java. Puedes descargar Java JDK desde el sitio web oficial de Oracle o utilizar OpenJDK.
+
+Herramientas de Construcción: Si estás utilizando Maven o Gradle, asegúrate de tener la versión adecuada instalada en tu máquina.
+
+- URL para Jugar:
+Una vez que la aplicación se esté ejecutando, si está configurada para escuchar en un puerto específico (por ejemplo, el puerto 8080), puedes acceder a ella a través de tu navegador web escribiendo http://localhost:8080 en la barra de direcciones. Esta URL puede variar dependiendo de cómo esté configurada la aplicación y en qué puerto esté escuchando.
+
+- En resumen, para jugar:
+
+Compila el proyecto con Maven.
+Ejecuta el archivo JAR generado.
+Accede a la aplicación a través del navegador web con la URL proporcionada por la aplicación o usando http://localhost:puerto si no se ha configurado otro 
