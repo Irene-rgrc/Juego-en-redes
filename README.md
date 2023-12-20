@@ -546,9 +546,22 @@ La clase User en el paquete com.caidacelestial.entity se presenta como una entid
 
 Los atributos username y password almacenan respectivamente el nombre de usuario y la contraseña asociados a cada instancia de la clase User. Ambos atributos se encuentran de tipo String, lo que permite almacenar cadenas de caracteres representativas de los datos de acceso del usuario. La clase incluye métodos accesores y modificadores (getters y setters) para interactuar con estos atributos de manera controlada. Los métodos getUsername, getPassword y getId permiten acceder a los valores de los atributos, mientras que los métodos setPassword, setUsername y setId posibilitan establecer nuevos valores para estos atributos, aplicando lógica y restricciones si es necesario. La anotación Entity indica que esta clase es una entidad persistente, es decir, que puede ser almacenada en una base de datos. Las anotaciones Id y GeneratedValue se utilizan para marcar el atributo id como la clave primaria de la entidad y para especificar que su valor será generado automáticamente por la base de datos según la estrategia definida por GenerationType. Por último, la anotación EmbeddedId está presente pero no se utiliza en esta implementación, lo que podría indicar un fragmento de código que fue desechado o que fue parte de una versión anterior y ya no es relevante en el contexto actual.
 
+2. **UserHashMap**
+
+La clase UsersHashMap en el paquete com.caidacelestial.entity representa una implementación básica y simplificada de cómo utilizar la clase HashMap en Java para almacenar y manipular pares de clave-valor. En el método main, se crea una instancia de HashMap llamada hash. Luego, se realizan algunas operaciones sobre esta instancia:
+- hash.put(null, null); intenta agregar un par de valores nulos al HashMap. En Java, un HashMap permite una sola clave nula y múltiples valores nulos, por lo que agregar un par de valores nulos no generará errores en este contexto.
+- hash.remove("Pepe"); intenta eliminar la entrada asociada con la clave "Pepe" del HashMap, si existe.
+- hash.containsKey("Pepe"); verifica si el HashMap contiene una clave "Pepe", pero en este caso no tendrá éxito, ya que anteriormente se eliminó dicha clave.
+Posteriormente, se itera sobre las claves del HashMap utilizando un bucle for-each. Por cada clave (indice) en el conjunto de claves (hash.keySet()), se imprime el valor asociado a esa clave utilizando hash.get(indice).
+
 2. **HomeController**
-3. **Index**
-4. **Puntuaciones/Temporizador**
+
+La clase HomeController en el paquete com.caidacelestial.controller representa un controlador dentro de una aplicación web basada en Spring. Está encargada de gestionar las operaciones relacionadas con los usuarios en un sistema, siguiendo las convenciones RESTful para la manipulación de recursos. En su configuración, esta clase se anota con @RestController, lo que indica que cada uno de sus métodos maneja las solicitudes HTTP y devuelve los resultados directamente como respuestas HTTP. El mapeo de las URLs está definido mediante anotaciones como @RequestMapping y @GetMapping, @PostMapping, @PutMapping, @DeleteMapping, que especifican las operaciones HTTP correspondientes.
+
+La clase mantiene un mapa (Map) llamado users, utilizando ConcurrentHashMap, para almacenar instancias de la clase User, que representa a los usuarios del sistema. También usa un AtomicLong llamado nextId para generar identificadores únicos para cada usuario. Los métodos definidos en este controlador manejan diferentes operaciones sobre usuarios. Por ejemplo, el método usuarios() responde a las solicitudes GET para obtener todos los usuarios registrados. usuario() responde a las solicitudes POST para crear un nuevo usuario, verificando primero si el usuario ya existe. Los métodos actulizaUser() y eliminarUser() gestionan las actualizaciones y eliminaciones de usuarios, respectivamente, utilizando las anotaciones @PutMapping y @DeleteMapping. Además, la clase implementa métodos guardarUsuarios() y cargarUsuarios() anotados con @PreDestroy y @PostConstruct respectivamente, que se encargan de guardar y cargar los usuarios en un archivo "users.txt" en el sistema de archivos. Sin embargo, la implementación de cargar usuarios está actualmente comentada.
+
+4. **Index**
+5. **Puntuaciones/Temporizador**
 Se ha implementado un temporizador de 5 minutos de cuenta atrás el cual al llegar a 0 directamente lleva al final malo y al menú principal. Esto esta creado con Date que posteriormente se pasa a string. Este valor se llama cuando ya ha conseguido llegar a los finales. Debido a que javascript no permite que el cliente envie este se guarda en local con el método localStorage.setItem() y posteriormente en el index.html se hace el post para tenerlo para la comunicación cliente/servidor. Esto se guarda en un txt llamado puntuación que guarda al nombre del usuario con su puntuación.
 
 
