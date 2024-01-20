@@ -35,35 +35,37 @@ import jakarta.annotation.PreDestroy;
 @RequestMapping("/users")
 public class UsersController {
 	
-	Map<String, User> users = new ConcurrentHashMap<>(); 
-	AtomicLong nextId = new AtomicLong(0);
+	ConcurrentHashMap<Long, User> users = new ConcurrentHashMap<>(); 
+	long nextId;
 	
 	@GetMapping(value = "/")
 	public Collection<User> usuarios() {
+		nextId = users.mappingCount()+1;
 		return users.values();
 	}
 	
 	@PostMapping(value = "/")
 	@ResponseStatus(HttpStatus.CREATED)
 	public User usuario(@RequestBody User usuario) throws ClassNotFoundException, IOException {
-		if(!users.containsKey(usuario.getUsername())) {
-			long id = nextId.incrementAndGet();
+		if(!users.containsKey(usuario.getId())) {
+			long id = nextId++;
 			usuario.setId(id);
-			users.put(usuario.getUsername(), usuario);
-			this.guardarUsuarios();
+			users.put(id, usuario);
+			guardarUsuarios();
 			return usuario;
 		}
 		return null;
 	}
 	
-	@PutMapping("/")
-	public ResponseEntity<User> actulizaUser(@RequestBody User userActualizado) {
+	@PutMapping("/{id}")
+	public ResponseEntity<User> actulizaUser(@PathVariable long id,@RequestBody User userActualizado) throws ClassNotFoundException, IOException {
 
-		User savedUser = users.get(userActualizado.getUsername());
+		User savedUser = users.get(userActualizado.getId());
 
 		if (savedUser != null) {
 
-			users.put(userActualizado.getUsername(), userActualizado);
+			users.put(id, userActualizado);
+			guardarUsuarios();
 
 			return new ResponseEntity<>(userActualizado, HttpStatus.OK);
 		} else {
@@ -71,13 +73,26 @@ public class UsersController {
 		}
 	}
 	
-	@DeleteMapping("/")
-	public ResponseEntity<User> eliminarUser(@RequestBody User user) {
+	@DeleteMapping("/{id}")
+	public ResponseEntity<User> eliminarUser(@PathVariable long id) throws ClassNotFoundException, IOException {
 
-		User savedUser = users.get(user.getUsername());
+		User savedUser = users.get(id);
 
 		if (savedUser != null) {
-			users.remove(savedUser.getUsername());
+			users.remove(savedUser.getId());
+			guardarUsuarios();
+			return new ResponseEntity<>(savedUser, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<User> loggearUser(@PathVariable long id) {
+
+		User savedUser = users.get(id);
+
+		if (savedUser != null) {
 			return new ResponseEntity<>(savedUser, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
