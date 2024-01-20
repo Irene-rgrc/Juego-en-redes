@@ -33,7 +33,7 @@ import jakarta.annotation.PreDestroy;
 
 @RestController
 @RequestMapping("/users")
-public class HomeController {
+public class UsersController {
 	
 	Map<String, User> users = new ConcurrentHashMap<>(); 
 	AtomicLong nextId = new AtomicLong(0);
