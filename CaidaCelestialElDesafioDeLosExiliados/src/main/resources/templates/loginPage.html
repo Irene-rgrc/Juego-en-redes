@@ -1,0 +1,21 @@
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Página de inicio de sesión.</title>
+	</head>
+	<body>
+		<h2>Bienvenido a nuestra página de inicio de sesión.</h2>
+		
+		<form method="post">
+			<input type="text" name="userId" placeholder="ID de usuario"/>
+			<br><br>
+			<input type="password" name="password" placeholder="Contraseña"/>
+			<br><br>
+			<button>Iniciar sesión</button>
+			<br><br>
+			<br><br>
+			<a th:href=@{/}>Volver.</a>
+			<br><br>
+			<a th:href=@{/changePassword}>Cambiar contraseña.</a>
+		</form>
+	</body>
+</html>
