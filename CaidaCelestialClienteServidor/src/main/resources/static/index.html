@@ -108,6 +108,7 @@
 </head>
 
 <body>
+    <p id="tiempo" style="position: absolute; top: 10px; left: 10px; padding: 10px; background-color: LavenderBlush;"></p>
     <div class="principal-popup" id="principalForm">
         <form class="principal-container" >
             <h1>Menú Principal</h1>
@@ -385,8 +386,8 @@
 		function actualizarTiempo(escena) {
 
 			tiempoInicio = Date.now(); // Guardar el tiempo de inicio en milisegundos
-			//var tiempoTotal = 5 * 60; // 5 minutos en segundos
-			var tiempoTotal = 60; // 5 minutos en segundos
+			var tiempoTotal = 5 * 60; // 5 minutos en segundos
+			//var tiempoTotal = 60; // 5 minutos en segundos
 			var display = document.getElementById('tiempo');
 
 			var tiempo = setInterval(function () {
