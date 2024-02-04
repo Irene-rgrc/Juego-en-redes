@@ -307,8 +307,9 @@
         // HIGHSCORE
         var tiempo;
         var tiempoInicio; // Variable para guardar el tiempo de inicio
-        var tiempoTranscurrido = new Date(); // VARIABLE QUE HAY QUE DEVOLVER PARA HOMECONTROLLER
-        //var tiempoTranscurrido;
+        var tiempoTotal;
+        //var tiempoTranscurrido = new Date(); // VARIABLE QUE HAY QUE DEVOLVER PARA HOMECONTROLLER
+        var tiempoTranscurrido;
 
         function actualizarTiempo() {
 
@@ -1181,6 +1182,11 @@
             }
 
             update() {
+				
+				// tiempo
+				actualizarTiempo();
+				mostrarTiempoTranscurrido();
+				
                 this.movimientoPersonajes();
                 this.piedra.setGravityY(0);
                 this.piedra1.setGravityY(0);
@@ -1667,6 +1673,11 @@
             }
 
             update() {
+				
+				// tiempo
+				actualizarTiempo();
+				mostrarTiempoTranscurrido();
+				
                 this.movimientoPersonajes();
                 this.controlMecanismos();
 
@@ -1822,6 +1833,7 @@
             }
 
             elegir() {
+				pararContador();
                 this.scene.start('Elegir');
             }
 
