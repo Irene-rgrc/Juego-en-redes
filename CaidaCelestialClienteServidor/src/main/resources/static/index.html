@@ -305,6 +305,7 @@
         let cancion;
 
         // HIGHSCORE
+        var tiempo;
         var tiempoInicio; // Variable para guardar el tiempo de inicio
         var tiempoTranscurrido = new Date(); // VARIABLE QUE HAY QUE DEVOLVER PARA HOMECONTROLLER
         //var tiempoTranscurrido;
@@ -329,6 +330,7 @@
                     //tiempoTranscurrido = (Date.now() - tiempoInicio) / 1000; // Calcular el tiempo transcurrido en segundos
                     //tiempoTranscurrido = (tiempoTotal - tiempoInicio) / 1000; // Calcular el tiempo transcurrido en segundos
                     display.textContent = 'Se acabo el tiempo';
+                    clearInterval(tiempo); // Detener el contador
                     scene[FinalMalo, VolverAJugar];
                 }
             }, 1000);
@@ -775,6 +777,12 @@
             }
 
             update() {
+				
+				// tiempo
+				actualizarTiempo();
+				mostrarTiempoTranscurrido();
+				
+				// MOVIMIENTOS PALANCAS BOTONES
                 this.movimientoPersonajes();
 
                 this.anims.create({
