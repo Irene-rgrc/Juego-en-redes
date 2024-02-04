@@ -2,42 +2,42 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <title>Caída Celestial: El Desafío de los Exiliados</title>
-    <script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
-    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
-        <style type="text/css">
-		body{
+	<meta charset="UTF-8" />
+	<title>Caída Celestial: El Desafío de los Exiliados</title>
+	<script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
+	<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+	<style type="text/css">
+		body {
 			position: absolute;
 			top: 50%;
 			left: 50%;
-  			transform: translate(-50%,-50%);
+			transform: translate(-50%, -50%);
 		}
-		
-        .register-popup {
-            position: fixed;
-            margin-top: -43px;
-        }
 
-        .inicio-popup {
-            display: none;
-            position: fixed;
-            margin-top: -43px;
-        }
+		.register-popup {
+			position: fixed;
+			margin-top: -43px;
+		}
 
-        .otros-popup {
-            display: none;
-            position: fixed;
-            margin-top: -43px;
-        }
+		.inicio-popup {
+			display: none;
+			position: fixed;
+			margin-top: -43px;
+		}
 
-        .form-container,
-        .iniciar-container,
-        .otros-container {
-            width: 1920px;
-            height: 1080px;
-            background-image: url('assetsUsuarios/FondoEstandar.jpg');
-        }
+		.otros-popup {
+			display: none;
+			position: fixed;
+			margin-top: -43px;
+		}
+
+		.form-container,
+		.iniciar-container,
+		.otros-container {
+			width: 1920px;
+			height: 1080px;
+			background-image: url('assetsUsuarios/FondoEstandar.jpg');
+		}
 
 		input[type=text],
 		input[type=password] {
@@ -86,14 +86,15 @@
 			opacity: 1;
 		}
 
-        html {
-            font-size: xx-large;
-        }
-
-    </style>
+		html {
+			font-size: xx-large;
+		}
+	</style>
 </head>
 
 <body>
+
+	<p id="tiempo" style="position: absolute; top: 10px; left: 10px; padding: 10px; background-color: LavenderBlush;"></p>
 
 	<div class="register-popup" id="myForm">
 		<form class="form-container" method="POST">
@@ -143,9 +144,8 @@
 		</form>
 
 	</div>
-	
-	<p id="tiempo" style="position: absolute; top: 10px; left: 10px;"></p>
-	
+
+
 	<script type="text/javascript">
 
 		var user;
@@ -310,58 +310,61 @@
 		let cancionReproducida = false;
 		let cancion;
 
-        // HIGHSCORE
-        
-        var tiempoInicio; // Variable para guardar el tiempo de inicio
-        var tiempoTranscurrido = new Date(); // VARIABLE QUE HAY QUE DEVOLVER PARA HOMECONTROLLER
-        //var tiempoTranscurrido;
+		// HIGHSCORE
 
-        function actualizarTiempo() {
+		var tiempoInicio; // Variable para guardar el tiempo de inicio
+		var tiempoTranscurrido = new Date(); // VARIABLE QUE HAY QUE DEVOLVER PARA HOMECONTROLLER
+		//var tiempoTranscurrido;
 
-            tiempoInicio = Date.now(); // Guardar el tiempo de inicio en milisegundos
-            var tiempoTotal = 5 * 60; // 5 minutos en segundos
-            var display = document.getElementById('tiempo');
+		function actualizarTiempo(escena) {
 
-            var tiempo = setInterval(function () {
-                var minutos = Math.floor(tiempoTotal / 60);
-                var segundos = tiempoTotal % 60;
+			tiempoInicio = Date.now(); // Guardar el tiempo de inicio en milisegundos
+			//var tiempoTotal = 5 * 60; // 5 minutos en segundos
+			var tiempoTotal = 60; // 5 minutos en segundos
+			var display = document.getElementById('tiempo');
 
-                tiempoTranscurrido = (Date.now() - tiempoInicio) / 1000; // Calcular el tiempo transcurrido en segundos
+			var tiempo = setInterval(function () {
+				var minutos = Math.floor(tiempoTotal / 60);
+				var segundos = tiempoTotal % 60;
 
-                display.textContent = minutos.toString().padStart(2, '0') + 'm ' + segundos.toString().padStart(2, '0') + 's';
+				tiempoTranscurrido = (Date.now() - tiempoInicio) / 1000; // Calcular el tiempo transcurrido en segundos
+
+				display.textContent = minutos.toString().padStart(2, '0') + 'm ' + segundos.toString().padStart(2, '0') + 's';
 
 
-                if (--tiempoTotal < 0) {
-                    clearInterval(tiempo);
-                    //tiempoTranscurrido = (Date.now() - tiempoInicio) / 1000; // Calcular el tiempo transcurrido en segundos
-                    //tiempoTranscurrido = (tiempoTotal - tiempoInicio) / 1000; // Calcular el tiempo transcurrido en segundos
-                    display.textContent = 'Se acabo el tiempo';
-                    scene[FinalMalo, VolverAJugar];
-                }
-            }, 1000);
-        }
+				if (--tiempoTotal < 0) {
+					clearInterval(tiempo);
+					// TiempoTranscurrido = (Date.now() - tiempoInicio) / 1000; // Calcular el tiempo transcurrido en segundos
+					// TiempoTranscurrido = (tiempoTotal - tiempoInicio) / 1000; // Calcular el tiempo transcurrido en segundos
+					display.textContent = 'Se acabo el tiempo';
+					// Poner final malo
+					game.scene.sleep(escena);
+					game.scene.start('FinalMalo');
+				}
+			}, 1000);
+		}
 
-        function mostrarTiempoTranscurrido() {
-            console.log('Tiempo transcurrido: ' + tiempoTranscurrido + ' segundos');
-            var highscore = tiempoTranscurrido.toLocaleString();
-            console.log(highscore);
-            return highscore; // DEVUELVE EL TIEMPO TRANSCURRIDO
-        }
+		function mostrarTiempoTranscurrido() {
+			console.log('Tiempo transcurrido: ' + tiempoTranscurrido + ' segundos');
+			var highscore = tiempoTranscurrido.toLocaleString();
+			console.log(highscore);
+			return highscore; // DEVUELVE EL TIEMPO TRANSCURRIDO
+		}
 
-        function pararContador() {
-            clearInterval(tiempo); // Detener el contador
-            var display = document.getElementById('tiempo');
-            display.textContent = 'Felicidades!!!';
-        }
+		function pararContador() {
+			clearInterval(tiempo); // Detener el contador
+			var display = document.getElementById('tiempo');
+			display.textContent = 'Felicidades!!!';
+		}
 
-        function guardarPuntuacion(data) {
-            /*var fso = new ActiveXObject("Scripting.FileSystemObject"); // SOLO FUNCIONA CON INTERNET EXPLORER NO SOPORTADO POR OTROS NAVEGADORES
-            var fh = fso.CreateTextFile("C://Users/usuario/Documents/GitHub/Juego-en-redes/CaidaCelestial_ElDesafioDeLosExiliados/puntuaciones.txt", true);
-            fh.WriteLine(data);
-            fh.Close();*/
-            localStorage.setItem('puntuaciones', data); // Se guarda en el localStorage y luego se hace un post desde AJAX :)
-        }
-		
+		function guardarPuntuacion(data) {
+			/*var fso = new ActiveXObject("Scripting.FileSystemObject"); // SOLO FUNCIONA CON INTERNET EXPLORER NO SOPORTADO POR OTROS NAVEGADORES
+			var fh = fso.CreateTextFile("C://Users/usuario/Documents/GitHub/Juego-en-redes/CaidaCelestial_ElDesafioDeLosExiliados/puntuaciones.txt", true);
+			fh.WriteLine(data);
+			fh.Close();*/
+			localStorage.setItem('puntuaciones', data); // Se guarda en el localStorage y luego se hace un post desde AJAX :)
+		}
+
 		class NivelBase extends Phaser.Scene {
 
 			construir() {
@@ -669,8 +672,8 @@
 			}
 
 			preload() {
-				actualizarTiempo();
-			 }
+				actualizarTiempo('NivelSubsuelo');
+			}
 
 			create() {
 
@@ -884,7 +887,7 @@
 				console.log(this.Cassadie.x)
 				console.log(this.Cassadie.y)
 				// ................................................................................................................................................
-                mostrarTiempoTranscurrido();
+				mostrarTiempoTranscurrido();
 
 				if (Phaser.Input.Keyboard.JustDown(this.keyH)) {
 					this.golpe1 = this.sound.add('golpe1', {loop: false});
@@ -1018,10 +1021,10 @@
 				//si se necesitan añadir más botones se indican aquí como "this.boton1; this.boton2;"
 			}
 
-			preload() { }
+			preload() {actualizarTiempo('NivelBosque');}
 
 			create() {
-				//actualizarTiempo();
+				//actualizarTiempo('NivelBosque');
 				//carga el fondo
 				this.add.image(960, 500, 'fondoB');
 				//se añade que tienen fisicas
@@ -1304,8 +1307,12 @@
 				if (this.Cassadie.x >= 1875 && this.Cassadie.y >= 184 && this.Seraphina.x >= 1875 && this.Seraphina.y >= 184) {
 					this.scene.start('NivelCielo');
 				}
+				
+				// ................................................................................................................................................
+				mostrarTiempoTranscurrido();
 
 				nivelActual = 'NivelBosque';
+
 
 				//Y se manda a pausa desde aquí porque hay que controlarlo metiendo el string que identifica a cada escena y es diferente para cada una
 				if (Phaser.Input.Keyboard.JustDown(this.keyP)) {
@@ -1315,6 +1322,8 @@
 					this.parar();
 				}
 			}
+
+
 
 			activarC(player, palanca) {
 				if (!palanca.getData('on') && this.tocarC) {
@@ -1428,6 +1437,7 @@
 			}
 
 			preload() {
+				actualizarTiempo('NivelCielo');
 			}
 
 			create() {
@@ -1686,6 +1696,9 @@
 
 				// tiempo
 				//mostrarTiempoTranscurrido();
+				
+				// ................................................................................................................................................
+				mostrarTiempoTranscurrido();
 
 				this.movimientoPersonajes();
 				this.controlMecanismos();
