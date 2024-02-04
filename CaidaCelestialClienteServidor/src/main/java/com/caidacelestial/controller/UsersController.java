@@ -80,6 +80,10 @@ public class UsersController {
 
 		if (savedUser != null) {
 			users.remove(savedUser.getId());
+			users.get(nextId).setId(id);
+			users.put(id,users.get(nextId));
+			users.remove(nextId);
+			nextId--;
 			guardarUsuarios();
 			return new ResponseEntity<>(savedUser, HttpStatus.OK);
 		} else {

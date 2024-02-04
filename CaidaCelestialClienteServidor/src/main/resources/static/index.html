@@ -351,6 +351,7 @@
             openPrincipal();
             closeOtro();
             
+			existingPasswords[currentUser-1] = contraseña;
         })
 
 
@@ -368,6 +369,15 @@
             deleteUser(currentUser);
             openPrincipal();
             closeOtro();
+            
+            loadUsers(function (users) {
+				existingUsers.length = 0;
+				existingPasswords.length = 0;
+        		for (var i = 0; i < users.length; i++) {
+            		existingUsers[i] = users[i].username;
+            		existingPasswords[i] = users[i].password;
+        		}
+        	})
         })
 
 		var nivelActual;
