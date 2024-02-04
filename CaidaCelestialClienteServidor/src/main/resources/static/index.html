@@ -2,42 +2,56 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8" />
-	<title>Caída Celestial: El Desafío de los Exiliados</title>
-	<script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
-	<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
-	<style type="text/css">
-		body {
+    <meta charset="UTF-8" />
+    <title>Caída Celestial: El Desafío de los Exiliados</title>
+    <script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+        <style type="text/css">
+		body{
 			position: absolute;
 			top: 50%;
 			left: 50%;
-			transform: translate(-50%, -50%);
+  			transform: translate(-50%,-50%);
 		}
+		
+        .register-popup {
+            display:none;
+            position: fixed;
+            margin-top: -43px;
+        }
 
-		.register-popup {
-			position: fixed;
-			margin-top: -43px;
-		}
+        .principal-popup {
+            position: fixed;
+            margin-top: -43px;
+        }
 
-		.inicio-popup {
-			display: none;
-			position: fixed;
-			margin-top: -43px;
-		}
+        .despuesInicio-popup {
+            display:none;
+            position: fixed;
+            margin-top: -43px;
+        }
 
-		.otros-popup {
-			display: none;
-			position: fixed;
-			margin-top: -43px;
-		}
+        .inicio-popup {
+            display: none;
+            position: fixed;
+            margin-top: -43px;
+        }
 
-		.form-container,
-		.iniciar-container,
-		.otros-container {
-			width: 1920px;
-			height: 1080px;
-			background-image: url('assetsUsuarios/FondoEstandar.jpg');
-		}
+        .otros-popup {
+            display: none;
+            position: fixed;
+            margin-top: -43px;
+        }
+
+        .form-container,
+        .iniciar-container,
+        .otros-container, 
+        .despuesInicio-container,
+        .principal-container {
+            width: 1920px;
+            height: 1080px;
+            background-image: url('assetsUsuarios/FondoEstandar.jpg');
+        }
 
 		input[type=text],
 		input[type=password] {
@@ -86,222 +100,275 @@
 			opacity: 1;
 		}
 
-		html {
-			font-size: xx-large;
-		}
-	</style>
+        html {
+            font-size: xx-large;
+        }
+
+    </style>
 </head>
 
 <body>
+    <div class="principal-popup" id="principalForm">
+        <form class="principal-container" >
+            <h1>Menú Principal</h1>
+            <br>
+            <button type="button" class="btn" onclick="openInicio()">Iniciar Sesion.</button>
+            <br><br>
+            <button type="button" class="btn" onclick="openForm()">Registrarse.</button>
+            <br><br>
+            <button type="button" class="btn" onclick="closePrincipal()">Iniciar el juego offline.</button>
+        </form>
+        
+    </div>
 
-	<div class="register-popup" id="myForm">
-		<form class="form-container" method="POST">
-			<h1>Registro</h1>
-			<br>
-			<b>Usuario</b></label>
-			<input type="text" id='user' placeholder="Introduzca su nombre de usuario" required>
-			<br><br><br>
-			<b>Contraseña</b></label>
-			<input type="password" id='password' placeholder="Introduzca su contraseña" required>
-			<br><br>
-			<p>Si el nombre de usuario ya está registrado por otra persona no podrás crear una cuenta y no se guardará
-				tu record.</p>
-			<br><br>
-			<button type="button" class="btn" id='registrarse-button'>Registrarse.</button>
-			<br><br>
-			<button type="button" class="btn login" onclick="openInicio()">Ya tengo usuario.</button>
-		</form>
-	</div>
+    <body>
+        <div class="despuesInicio-popup" id="despuesInicioForm">
+            <form class="despuesInicio-container" >
+                <br>
+                <button type="button" class="btn" onclick="closeDespuesInicio()">Continuar.</button>
+                <br><br>
+                <button type="button" class="btn" onclick="openOtro()">Cambiar Contraseña / Eliminar Cuenta.</button>
+                <br><br>
+            </form>
+            
+        </div>
 
-	<div class="inicio-popup" id="inicioForm">
-		<form class="iniciar-container">
-			<h1>Login</h1>
-			<br>
-			<b>Usuario</b></label>
-			<input type="text" id='userA' placeholder="Introduzca su nombre de usuario" required>
-			<br><br><br>
-			<b>Contraseña</b></label>
-			<input type="password" id='passwordA' placeholder="Introduzca su contraseña" required>
-			<br><br>
-			<button type="button" class="btn" id='iniciar-button'>Iniciar sesión.</button>
-		</form>
-	</div>
+    <div class="register-popup" id="myForm">
+        <form class="form-container" method="POST">
+            <h1>Registro</h1>
+            <br>
+            <b>Usuario</b></label>
+            <input type="text" id='user' placeholder="Introduzca su nombre de usuario" required>
+            <br><br><br>
+            <b>Contraseña</b></label>
+            <input type="password" id='password' placeholder="Introduzca su contraseña" required>
+            <br><br>
+            <p>Si el nombre de usuario ya está registrado por otra persona no podrás crear una cuenta y no se guardará
+                tu record.</p>
+            <br><br>
+            <button type="button" class="btn" id='registrarse-button'>Registrarse.</button>
+            <br><br>
+            <button type="button" class="btn login" onclick="openInicio()">Ya tengo usuario.</button>
+        </form>
+    </div>
 
-	<div class="otros-popup" id="otrosForm">
-		<form class="otros-container">
-			<h1>Cambiar contraseña</h1>
-			<br>
-			<b>Nueva Contraseña</b></label>
-			<input type="password" id='nPasswordC' placeholder="Introduzca su nueva contraseña" required>
-			<br><br>
-			<button type="button" class="btn" id='cambiar-button'>Cambiar contraseña.</button>
-			<br><br>
-			<button type="button" class="btn" id='eliminar-button'>Eliminar cuenta.</button>
-			<br><br>
-			<button type="button" class="btn" onclick="closeOtro()">Iniciar el juego.</button>
-		</form>
+    <div class="inicio-popup" id="inicioForm">
+        <form class="iniciar-container">
+            <h1>Login</h1>
+            <br>
+            <b>Usuario</b></label>
+            <input type="text" id='userA' placeholder="Introduzca su nombre de usuario" required>
+            <br><br><br>
+            <b>Contraseña</b></label>
+            <input type="password" id='passwordA' placeholder="Introduzca su contraseña" required>
+            <br><br>
+            <button type="button" class="btn" id='iniciar-button'>Iniciar sesión.</button>
+        </form>
+    </div>
 
-	</div>
+    <div class="otros-popup" id="otrosForm">
+        <form class="otros-container">
+            <h1>Cambiar contraseña</h1>
+            <br>
+            <b>Nueva Contraseña</b></label>
+            <input type="password" id='nPasswordC' placeholder="Introduzca su nueva contraseña" required>
+            <br><br>
+            <button type="button" class="btn" id='cambiar-button'>Cambiar contraseña.</button>
+            <br><br>
+            <button type="button" class="btn" id='eliminar-button'>Eliminar cuenta.</button>
+            <br><br>
+        </form>
 
-	<!--- TIEMPOOO -->
-	<p id="tiempo"></p>
+	
+    <script type="text/javascript">
 
-	<script type="text/javascript">
+        var user;
 
-		var user;
+        function openForm() {
+            closePrincipal();
+            document.getElementById("myForm").style.display = "block";
+        }
 
-		function openForm() {
-			document.getElementById("myForm").style.display = "block";
-		}
+        function openDespuesInicio() {
+            closePrincipal();
+            document.getElementById("despuesInicioForm").style.display = "block";
+        }
 
-		function openInicio() {
-			closeForm();
-			document.getElementById("inicioForm").style.display = "block";
-		}
+        function openInicio() {
+            closePrincipal();
+            document.getElementById("inicioForm").style.display = "block";
+        }
 
-		function openOtro() {
-			document.getElementById("otrosForm").style.display = "block";
-		}
+        function openOtro() {
+            closeInicio();
+            closePrincipal();
+            closeDespuesInicio();
+            document.getElementById("otrosForm").style.display = "block";
+        }
+        
+        function openPrincipal() {
+            document.getElementById("principalForm").style.display = "block";
+        }
 
-		function closeForm() {
-			document.getElementById("myForm").style.display = "none";
-		}
 
-		function closeInicio() {
-			document.getElementById("inicioForm").style.display = "none";
-			openOtro();
-		}
+        function closeForm() {
+            document.getElementById("myForm").style.display = "none";
+            openPrincipal();
+        }
 
-		function closeOtro() {
-			document.getElementById("otrosForm").style.display = "none";
-		}
+        function closeDespuesInicio() {
+            document.getElementById("despuesInicioForm").style.display = "none";
+        }
 
-		var ip = location.host;
-		var existingUsers = [];
-		var existingPasswords = [];
-		var currentUser;
 
-		function loadUsers(callback) {
-			$.ajax({
-				url: 'http://localhost:8080/users/'
+        function closeInicio() {
+            document.getElementById("inicioForm").style.display = "none";
+            openPrincipal();
+        }
+
+        function closeOtro() {
+            document.getElementById("otrosForm").style.display = "none";
+            openPrincipal();
+        }
+        
+         function closePrincipal() {
+            document.getElementById("principalForm").style.display = "none";
+        }
+
+        var ip = location.host;
+        var existingUsers = [];
+        var existingPasswords = [];
+        var currentUser;
+        
+        function loadUsers(callback) {
+    		$.ajax({
+        		url: 'http://localhost:8080/users/'
 			}).done(function (users) {
-				console.log('Users loaded: ' + JSON.stringify(users));
-				callback(users);
-			})
+    			console.log('Users loaded: ' + JSON.stringify(users));
+        		callback(users);
+    		})
 		}
-
+		
 		$(document).ready(function () {
 
-			loadUsers(function (users) {
-				for (var i = 0; i < users.length; i++) {
-					existingUsers[i] = users[i].username;
-					existingPasswords[i] = users[i].password;
-				}
-			})
-		})
+    		loadUsers(function (users) {
+        		for (var i = 0; i < users.length; i++) {
+            		existingUsers[i] = users[i].username;
+            		existingPasswords[i] = users[i].password;
+        		}
+        	})
+    	})
 
 
-		function createUser(user, callback) {
-			$.ajax({
-				method: "POST",
-				url: 'http://' + ip + '/users/',
-				data: JSON.stringify(user),
-				processData: false,
-				headers: {
-					"Content-Type": "application/json"
-				}
-			}).done(function (user) {
-				console.log("User created: " + JSON.stringify(user));
-				callback(user);
-			})
-		}
+        function createUser(user, callback) {
+        	$.ajax({
+            	method: "POST",
+            	url: 'http://' + ip + '/users/',
+            	data: JSON.stringify(user),
+            	processData: false,
+            	headers: {
+                	"Content-Type": "application/json"
+            	}
+        	}).done(function (user) {
+            	console.log("User created: " + JSON.stringify(user));
+            	callback(user);
+        	})
+        }
 
 
-		$('#registrarse-button').click(function () {
+        $('#registrarse-button').click(function () {
 			var name = $('#user').val();
-			var contraseña = $('#password').val();
+        	var contraseña = $('#password').val();
 
-			var usuario = {
-				username: name,
-				password: contraseña
-			}
-
+            var usuario = {
+            username: name,
+            password: contraseña
+            }
+			
 			var existe = false;
 			for (var i = 0; i < existingUsers.length; i++) {
-				if (existingUsers[i] == name) {existe = true;}
+				if(existingUsers[i] == name) { existe = true;}
 			}
-			if (!existe) {
-				createUser(usuario, function (usuarioConId) {
+			if(!existe){
+            	createUser(usuario, function (usuarioConId) {
 					currentUser = usuarioConId.id;
 				});
-				closeForm();
-				openOtro();
-			}
-		})
+            	openPrincipal();
+                closeForm();
+        	}
+        })
+        
+        function logUser(userId) {
+        	$.ajax({
+            	method: "GET",
+            	url: 'http://' + ip + '/users/' + userId,
+        	}).done(function (user) {
+            	console.log("User logged: " + JSON.stringify(user));
+        	})
+        }
 
-		function logUser(userId) {
-			$.ajax({
-				method: "GET",
-				url: 'http://' + ip + '/users/' + userId,
-			}).done(function (user) {
-				console.log("User logged: " + JSON.stringify(user));
-			})
-		}
 
-
-		$('#iniciar-button').click(function () {
+        $('#iniciar-button').click(function () {
 			var name = $('#userA').val();
-			var contraseña = $('#passwordA').val();
-
+        	var contraseña = $('#passwordA').val();
+			
 			var esCorrecto = false;
 			for (var i = 0; i < existingUsers.length; i++) {
-				if (existingUsers[i] == name) {if (existingPasswords[i]) {esCorrecto = true; currentUser = i + 1;} }
+				if(existingUsers[i] == name) { if (existingPasswords[i]) {esCorrecto = true; currentUser = i+1;}}
 			}
-			if (esCorrecto) {
-				logUser(currentUser);
-				closeInicio();
-			}
-		})
+			if(esCorrecto){
+            	logUser(currentUser);
+                openDespuesInicio();
+            	closeInicio();
+                closePrincipal();
+        	}
+        })
 
-		function updateUser(user) {
-			$.ajax({
-				method: 'PUT',
-				url: 'http://' + ip + '/users/' + user.id,
-				data: JSON.stringify(user),
-				processData: false,
-				headers: {
-					"Content-Type": "application/json"
-				}
-			}).done(function (item) {
-				console.log("Updated item: " + JSON.stringify(user))
-			})
-		}
+        function updateUser(user) {
+            $.ajax({
+                method: 'PUT',
+                url: 'http://' + ip + '/users/' + user.id,
+                data: JSON.stringify(user),
+                processData: false,
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).done(function (item) {
+                console.log("Updated item: " + JSON.stringify(user))
+            })
+        }
 
-		$('#cambiar-button').click(function () {
-			var contraseña = $('#nPasswordC').val();
+        $('#cambiar-button').click(function () {
+            var contraseña = $('#nPasswordC').val();
 
-			var usuario = {
-				username: existingUsers[currentUser - 1],
-				password: contraseña,
-				id: currentUser
-			}
-			updateUser(usuario);
-		})
+            var usuario = {
+                username: existingUsers[currentUser-1],
+                password: contraseña,
+                id: currentUser
+            }
+            updateUser(usuario);
+            openPrincipal();
+            closeOtro();
+            
+        })
 
 
-		function deleteUser(userId) {
-			$.ajax({
-				method: 'DELETE',
-				url: 'http://' + ip + '/users/' + userId,
-			}).done(function (user) {
-				console.log("Deleted user " + userId)
-			})
-		}
+        function deleteUser(userId) {
+            $.ajax({
+                method: 'DELETE',
+                url: 'http://' + ip + '/users/' + userId,
+            }).done(function (user) {
+                console.log("Deleted user " + userId)
+            })
+        }
 
-		$('#eliminar-button').click(function (event) {
+        $('#eliminar-button').click(function (event) {
 			console.log(currentUser);
-			deleteUser(currentUser);
-		})
+            deleteUser(currentUser);
+            openPrincipal();
+            closeOtro();
+        })
+
 
 		var nivelActual;
 		var frog;
