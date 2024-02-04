@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+<<<<<<< HEAD
 	<meta charset="UTF-8" />
 	<title>Caída Celestial: El Desafío de los Exiliados</title>
 	<script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
@@ -36,6 +37,44 @@
 			height: 1080px;
 			background-image: url('assets/MenúInicio.PNG');
 		}
+=======
+    <meta charset="UTF-8" />
+    <title>Caída Celestial: El Desafío de los Exiliados</title>
+    <script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+        <style type="text/css">
+		body{
+			position: absolute;
+			top: 50%;
+			left: 50%;
+  			transform: translate(-50%,-50%);
+		}
+		
+        .register-popup {
+            position: fixed;
+            margin-top: -43px;
+        }
+
+        .inicio-popup {
+            display: none;
+            position: fixed;
+            margin-top: -43px;
+        }
+
+        .otros-popup {
+            display: none;
+            position: fixed;
+            margin-top: -43px;
+        }
+
+        .form-container,
+        .iniciar-container,
+        .otros-container {
+            width: 1920px;
+            height: 1080px;
+            background-image: url('assetsUsuarios/FondoEstandar.jpg');
+        }
+>>>>>>> 1e8310bb341f4f8da59c9dac451d31906d152b7c
 
 		input[type=text],
 		input[type=password] {
@@ -84,10 +123,18 @@
 			opacity: 1;
 		}
 
+<<<<<<< HEAD
 		html {
 			font-size: xx-large;
 		}
 	</style>
+=======
+        html {
+            font-size: xx-large;
+        }
+
+    </style>
+>>>>>>> 1e8310bb341f4f8da59c9dac451d31906d152b7c
 </head>
 
 <body>
@@ -1840,6 +1887,7 @@
 
 			elegir() {
 				pararContador();
+<<<<<<< HEAD
 				this.scene.start('Elegir');
 			}
 
@@ -2667,6 +2715,832 @@
 		var game = new Phaser.Game(config);
 
 	</script>
+=======
+                this.scene.start('Elegir');
+            }
+
+            //////////////////////Presionar para hacer otro con cada piezaboton extra
+            /*presionar(player, boton) {
+                if (this.pulsar) {
+                    boton.anims.play('pulsar', false);
+                    this.pulsar = false;
+            
+                }
+                this.piezaboton.disableBody(true, true);
+            }*/
+
+            activarC(player, palanca) {
+                if (!palanca.getData('on') && this.tocarC) {
+                    palanca.anims.play('activarC', false);
+                    palanca.getData('ground').disableBody(true, true);
+                    palanca.setData({ on: true });
+                }
+                else if (palanca.getData('on') && this.tocarC) {
+                    palanca.anims.play('desactivarC', false);
+                    palanca.getData('ground').enableBody(false, 0, 0, true, true);
+                    palanca.setData({ on: false });
+                }
+            }
+
+            activarS(player, palanca) {
+                if (!palanca.getData('on') && this.tocarS) {
+                    palanca.anims.play('activarC', false);
+                    palanca.getData('ground').disableBody(true, true);
+                    palanca.setData({ on: true });
+                }
+                else if (palanca.getData('on') && this.tocarS) {
+                    palanca.anims.play('desactivarC', false);
+                    palanca.getData('ground').enableBody(false, 0, 0, true, true);
+                    palanca.setData({ on: false });
+                }
+            }
+
+            presionar(player, boton) {
+                if (this.pulsar) {
+                    boton.anims.play('pulsarC', false);
+                    this.pulsar = false;
+
+                }
+                this.piezaboton.disableBody(true, true);
+            }
+
+            presionar2(player, boton) {
+                if (this.pulsar3) {
+                    boton.anims.play('pulsarC', false);
+                    this.pulsar3 = false;
+
+                }
+                this.piezaboton4.disableBody(true, true);
+            }
+
+            desaparecerNube(nube) {
+                nube.anims.play('nubesDesaparecer', true);
+                setTimeout(() => {
+                    nube.disableBody(true, true);
+                    // Puedes agregar más lógica aquí si es necesario
+                }, 3000); // Ajusta el tiempo según tus necesidades
+            }
+        }
+
+        class TutorialImagenes extends Phaser.Scene {
+            constructor() {
+                super('TutorialImagenes');
+                this.indice = 0;
+
+            }
+
+            preload() {
+            }
+
+            create() {
+                //Fondo
+                const fondo = this.add.image(0, 0, 'fondoTutorialI').setDisplaySize(1920, 1080);
+                fondo.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+
+                //Imagenes
+                const image1 = this.add.image(1000, 440, 'Imagen1').setDisplaySize(1920, 1080);
+                image1.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+
+
+                const image2 = this.add.image(950, 440, 'Imagen2').setDisplaySize(1920, 1080);
+                image2.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+                image2.setVisible(false);
+
+                const image3 = this.add.image(950, 440, 'Imagen3').setDisplaySize(1920, 1080);
+                image3.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+                image3.setVisible(false);
+
+                const image4 = this.add.image(950, 440, 'Imagen4').setDisplaySize(1920, 1080);
+                image4.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+                image4.setVisible(false);
+
+                const image5 = this.add.image(950, 440, 'Imagen5').setDisplaySize(1920, 1080);
+                image5.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+                image5.setVisible(false);
+
+                const image6 = this.add.image(950, 440, 'Imagen6').setDisplaySize(1920, 1080);
+                image6.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+                image6.setVisible(false);
+
+                const image7 = this.add.image(950, 440, 'Imagen7').setDisplaySize(1920, 1080);
+                image7.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+                image7.setVisible(false);
+
+                const image8 = this.add.image(950, 440, 'Imagen8').setDisplaySize(1920, 1080);
+                image8.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+                image8.setVisible(false);
+
+                const image9 = this.add.image(950, 440, 'Imagen9').setDisplaySize(1920, 1080);
+                image9.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+                image9.setVisible(false);
+
+                const image10 = this.add.image(950, 440, 'Imagen10').setDisplaySize(1920, 1080);
+                image10.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+                image10.setVisible(false);
+
+                const image11 = this.add.image(950, 440, 'Imagen11').setDisplaySize(1920, 1080);
+                image11.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+                image11.setVisible(false);
+
+                const image12 = this.add.image(950, 440, 'Imagen12').setDisplaySize(1920, 1080);
+                image12.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+                image12.setVisible(false);
+
+                const image13 = this.add.image(950, 440, 'Imagen13').setDisplaySize(1920, 1080);
+                image13.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+                image13.setVisible(false);
+
+                const image14 = this.add.image(950, 440, 'Imagen14').setDisplaySize(1920, 1080);
+                image14.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+                image14.setVisible(false);
+
+                //BOTON SIGUIENTE
+                //Se añade el boton para pasar de imagenes
+                const botonSiguiente = this.add.image(990, 980, "BotonSiguiente").setInteractive();
+                botonSiguiente.setScale(1)
+
+                //Al pasar por encima se pone mas oscuro y crece en tamaño
+                botonSiguiente.on('pointerover', function () {
+                    this.setTint(0x555555);
+                    this.setScale(1.2);
+                });
+
+                //Al quitar el cursor el boton vuelve al tamaño original
+                botonSiguiente.on('pointerout', function () {
+                    this.clearTint();
+                    this.setScale(1);
+                });
+
+                //Al hacer click en el boton se pasan las imagenes
+                botonSiguiente.on('pointerdown', (pointer) => {
+                    this.indice = (this.indice + 1) % 15;
+                    console.log('Indice' + this.indice);
+
+                    if (this.indice == 0) {
+                        image1.setVisible(true);
+
+                    }
+                    else if (this.indice == 1) {
+                        image1.setVisible(false);
+                        image2.setVisible(true);
+                    }
+                    else if (this.indice == 2) {
+                        image2.setVisible(false);
+                        image3.setVisible(true);
+                    }
+                    else if (this.indice == 3) {
+                        image3.setVisible(false);
+                        image4.setVisible(true);
+                    }
+                    else if (this.indice == 4) {
+                        image4.setVisible(false);
+                        image5.setVisible(true);
+                    }
+                    else if (this.indice == 5) {
+                        image5.setVisible(false);
+                        image6.setVisible(true);
+                    }
+                    else if (this.indice == 6) {
+                        image6.setVisible(false);
+                        image7.setVisible(true);
+                    }
+                    else if (this.indice == 7) {
+                        image7.setVisible(false);
+                        image8.setVisible(true);
+                    }
+                    else if (this.indice == 8) {
+                        image8.setVisible(false);
+                        image9.setVisible(true);
+                    }
+                    else if (this.indice == 9) {
+                        image9.setVisible(false);
+                        image10.setVisible(true);
+                    }
+                    else if (this.indice == 10) {
+                        image10.setVisible(false);
+                        image11.setVisible(true);
+                    }
+                    else if (this.indice == 11) {
+                        image11.setVisible(false);
+                        image12.setVisible(true);
+                    }
+                    else if (this.indice == 12) {
+                        image12.setVisible(false);
+                        image13.setVisible(true);
+                    }
+                    else if (this.indice == 13) {
+                        image13.setVisible(false);
+                        image14.setVisible(true);
+                    }
+                    if (this.indice == 14) {
+                        console.log('ComenzandoJuego');
+                        this.scene.start('Intro');
+                    }
+
+                });
+
+            }
+
+            update() {
+                nivelActual = 'TutorialImagenes';
+
+            }
+
+        }
+
+
+        class IrCreditos extends Phaser.Scene {
+            constructor() {
+                super('IrCreditos');
+            }
+
+            preload() {
+                // ----------------------------------------------------------------------------------------- HIGHSCORE
+                var highscore = mostrarTiempoTranscurrido();
+                guardarPuntuacion(highscore);
+                pararContador();
+            }
+
+            create() {
+                const fondo = this.add.image(0, 0, 'GraciasPorJugar').setDisplaySize(1920, 1080);
+                fondo.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+
+                //BOTON TUTORIAL
+                //Se añade el boton para jugar
+                const botonTutorial = this.add.image(960, 800, "IrCreditos").setInteractive();
+                botonTutorial.setScale(0.5)
+
+                //Al pasar por encima se pone mas oscuro y crece en tamaño
+                botonTutorial.on('pointerover', function () {
+                    this.setTint(0x555555);
+                    this.setScale(0.55);
+                });
+
+                //Al quitar el cursor el boton vuelve al tamaño original
+                botonTutorial.on('pointerout', function () {
+                    this.clearTint();
+                    this.setScale(0.5);
+                });
+
+                //Al hacer click en el boton comienza el juego
+                botonTutorial.on('pointerdown', (pointer) => {
+                    console.log('IrCreditos');
+                    this.scene.start('Creditos');
+                });
+            }
+
+            update() { }
+        }
+
+        class Creditos extends Phaser.Scene {
+            constructor() {
+                super('Creditos');
+                this.enter;
+            }
+            preload() {
+            }
+            create() {
+
+                this.enter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
+                const imagen1 = this.add.image(0, 0, 'Imagen1').setDisplaySize(1920, 1080);
+                imagen1.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+            }
+            update() {
+                if (Phaser.Input.Keyboard.JustDown(this.enter)) {
+                    this.scene.start('VolverAJugar');
+                }
+            }
+        }
+
+        class VolverAJugar extends Phaser.Scene {
+            constructor() {
+                super('VolverAJugar');
+            }
+            preload() {
+            }
+            create() {
+                this.enter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
+                const fondo = this.add.image(0, 0, 'Fondo').setDisplaySize(1920, 1080);
+                fondo.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+
+                //BOTON VOLVER A JUGAR
+                //Se añade el boton para jugar
+                const botonTutorial = this.add.image(960, 800, "Boton").setInteractive();
+                botonTutorial.setScale(1)
+
+                //Al pasar por encima se pone mas oscuro y crece en tamaño
+                botonTutorial.on('pointerover', function () {
+                    this.setTint(0x555555);
+                    this.setScale(1.2);
+                });
+
+                //Al quitar el cursor el boton vuelve al tamaño original
+                botonTutorial.on('pointerout', function () {
+                    this.clearTint();
+                    this.setScale(1);
+                });
+
+                //Al hacer click en el boton comienza el juego
+                botonTutorial.on('pointerdown', (pointer) => {
+                    console.log('VolverAJugar');
+                    this.scene.start('MenuInicio');
+                });
+            }
+            update() { }
+        }
+
+
+        class Tutorial extends Phaser.Scene {
+            constructor() {
+                super('Tutorial');
+            }
+
+            preload() {
+            }
+
+            create() {
+
+
+                //Fondo
+                const fondo = this.add.image(0, 0, 'fondoTutorial').setDisplaySize(1920, 1080);
+                fondo.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+
+                //BOTON JUGAR
+                //Se añade el boton para jugar
+                const botonJugar = this.add.image(960, 500, "Botonjugar").setInteractive();
+                botonJugar.setScale(1)
+
+                //Al pasar por encima se pone mas oscuro y crece en tamaño
+                botonJugar.on('pointerover', function () {
+                    this.setTint(0x555555);
+                    this.setScale(1.2);
+                });
+
+                //Al quitar el cursor el boton vuelve al tamaño original
+                botonJugar.on('pointerout', function () {
+                    this.clearTint();
+                    this.setScale(1);
+                });
+
+                //Al hacer click en el boton comienza el juego
+                botonJugar.on('pointerdown', (pointer) => {
+                    console.log('Comenzando Juego');
+                    this.scene.start('Intro');
+                });
+
+                //BOTON TUTORIAL
+                //Se añade el boton para jugar
+                const botonTutorial = this.add.image(960, 700, "BotonTutorial").setInteractive();
+                botonTutorial.setScale(1)
+
+                //Al pasar por encima se pone mas oscuro y crece en tamaño
+                botonTutorial.on('pointerover', function () {
+                    this.setTint(0x555555);
+                    this.setScale(1.2);
+                });
+
+                //Al quitar el cursor el boton vuelve al tamaño original
+                botonTutorial.on('pointerout', function () {
+                    this.clearTint();
+                    this.setScale(1);
+                });
+
+                //Al hacer click en el boton comienza el tutorial
+                botonTutorial.on('pointerdown', (pointer) => {
+                    console.log('Comenzando Tutorial');
+                    this.scene.start('TutorialImagenes');
+                });
+
+
+
+            }
+
+            update() {
+                nivelActual = 'Tutorial';
+
+            }
+        }
+
+        class Introducción extends Phaser.Scene {
+            constructor() {
+                super('Intro');
+                this.enter;
+            }
+
+            preload() {
+            }
+
+            create() {
+                this.add.image(960, 500, 'sky');
+                this.enter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
+                this.add.text(40, 50, 'Tras años de torturas por parte del dios del mal,\nCassadie por fin se encontraría con Seraphina. \nOtro ángel caído abandonado en el subsuelo... Quizá tenían más en común de lo que parecía. \nY quizá no, quizás eso sería incluso mejor... \n\nQuizá podía ser su billete de vuelta.',
+                    { fontFamily: 'serif', fontSize: '50px', color: '#000' });
+            }
+
+            update() {
+                if (Phaser.Input.Keyboard.JustDown(this.enter)) {
+                    this.scene.start('NivelSubsuelo');
+                }
+            }
+        }
+
+        class MenuInicio extends Phaser.Scene {
+            constructor() {
+                super('MenuInicio');
+                this.enter;
+            }
+
+            preload() {
+                this.load.spritesheet('Cassadie', 'assets/cassadie.png', { frameWidth: 862, frameHeight: 980 });
+                this.load.spritesheet('Seraphina', 'assets/spritesheet.png', { frameWidth: 862, frameHeight: 980 });
+                this.load.image('fondoSubsuelo', 'assetsSubsuelo/Subterraneo.png');
+                this.load.image('sueloSubsuelo', 'assetsSubsuelo/LazoAzul2Redimensionado.png');
+                this.load.image('plataforma1', 'assetsSubsuelo/CuadradoAzul2Redimensionado.png');
+                this.load.image('plataforma2', 'assetsSubsuelo/CuadradoAzulRedimensionado.png');
+                this.load.spritesheet('botonSubterraneo', 'assetsSubsuelo/botonSubterraneo.png', { frameWidth: 322, frameHeight: 223 });
+                this.load.spritesheet('palanca', 'assetsSubsuelo/palancaPiedra.png', { frameWidth: 446, frameHeight: 345 });
+                this.load.spritesheet('palancaInv', 'assetsSubsuelo/palancaPiedraInv.png', { frameWidth: 446, frameHeight: 345 });
+                this.load.image('pulpo', 'assetsSubsuelo/Pulpo.png');
+                this.load.spritesheet('palancaPiedra', 'assetsSubsuelo/palancaPiedra.png', { frameWidth: 446, frameHeight: 345 });
+                this.load.spritesheet('palancaPiedraInv', 'assetsSubsuelo/palancaPiedraInv.png', { frameWidth: 446, frameHeight: 345 });
+                this.load.audio('golpe1', 'Sonidos/Golpe1.wav');
+                this.load.audio('golpe2', 'Sonidos/Golpe2.wav');
+                this.load.audio('golpe3', 'Sonidos/Golpe3.wav');
+                this.load.image('fondoB', 'assets/Bosque.png');
+                this.load.image('sueloBosque', 'assets/CuadradoMarron.png');
+                this.load.image('plataformaBosque1', 'assets/LadoVerde.png');
+                this.load.image('plataformaBosque2', 'assets/LadoOscuro.png');
+                this.load.image('piedraBosque', 'assets/piedra.png');
+                this.load.spritesheet('palancaBosque', 'assets/palancaBosque.png', { frameWidth: 446, frameHeight: 345 });
+                this.load.spritesheet('palancaInvBosque', 'assets/palancaMaderaInv.png', { frameWidth: 446, frameHeight: 345 });
+                this.load.spritesheet('botonBosque', 'assets/botonBosque.png', { frameWidth: 322, frameHeight: 223 });
+                this.load.spritesheet('floresObstaculo', 'assets/floresObstaculo.png', { frameWidth: 862, frameHeight: 1760 });
+                this.load.image('frog', 'assets/Rana.png');
+                this.load.image('fondoCielo', 'assets/Cielo.jpg');
+                this.load.image('sueloCielo', 'assets/PlataformaMoradaLado.png');
+                this.load.image('plataformaCieloMorado', 'assets/PlataformaMoradaCuad.png');
+                this.load.image('plataformaCieloRojo', 'assets/PlataformaRojaCuad.png');
+                this.load.image('plataformaCieloClaro', 'assets/PlataformaClaroCuad.png');
+                this.load.spritesheet('palancaCielo', 'assets/palancaCielo.png', { frameWidth: 446, frameHeight: 345 });
+                this.load.spritesheet('palancaInvCielo', 'assets/palancaCieloInv.png', { frameWidth: 446, frameHeight: 345 });
+                this.load.spritesheet('botonSCielo', 'assets/botonCielo.png', { frameWidth: 322, frameHeight: 223 });
+                this.load.spritesheet('floresObstaculo', 'assets/floresObstaculo.png', { frameWidth: 862, frameHeight: 1760 });
+                this.load.spritesheet('puerta', 'assets/PuertaCielo.png', { frameWidth: 960, frameHeight: 540 })
+                this.load.spritesheet('nubesObstaculo', 'assets/nubesObstaculo.png', { frameWidth: 311, frameHeight: 109 });
+                this.load.image('sky', 'assets/Cielo.jpg');
+                this.load.image('fondoTutorialI', 'assets/FondoTutorial.png');
+                this.load.image('BotonSiguiente', 'assets/BotonSiguiente.png');
+                this.load.image('Imagen1', 'ImagenesTutorial/Imagen1.png');
+                this.load.image('Imagen2', 'ImagenesTutorial/Imagen2.png');
+                this.load.image('Imagen3', 'ImagenesTutorial/Imagen3.png');
+                this.load.image('Imagen4', 'ImagenesTutorial/Imagen4.png');
+                this.load.image('Imagen5', 'ImagenesTutorial/Imagen5.png');
+                this.load.image('Imagen6', 'ImagenesTutorial/Imagen6.png');
+                this.load.image('Imagen7', 'ImagenesTutorial/Imagen7.png');
+                this.load.image('Imagen8', 'ImagenesTutorial/Imagen8.png');
+                this.load.image('Imagen9', 'ImagenesTutorial/Imagen9.png');
+                this.load.image('Imagen10', 'ImagenesTutorial/Imagen10.png');
+                this.load.image('Imagen11', 'ImagenesTutorial/Imagen11.png');
+                this.load.image('Imagen12', 'ImagenesTutorial/Imagen12.png');
+                this.load.image('Imagen13', 'ImagenesTutorial/Imagen13.png');
+                this.load.image('Imagen14', 'ImagenesTutorial/Imagen14.png');
+                this.load.image('GraciasPorJugar', 'CreditosImagenes/GraciasPorJugar.png');
+                this.load.image('IrCreditos', 'CreditosImagenes/BotonCreditos.PNG');
+                this.load.image('Imagen1', 'CreditosImagenes/Creditos2.png');
+                this.load.image('Imagen2', 'CreditosImagenes/Creditos2.png');
+                this.load.image('Imagen3', 'CreditosImagenes/Creditos3.png');
+                this.load.image('Fondo', 'CreditosImagenes/Creditos3.png');
+                this.load.image('Boton', 'CreditosImagenes/BotonVolverJugar.png');
+                this.load.image('fondoTutorial', 'assets/MenuInicio.PNG');
+                this.load.image('Botonjugar', 'assets/BotonJuego.png');
+                this.load.image('BotonTutorial', 'assets/BotonTutorial.png');
+                this.load.image('fondoI', 'assets/MenuInicio.PNG');
+                this.load.image('jugar', 'assets/BotonJugar.png');
+                this.load.image('ajustes', 'assets/BotonAjustes.png');
+                this.load.image('salir', 'assets/BotonSalir.png');
+                this.load.image('titulo', 'assets/Titulo.png');
+                this.load.image('fondoAjustes', 'assets/MenuAjuste.jpg');
+                this.load.image('salir', 'assets/BotonSalir.png');
+                this.load.image('cuadradoVolumen', 'assets/Volumen.PNG');
+                this.load.image('circulo', 'assets/Slider.PNG');
+                this.load.image('barra', 'assets/BarraSonido.PNG');
+                this.load.audio('cancion', 'Sonidos/Musica.wav')
+                this.load.image('opcion1', 'assets/Opcion1.png');
+                this.load.image('opcion2', 'assets/Opcion2.png');
+                this.load.spritesheet('puerta', 'assets/PuertaCielo.png', { frameWidth: 1920, frameHeight: 1080 })
+                this.load.image('sueloCielo', 'assets/PlataformaMoradaLado.png');
+            }
+
+            create() {
+
+                //Fondo
+                const fondo = this.add.image(0, 0, 'fondoI').setDisplaySize(1920, 1080);
+                fondo.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+
+                //Titulo
+                const titulo = this.add.image(960, 240, "titulo");
+                titulo.setScale(0.5, 0.5);
+
+
+                //Tecla Enter
+                this.enter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
+
+                //-------------------------------------------------------------------------------------------------
+                //BOTON JUGAR
+                //Se añade el boton para jugar
+                const botonJugar = this.add.image(960, 500, "jugar").setInteractive();
+                botonJugar.setScale(0.35, 0.35)
+
+                //Al pasar por encima se pone mas oscuro y crece en tamaño
+                botonJugar.on('pointerover', function () {
+                    this.setTint(0x555555);
+                    this.setScale(0.40, 0.40);
+                });
+
+                //Al quitar el cursor el boton vuelve al tamaño original
+                botonJugar.on('pointerout', function () {
+                    this.clearTint();
+                    this.setScale(0.35, 0.35);
+                });
+
+                //Al hacer click en el boton comienza el juego
+                botonJugar.on('pointerdown', (pointer) => {
+                    console.log('Comenzando Juego');
+                    this.scene.start('Tutorial');
+                });
+
+                //BOTON AJUSTES
+                //Se añade el boton de ajustes
+                const botonAjustes = this.add.image(973, 630, "ajustes").setInteractive();
+                botonAjustes.setScale(0.25, 0.25)
+
+                //Al pasar por encima se pone mas oscuro y crece en tamaño
+                botonAjustes.on('pointerover', function () {
+                    this.setTint(0x555555);
+                    this.setScale(0.28, 0.28);
+                });
+
+                //Al quitar el cursor el boton vuelve al tamaño original
+                botonAjustes.on('pointerout', function () {
+                    this.clearTint();
+                    this.setScale(0.25, 0.25);
+                });
+
+                //Al hacer click en el boton se va a ajustes
+                botonAjustes.on('pointerdown', (pointer) => {
+                    this.scene.sleep('MenuInicio');
+                    this.scene.launch('Ajustes');
+                    console.log('Pantalla ajustes');
+
+                });
+
+                //BOTON SALIR
+                //Se añade el boton de salir
+                const botonSalir = this.add.image(975, 760, "salir").setInteractive();
+                botonSalir.setScale(0.20, 0.20)
+
+                //Al pasar por encima se pone mas oscuro y crece en tamaño
+                botonSalir.on('pointerover', function () {
+                    this.setTint(0x555555);
+                    this.setScale(0.23, 0.23);
+                });
+
+                //Al quitar el cursor el boton vuelve al tamaño original
+                botonSalir.on('pointerout', function () {
+                    this.clearTint();
+                    this.setScale(0.20, 0.20);
+                });
+
+                //Al hacer click en el boton se sale del juego
+                botonSalir.on('pointerdown', (pointer) => {
+                    console.log('Saliendo');
+                    window.close();
+                });
+
+            }
+
+            update() {
+                nivelActual = 'MenuInicio';
+                //Otra manera de iniciar el juego, al pulsar enter comienza el juego
+                if (Phaser.Input.Keyboard.JustDown(this.enter)) { //Al hacer enter se inicia el juego
+                    console.log('Comenzando Juego');
+                    this.scene.start('Tutorial');
+                    //this.scene.resume(nivel);
+                    //this.scene.stop('MenuInicio');
+                }
+            }
+        }
+
+        class Ajustes extends Phaser.Scene {
+            constructor() {
+                super('Ajustes');
+            }
+
+            preload() {
+            }
+
+            create() {
+                //Fondo
+                const fondoAjustes = this.add.image(0, 0, 'fondoAjustes').setDisplaySize(1920, 1080);
+                fondoAjustes.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+
+                //Rectangulo volumen
+                const cuadroVolumen = this.add.image(975, 500, "cuadradoVolumen");
+                cuadroVolumen.setScale(0.5, 0.5)
+                const barraVolumen = this.add.image(975, 550, "barra");
+                barraVolumen.setScale(0.5, 0.5)
+
+                //BOTON SALIR
+                //Se añade el boton de salir
+                const botonSalir = this.add.image(975, 760, "salir").setInteractive();
+                botonSalir.setScale(0.20, 0.20)
+
+                //Al pasar por encima se pone mas oscuro y crece en tamaño
+                botonSalir.on('pointerover', function () {
+                    this.setTint(0x555555);
+                    this.setScale(0.23, 0.23);
+                });
+
+                //Al quitar el cursor el boton vuelve al tamaño original
+                botonSalir.on('pointerout', function () {
+                    this.clearTint();
+                    this.setScale(0.20, 0.20);
+                });
+
+                //Al hacer click en el boton se sale del juego
+                botonSalir.on('pointerdown', (pointer) => {
+                    console.log('Saliendo de Ajustes');
+                    this.scene.wake(nivelActual);
+                    //this.scene.resume(nivel);
+                    this.scene.stop('Ajustes');
+                });
+
+                //CANCION
+
+
+                if (!cancionReproducida) {
+                    cancion = this.sound.add('cancion', { loop: true });
+                    cancion.play();
+                    cancionReproducida = true;
+                }
+
+                //SLIDER VOLUMEN
+
+                const controlVol = this.add.image(posicionSliderGlobal, 550, "circulo").setInteractive({ draggable: true });
+                controlVol.setScale(0.15, 0.15);
+                this.input.setDraggable(controlVol);
+
+
+                this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
+                    controlVol.x = Phaser.Math.Clamp(dragX, 780, 1210);
+                    posicionSliderGlobal = controlVol.x;
+                    volumenGlobal = (controlVol.x - 780) / 430;
+                    cancion.setVolume(volumenGlobal);
+                    console.log(volumenGlobal);
+                    console.log("Ajustando volumen");
+                    cancion.resume();
+
+                })
+            }
+
+            update() { }
+        }
+
+        class Elegir extends Phaser.Scene {
+            constructor() {
+                super('Elegir');
+            }
+
+            preload() {
+            }
+
+            create() {
+                this.add.image(960, 500, 'sky');
+
+                const OpcionSolo = this.add.image(750, 400, "opcion1").setInteractive();
+                OpcionSolo.setScale(0.25, 0.25)
+
+                //Al pasar por encima se pone mas oscuro y crece en tamaño
+                OpcionSolo.on('pointerover', function () {
+                    this.setTint(0x555555);
+                    this.setScale(0.28, 0.28);
+                });
+
+                //Al quitar el cursor el boton vuelve al tamaño original
+                OpcionSolo.on('pointerout', function () {
+                    this.clearTint();
+                    this.setScale(0.25, 0.25);
+                });
+
+                //Al hacer click en el boton comienza el juego
+                OpcionSolo.on('pointerdown', (pointer) => {
+                    this.scene.start('FinalMalo');
+                });
+
+                //BOTON AJUSTES
+                //Se añade el boton de ajustes
+                const OpcionJuntos = this.add.image(1150, 400, "opcion2").setInteractive();
+                OpcionJuntos.setScale(0.25, 0.25)
+
+                //Al pasar por encima se pone mas oscuro y crece en tamaño
+                OpcionJuntos.on('pointerover', function () {
+                    this.setTint(0x555555);
+                    this.setScale(0.28, 0.28);
+                });
+
+                //Al quitar el cursor el boton vuelve al tamaño original
+                OpcionJuntos.on('pointerout', function () {
+                    this.clearTint();
+                    this.setScale(0.25, 0.25);
+                });
+
+                //Al hacer click en el boton se va a ajustes
+                OpcionJuntos.on('pointerdown', (pointer) => {
+                    this.scene.start('FinalBueno');
+                });
+            }
+
+            update() { }
+        }
+
+
+        class FinalBueno extends Phaser.Scene {
+            constructor() {
+                super('FinalBueno');
+                this.puerta;
+                this.suelo;
+                this.enter;
+            }
+
+            preload() {
+            }
+
+            create() {
+                this.add.image(960, 500, 'sky');
+                this.add.text(50, 50, '-Os he estado observando. \n-El apoyo desinteresado para ayudar a otro a redimir sus pecados muestra un gran cambio. \n-Estoy orgulloso. \n\nY con eso, las puertas con las que tanto habían soñado... \nFinalmente se abrieron.',
+                    { fontFamily: 'serif', fontSize: '50px', color: '#000' });
+                this.suelo = this.physics.add.staticGroup();
+                this.suelo.create(950, 978, 'sueloCielo').setScale(6, 2).refreshBody();
+                this.anims.create({
+                    key: 'abrirPuerta',
+                    frames: this.anims.generateFrameNumbers('puerta', { start: 0, end: 4 }),
+                    frameRate: 10,
+                    repeat: 0,
+                })
+                this.puerta = this.physics.add.sprite(1370, 580, 'puerta').setScale(1);
+                this.physics.add.collider(this.puerta, this.suelo);
+                this.puerta.anims.play('abrirPuerta', false);
+                this.enter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
+            }
+
+            update() {
+                if (Phaser.Input.Keyboard.JustDown(this.enter)) {
+                    this.scene.start('IrCreditos');
+                }
+            }
+        }
+
+        class FinalMalo extends Phaser.Scene {
+            constructor() {
+                super('FinalMalo');
+                this.enter;
+            }
+
+            preload() {
+            }
+
+            create() {
+                this.add.image(960, 500, 'sky');
+                this.add.text(100, 600, '-Te has vuelto egoísta. \n-Me has decepcionado. \n-Tus actos te condenarán a ti y a tu compañero al sufrimiento eterno. \n\nY con eso, ambos ángeles caídos fueron definitivamente expulsados... \npara toda le eternidad.',
+                    { fontFamily: 'serif', fontSize: '50px', color: '#fff' });
+                this.enter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
+            }
+
+            update() {
+                if (Phaser.Input.Keyboard.JustDown(this.enter)) {
+                    this.scene.start('IrCreditos');
+                }
+            }
+        }
+
+        var config = {
+            type: Phaser.AUTO,
+            width: 1920,
+            height: 1080,
+            physics: {
+                default: 'arcade',
+                arcade: {
+                    gravity: { y: 300 },
+                    debug: false
+                }
+            },
+            scene: [MenuInicio, Ajustes, Tutorial, TutorialImagenes, Introducción, NivelSubsuelo, NivelBosque, NivelCielo, Elegir, FinalBueno, FinalMalo, IrCreditos, Creditos, VolverAJugar]
+        };
+
+        var game = new Phaser.Game(config);
+
+    </script>
+>>>>>>> 1e8310bb341f4f8da59c9dac451d31906d152b7c
 
 </body>
 
