@@ -6,35 +6,37 @@
     <title>Caída Celestial: El Desafío de los Exiliados</title>
     <script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
     <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
-    <style type="text/css">
+        <style type="text/css">
+		body{
+			position: absolute;
+			top: 50%;
+			left: 50%;
+  			transform: translate(-50%,-50%);
+		}
+		
         .register-popup {
             position: fixed;
-            margin: auto;
+            margin-top: -43px;
         }
 
         .inicio-popup {
             display: none;
             position: fixed;
-            margin: auto;
+            margin-top: -43px;
         }
 
         .otros-popup {
             display: none;
             position: fixed;
-            margin: auto;
+            margin-top: -43px;
         }
 
-        .form-container {
-            width: 1920px;
-            height: 1080px;
-            background-image: url('assets/MenúInicio.PNG');
-        }
-
+        .form-container,
         .iniciar-container,
         .otros-container {
             width: 1920px;
             height: 1080px;
-            background-image: url('assets/MenúInicio.PNG');
+            background-image: url('assetsUsuarios/FondoEstandar.jpg');
         }
 
         input[type=text],
@@ -87,6 +89,7 @@
         html {
             font-size: xx-large;
         }
+
     </style>
 </head>
 
@@ -2651,9 +2654,6 @@
                     gravity: { y: 300 },
                     debug: false
                 }
-            },
-            dom: {
-                createContainer: true
             },
             scene: [MenuInicio, Ajustes, Tutorial, TutorialImagenes, Introducción, NivelSubsuelo, NivelBosque, NivelCielo, Elegir, FinalBueno, FinalMalo, IrCreditos, Creditos, VolverAJugar]
         };
