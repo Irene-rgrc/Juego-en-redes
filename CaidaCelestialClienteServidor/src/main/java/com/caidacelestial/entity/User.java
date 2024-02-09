@@ -12,6 +12,7 @@ public class User implements Serializable {
 	private long id;
 	private String username;
 	private String password;
+	private long record;
 
 	public String getUsername() {
 		return username;
@@ -25,6 +26,10 @@ public class User implements Serializable {
 		return id;
 	}
 	
+	public long getRecord() {
+		return record;
+	}
+	
 	public void setPassword(String contraseña) {
 		this.password = contraseña;
 	}
@@ -35,5 +40,9 @@ public class User implements Serializable {
 	
 	public void setId(long idN) {
 		this.id = idN;
+	}
+	
+	public void setRecord(long newRecord) {
+		this.record = newRecord;
 	}
 }
