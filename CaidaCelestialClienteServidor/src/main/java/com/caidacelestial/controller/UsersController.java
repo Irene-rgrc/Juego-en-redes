@@ -37,6 +37,7 @@ public class UsersController {
 	
 	ConcurrentHashMap<Long, User> users = new ConcurrentHashMap<>(); 
 	long nextId;
+	//long nextId = 0;
 	
 	@GetMapping(value = "/")
 	public Collection<User> usuarios() {
@@ -103,6 +104,7 @@ public class UsersController {
 		}
 	}
 	
+	
 	@PostConstruct
 	public void cargarUsuarios() throws IOException, ClassNotFoundException{
 		FileInputStream fileInputStream = new FileInputStream("src/main/resources/users.txt");
@@ -110,8 +112,8 @@ public class UsersController {
 		ConcurrentHashMap usersEnFichero = (ConcurrentHashMap) objectInputStream.readObject();
 		users = usersEnFichero;
 		objectInputStream.close();
-	}
-	
+	} 
+
 	@PreDestroy
 	public void guardarUsuarios() throws IOException, ClassNotFoundException{
 		FileOutputStream fileOutputStream = new FileOutputStream("src/main/resources/users.txt");

@@ -243,7 +243,7 @@
         
         function loadUsers(callback) {
     		$.ajax({
-        		url: 'http://localhost:8080/users/'
+        		url: 'http://' + ip + '/users/'                       //   COMPROBAR
 			}).done(function (users) {
     			console.log('Users loaded: ' + JSON.stringify(users));
         		callback(users);
@@ -379,6 +379,23 @@
         		}
         	})
         })
+        
+        // PUNTUACION = tiempoTranscurrido
+        function loadPuntuacion(callback) {
+    		$.ajax({
+        		url: 'http://' + ip + '/puntuacion/'
+			}).done(function (puntuacion) {
+    			console.log('Puntuacion loaded: ' + JSON.stringify(puntuacion));
+        		callback(tiempoTranscurrido);
+    		})
+		}
+		
+		$(document).ready(function () {
+    		loadPuntuacion(function (puntuacion) {
+        		record = puntuacion;
+        	})
+    	})
+        
 
 		var nivelActual;
 		var frog;
@@ -391,6 +408,7 @@
 
 		var tiempoInicio; // Variable para guardar el tiempo de inicio
 		var tiempoTranscurrido = new Date(); // VARIABLE QUE HAY QUE DEVOLVER PARA HOMECONTROLLER
+		var record; // PUNTUACION MAS ALTA
 		//var tiempoTranscurrido;
 
 		function actualizarTiempo(escena) {
@@ -432,6 +450,9 @@
 			clearInterval(tiempo); // Detener el contador
 			var display = document.getElementById('tiempo');
 			display.textContent = 'Felicidades!!!';
+			if (tiempoTranscurrido < record){
+				record = tiempoTranscurrido;
+			}
 		}
 
 		function guardarPuntuacion(data) {
