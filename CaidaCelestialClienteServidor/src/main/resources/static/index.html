@@ -239,11 +239,12 @@
         var ip = location.host;
         var existingUsers = [];
         var existingPasswords = [];
+        var existingRecords = [];
         var currentUser;
         
         function loadUsers(callback) {
     		$.ajax({
-        		url: 'http://' + ip + '/users/'                       //   COMPROBAR
+        		url: 'http://' + ip + '/users/'                
 			}).done(function (users) {
     			console.log('Users loaded: ' + JSON.stringify(users));
         		callback(users);
@@ -256,6 +257,7 @@
         		for (var i = 0; i < users.length; i++) {
             		existingUsers[i] = users[i].username;
             		existingPasswords[i] = users[i].password;
+            		existingRecords[i] = users[i].record;
         		}
         	})
     	})
@@ -280,10 +282,12 @@
         $('#registrarse-button').click(function () {
 			var name = $('#user').val();
         	var contraseña = $('#password').val();
+        	var puntuacion = $('#record').val();
 
             var usuario = {
             username: name,
-            password: contraseña
+            password: contraseña,
+            record: puntuacion
             }
 			
 			var existe = false;
@@ -345,6 +349,7 @@
             var usuario = {
                 username: existingUsers[currentUser-1],
                 password: contraseña,
+                record: puntuacion,
                 id: currentUser
             }
             updateUser(usuario);
@@ -373,9 +378,11 @@
             loadUsers(function (users) {
 				existingUsers.length = 0;
 				existingPasswords.length = 0;
+				existingRecords.length = 0;
         		for (var i = 0; i < users.length; i++) {
             		existingUsers[i] = users[i].username;
-            		existingPasswords[i] = users[i].password;
+            		existingPasswords[i] = users[i].password; 
+            		existingRecords[i] = users[i].record;  /// COMPROBAR
         		}
         	})
         })
