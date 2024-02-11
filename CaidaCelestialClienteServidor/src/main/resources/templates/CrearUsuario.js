@@ -16,10 +16,12 @@ $("#registrarse-button").click(function () {
 
         var username = $('#user');
         var password = $('#password');
+        //var record = $('#record');
         
         var user = {
             username: username.val(),
-            password: password.val()
+            password: password.val() //,
+            //record: record.val()  // NO HACE FALTA :,)
         }
 
         createUser(user);
