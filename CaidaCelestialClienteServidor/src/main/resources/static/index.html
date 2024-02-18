@@ -607,6 +607,7 @@
 					$.ajax({
 						method: 'POST',
 						url: 'http://' + ip + '/puntuacion/',
+						// Tambien tiene que guardar el usuario
 						data: JSON.stringify({tiempo: puntosUsuario}), // Suponiendo que el servidor espera un objeto con el tiempo
 						contentType: 'application/json',
 					});
