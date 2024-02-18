@@ -193,20 +193,6 @@
 			left: 770px;
 		}
 		
-		.principal-container .puntuacion {
-
-			background-image: url('assets/PuntuacionesBoton.PNG');
-			background-size: contain;
-			background-repeat: no-repeat;
-			background-position: center;
-			opacity: 0.8;
-			width: 260px;
-			height: 100px;
-			display: block;
-			margin: 0 auto;
-			background-color: transparent;
-		}
-
 		.despuesInicio-container .continuar {
 
 			background-image: url('assetsUsuarios/ContinuarBoton.png');
@@ -327,8 +313,6 @@
 			<button type="button" class="btn inicioSesion" onclick="openInicio()"> </button>
 			<br><br>
 			<button type="button" class="btn registrarse" onclick="openForm()"> </button>
-			<br><br>
-			<button type="button" class="btn puntuacion" onclick="openPuntuacion()"> </button>
 			<br><br>
 			<button type="button" class="btn offline" onclick="closePrincipal()"> </button>	
 		</form>
@@ -2704,6 +2688,7 @@
 						this.load.spritesheet('puerta', 'assets/PuertaCielo.png', {frameWidth: 1920, frameHeight: 1080})
 						this.load.image('sueloCielo', 'assets/PlataformaMoradaLado.png');
 						this.load.image('puntuaciones', 'assets/PuntuacionesBoton.png');
+						this.load.image('FondoPunt', 'assetsUsuarios/FondoEstandar.jpg');
 					}
 
 					create() {
@@ -2905,6 +2890,47 @@
 
 					update() { }
 				}
+				
+				class Puntuaciones extends Phaser.Scene {
+					constructor() {
+						super('Puntuaciones');
+						this.enter;
+					}
+					preload() {
+						
+					}
+					create() {
+
+						const punt = this.add.image(0, 0, 'FondoPunt').setDisplaySize(1920, 1080);
+						punt.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+						
+						const botonSalir = this.add.image(975, 760, "salir").setInteractive();
+						botonSalir.setScale(0.20, 0.20)
+
+						//Al pasar por encima se pone mas oscuro y crece en tamaño
+						botonSalir.on('pointerover', function () {
+							this.setTint(0x555555);
+							this.setScale(0.23, 0.23);
+						});
+
+						//Al quitar el cursor el boton vuelve al tamaño original
+						botonSalir.on('pointerout', function () {
+							this.clearTint();
+							this.setScale(0.20, 0.20);
+						});
+
+						//Al hacer click en el boton se sale del juego
+						botonSalir.on('pointerdown', (pointer) => {
+							console.log('Saliendo de Ajustes');
+							this.scene.wake(nivelActual);
+							//this.scene.resume(nivel);
+							this.scene.stop('Puntuaciones');
+						});
+					}
+					update() {
+						
+					}
+				}
 
 				class Elegir extends Phaser.Scene {
 					constructor() {
@@ -3037,7 +3063,7 @@
 					dom: {
 						createContainer: true
 					},
-					scene: [MenuInicio, Ajustes, Tutorial, TutorialImagenes, Introducción, NivelSubsuelo, NivelBosque, NivelCielo, Elegir, FinalBueno, FinalMalo, IrCreditos, Creditos, VolverAJugar]
+					scene: [MenuInicio, Ajustes, Tutorial, TutorialImagenes, Introducción, NivelSubsuelo, NivelBosque, NivelCielo, Elegir, FinalBueno, FinalMalo, IrCreditos, Creditos, VolverAJugar, Puntuaciones]
 				};
 
 				var game = new Phaser.Game(config);
