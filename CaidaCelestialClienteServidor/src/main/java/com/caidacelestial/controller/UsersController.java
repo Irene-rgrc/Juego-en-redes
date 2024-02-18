@@ -51,6 +51,7 @@ public class UsersController {
 		if(!users.containsKey(usuario.getId())) {
 			long id = nextId++;
 			usuario.setId(id);
+			usuario.setRecord(300);
 			users.put(id, usuario);
 			guardarUsuarios();
 			return usuario;
@@ -105,14 +106,14 @@ public class UsersController {
 	}
 	
 	
-	/*@PostConstruct
+	@PostConstruct
 	public void cargarUsuarios() throws IOException, ClassNotFoundException{
 		FileInputStream fileInputStream = new FileInputStream("src/main/resources/users.txt");
 		ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
 		ConcurrentHashMap usersEnFichero = (ConcurrentHashMap) objectInputStream.readObject();
 		users = usersEnFichero;
 		objectInputStream.close();
-	} */
+	}
 
 	@PreDestroy
 	public void guardarUsuarios() throws IOException, ClassNotFoundException{

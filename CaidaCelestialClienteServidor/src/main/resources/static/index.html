@@ -485,12 +485,10 @@
 				$('#registrarse-button').click(function () {
 					var name = $('#user').val();
 					var contraseña = $('#password').val();
-					var puntuacion = $('#record').val();
 
 					var usuario = {
 						username: name,
 						password: contraseña,
-						record: puntuacion
 					}
 
 					var existe = false;
@@ -552,7 +550,7 @@
 					var usuario = {
 						username: existingUsers[currentUser - 1],
 						password: contraseña,
-						record: puntuacion,
+						record: existingPasswords[currentUser - 1],
 						id: currentUser
 					}
 					updateUser(usuario);
@@ -573,7 +571,6 @@
 				}
 
 				$('#eliminar-button').click(function (event) {
-					console.log(currentUser);
 					deleteUser(currentUser);
 					openPrincipal();
 					closeOtro();
@@ -590,43 +587,26 @@
 					})
 				})
 
-				//PUNTUACION = tiempoTranscurrido
-				function loadPuntuacion(callback) {
-					$.ajax({
-						url: 'http://' + ip + '/puntuacion/'
-					}).done(function (puntuacion) {
-						console.log('Puntuacion loaded: ' + JSON.stringify(puntuacion));
-						// Llamar al callback con los datos de puntuación cargados
-						callback(puntuacion);
-					});
-				}
-
 				// Función para guardar la puntuación del usuario
-				function guardarPuntuacion(puntosUsuario) {
-					// Aquí puedes enviar la puntuación al servidor utilizando una solicitud AJAX
-					$.ajax({
-						method: 'POST',
-						url: 'http://' + ip + '/puntuacion/',
-						// Tambien tiene que guardar el usuario
-						data: JSON.stringify({tiempo: puntosUsuario}), // Suponiendo que el servidor espera un objeto con el tiempo
-						contentType: 'application/json',
-					});
+				function guardarPuntuacion() {
+					var usuario = {
+						username: existingUsers[currentUser - 1],
+						password: existingPasswords[currentUser - 1],
+						record: tiempoTranscurrido,
+						id: currentUser
+					}
+					updateUser(usuario);
+
+					existingRecords[currentUser - 1] = tiempoTranscurrido;
 				}
 
 				// Ejemplo de cómo utilizar estas funciones después de que el usuario complete una partida
 				function partidaCompleta() {
-					// Aquí obtén el tiempo transcurrido de la partida
-					puntosUsuario = pararContador(); // Por ejemplo, 2 minutos
 					// Guardar la puntuación en el servidor
-					guardarPuntuacion(puntosUsuario);
+					if(tiempoTranscurrido < existingRecords[currentUser-1]){
+						guardarPuntuacion();
+					}
 				}
-				// Ejemplo de cómo cargar y mostrar las puntuaciones cuando la página está lista
-				$(document).ready(function () {
-					loadPuntuacion(function (puntuacion) {
-						// Suponiendo que tienes un elemento en tu página con id "puntuacion"
-						$('#puntuacion').text('Puntuación: ' + puntuacion);
-					});
-				});
 				
 				// VARIABLES
 				var nivelActual;
@@ -639,11 +619,8 @@
 				// HIGHSCORE
 				var tiempoInicio; // Variable para guardar el tiempo de inicio
 				var tiempoTranscurrido = new Date(); // VARIABLE QUE HAY QUE DEVOLVER PARA HOMECONTROLLER
-				var record; // PUNTUACION MAS ALTA
-				var puntosUsuario; // SE GUARDA LA PUNTUACION DEL USUARIO EN LA PARTIDA
-				//var tiempoTranscurrido;
 
-				function actualizarTiempo(escena) {
+				function actualizarTiempo() {
 
 					tiempoInicio = Date.now(); // Guardar el tiempo de inicio en milisegundos
 					var tiempoTotal = 5 * 60; // 5 minutos en segundos
@@ -659,7 +636,7 @@
 						display.textContent = minutos.toString().padStart(2, '0') + 'm ' + segundos.toString().padStart(2, '0') + 's';
 
 
-						if (--tiempoTotal < 0) {
+						/*if (--tiempoTotal < 0) {
 							clearInterval(tiempo);
 							// TiempoTranscurrido = (Date.now() - tiempoInicio) / 1000; // Calcular el tiempo transcurrido en segundos
 							// TiempoTranscurrido = (tiempoTotal - tiempoInicio) / 1000; // Calcular el tiempo transcurrido en segundos
@@ -667,7 +644,7 @@
 							// Poner final malo
 							game.scene.sleep(escena);
 							game.scene.start('FinalMalo');
-						}
+						}*/
 					}, 1000);
 				}
 
@@ -682,17 +659,8 @@
 					clearInterval(tiempo); // Detener el contador
 					var display = document.getElementById('tiempo');
 					display.textContent = 'Felicidades!!!';
-					//  if (tiempoTranscurrido < record) {
+					partidaCompleta();
 						return  tiempoTranscurrido;
-					//}
-				}
-
-				function guardarPuntuacion(data) {
-					/*var fso = new ActiveXObject("Scripting.FileSystemObject"); // SOLO FUNCIONA CON INTERNET EXPLORER NO SOPORTADO POR OTROS NAVEGADORES
-					var fh = fso.CreateTextFile("C://Users/usuario/Documents/GitHub/Juego-en-redes/CaidaCelestial_ElDesafioDeLosExiliados/puntuaciones.txt", true);
-					fh.WriteLine(data);
-					fh.Close();*/
-					localStorage.setItem('puntuaciones', data); // Se guarda en el localStorage y luego se hace un post desde AJAX :)
 				}
 
 				class NivelBase extends Phaser.Scene {
@@ -1002,7 +970,7 @@
 					}
 
 					preload() {
-						actualizarTiempo('NivelSubsuelo');
+						actualizarTiempo();
 					}
 
 					create() {
@@ -1351,7 +1319,7 @@
 						//si se necesitan añadir más botones se indican aquí como "this.boton1; this.boton2;"
 					}
 
-					preload() {actualizarTiempo('NivelBosque');}
+					//preload() {actualizarTiempo('NivelBosque');}
 
 					create() {
 						//actualizarTiempo('NivelBosque');
@@ -1767,7 +1735,7 @@
 					}
 
 					preload() {
-						actualizarTiempo('NivelCielo');
+						//actualizarTiempo('NivelCielo');
 					}
 
 					create() {
@@ -2426,8 +2394,6 @@
 
 					preload() {
 						// ----------------------------------------------------------------------------------------- HIGHSCORE
-						var highscore = mostrarTiempoTranscurrido();
-						guardarPuntuacion(highscore);
 						pararContador();
 					}
 
