@@ -396,7 +396,7 @@
 				<br><br>
 				<button type="button" class="btn eliminar" id='eliminar-button'> </button>
 				<br><br>
-				<button type="button" class="btn cancelar" onclick="closeOtro()"> </button>
+				<button type="button" class="btn cancelar" onclick="closeOtro2()"> </button>
 				<br><br>
 			</form>
 
@@ -465,6 +465,11 @@
 				function closePrincipal() {
 					document.getElementById("principalForm").style.display = "none";
 				}
+				
+				function closeOtro2() {
+                    document.getElementById("otrosForm").style.display = "none";
+                    openDespuesInicio();
+                }
 
 
 				var ip = location.host;
