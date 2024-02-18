@@ -2895,6 +2895,12 @@
 					constructor() {
 						super('Puntuaciones');
 						this.enter;
+						this.primerId;
+                        this.segundoId;
+                        this.tercerId;
+                        this.primerPunt;
+                        this.segundoPunt;
+                        this.tercerPunt;
 					}
 					preload() {
 						
@@ -2926,7 +2932,53 @@
 							//this.scene.resume(nivel);
 							this.scene.stop('Puntuaciones');
 						});
+						
+						this.primerPunt = existingRecords[0];
+						this.primerId = existingUsers[0];
+						this.segundoPunt = existingRecords[1];
+						this.segundoId = existingUsers[1];
+						this.tercerPunt = existingRecords[2];
+						this.tercerId = existingUsers[2];
+						
+						for(var i = 1; i < existingRecords.length; i++){
+                            if(this.primerPunt > existingRecords[i]){
+                                this.segundoPunt = this.primerPunt
+                                this.segundoId = this.primerId
+                                this.primerId = existingUsers[i]
+                                this.primerPunt = existingRecords[i]
+
+                                }else if(this.segundoPunt > existingRecords[i]){
+                                    this.tercerPunt = this.segundoPunt;
+                                    this.tercerId = this.segundoId
+                                    this.segundoPunt = existingRecords[i]
+                                    this.segundoId = existingUsers[i]
+
+                                }else if(this.tercerPunt > existingRecords[i]){
+                                      this.tercerPunt = existingRecords[i]
+                                      this.tercerId = existingUsers[i]
+                            }
+                        }
+						
+						this.add.text(250, 50, this.primerId,
+							{fontFamily: 'serif', fontSize: '50px', color: '#000'});
+							
+						this.add.text(450, 50, this.primerPunt,
+							{fontFamily: 'serif', fontSize: '50px', color: '#000'});
+							
+						this.add.text(250, 150, this.segundoId,
+							{fontFamily: 'serif', fontSize: '50px', color: '#000'});
+							
+						this.add.text(450, 150, this.segundoPunt,
+							{fontFamily: 'serif', fontSize: '50px', color: '#000'});
+							
+						this.add.text(250, 250, this.tercerId,
+							{fontFamily: 'serif', fontSize: '50px', color: '#000'});
+							
+						this.add.text(450, 250, this.tercerPunt,
+							{fontFamily: 'serif', fontSize: '50px', color: '#000'});
+							
 					}
+					
 					update() {
 						
 					}
