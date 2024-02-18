@@ -515,6 +515,9 @@
 					if (!existe) {
 						createUser(usuario, function (usuarioConId) {
 							currentUser = usuarioConId.id;
+							existingUsers[currentUser - 1] = usuarioConId.username;
+							existingPasswords[currentUser - 1] = usuarioConId.password;
+							existingRecords[currentUser - 1] = usuarioConId.record;
 						});
 						openPrincipal();
 						closeForm();
@@ -556,7 +559,7 @@
 						headers: {
 							"Content-Type": "application/json"
 						}
-					}).done(function (item) {
+					}).done(function (user) {
 						console.log("Updated item: " + JSON.stringify(user))
 					})
 				}
@@ -570,6 +573,7 @@
 						record: existingPasswords[currentUser - 1],
 						id: currentUser
 					}
+					console.log(usuario.id);
 					updateUser(usuario);
 					openPrincipal();
 					closeOtro();
@@ -599,7 +603,7 @@
 						for (var i = 0; i < users.length; i++) {
 							existingUsers[i] = users[i].username;
 							existingPasswords[i] = users[i].password;
-							existingRecords[i] = users[i].record;  /// COMPROBAR
+							existingRecords[i] = users[i].record;
 						}
 					})
 				})

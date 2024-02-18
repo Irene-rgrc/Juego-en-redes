@@ -60,7 +60,7 @@ public class UsersController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<User> actulizaUser(@PathVariable long id,@RequestBody User userActualizado) throws ClassNotFoundException, IOException {
+	public ResponseEntity<User> actualizaUser(@PathVariable long id,@RequestBody User userActualizado) throws ClassNotFoundException, IOException {
 
 		User savedUser = users.get(userActualizado.getId());
 
