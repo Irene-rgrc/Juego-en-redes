@@ -2703,6 +2703,7 @@
 						this.load.image('opcion2', 'assets/Opcion2.png');
 						this.load.spritesheet('puerta', 'assets/PuertaCielo.png', {frameWidth: 1920, frameHeight: 1080})
 						this.load.image('sueloCielo', 'assets/PlataformaMoradaLado.png');
+						this.load.image('puntuaciones', 'assets/PuntuacionesBoton.png');
 					}
 
 					create() {
@@ -2770,25 +2771,50 @@
 
 						//BOTON SALIR
 						//Se añade el boton de salir
-						const botonSalir = this.add.image(975, 760, "salir").setInteractive();
-						botonSalir.setScale(0.20, 0.20)
+						const botonSalir = this.add.image(975, 870, "salir").setInteractive();
+						botonSalir.setScale(0.15, 0.15)
 
 						//Al pasar por encima se pone mas oscuro y crece en tamaño
 						botonSalir.on('pointerover', function () {
 							this.setTint(0x555555);
-							this.setScale(0.23, 0.23);
+							this.setScale(0.20, 0.20);
 						});
 
 						//Al quitar el cursor el boton vuelve al tamaño original
 						botonSalir.on('pointerout', function () {
 							this.clearTint();
-							this.setScale(0.20, 0.20);
+							this.setScale(0.15, 0.15);
 						});
 
 						//Al hacer click en el boton se sale del juego
 						botonSalir.on('pointerdown', (pointer) => {
 							console.log('Saliendo');
 							window.close();
+						});
+						
+						//BOTON PUNTUACIONES
+						//Se añade el boton de puntuaciones
+						const botonPuntuacion = this.add.image(975, 760, "puntuaciones").setInteractive();
+						botonPuntuacion.setScale(0.06, 0.06)
+
+						//Al pasar por encima se pone mas oscuro y crece en tamaño
+						botonPuntuacion.on('pointerover', function () {
+							this.setTint(0x555555);
+							this.setScale(0.08, 0.08);
+						});
+
+						//Al quitar el cursor el boton vuelve al tamaño original
+						botonPuntuacion.on('pointerout', function () {
+							this.clearTint();
+							this.setScale(0.06, 0.06);
+						});
+
+						//Al hacer click en el boton se va a ajustes
+						botonPuntuacion.on('pointerdown', (pointer) => {
+							this.scene.sleep('MenuInicio');
+							this.scene.launch('Puntuaciones');
+							console.log('Pantalla de Puntuaciones');
+
 						});
 
 					}
