@@ -654,7 +654,7 @@
 				var tiempoInicio; // Variable para guardar el tiempo de inicio
 				var tiempoTranscurrido = new Date(); // VARIABLE QUE HAY QUE DEVOLVER PARA HOMECONTROLLER
 
-				function actualizarTiempo() {
+				function actualizarTiempo(escena) {
 					if(tiempoAcabar == false){
 						tiempoInicio = Date.now(); // Guardar el tiempo de inicio en milisegundos
 					var tiempoTotal = 5 * 60; // 5 minutos en segundos
@@ -674,7 +674,7 @@
                             // TiempoTranscurrido = (tiempoTotal - tiempoInicio) / 1000; // Calcular el tiempo transcurrido en segundos
                             display.textContent = 'Se acabo el tiempo';
                             // Poner final malo
-                            game.scene.start('FinalMalo');
+                            escena.scene.start('FinalMalo');
                         } else if (tiempoAcabar == true){
 							clearInterval(tiempo);
 						}
@@ -1007,7 +1007,7 @@
 
 					preload() {
 						tiempoAcabar = false;
-						actualizarTiempo();
+						actualizarTiempo(this);
 					}
 
 					create() {
