@@ -648,18 +648,18 @@
 				let volumenGlobal = 0.3;
 				let cancionReproducida = false;
 				let cancion;
+				var tiempoAcabar = false;
 
 				// HIGHSCORE
 				var tiempoInicio; // Variable para guardar el tiempo de inicio
 				var tiempoTranscurrido = new Date(); // VARIABLE QUE HAY QUE DEVOLVER PARA HOMECONTROLLER
 
 				function actualizarTiempo() {
-
-					tiempoInicio = Date.now(); // Guardar el tiempo de inicio en milisegundos
+					if(tiempoAcabar == false){
+						tiempoInicio = Date.now(); // Guardar el tiempo de inicio en milisegundos
 					var tiempoTotal = 5 * 60; // 5 minutos en segundos
 					//var tiempoTotal = 60; // 5 minutos en segundos
 					var display = document.getElementById('tiempo');
-
 					var tiempo = setInterval(function () {
 						var minutos = Math.floor(tiempoTotal / 60);
 						var segundos = tiempoTotal % 60;
@@ -667,18 +667,20 @@
 						tiempoTranscurrido = (Date.now() - tiempoInicio) / 1000; // Calcular el tiempo transcurrido en segundos
 
 						display.textContent = minutos.toString().padStart(2, '0') + 'm ' + segundos.toString().padStart(2, '0') + 's';
-
-
-						/*if (--tiempoTotal < 0) {
+						
+						if (--tiempoTotal < 0) {
+                            clearInterval(tiempo);
+                            // TiempoTranscurrido = (Date.now() - tiempoInicio) / 1000; // Calcular el tiempo transcurrido en segundos
+                            // TiempoTranscurrido = (tiempoTotal - tiempoInicio) / 1000; // Calcular el tiempo transcurrido en segundos
+                            display.textContent = 'Se acabo el tiempo';
+                            // Poner final malo
+                            game.scene.start('FinalMalo');
+                        } else if (tiempoAcabar == true){
 							clearInterval(tiempo);
-							// TiempoTranscurrido = (Date.now() - tiempoInicio) / 1000; // Calcular el tiempo transcurrido en segundos
-							// TiempoTranscurrido = (tiempoTotal - tiempoInicio) / 1000; // Calcular el tiempo transcurrido en segundos
-							display.textContent = 'Se acabo el tiempo';
-							// Poner final malo
-							game.scene.sleep(escena);
-							game.scene.start('FinalMalo');
-						}*/
+						}
 					}, 1000);
+					
+					}
 				}
 
 				function mostrarTiempoTranscurrido() {
@@ -689,9 +691,9 @@
 				}
 
 				function pararContador() {
-					clearInterval(tiempo); // Detener el contador
+					tiempoAcabar = true; // Detener el contador
 					var display = document.getElementById('tiempo');
-					display.textContent = 'Felicidades!!!';
+					display.textContent = '';
 					partidaCompleta();
 						return  tiempoTranscurrido;
 				}
@@ -1000,9 +1002,11 @@
 						this.pulsar3;
 						this.pulsar4;
 						this.numAleatorio;
+						
 					}
 
 					preload() {
+						tiempoAcabar = false;
 						actualizarTiempo();
 					}
 
@@ -2187,6 +2191,7 @@
 
 					elegir() {
 						pararContador();
+						tiempoAcabar = true;
 						this.scene.start('Elegir');
 					}
 
