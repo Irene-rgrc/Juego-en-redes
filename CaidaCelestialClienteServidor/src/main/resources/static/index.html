@@ -192,6 +192,20 @@
 			position: absolute;
 			left: 770px;
 		}
+		
+		.principal-container .puntuacion {
+
+			background-image: url('assets/PuntuacionesBoton.PNG');
+			background-size: contain;
+			background-repeat: no-repeat;
+			background-position: center;
+			opacity: 0.8;
+			width: 260px;
+			height: 100px;
+			display: block;
+			margin: 0 auto;
+			background-color: transparent;
+		}
 
 		.despuesInicio-container .continuar {
 
@@ -263,6 +277,7 @@
 			margin: 0 auto;
 			background-color: transparent;
 		}
+		
 
 		.iniciar-container .inicioSesion {
 
@@ -313,7 +328,9 @@
 			<br><br>
 			<button type="button" class="btn registrarse" onclick="openForm()"> </button>
 			<br><br>
-			<button type="button" class="btn offline" onclick="closePrincipal()"> </button>
+			<button type="button" class="btn puntuacion" onclick="openPuntuacion()"> </button>
+			<br><br>
+			<button type="button" class="btn offline" onclick="closePrincipal()"> </button>	
 		</form>
 
 	</div>
@@ -409,6 +426,11 @@
 					closeDespuesInicio();
 					document.getElementById("otrosForm").style.display = "block";
 				}
+				
+				function openPuntuacion() {
+					closePrincipal();
+					document.getElementById("puntuacionForm").style.display = "block";
+				}
 
 				function openPrincipal() {
 					document.getElementById("principalForm").style.display = "block";
@@ -434,10 +456,16 @@
 					document.getElementById("otrosForm").style.display = "none";
 					openPrincipal();
 				}
+				
+				function closePuntuacion() {
+					document.getElementById("puntuacionForm").style.display = "none";
+					openPrincipal();
+				}
 
 				function closePrincipal() {
 					document.getElementById("principalForm").style.display = "none";
 				}
+
 
 				var ip = location.host;
 				var existingUsers = [];
