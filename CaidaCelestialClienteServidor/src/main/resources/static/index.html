@@ -570,12 +570,12 @@
 					var usuario = {
 						username: existingUsers[currentUser - 1],
 						password: contraseña,
-						record: existingPasswords[currentUser - 1],
+						record: existingRecords[currentUser - 1],
 						id: currentUser
 					}
 					console.log(usuario.id);
 					updateUser(usuario);
-					openPrincipal();
+					openDespuesInicio();
 					closeOtro();
 
 					existingPasswords[currentUser - 1] = contraseña;
