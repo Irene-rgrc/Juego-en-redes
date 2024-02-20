@@ -423,6 +423,7 @@ Si se ha pulsado el botón de tutorial esto llevará a una secuencia explicativa
 
 Los botones de registrase e iniciar sesión permiten a los jugadores crearse una cuenta y acceder a ella respectivamente. Aunque no es necesario tener una cuenta para poder jugar, iniciar sesión permite guadar la máxima puntuación del jugador y mostrarla en el menú de puntuaciones si se encuentra entre las tres mejores. Además es posible cambiar la contraseña de la cuenta e incluso borrala por completo si se accede al menú de ajustes de la cuenta después de iniciar sesión.
 
+
 ![](CONCEPTS/Concept_Boton_Continuar.png)
 
 *Img. Concept Botones de Interfaz* 
@@ -431,7 +432,7 @@ Los botones de registrase e iniciar sesión permiten a los jugadores crearse una
 
 El menú principal consta del título del juego que ocupe un tamaño razonable para captar la atención del jugador y luego abajo estarán enfiladas céntricas tres botones: Comenzar que se ha cambiado por Jugar, Ajustes y Salir.
 
-![](CONCEPTS/Concept_MenuPrincipal.jpeg)
+![](CONCEPTS/Concept_MenuPrincipalFinal2.PNG)
 
 *Img. Esquema del menú principal*
 
