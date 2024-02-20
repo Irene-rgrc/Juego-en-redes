@@ -413,7 +413,7 @@ El juego contendrá una serie de “menús” los cuales le permitirán al jugad
 A continuación, se explicará en qué consiste el diagrama de flujo de las interfaces. Un diagrama de flujo de una interfaz, a menudo denominado diagrama de  flujo de  usuario, es  una representación gráfica  que muestra  cómo un  usuario interactúa  con una  interfaz del juego/software.*** 
 
 
-![](CONCEPTS/FINALES/DiagramaDeFlujo.png)
+![](CONCEPTS/FINALES/DiagramaDeFlujoFinal.png)
 
 *Img. Diagrama de flujo*
 
