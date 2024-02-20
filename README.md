@@ -432,7 +432,7 @@ Los botones de registrase e iniciar sesión permiten a los jugadores crearse una
 
 El menú principal consta del título del juego que ocupe un tamaño razonable para captar la atención del jugador y luego abajo estarán enfiladas céntricas tres botones: Comenzar que se ha cambiado por Jugar, Ajustes y Salir.
 
-![](CONCEPTS/Concept_MenuPrincipal.PNG)
+![](CONCEPTS/Concept_MenuPrincipal.jpeg)
 
 *Img. Esquema del menú principal*
 
