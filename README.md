@@ -465,6 +465,8 @@ En la pantalla de puntuaciones aparece una lista de las tres mejores puntuacione
 
 5. ***Iniciar Sesión y Registrarse***
 
+Las pantallas para Iniciar Sesión y Registrarse explicadas anteriromente son las siguientes:
+
 ![](CONCEPTS/FINALES/IniciarSesionImg.png)
 
 *Img. Pantalla Iniciar Sesión *
@@ -473,6 +475,7 @@ En la pantalla de puntuaciones aparece una lista de las tres mejores puntuacione
 
 *Img. Pantalla Registrarse *
 
+Una vez iniciada la sesión se pueden acceder a los ajustes de cuenta para cambiar la contraseña y borrar la cuenta
 ![](CONCEPTS/FINALES/AjustesCuentaImg.png)
 
 *Img. Pantalla Ajustes Cuenta *
