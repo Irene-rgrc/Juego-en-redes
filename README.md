@@ -463,7 +463,21 @@ En la pantalla de puntuaciones aparece una lista de las tres mejores puntuacione
 
 *Img. Pantalla Puntuaciones*
 
-5. ***Pantalla del tutorial & juego*** 
+5. ***Iniciar Sesión y Registrarse***
+
+![](CONCEPTS/FINALES/IniciarSesionImg.png)
+
+*Img. Pantalla Iniciar Sesión *
+
+![](CONCEPTS/FINALES/RegistarseImg.png)
+
+*Img. Pantalla Registarse *
+
+![](CONCEPTS/FINALES/AjustesCuentaImg.png)
+
+*Img. Pantalla Ajustes Cuenta *
+   
+6. ***Pantalla del tutorial & juego*** 
 
 Para que el jugador no tenga que volver a pasar por las distintas explicaciones que se otorgan al principio se han implementado dos botones extras. El cual uno te lleva directamente al juego donde se encuentra los tres niveles solamente con una breve explicación de historia. El otro llevara a una secuencia de explicaciones de mecánicas de cómo usar los personajes, interactuar con el entorno y con el otro jugador para diversas amenazas.
 
@@ -471,7 +485,7 @@ Para que el jugador no tenga que volver a pasar por las distintas explicaciones 
 
 *Img. Elección de Jugar o tutorial*
 
-5.1 **Pantalla del tutorial** 
+6.1 **Pantalla del tutorial** 
 
 En cuanto al tutorial, presenta una serie de imágenes explicativas sobre como mover al personaje, instrucciones sobre enemigos y objetos, además de los objetivos. En la imagen presenta instrucciones iconográficas de cómo manejarse por el juego, las cuales se pueden pasar pulsando el botón de siguiente en el inferior centrar de la pantalla. Una vez pasada la presentación comienza la pantalla de juego.
 
@@ -479,7 +493,7 @@ En cuanto al tutorial, presenta una serie de imágenes explicativas sobre como m
 
 *Img. Tutorial*
 
-5.2 **Pantalla de juego** 
+6.2 **Pantalla de juego** 
 
 En este menú cuenta “el juego en sí”, se refiere a la interfaz gráfica que se muestra en el monitor cuando una persona está jugando un videojuego, la pantalla de juego es la ventana a la acción y la experiencia del juego. Es la ventana a la experiencia interactiva que ofrece el videojuego. 
 
