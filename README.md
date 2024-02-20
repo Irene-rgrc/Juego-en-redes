@@ -469,9 +469,9 @@ En la pantalla de puntuaciones aparece una lista de las tres mejores puntuacione
 
 *Img. Pantalla Iniciar Sesión *
 
-![](CONCEPTS/FINALES/RegistarseImg.png)
+![](CONCEPTS/FINALES/RegistrarseImg.png)
 
-*Img. Pantalla Registarse *
+*Img. Pantalla Registrarse *
 
 ![](CONCEPTS/FINALES/AjustesCuentaImg.png)
 
