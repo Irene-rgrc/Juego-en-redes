@@ -417,9 +417,11 @@ A continuación, se explicará en qué consiste el diagrama de flujo de las inte
 
 *Img. Diagrama de flujo*
 
-Una vez se abre el ejecutable se encuentra en el menú principal o pantalla de menú principal en la cual aparecerán cuatro botones importantes: Jugar, Ajustes y Salir. Si se ha pulsado salir la página se cierra, si se ha pulsado ajustes aparecerá una barra para ajustar el volumen y se ha pulsado Jugar se puede seleccionar entre el juego o el tutorial. En jugar presenta dos botones debido a que así si los jugadores ya han jugado anteriormente/y o saben las mecánicas pues que no tengan que ver de nuevo la presentación larga explicativa e ir directamente a la pantalla de juego. 
+Una vez se abre el ejecutable se encuentra en el menú principal o pantalla de menú principal en la cual aparecerán  los siguientes botones: Jugar, Registrarse e Iniciar Sesión. Si se selecciona la opción de Jugar se llevará al jugadora otro menú con cuatro botones: Jugar, Ajustes,Salir y Puntuaciones. Si se ha pulsado salir la página se cierra, si se ha pulsado ajustes aparecerá una barra para ajustar el volumen, en puntuaciones aparece una lista de las tres mejores puntuaciones y nombres de usuario de los jugadores que tienen una cuenta creada. Por último, si se ha pulsado Jugar se puede seleccionar entre el juego o el tutorial. En jugar presenta dos botones debido a que así si los jugadores ya han jugado anteriormente/y o saben las mecánicas pues que no tengan que ver de nuevo la presentación larga explicativa e ir directamente a la pantalla de juego. 
 
 Si se ha pulsado el botón de tutorial esto llevará a una secuencia explicativa de como moverse, manejarse e interactuar con el entorno, una vez acaba dicha explicación llevará a la pantalla de juego en la cual consta de una pequeña historia y al pulsar 'enter' se pasará a los tres niveles.  Los niveles son tres, el primero es el subtsubterráneo/suelo el cual presenta unos tentáculos enemigos que si las dos se quedan atascadas entonces se reinicia el nivel. Una vez acabado el nivel del subsuelo, se pasa al del bosque y luego al del cielo. En cualquier momento pulsando la p se puede ir a la pantalla de ajustes y de ella se puede volver a la escena de juego. Dependiendo de si han llegado las dos o solo una saldrá un final u otro. 
+
+Los botones de registrase e iniciar sesión permiten a los jugadores crearse una cuenta y acceder a ella respectivamente. Aunque no es necesario tener una cuenta para poder jugar, iniciar sesión permite guadar la máxima puntuación del jugador y mostrarla en el menú de puntuaciones si se encuentra entre las tres mejores. Además es posible cambiar la contraseña de la cuenta e incluso borrala por completo si se accede al menú de ajustes de la cuenta después de iniciar sesión.
 
 ![](CONCEPTS/Concept_Boton_Continuar.png)
 
@@ -571,7 +573,7 @@ Se ha implementado un temporizador de 5 minutos de cuenta atrás el cual al lleg
 **Instrucciones**
 
 
-¡Claro! Aquí te explico cómo compilar y ejecutar un proyecto Java basado en Spring Boot, además de los pasos para jugar:
+Los pasos para jugar son los siguientes:
 
 - Compilación y Ejecución:
 Compilar el Proyecto:
