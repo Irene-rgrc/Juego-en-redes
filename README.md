@@ -436,12 +436,12 @@ El menú principal consta del título del juego que ocupe un tamaño razonable p
 
 *Img. Esquema del menú principal*
 
-La pantalla que visualizamos al abrir el ejecutable contiene los botiones de Jugar, Iniciar Sesión y Registrarse.
+La pantalla que visualizamos al abrir el ejecutable contiene los botones de Jugar, Iniciar Sesión y Registrarse.
 ![](CONCEPTS/FINALES/MenuPrincipalimgFinal.png)
 
 *Img. Menú principal *
 
-El menú principal consta del título con un fondo de las puertas las cuales es el objetivo final del juego. En el centro se puede ver cuatro botones que destacán los cuales son Jugar, Ajustes, Putuaciones y Salir. Al pulsar Salir se cierra el ejecutable, el botón de Ajustes lleva a la pantalla de ajustes, Puntuaciones lleva a la pantalla con los records y jugar a la selección de juego o tutorial.
+El menú principal consta del título con un fondo de las puertas las cuales son el objetivo final del juego. En el centro se pueden ver cuatro botones que son Jugar, Ajustes, Puntuaciones y Salir. Al pulsar Salir se cierra el ejecutable, el botón de Ajustes lleva a la pantalla de ajustes, Puntuaciones lleva a la pantalla con los records y Jugar a la selección de juego o tutorial.
 
 ![](CONCEPTS/FINALES/MenuPrincipalFinal2.png)
 
@@ -453,9 +453,15 @@ Se puede acceder a través del menú principal o mientras se está jugando, el m
 
 ![](CONCEPTS/FINALES/MenuAjustes.PNG)
 
-*Img. Menú de ajuste*
+*Img. Menú de ajustes*
 
-4. ***Pantalla del tutorial & juego*** 
+4. ***Pantalla De Puntuaciones***
+   
+En la pantalla de puntuaciones aparece una lista de las tres mejores puntuaciones junto a los nombres de usuario de los jugadores que las han obtenido. Es necesario tener una cuenta e iniciar sesión para poder obtener una puntuación y que esta sea registrada en dicha pantalla.
+
+*Img. Pantalla Puntuaciones*
+
+5. ***Pantalla del tutorial & juego*** 
 
 Para que el jugador no tenga que volver a pasar por las distintas explicaciones que se otorgan al principio se han implementado dos botones extras. El cual uno te lleva directamente al juego donde se encuentra los tres niveles solamente con una breve explicación de historia. El otro llevara a una secuencia de explicaciones de mecánicas de cómo usar los personajes, interactuar con el entorno y con el otro jugador para diversas amenazas.
 
@@ -463,7 +469,7 @@ Para que el jugador no tenga que volver a pasar por las distintas explicaciones 
 
 *Img. Elección de Jugar o tutorial*
 
-4.1 **Pantalla del tutorial** 
+5.1 **Pantalla del tutorial** 
 
 En cuanto al tutorial, presenta una serie de imágenes explicativas sobre como mover al personaje, instrucciones sobre enemigos y objetos, además de los objetivos. En la imagen presenta instrucciones iconográficas de cómo manejarse por el juego, las cuales se pueden pasar pulsando el botón de siguiente en el inferior centrar de la pantalla. Una vez pasada la presentación comienza la pantalla de juego.
 
@@ -471,7 +477,7 @@ En cuanto al tutorial, presenta una serie de imágenes explicativas sobre como m
 
 *Img. Tutorial*
 
-4.2 **Pantalla de juego** 
+5.2 **Pantalla de juego** 
 
 En este menú cuenta “el juego en sí”, se refiere a la interfaz gráfica que se muestra en el monitor cuando una persona está jugando un videojuego, la pantalla de juego es la ventana a la acción y la experiencia del juego. Es la ventana a la experiencia interactiva que ofrece el videojuego. 
 
