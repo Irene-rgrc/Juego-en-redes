@@ -459,6 +459,8 @@ Se puede acceder a través del menú principal o mientras se está jugando, el m
    
 En la pantalla de puntuaciones aparece una lista de las tres mejores puntuaciones junto a los nombres de usuario de los jugadores que las han obtenido. Es necesario tener una cuenta e iniciar sesión para poder obtener una puntuación y que esta sea registrada en dicha pantalla.
 
+![](CONCEPTS/FINALES/Pantallauntuaciones.png)
+
 *Img. Pantalla Puntuaciones*
 
 5. ***Pantalla del tutorial & juego*** 
