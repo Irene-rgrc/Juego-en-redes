@@ -11,9 +11,9 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-		//ObjectMapper mapper = new ObjectMapper();
-		//JsonNode node = mapper.readTree(message.getPayload());
-		System.out.println("Message received: " + message);
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode node = mapper.readTree(message.getPayload());
+		System.out.println("Message received: " + node.toString());
 	}
 
 }

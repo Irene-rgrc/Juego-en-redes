@@ -457,27 +457,25 @@
                 
                 var connection = new WebSocket('ws://127.0.0.1:8080/caidacelestial');
 				connection.onopen = function () {
-				connection.send('Handshake');
+				var msg = {message: "Handshake"};
+				connection.send(JSON.stringify(msg));
 				}
-
+				connection.onclose = function(){
+					console.log("Se ha cerrado la conexión.");
+				}
+				connection.onerror = function(e) {
+				console.log("WS error: " + e);
+				}
 				connection.onmessage = function(msg) {
 				console.log("WS message: " + msg.data);
 				}
 				$(document).ready(function() {
 					$('#registrarse-button').click(function () {
-				var message = JSON;
-				message.owa = "Manolo";
-				message.pepe = 35;
-				connection.send(message);
+				var msg = {message: "Haz esto"};
+				connection.send(JSON.stringify(msg));
 				})
 				});
 				
-				connection.onclose = function(){
-					console.log('owaowaaaaoaowao');
-				}
-				connection.onerror = function(e) {
-				console.log("WS error: " + e);
-				}
 
 
 				var ip = location.host;
