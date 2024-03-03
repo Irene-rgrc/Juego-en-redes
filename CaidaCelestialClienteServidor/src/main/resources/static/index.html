@@ -388,6 +388,13 @@
 			<script type="text/javascript">
 
 				var user;
+				var ip = location.host;
+				var existingUsers = [];
+				var existingPasswords = [];
+				var existingRecords = [];
+				var currentUser;
+				var primero;
+
 
 				function openForm() {
 					closePrincipal();
@@ -455,9 +462,9 @@
                     openDespuesInicio();
                 }
                 
-                var connection = new WebSocket('ws://127.0.0.1:8080/caidacelestial');
+                var connection = new WebSocket('ws://' + ip + '/caidacelestial');
 				connection.onopen = function () {
-				var msg = {message: "Handshake"};
+				var msg = {peticion: "Handshake"};
 				connection.send(JSON.stringify(msg));
 				}
 				connection.onclose = function(){
@@ -467,22 +474,19 @@
 				console.log("WS error: " + e);
 				}
 				connection.onmessage = function(msg) {
-				console.log("WS message: " + msg.data);
+					switch(msg.data){
+						case "Cassadie":
+							primero=true;
+							break;
+						case "Seraphina":
+							primero=false;
+							break;
+					}
+					console.log("primero");
 				}
-				$(document).ready(function() {
-					$('#registrarse-button').click(function () {
-				var msg = {message: "Haz esto"};
-				connection.send(JSON.stringify(msg));
-				})
-				});
 				
 
 
-				var ip = location.host;
-				var existingUsers = [];
-				var existingPasswords = [];
-				var existingRecords = [];
-				var currentUser;
 
 				function loadUsers(callback) {
 					$.ajax({
@@ -1016,8 +1020,10 @@
 					}
 
 					preload() {
-						tiempoAcabar = false;
-						actualizarTiempo(this);
+						var msg = {peticion: "emparejar"};
+						connection.send(JSON.stringify(msg));
+						//tiempoAcabar = false;
+						//actualizarTiempo(this);
 					}
 
 					create() {
