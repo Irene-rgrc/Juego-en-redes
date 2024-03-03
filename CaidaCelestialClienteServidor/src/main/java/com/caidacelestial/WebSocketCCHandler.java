@@ -17,7 +17,7 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 		JsonNode m = node.get("peticion");
 		System.out.println("Message received: " + node.toString());
 		
-		switch(m.toString()){
+		switch(m.asText()){
 		case "emparejar":
 			if(!primero) {
 				primero=true;
