@@ -55,12 +55,7 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-
-		<dependency>
-			<groupId>es.urjc.code.juegosenred</groupId>
-			<artifactId>items-backend-and-frontend</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
+		
 	</dependencies>
 
 	<build>
@@ -72,5 +67,6 @@
 			</plugin>
 		</plugins>
 	</build>
+
 
 </project>
