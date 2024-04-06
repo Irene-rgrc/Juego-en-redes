@@ -394,6 +394,8 @@
 				var existingRecords = [];
 				var currentUser;
 				var primero;
+				var pausa1;
+				var pausa2;
 
 
 				function openForm() {
@@ -477,12 +479,25 @@
 					switch(msg.data){
 						case "Cassadie":
 							primero=true;
+							console.log("primero");
 							break;
 						case "Seraphina":
 							primero=false;
+							console.log("segundo");
+							break;
+						case "Pausa1":
+							pausa1 = true;
+							break;
+						case "Pausa2":
+							pausa2 = true;
+							break;
+						case "Play1":
+							pausa1 = false;
+							break;
+						case "Play2":
+							pausa2 = false;
 							break;
 					}
-					console.log("primero");
 				}
 				
 
@@ -865,7 +880,7 @@
 						this.physics.add.overlap(this.Seraphina, this.boton, this.presionar, null, this);
 					}
 
-					movimientoPersonajes() {
+					controles() {
 						if (this.gameOver) {
 							return;
 						}
@@ -931,6 +946,20 @@
 						if (this.keyW.isDown && this.Cassadie.body.touching.down) {
 							this.Cassadie.setVelocityY(-330);
 						}
+						if (Phaser.Input.Keyboard.JustDown(this.keyP)) {
+							var msg = {peticion: "parar"};
+							connection.send(JSON.stringify(msg));
+						}
+						if (pausa1 || pausa2){
+							this.scene.switch('Ajustes');
+							this.keyA.isDown = false;
+							this.keyD.isDown = false;
+							this.keyW.isDown = false;
+							this.keyP.isDown = false;
+							this.cursors.left.isDown = false;
+							this.cursors.right.isDown = false;
+							this.cursors.up.isDown = false;
+						}
 					}
 
 					controlMecanismos() {
@@ -946,15 +975,6 @@
 						else {
 							this.tocarS = false;
 						}
-					}
-
-					parar() {
-						this.keyA.isDown = false;
-						this.keyD.isDown = false;
-						this.keyW.isDown = false;
-						this.cursors.left.isDown = false;
-						this.cursors.right.isDown = false;
-						this.cursors.up.isDown = false;
 					}
 
 					activarC(player, palanca) {
@@ -1140,12 +1160,7 @@
 					}
 
 					update() {
-
-						// tiempo
-						//mostrarTiempoTranscurrido();
-
-						// MOVIMIENTOS PALANCAS BOTONES
-						this.movimientoPersonajes();
+						this.controles();
 
 						this.anims.create({
 							key: 'desactivar',
@@ -1183,12 +1198,6 @@
 						}
 
 						nivelActual = 'NivelSubsuelo';
-						if (Phaser.Input.Keyboard.JustDown(this.keyP)) {
-							//this.scene.pause();
-							this.scene.sleep('NivelSubsuelo');
-							this.scene.launch('Ajustes');
-							this.parar();
-						}
 
 						const distance = Phaser.Math.Distance.Between(this.Seraphina.x, this.Seraphina.y, this.Cassadie.x, this.Cassadie.y);
 						console.log('Distancia:' + distance);
@@ -1550,7 +1559,7 @@
 						// tiempo
 						//mostrarTiempoTranscurrido();
 
-						this.movimientoPersonajes();
+						this.controles();
 						this.piedra.setGravityY(0);
 						this.piedra1.setGravityY(0);
 						this.piedra.setVelocityX(0);
@@ -1663,15 +1672,6 @@
 						mostrarTiempoTranscurrido();
 
 						nivelActual = 'NivelBosque';
-
-
-						//Y se manda a pausa desde aquí porque hay que controlarlo metiendo el string que identifica a cada escena y es diferente para cada una
-						if (Phaser.Input.Keyboard.JustDown(this.keyP)) {
-							//this.scene.pause();
-							this.scene.sleep('NivelBosque');
-							this.scene.launch('Ajustes');
-							this.parar();
-						}
 					}
 
 
@@ -1746,9 +1746,6 @@
 						}
 						this.piezaboton1.disableBody(true, true);
 					}
-
-
-
 
 
 					//////////////////////Presionar para hacer otro con cada piezaboton extra
@@ -2051,7 +2048,7 @@
 						// ................................................................................................................................................
 						mostrarTiempoTranscurrido();
 
-						this.movimientoPersonajes();
+						this.controles();
 						this.controlMecanismos();
 
 						if (!this.physics.overlap(this.boton, this.Cassadie) && !this.physics.overlap(this.boton, this.Seraphina)) {
@@ -2195,14 +2192,6 @@
 
 						//se actualiza el nivel actual para que la pantalla de pausa te devuelva a donde debe
 						nivelActual = 'NivelCielo';
-
-						//Y se manda a pausa desde aquí porque hay que controlarlo metiendo el string que identifica a cada escena y es diferente para cada una
-						if (Phaser.Input.Keyboard.JustDown(this.keyP)) {
-							//this.scene.pause();
-							this.scene.sleep('NivelCielo');
-							this.scene.launch('Ajustes');
-							this.parar();
-						}
 					}
 
 					elegir() {
@@ -2884,6 +2873,8 @@
 
 						//Al hacer click en el boton se sale del juego
 						botonSalir.on('pointerdown', (pointer) => {
+							var msg = {peticion: "continuar"};
+							connection.send(JSON.stringify(msg));
 							console.log('Saliendo de Ajustes');
 							this.scene.wake(nivelActual);
 							//this.scene.resume(nivel);

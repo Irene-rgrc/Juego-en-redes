@@ -14,10 +14,9 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode node = mapper.readTree(message.getPayload());
-		JsonNode m = node.get("peticion");
 		System.out.println("Message received: " + node.toString());
 		
-		switch(m.asText()){
+		switch(node.get("peticion").asText()){
 		case "emparejar":
 			if(!primero) {
 				primero=true;
@@ -26,6 +25,26 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 			}
 			else {
 				String msg="Seraphina";
+				session.sendMessage(new TextMessage(msg));
+			}
+			break;
+		case "parar":
+			if(primero) {
+				String msg="Pausa1";
+				session.sendMessage(new TextMessage(msg));
+			}
+			else {
+				String msg="Pausa2";
+				session.sendMessage(new TextMessage(msg));
+			}
+			break;
+		case "continuar":
+			if(primero) {
+				String msg="Play1";
+				session.sendMessage(new TextMessage(msg));
+			}
+			else {
+				String msg="Play2";
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;
