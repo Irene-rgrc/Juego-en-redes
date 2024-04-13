@@ -393,7 +393,6 @@
 				var existingPasswords = [];
 				var existingRecords = [];
 				var currentUser;
-				var primero;
 				var pausa1;
 				var pausa2;
 
@@ -478,11 +477,11 @@
 				connection.onmessage = function(msg) {
 					switch(msg.data){
 						case "Cassadie":
-							primero=true;
+							window.plyer="player1";
 							console.log("primero");
 							break;
 						case "Seraphina":
-							primero=false;
+							window.plyer="player2";
 							console.log("segundo");
 							break;
 						case "Pausa1":
@@ -497,11 +496,12 @@
 						case "Play2":
 							pausa2 = false;
 							break;
+						case "listos":
+							window.listos = true;
+							break;
 					}
 				}
 				
-
-
 
 				function loadUsers(callback) {
 					$.ajax({
@@ -1012,11 +1012,41 @@
 						this.piezaboton.disableBody(true, true);
 					}
 				}
-
-
+				
+				//PANTALLA SELECCION
+				class PantallaSeleccion extends NivelBase{
+					constructor(){
+						super('PantallaSeleccion');
+					}
+					preload(){
+					}
+					create(){
+						if(window.plyer === "player1"){
+							this.add.image(this.sys.game.config.width / 2, this.sys.game.config.height / 2, "Cassadie");
+							var msg = {peticion: "playerReady", player:"player1"};
+						}
+						else if(window.plyer === "player2"){
+							this.add.image(this.sys.game.config.width / 2, this.sys.game.config.height / 2, "Seraphina");
+							var msg = {peticion: "playerReady", player:"player2"};
+						}
+						connection.send(JSON.stringify(msg));
+						setTimeout(this.startGame.bind(this), 3000);	
+					}
+					update(){
+					}
+					
+					startGame(){
+						var msg = {peticion: "checkPlayersReady"};
+						connection.send(JSON.stringify(msg));
+						if(window.listos) {
+							this.scene.start("NivelSubsuelo");
+						}
+						else setTimeout(this.startGame.bind(this), 3000);
+					}
+				}
+				
 				//NIVEL SUBSUELO
 				class NivelSubsuelo extends NivelBase {
-
 					//Constructor del nivel
 					constructor() {
 						super('NivelSubsuelo');
@@ -1040,8 +1070,6 @@
 					}
 
 					preload() {
-						var msg = {peticion: "emparejar"};
-						connection.send(JSON.stringify(msg));
 						//tiempoAcabar = false;
 						//actualizarTiempo(this);
 					}
@@ -2607,6 +2635,8 @@
 					}
 
 					preload() {
+						var msg = {peticion: "emparejar"};
+						connection.send(JSON.stringify(msg));
 					}
 
 					create() {
@@ -2618,7 +2648,7 @@
 
 					update() {
 						if (Phaser.Input.Keyboard.JustDown(this.enter)) {
-							this.scene.start('NivelSubsuelo');
+							this.scene.start('PantallaSeleccion');
 						}
 					}
 				}
@@ -3136,7 +3166,7 @@
 					dom: {
 						createContainer: true
 					},
-					scene: [MenuInicio, Ajustes, Tutorial, TutorialImagenes, Introducción, NivelSubsuelo, NivelBosque, NivelCielo, Elegir, FinalBueno, FinalMalo, IrCreditos, Creditos, VolverAJugar, Puntuaciones]
+					scene: [MenuInicio, Ajustes, Tutorial, TutorialImagenes, Introducción, PantallaSeleccion, NivelSubsuelo, NivelBosque, NivelCielo, Elegir, FinalBueno, FinalMalo, IrCreditos, Creditos, VolverAJugar, Puntuaciones]
 				};
 
 				var game = new Phaser.Game(config);

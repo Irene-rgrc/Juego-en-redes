@@ -9,6 +9,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class WebSocketCCHandler extends TextWebSocketHandler {
 	boolean primero=false;
+	boolean segundo=false;
+	boolean p1ready = false;
+	boolean p2ready = false;
 	
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
@@ -23,7 +26,8 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 				String msg="Cassadie";
 				session.sendMessage(new TextMessage(msg));
 			}
-			else {
+			else if(!segundo){
+				segundo=true;
 				String msg="Seraphina";
 				session.sendMessage(new TextMessage(msg));
 			}
@@ -47,6 +51,14 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 				String msg="Play2";
 				session.sendMessage(new TextMessage(msg));
 			}
+			break;
+		case "playerReady":
+			String player = node.get("player").asText();
+			if(player.equals("player1")) p1ready = true;
+			else if(player.equals("player2")) p2ready = true;
+			break;
+		case "checkPlayersReady":
+			if(p1ready && p2ready) session.sendMessage(new TextMessage("listos"));
 			break;
 		}
 	}
