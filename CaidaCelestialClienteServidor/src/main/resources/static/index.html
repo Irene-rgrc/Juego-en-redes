@@ -1022,11 +1022,13 @@
 					}
 					create(){
 						if(window.plyer === "player1"){
-							this.add.image(this.sys.game.config.width / 2, this.sys.game.config.height / 2, "Cassadie");
+							//this.add.image(this.sys.game.config.width / 2, this.sys.game.config.height / 2, "Cassadie");
+							this.add.image(960, 500, "CassadieEsperando");
 							var msg = {peticion: "playerReady", player:"player1"};
 						}
 						else if(window.plyer === "player2"){
-							this.add.image(this.sys.game.config.width / 2, this.sys.game.config.height / 2, "Seraphina");
+							//this.add.image(this.sys.game.config.width / 2, this.sys.game.config.height / 2, "Seraphina");
+							this.add.image(960, 500, "SeraphinaEsperando");
 							var msg = {peticion: "playerReady", player:"player2"};
 						}
 						connection.send(JSON.stringify(msg));
@@ -2738,6 +2740,8 @@
 						this.load.image('sueloCielo', 'assets/PlataformaMoradaLado.png');
 						this.load.image('puntuaciones', 'assets/PuntuacionesBoton.png');
 						this.load.image('FondoPunt', 'assetsUsuarios/FondoPuntuaciones.png');
+						this.load.image('SeraphinaEsperando', 'assets/SeraphinaEsperando.png');
+						this.load.image('CassadieEsperando', 'assets/CassadieEsperando.png');
 					}
 
 					create() {
