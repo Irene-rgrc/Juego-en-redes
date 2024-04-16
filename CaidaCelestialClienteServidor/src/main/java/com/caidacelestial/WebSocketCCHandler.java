@@ -10,8 +10,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class WebSocketCCHandler extends TextWebSocketHandler {
 	boolean primero=false;
 	boolean segundo=false;
+	// JUGADORES
 	boolean p1ready = false;
 	boolean p2ready = false;
+	
+	
+	boolean seraphineFinal = false;
+	boolean cassidieFinal = false;
+	
 	
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
@@ -59,6 +65,15 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 			break;
 		case "checkPlayersReady":
 			if(p1ready && p2ready) session.sendMessage(new TextMessage("listos"));
+			break;
+		case "playerPuertas":
+			String jugador = node.get("player").asText();
+			if(jugador.equals("player1")) cassidieFinal = true;
+			else if(jugador.equals("player2")) seraphineFinal = true;
+			break;
+		case "elegirFinal":
+			if (cassidieFinal) session.sendMessage(new TextMessage("cassidieElige"));
+			if (seraphineFinal) session.sendMessage(new TextMessage("seraphinaElige"));
 			break;
 		}
 	}

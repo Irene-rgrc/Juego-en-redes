@@ -395,6 +395,8 @@
 				var currentUser;
 				var pausa1;
 				var pausa2;
+				//var finalC = false;
+				//var finalS = false;
 
 
 				function openForm() {
@@ -498,6 +500,12 @@
 							break;
 						case "listos":
 							window.listos = true;
+							break;
+						case "cassidieElige":
+							window.finalC = true;
+							break;
+						case "seraphinaElige":
+							window.finalS = true;
 							break;
 					}
 				}
@@ -2225,18 +2233,45 @@
 					elegir() {
 						pararContador();
 						tiempoAcabar = true;
-						this.scene.start('Elegir');
-					}
-
-					//////////////////////Presionar para hacer otro con cada piezaboton extra
-					/*presionar(player, boton) {
-						if (this.pulsar) {
-							boton.anims.play('pulsar', false);
-							this.pulsar = false;
-				    
+						// AQUI LE TENGO QUE MANDAR LA PETICION PARA QUE LLEGUE A UN JUGADOR A ESPERAR 
+						// Y AL OTRO A ESPERAR
+						// CASSIDIE
+						if(window.plyer==="player1" ){ // ME DICE EL PUTO CHATGPT QUE ES CON ===
+							var msg = {peticion: "playerPuertas", player:"player1"};
+							console.log("CASSIDIE GANO");
 						}
-						this.piezaboton.disableBody(true, true);
-					}*/
+						//SERAPHINA
+						else if (window.plyer==="player2"){
+							var msg = {peticion: "playerPuertas", player:"player2"};
+							console.log("SERAPHINA GANO");
+						}else{console.log("No pilla el window.player!!!!")} 
+						// Mando para que me eliga el final
+						var msgFinal = {peticion: "elegirFinal"};
+						connection.send(JSON.stringify(msgFinal));
+						console.log("Enviado")
+						if(window.finalC) {
+							console.log("FINALC");
+							// Mando al jugador que ha llegado a la escena elegir
+							if(window.plyer==="player1"){
+								console.log("Elegir");
+								this.scene.start("Elegir");
+							}
+							else if(window.plyer==="player2"){
+								this.scene.start("Ajustes") // TEMPORAL, CREAR ESCENA DE ELECCION DEL OTRO
+							}
+							//this.scene.start("Elegir");
+							// Mando al otro a la espera
+						}else if(window.finalS){
+							console.log("FINALS");
+							if(window.plyer==="player2"){
+								console.log("Elegir");
+								this.scene.start("Elegir");
+							}
+							else if(window.plyer==="player1"){
+								this.scene.start("Ajustes") // TEMPORAL
+							}
+						}
+					}
 
 					activarC(player, palanca) {
 						if (!palanca.getData('on') && this.tocarC) {
