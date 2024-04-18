@@ -68,7 +68,7 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 			break;
 		case "playerPuertas":
 			String jugador = node.get("player").asText();
-			if(jugador.equals("player1")) cassidieFinal = true;
+			if(jugador.equals("player1")) cassidieFinal = true; // A LO MEJOR FALTA CASE DE ESTO
 			else if(jugador.equals("player2")) seraphineFinal = true;
 			break;
 		case "elegirFinal":
