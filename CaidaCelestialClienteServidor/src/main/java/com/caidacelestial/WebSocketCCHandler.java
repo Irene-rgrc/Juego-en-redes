@@ -10,6 +10,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class WebSocketCCHandler extends TextWebSocketHandler {
 	boolean primero=false;
 	boolean segundo=false;
+	// Pausa
+	boolean pausa1=false;
+	boolean pausa2=false;
 	// JUGADORES
 	boolean p1ready = false;
 	boolean p2ready = false;
@@ -31,6 +34,7 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 				primero=true;
 				String msg="Cassadie";
 				session.sendMessage(new TextMessage(msg));
+				System.out.println(msg);
 			}
 			else if(!segundo){
 				segundo=true;
@@ -39,21 +43,45 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 			}
 			break;
 		case "parar":
-			if(primero) {
+			if(node.get("player").asText().equals("player1")) {
+				pausa1 = true;
 				String msg="Pausa1";
 				session.sendMessage(new TextMessage(msg));
 			}
-			else {
+			else if(node.get("player").asText().equals("player2")) {
+				pausa2 = true;
+				String msg="Pausa2";
+				session.sendMessage(new TextMessage(msg));
+			}
+			break;
+		case "pausa":
+			if(pausa1 == true) {
+				String msg="Pausa1";
+				session.sendMessage(new TextMessage(msg));
+			}
+			if(pausa2 == true) {
 				String msg="Pausa2";
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;
 		case "continuar":
-			if(primero) {
+			if(node.get("player").asText().equals("player1")) {
+				pausa1=false;
 				String msg="Play1";
 				session.sendMessage(new TextMessage(msg));
 			}
-			else {
+			else if(node.get("player").asText().equals("player2")) {
+				pausa2=false;
+				String msg="Play2";
+				session.sendMessage(new TextMessage(msg));
+			}
+			break;
+		case "play":
+			if(pausa1 == false) {
+				String msg="Play1";
+				session.sendMessage(new TextMessage(msg));
+			}
+			if(pausa2 == false) {
 				String msg="Play2";
 				session.sendMessage(new TextMessage(msg));
 			}

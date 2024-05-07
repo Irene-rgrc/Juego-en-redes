@@ -387,14 +387,11 @@
 
 			<script type="text/javascript">
 
-				var user;
 				var ip = location.host;
 				var existingUsers = [];
 				var existingPasswords = [];
 				var existingRecords = [];
 				var currentUser;
-				var pausa1;
-				var pausa2;
 				//var finalC = false;
 				//var finalS = false;
 
@@ -487,16 +484,16 @@
 							console.log("segundo");
 							break;
 						case "Pausa1":
-							pausa1 = true;
+							window.pausa1 = true;
 							break;
 						case "Pausa2":
-							pausa2 = true;
+							window.pausa2 = true;
 							break;
 						case "Play1":
-							pausa1 = false;
+							window.pausa1 = false;
 							break;
 						case "Play2":
-							pausa2 = false;
+							window.pausa2 = false;
 							break;
 						case "listos":
 							window.listos = true;
@@ -721,9 +718,9 @@
 				}
 
 				function mostrarTiempoTranscurrido() {
-					console.log('Tiempo transcurrido: ' + tiempoTranscurrido + ' segundos');
+					//console.log('Tiempo transcurrido: ' + tiempoTranscurrido + ' segundos');
 					var highscore = tiempoTranscurrido.toLocaleString();
-					console.log(highscore);
+					//console.log(highscore);
 					return highscore; // DEVUELVE EL TIEMPO TRANSCURRIDO
 				}
 
@@ -955,10 +952,22 @@
 							this.Cassadie.setVelocityY(-330);
 						}
 						if (Phaser.Input.Keyboard.JustDown(this.keyP)) {
-							var msg = {peticion: "parar"};
-							connection.send(JSON.stringify(msg));
+							if(window.plyer === "player1") {
+								var msg = {peticion: "parar", player: "player1"};
+								connection.send(JSON.stringify(msg));
+							}
+							if(window.plyer === "player2") {
+								var msg = {peticion: "parar", player: "player2"};
+								connection.send(JSON.stringify(msg));
+							}
 						}
-						if (pausa1 || pausa2){
+						this.comprobarPausa();
+					}
+					
+					comprobarPausa() {
+						var msg = {peticion: "pausa"};
+							connection.send(JSON.stringify(msg));
+						if (window.pausa1 || window.pausa2){
 							this.scene.switch('Ajustes');
 							this.keyA.isDown = false;
 							this.keyD.isDown = false;
@@ -968,7 +977,7 @@
 							this.cursors.right.isDown = false;
 							this.cursors.up.isDown = false;
 						}
-					}
+					}	
 
 					controlMecanismos() {
 						if (!this.Cassadie.body.touching.left && !this.Cassadie.body.touching.right && !this.Cassadie.body.touching.up) {
@@ -1238,7 +1247,7 @@
 						nivelActual = 'NivelSubsuelo';
 
 						const distance = Phaser.Math.Distance.Between(this.Seraphina.x, this.Seraphina.y, this.Cassadie.x, this.Cassadie.y);
-						console.log('Distancia:' + distance);
+						//console.log('Distancia:' + distance);
 
 						//Si los dos estan atrapados se reinicia
 						if (this.atrapadoC && this.atrapadoS && this.Seraphina.body.touching.down && this.Cassadie.body.touching.down) {
@@ -1282,8 +1291,8 @@
 							this.piezaboton3.enableBody(false, 0, 0, true, true);
 						}
 
-						console.log(this.Cassadie.x)
-						console.log(this.Cassadie.y)
+						//console.log(this.Cassadie.x)
+						//console.log(this.Cassadie.y)
 						// ................................................................................................................................................
 						mostrarTiempoTranscurrido();
 
@@ -2942,12 +2951,14 @@
 
 						//Al hacer click en el boton se sale del juego
 						botonSalir.on('pointerdown', (pointer) => {
-							var msg = {peticion: "continuar"};
-							connection.send(JSON.stringify(msg));
-							console.log('Saliendo de Ajustes');
-							this.scene.wake(nivelActual);
-							//this.scene.resume(nivel);
-							this.scene.stop('Ajustes');
+							if(window.plyer == "player1") {
+								var msg = {peticion: "continuar", player: "player1"};
+								connection.send(JSON.stringify(msg));
+							}
+							if(window.plyer == "player2") {
+								var msg = {peticion: "continuar", player: "player2"};
+								connection.send(JSON.stringify(msg));
+							}
 						});
 
 						//CANCION
@@ -2978,7 +2989,18 @@
 						})
 					}
 
-					update() { }
+					update() { 
+						if (!window.pausa1 && !window.pausa2){
+								console.log('Saliendo de Ajustes');
+								this.scene.wake(nivelActual);
+								//this.scene.resume(nivel);
+								this.scene.stop('Ajustes');
+							}
+						if(window.pausa1 || window.pausa2){
+							var msg = {peticion: "play"};
+								connection.send(JSON.stringify(msg));
+						}
+					}
 				}
 				
 				class Puntuaciones extends Phaser.Scene {
