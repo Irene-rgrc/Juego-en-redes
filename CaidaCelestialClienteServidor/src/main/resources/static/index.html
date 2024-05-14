@@ -504,6 +504,21 @@
 						case "seraphinaElige":
 							window.finalS = true;
 							break;
+						case "up1":
+                			window.up1 = true;
+                			break;
+            			case "down1":
+               				window.down1 = true;
+                			break;
+            			case "left1":
+                			window.left1 = true;
+                			break;
+            			case "right1":
+                			window.right1 = true;
+                			break;
+						case "Controlesj2":
+							window.pausa2 = true;
+							break;
 					}
 				}
 				
@@ -889,32 +904,49 @@
 						if (this.gameOver) {
 							return;
 						}
+						
+						if (window.plyer === "player2") {
+							
 
-						if (this.cursors.left.isDown) {
-							this.Seraphina.setVelocityX(-160);
-							this.Seraphina.anims.play('leftS', true);
-						} else if (this.cursors.right.isDown) {
-							this.Seraphina.setVelocityX(160);
-							this.Seraphina.anims.play('rightS', true);
-						}
-						else {
-							this.Seraphina.setVelocityX(0);
-							this.Seraphina.anims.play('turnS');
-						}
+							if (this.cursors.left.isDown) {
+								this.Seraphina.setVelocityX(-160);
+									this.Seraphina.anims.play('leftS', true);
 
-						if (this.cursors.up.isDown && this.Seraphina.body.touching.down) {
-							this.Seraphina.setVelocityY(-330);
-							this.salto = true;
-						}
-
-						if (this.enter.isDown && !this.Seraphina.body.touching.down && this.salto) {
-							this.Seraphina.setVelocityY(-330);
-							this.segundoSalto = true;
-							this.salto = false;
-						}
-
-						if (this.Seraphina.body.touching.down) {
-							this.segundoSalto = false;
+								var msg = {
+						            peticion: "controlesApretarj1",
+						            player: "player1",
+						            tecla: "left"
+						        };
+						        connection.send(JSON.stringify(msg));
+						        
+						        if(window.left1){
+									this.Seraphina.setVelocityX(-160);
+									this.Seraphina.anims.play('leftS', true);
+								}
+						        
+							} else if (this.cursors.right.isDown) {
+								this.Seraphina.setVelocityX(160);
+								this.Seraphina.anims.play('rightS', true);
+							}
+							else {
+								this.Seraphina.setVelocityX(0);
+								this.Seraphina.anims.play('turnS');
+							}
+	
+							if (this.cursors.up.isDown && this.Seraphina.body.touching.down) {
+								this.Seraphina.setVelocityY(-330);
+								this.salto = true;
+							}
+	
+							if (this.enter.isDown && !this.Seraphina.body.touching.down && this.salto) {
+								this.Seraphina.setVelocityY(-330);
+								this.segundoSalto = true;
+								this.salto = false;
+							}
+	
+							if (this.Seraphina.body.touching.down) {
+								this.segundoSalto = false;
+							}
 						}
 
 

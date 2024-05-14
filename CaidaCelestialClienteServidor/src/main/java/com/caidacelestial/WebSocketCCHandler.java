@@ -21,6 +21,19 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 	boolean seraphineFinal = false;
 	boolean cassidieFinal = false;
 	
+	//Controles j1
+	
+	boolean up1=false;
+	boolean down1=false;
+	boolean left1=false;
+	boolean right1=false;
+	
+	//Controles j2
+	boolean up2=false;
+	boolean down2=false;
+	boolean left2=false;
+	boolean right2=false;
+	
 	
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
@@ -42,6 +55,7 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;
+			
 		case "parar":
 			if(node.get("player").asText().equals("player1")) {
 				pausa1 = true;
@@ -55,6 +69,7 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 			}
 			break;
 		case "pausa":
+			
 			if(pausa1 == true) {
 				String msg="Pausa1";
 				session.sendMessage(new TextMessage(msg));
@@ -64,6 +79,7 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;
+			
 		case "continuar":
 			if(node.get("player").asText().equals("player1")) {
 				pausa1=false;
@@ -76,6 +92,7 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;
+			
 		case "play":
 			if(pausa1 == false) {
 				String msg="Play1";
@@ -86,24 +103,85 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;
+			
 		case "playerReady":
 			String player = node.get("player").asText();
 			if(player.equals("player1")) p1ready = true;
 			else if(player.equals("player2")) p2ready = true;
 			break;
+			
 		case "checkPlayersReady":
 			if(p1ready && p2ready) session.sendMessage(new TextMessage("listos"));
 			break;
+			
 		case "playerPuertas":
 			String jugador = node.get("player").asText();
 			if(jugador.equals("player1")) cassidieFinal = true; // A LO MEJOR FALTA CASE DE ESTO
 			else if(jugador.equals("player2")) seraphineFinal = true;
 			break;
+			
 		case "elegirFinal":
 			if (cassidieFinal) session.sendMessage(new TextMessage("cassidieElige"));
 			if (seraphineFinal) session.sendMessage(new TextMessage("seraphinaElige"));
 			break;
+			
+		case "controlesj1":
+			if(up1 == true) {
+				String msg="Up1";
+				session.sendMessage(new TextMessage(msg));
+			}
+			if(down1 == true) {
+				String msg="Down1";
+				session.sendMessage(new TextMessage(msg));
+			}
+			if(left1 == true) {
+				String msg="Left1";
+				session.sendMessage(new TextMessage(msg));
+			}
+			if(right1 == true) {
+				String msg="Right1";
+				session.sendMessage(new TextMessage(msg));
+			}
+			break;
+			
+		case "controlesSoltarj1":
+			if(node.get("player").asText().equals("player1")) {
+		        if(node.get("tecla").asText().equals("up")) {
+		            up1 = false;
+		        } else if(node.get("tecla").asText().equals("down")) {
+		            down1 = false;
+		        } else if(node.get("tecla").asText().equals("left")) {
+		            left1 = false;
+		        } else if(node.get("tecla").asText().equals("right")) {
+		            right1 = false;
+		        }
+		     String msg = "Play1; up1=" + up1 + ", down1=" + down1 + ", left1=" + left1 + ", right1=" + right1;
+		     session.sendMessage(new TextMessage(msg));
+			}
+			break;
+			
+			
+		case "controlesApretarj1":
+				if(node.get("player").asText().equals("player1")) {
+			        if(node.get("tecla").asText().equals("up")) {
+			            up1 = true;
+			        } else if(node.get("tecla").asText().equals("down")) {
+			            down1 = true;
+			        } else if(node.get("tecla").asText().equals("left")) {
+						String msg="Left1";
+						session.sendMessage(new TextMessage(msg));
+			        }
+			            left1 = true;
+			        } else if(node.get("tecla").asText().equals("right")) {
+			            right1 = true;
+			        }
+			     //String msg = "Play1; up1=" + up1 + ", down1=" + down1 + ", left1=" + left1 + ", right1=" + right1;
+			     //session.sendMessage(new TextMessage(msg));
+				break;
+			
+			}	
 		}
+		
 	}
+	
 
-}
