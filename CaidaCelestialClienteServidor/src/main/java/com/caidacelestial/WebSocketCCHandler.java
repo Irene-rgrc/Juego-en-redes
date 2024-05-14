@@ -161,24 +161,55 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 			break;
 			
 			
-		case "controlesApretarj1":
-				if(node.get("player").asText().equals("player1")) {
-			        if(node.get("tecla").asText().equals("up")) {
-			            up1 = true;
-			        } else if(node.get("tecla").asText().equals("down")) {
-			            down1 = true;
-			        } else if(node.get("tecla").asText().equals("left")) {
-						String msg="Left1";
-						session.sendMessage(new TextMessage(msg));
-			        }
-			            left1 = true;
-			        } else if(node.get("tecla").asText().equals("right")) {
-			            right1 = true;
-			        }
-			     //String msg = "Play1; up1=" + up1 + ", down1=" + down1 + ", left1=" + left1 + ", right1=" + right1;
-			     //session.sendMessage(new TextMessage(msg));
-				break;
+		case "pulsarJugador":
+			if(node.get("player").asText().equals("player2")) {
+				left1 = true;
+				String msg="pulsadoLeft1";
+				session.sendMessage(new TextMessage(msg));
+			}
+			if(node.get("player").asText().equals("player1")) {
+				left2 = true;
+				String msg="pulsadoLeft2";
+				session.sendMessage(new TextMessage(msg));
+			}
+			break;
 			
+		case "soltarJugador":
+			if(node.get("player").asText().equals("player2")) {
+				left1=false;
+				String msg="soltadoLeft1";
+				session.sendMessage(new TextMessage(msg));
+			}
+			if(node.get("player").asText().equals("player1")) {
+				left2=false;
+				String msg="soltadoLeft2";
+				session.sendMessage(new TextMessage(msg));
+			}
+			break;
+			
+		case "pulsadoJugador":
+			
+			if(left1 == true) {
+				String msg="pulsadoLeft1";
+				session.sendMessage(new TextMessage(msg));
+			}
+			
+			if(left2 == true) {
+				String msg="pulsadoLeft2";
+				session.sendMessage(new TextMessage(msg));
+			}
+			break;
+		case "seguirJugador":
+			if(left1 == false) {
+				String msg="SoltadoLeft1";
+				session.sendMessage(new TextMessage(msg));
+			}
+			
+			if(left2 == false) {
+				String msg="soltadoLeft2";
+				session.sendMessage(new TextMessage(msg));
+			}
+			break;
 			}	
 		}
 		
