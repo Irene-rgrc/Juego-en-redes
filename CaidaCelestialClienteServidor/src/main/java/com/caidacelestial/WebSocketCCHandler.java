@@ -21,18 +21,19 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 	boolean seraphineFinal = false;
 	boolean cassidieFinal = false;
 	
-	//Controles j1
+	//Controles Seraphina
 	
 	boolean up1=false;
 	boolean down1=false;
 	boolean left1=false;
 	boolean right1=false;
 	
-	//Controles j2
 	boolean up2=false;
 	boolean down2=false;
 	boolean left2=false;
 	boolean right2=false;
+	
+	//controles Cassadie
 	
 	
 	@Override
@@ -125,43 +126,8 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 			if (seraphineFinal) session.sendMessage(new TextMessage("seraphinaElige"));
 			break;
 			
-		case "controlesj1":
-			if(up1 == true) {
-				String msg="Up1";
-				session.sendMessage(new TextMessage(msg));
-			}
-			if(down1 == true) {
-				String msg="Down1";
-				session.sendMessage(new TextMessage(msg));
-			}
-			if(left1 == true) {
-				String msg="Left1";
-				session.sendMessage(new TextMessage(msg));
-			}
-			if(right1 == true) {
-				String msg="Right1";
-				session.sendMessage(new TextMessage(msg));
-			}
-			break;
 			
-		case "controlesSoltarj1":
-			if(node.get("player").asText().equals("player1")) {
-		        if(node.get("tecla").asText().equals("up")) {
-		            up1 = false;
-		        } else if(node.get("tecla").asText().equals("down")) {
-		            down1 = false;
-		        } else if(node.get("tecla").asText().equals("left")) {
-		            left1 = false;
-		        } else if(node.get("tecla").asText().equals("right")) {
-		            right1 = false;
-		        }
-		     String msg = "Play1; up1=" + up1 + ", down1=" + down1 + ", left1=" + left1 + ", right1=" + right1;
-		     session.sendMessage(new TextMessage(msg));
-			}
-			break;
-			
-			
-		case "pulsarJugador":
+		case "pulsarJugadorLeft":
 			if(node.get("player").asText().equals("player2")) {
 				left1 = true;
 				String msg="pulsadoLeft1";
@@ -174,7 +140,7 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 			}
 			break;
 			
-		case "soltarJugador":
+		case "soltarJugadorLeft":
 			if(node.get("player").asText().equals("player2")) {
 				left1=false;
 				String msg="soltadoLeft1";
@@ -187,7 +153,7 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 			}
 			break;
 			
-		case "pulsadoJugador":
+		case "pulsadoJugadorLeft":
 			
 			if(left1 == true) {
 				String msg="pulsadoLeft1";
@@ -199,7 +165,7 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;
-		case "seguirJugador":
+		case "seguirJugadorLeft":
 			if(left1 == false) {
 				String msg="SoltadoLeft1";
 				session.sendMessage(new TextMessage(msg));
@@ -207,6 +173,56 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 			
 			if(left2 == false) {
 				String msg="soltadoLeft2";
+				session.sendMessage(new TextMessage(msg));
+			}
+			break;
+			
+		case "pulsarJugadorRight":
+			if(node.get("player").asText().equals("player2")) {
+				right1 = true;
+				String msg="pulsadoRight1";
+				session.sendMessage(new TextMessage(msg));
+			}
+			if(node.get("player").asText().equals("player1")) {
+				right2 = true;
+				String msg="pulsadoRight2";
+				session.sendMessage(new TextMessage(msg));
+			}
+			break;
+			
+		case "soltarJugadorRight":
+			if(node.get("player").asText().equals("player2")) {
+				right1=false;
+				String msg="soltadoRight1";
+				session.sendMessage(new TextMessage(msg));
+			}
+			if(node.get("player").asText().equals("player1")) {
+				right2=false;
+				String msg="soltadoRight2";
+				session.sendMessage(new TextMessage(msg));
+			}
+			break;
+			
+		case "pulsadoJugadorRight":
+			
+			if(right1 == true) {
+				String msg="pulsadoRight1";
+				session.sendMessage(new TextMessage(msg));
+			}
+			
+			if(right2 == true) {
+				String msg="pulsadoRight2";
+				session.sendMessage(new TextMessage(msg));
+			}
+			break;
+		case "seguirJugadorRight":
+			if(right1 == false) {
+				String msg="SoltadoRight1";
+				session.sendMessage(new TextMessage(msg));
+			}
+			
+			if(right2 == false) {
+				String msg="soltadoRight2";
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;
