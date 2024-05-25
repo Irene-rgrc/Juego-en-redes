@@ -24,17 +24,22 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 	//Controles Seraphina
 	
 	boolean up1=false;
-	boolean down1=false;
 	boolean left1=false;
 	boolean right1=false;
 	
 	boolean up2=false;
-	boolean down2=false;
 	boolean left2=false;
 	boolean right2=false;
-	
+
 	//controles Cassadie
-	
+	boolean a1=false;
+	boolean d1=false;
+	boolean w1=false;
+
+	boolean a2=false;
+	boolean d2=false;
+	boolean w2=false;
+
 	
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
@@ -223,6 +228,203 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 			
 			if(right2 == false) {
 				String msg="soltadoRight2";
+				session.sendMessage(new TextMessage(msg));
+			}
+			break;
+		case "pulsarJugadorUp":
+			if(node.get("player").asText().equals("player2")) {
+				up1 = true;
+				String msg="pulsadoUp1";
+				session.sendMessage(new TextMessage(msg));
+			}
+			if(node.get("player").asText().equals("player1")) {
+				up2 = true;
+				String msg="pulsadoUp2";
+				session.sendMessage(new TextMessage(msg));
+			}
+			break;
+			
+		case "soltarJugadorUp":
+			if(node.get("player").asText().equals("player2")) {
+				up1=false;
+				String msg="soltadoUp1";
+				session.sendMessage(new TextMessage(msg));
+			}
+			if(node.get("player").asText().equals("player1")) {
+				up2=false;
+				String msg="soltadoUp2";
+				session.sendMessage(new TextMessage(msg));
+			}
+			break;
+			
+		case "pulsadoJugadorUp":
+			
+			if(up1 == true) {
+				String msg="pulsadoUp1";
+				session.sendMessage(new TextMessage(msg));
+			}
+			
+			if(up2 == true) {
+				String msg="pulsadoUp2";
+				session.sendMessage(new TextMessage(msg));
+			}
+			break;
+		case "seguirJugadorUp":
+			if(up1 == false) {
+				String msg="SoltadoUp1";
+				session.sendMessage(new TextMessage(msg));
+			}
+			
+			if(up2 == false) {
+				String msg="soltadoUp2";
+				session.sendMessage(new TextMessage(msg));
+			}
+			break;
+		case "pulsarJugadorA":
+			if(node.get("player").asText().equals("player2")) {
+				a1 = true;
+				String msg="pulsadoA1";
+				session.sendMessage(new TextMessage(msg));
+			}
+			if(node.get("player").asText().equals("player1")) {
+				a2 = true;
+				String msg="pulsadoA2";
+				session.sendMessage(new TextMessage(msg));
+			}
+			break;
+			
+		case "soltarJugadorA":
+			if(node.get("player").asText().equals("player2")) {
+				a1=false;
+				String msg="soltadoA1";
+				session.sendMessage(new TextMessage(msg));
+			}
+			if(node.get("player").asText().equals("player1")) {
+				a2=false;
+				String msg="soltadoA2";
+				session.sendMessage(new TextMessage(msg));
+			}
+			break;
+			
+		case "pulsadoJugadorA":
+			
+			if(a1 == true) {
+				String msg="pulsadoA1";
+				session.sendMessage(new TextMessage(msg));
+			}
+			
+			if(a2 == true) {
+				String msg="pulsadoA2";
+				session.sendMessage(new TextMessage(msg));
+			}
+			break;
+		case "seguirJugadorA":
+			if(a1 == false) {
+				String msg="SoltadoA1";
+				session.sendMessage(new TextMessage(msg));
+			}
+			
+			if(a2 == false) {
+				String msg="soltadoA2";
+				session.sendMessage(new TextMessage(msg));
+			}
+			break;
+			
+		case "pulsarJugadorD":
+			if(node.get("player").asText().equals("player2")) {
+				d1 = true;
+				String msg="pulsadoD1";
+				session.sendMessage(new TextMessage(msg));
+			}
+			if(node.get("player").asText().equals("player1")) {
+				d2 = true;
+				String msg="pulsadoD2";
+				session.sendMessage(new TextMessage(msg));
+			}
+			break;
+			
+		case "soltarJugadorD":
+			if(node.get("player").asText().equals("player2")) {
+				d1=false;
+				String msg="soltadoD1";
+				session.sendMessage(new TextMessage(msg));
+			}
+			if(node.get("player").asText().equals("player1")) {
+				d2=false;
+				String msg="soltadoD2";
+				session.sendMessage(new TextMessage(msg));
+			}
+			break;
+			
+		case "pulsadoJugadorD":
+			
+			if(d1 == true) {
+				String msg="pulsadoD1";
+				session.sendMessage(new TextMessage(msg));
+			}
+			
+			if(d2 == true) {
+				String msg="pulsadoD2";
+				session.sendMessage(new TextMessage(msg));
+			}
+			break;
+		case "seguirJugadorD":
+			if(d1 == false) {
+				String msg="SoltadoD1";
+				session.sendMessage(new TextMessage(msg));
+			}
+			
+			if(d2 == false) {
+				String msg="soltadoD2";
+				session.sendMessage(new TextMessage(msg));
+			}
+			break;
+		case "pulsarJugadorW":
+			if(node.get("player").asText().equals("player2")) {
+				w1 = true;
+				String msg="pulsadoW1";
+				session.sendMessage(new TextMessage(msg));
+			}
+			if(node.get("player").asText().equals("player1")) {
+				w2 = true;
+				String msg="pulsadoW2";
+				session.sendMessage(new TextMessage(msg));
+			}
+			break;
+			
+		case "soltarJugadorW":
+			if(node.get("player").asText().equals("player2")) {
+				w1=false;
+				String msg="soltadoW1";
+				session.sendMessage(new TextMessage(msg));
+			}
+			if(node.get("player").asText().equals("player1")) {
+				w2=false;
+				String msg="soltadoW2";
+				session.sendMessage(new TextMessage(msg));
+			}
+			break;
+			
+		case "pulsadoJugadorW":
+			
+			if(w1 == true) {
+				String msg="pulsadoW1";
+				session.sendMessage(new TextMessage(msg));
+			}
+			
+			if(w2 == true) {
+				String msg="pulsadoW2";
+				session.sendMessage(new TextMessage(msg));
+			}
+			break;
+		case "seguirJugadorW":
+			if(w1 == false) {
+				String msg="SoltadoW1";
+				session.sendMessage(new TextMessage(msg));
+			}
+			
+			if(w2 == false) {
+				String msg="soltadoW2";
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;

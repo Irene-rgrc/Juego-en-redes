@@ -532,6 +532,63 @@
 						case "soltadoRight2":
 							window.right2 = false;
 							break;
+						case "pulsadoUp1":
+							window.up1 = true;
+							console.Log("holiiis")
+							break;
+						case "soltadoUp1":
+							window.up1 = false;
+							break;
+						case "pulsadoUp2":
+							window.up2 = true;
+							console.Log("holiiis")
+							break;
+						case "soltadoUp2":
+							window.up2 = false;
+							break;
+							
+						case "pulsadoA1":
+							window.a1 = true;
+							console.Log("holiiis")
+							break;
+						case "soltadoA1":
+							window.a1 = false;
+							break;
+						case "pulsadoA2":
+							window.a2 = true;
+							console.Log("holiiis")
+							break;
+						case "soltadoA2":
+							window.a2 = false;
+							break;
+						case "pulsadoD1":
+							window.d1 = true;
+							console.Log("holiiis")
+							break;
+						case "soltadoD1":
+							window.d1 = false;
+							break;
+						case "pulsadoD2":
+							window.d2 = true;
+							console.Log("holiiis")
+							break;
+						case "soltadoD2":
+							window.d2 = false;
+							break;
+						case "pulsadoW1":
+							window.w1 = true;
+							console.Log("holiiis")
+							break;
+						case "soltadoW1":
+							window.w1 = false;
+							break;
+						case "pulsadoW2":
+							window.w2 = true;
+							console.Log("holiiis")
+							break;
+						case "soltadoW2":
+							window.w2 = false;
+							break;
 
 					}
 				}
@@ -957,8 +1014,17 @@
 							}
 	
 							if (this.cursors.up.isDown && this.Seraphina.body.touching.down) {
-								this.Seraphina.setVelocityY(-330);
-								this.salto = true;
+								//this.Seraphina.setVelocityY(-330);
+								var msg = {peticion: "pulsarJugadorUp", player: "player2"};
+								connection.send(JSON.stringify(msg));
+								var msg = {peticion: "pulsarJugadorUp", player: "player1"};
+								connection.send(JSON.stringify(msg));
+								//this.salto = true;
+							}else{
+								var msg = {peticion: "soltarJugadorUp", player: "player2"};
+								connection.send(JSON.stringify(msg));
+								var msg = {peticion: "soltarJugadorUp", player: "player1"};
+								connection.send(JSON.stringify(msg));
 							}
 	
 							if (this.enter.isDown && !this.Seraphina.body.touching.down && this.salto) {
@@ -972,40 +1038,71 @@
 							}
 						}
 
-
+					if(window.plyer === "player1" ){
 						if (this.keyA.isDown) {
 							if (Phaser.Input.Keyboard.JustDown(this.space)) {
-								this.Cassadie.setVelocityX(-600);
-								this.sprintActivado = true;
-								this.empujon = false;
+								//this.Cassadie.setVelocityX(-600);
+								//this.sprintActivado = true;
+								//this.empujon = false;
+								console.log("aqui va el sprint")
 							}
 							else {
-								this.Cassadie.setVelocityX(-160);
-								this.sprintActivado = false;
-								this.Cassadie.anims.play('leftC', true);
+								//this.Cassadie.setVelocityX(-160);
+								//this.sprintActivado = false;
+								//this.Cassadie.anims.play('leftC', true);
+								var msg = {peticion: "pulsarJugadorA", player: "player2"};
+								connection.send(JSON.stringify(msg));
+								var msg = {peticion: "pulsarJugadorA", player: "player1"};
+								connection.send(JSON.stringify(msg));
 							}
 						} else if (this.keyD.isDown) {
 							if (Phaser.Input.Keyboard.JustDown(this.space)) {
-								this.Cassadie.setVelocityX(600);
-								this.sprintActivado = true;
-								this.empujon = false;
+								//this.Cassadie.setVelocityX(600);
+								//this.sprintActivado = true;
+								//this.empujon = false;
+								console.log("aqui va el sprint")
 							}
 							else {
-								this.Cassadie.setVelocityX(160);
-								this.sprintActivado = false;
-								this.Cassadie.anims.play('rightC', true);
+								//this.Cassadie.setVelocityX(160);
+								//this.sprintActivado = false;
+								//this.Cassadie.anims.play('rightC', true);
+								var msg = {peticion: "pulsarJugadorD", player: "player2"};
+								connection.send(JSON.stringify(msg));
+								var msg = {peticion: "pulsarJugadorD", player: "player1"};
+								connection.send(JSON.stringify(msg))
 							}
 						}
 						else {
-							this.Cassadie.setVelocityX(0);
-							this.Cassadie.anims.play('turnC');
-							this.sprintActivado = false;
-							this.empujon = true;
+							//this.Cassadie.setVelocityX(0);
+							//this.Cassadie.anims.play('turnC');
+							//this.sprintActivado = false;
+							//this.empujon = true;
+								var msg = {peticion: "soltarJugadorA", player: "player2"};
+								connection.send(JSON.stringify(msg));
+								var msg = {peticion: "soltarJugadorA", player: "player1"};
+								connection.send(JSON.stringify(msg));
+								
+								var msg = {peticion: "soltarJugadorD", player: "player2"};
+								connection.send(JSON.stringify(msg));
+								var msg = {peticion: "soltarJugadorD", player: "player1"};
+								connection.send(JSON.stringify(msg));
+								
 						}
 
 						if (this.keyW.isDown && this.Cassadie.body.touching.down) {
-							this.Cassadie.setVelocityY(-330);
+							//this.Cassadie.setVelocityY(-330);
+								var msg = {peticion: "pulsarJugadorW", player: "player2"};
+								connection.send(JSON.stringify(msg));
+								var msg = {peticion: "pulsarJugadorW", player: "player1"};
+								connection.send(JSON.stringify(msg))
+						}else{
+								var msg = {peticion: "soltarJugadorW", player: "player2"};
+								connection.send(JSON.stringify(msg));
+								var msg = {peticion: "soltarJugadorW", player: "player1"};
+								connection.send(JSON.stringify(msg));
+								
 						}
+					}
 						if (Phaser.Input.Keyboard.JustDown(this.keyP)) {
 							if(window.plyer === "player1") {
 								var msg = {peticion: "parar", player: "player1"};
@@ -1040,6 +1137,8 @@
 							connection.send(JSON.stringify(msg));
 						var msg = {peticion: "pulsadoJugadorRight"};
 							connection.send(JSON.stringify(msg));
+						var msg = {peticion: "pulsadoJugadorUp"};
+							connection.send(JSON.stringify(msg));
 							
 						if (window.left1 && window.left2){
 							this.Seraphina.setVelocityX(-160);
@@ -1053,7 +1152,37 @@
 							this.Seraphina.setVelocityX(0);
 							this.Seraphina.anims.play('turnS');
 						}
-					
+						
+						if (window.up1 && window.up2){
+							this.Seraphina.setVelocityY(-330);
+							this.salto=true;
+						
+						}
+						
+						var msg = {peticion: "pulsadoJugadorA"};
+							connection.send(JSON.stringify(msg));
+						var msg = {peticion: "pulsadoJugadorD"};
+							connection.send(JSON.stringify(msg));
+						var msg = {peticion: "pulsadoJugadorW"};
+							connection.send(JSON.stringify(msg));
+							
+						if (window.a1 && window.a2){
+							this.Cassadie.setVelocityX(-160);
+							this.Cassadie.anims.play('leftC', true);
+
+						}else if(window.d1 && window.d2){
+							this.Cassadie.setVelocityX(160);
+							this.Cassadie.anims.play('rightC', true);
+						}
+						else{
+							this.Cassadie.setVelocityX(0);
+							this.Cassadie.anims.play('turnC');
+						}
+						
+						if (window.w1 && window.w2){
+							this.Cassadie.setVelocityY(-330);
+						
+						}
 					}
 
 					controlMecanismos() {
@@ -1291,6 +1420,23 @@
 						}
 						if(window.right1 && window.right2){
 							var msg = {peticion: "seguirJugadorRight"};
+								connection.send(JSON.stringify(msg));
+						}
+						if(window.up1 && window.up2){
+							var msg = {peticion: "seguirJugadorUp"};
+								connection.send(JSON.stringify(msg));
+						}
+						
+						if(window.a1 && window.a2){
+							var msg = {peticion: "seguirJugadorA"};
+								connection.send(JSON.stringify(msg));
+						}
+						if(window.d1 && window.d2){
+							var msg = {peticion: "seguirJugadorD"};
+								connection.send(JSON.stringify(msg));
+						}
+						if(window.w1 && window.w2){
+							var msg = {peticion: "seguirJugadorW"};
 								connection.send(JSON.stringify(msg));
 						}
 
@@ -1692,6 +1838,31 @@
 						//mostrarTiempoTranscurrido();
 
 						this.controles();
+						if(window.left1 && window.left2){
+							var msg = {peticion: "seguirJugadorLeft"};
+								connection.send(JSON.stringify(msg));
+						}
+						if(window.right1 && window.right2){
+							var msg = {peticion: "seguirJugadorRight"};
+								connection.send(JSON.stringify(msg));
+						}
+						if(window.up1 && window.up2){
+							var msg = {peticion: "seguirJugadorUp"};
+								connection.send(JSON.stringify(msg));
+						}
+						
+						if(window.a1 && window.a2){
+							var msg = {peticion: "seguirJugadorA"};
+								connection.send(JSON.stringify(msg));
+						}
+						if(window.d1 && window.d2){
+							var msg = {peticion: "seguirJugadorD"};
+								connection.send(JSON.stringify(msg));
+						}
+						if(window.w1 && window.w2){
+							var msg = {peticion: "seguirJugadorW"};
+								connection.send(JSON.stringify(msg));
+						}
 						this.piedra.setGravityY(0);
 						this.piedra1.setGravityY(0);
 						this.piedra.setVelocityX(0);
@@ -2181,6 +2352,31 @@
 						mostrarTiempoTranscurrido();
 
 						this.controles();
+						if(window.left1 && window.left2){
+							var msg = {peticion: "seguirJugadorLeft"};
+								connection.send(JSON.stringify(msg));
+						}
+						if(window.right1 && window.right2){
+							var msg = {peticion: "seguirJugadorRight"};
+								connection.send(JSON.stringify(msg));
+						}
+						if(window.up1 && window.up2){
+							var msg = {peticion: "seguirJugadorUp"};
+								connection.send(JSON.stringify(msg));
+						}
+						
+						if(window.a1 && window.a2){
+							var msg = {peticion: "seguirJugadorA"};
+								connection.send(JSON.stringify(msg));
+						}
+						if(window.d1 && window.d2){
+							var msg = {peticion: "seguirJugadorD"};
+								connection.send(JSON.stringify(msg));
+						}
+						if(window.w1 && window.w2){
+							var msg = {peticion: "seguirJugadorW"};
+								connection.send(JSON.stringify(msg));
+						}
 						this.controlMecanismos();
 
 						if (!this.physics.overlap(this.boton, this.Cassadie) && !this.physics.overlap(this.boton, this.Seraphina)) {
