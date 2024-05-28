@@ -2896,10 +2896,10 @@
 						
 						if(window.finalElegido === true){
 							console.log("Personaje entro en eleccion");
-							if (window.esFinalMalo == true){
+							if (window.esFinalMalo === true){
 								this.scene.start('FinalMalo');
 							}
-							if (window.esFinalBueno == true){
+							if (window.esFinalBueno === true){
 								this.scene.start('FinalBueno');
 							}
 							
@@ -3703,7 +3703,7 @@
 						//Al hacer click en el boton comienza el juego
 						OpcionSolo.on('pointerdown', (pointer) => {
 							// MANDARSELO AL WEBSOCKET PARA QUE LO SEPA EL OTRO
-							var escogerFinalMalo = {peticion: "finMalo"};
+							var escogerFinalMalo = {peticion: "finalMalo"};
 							connection.send(JSON.stringify(escogerFinalMalo));
 							this.scene.start('FinalMalo');
 						});
@@ -3728,7 +3728,7 @@
 						//Al hacer click en el boton se va a ajustes
 						OpcionJuntos.on('pointerdown', (pointer) => {
 							// MANDARSELO AL WEBSOCKET PARA QUE LO SEPA EL OTRO
-							var escogerFinalBueno = {peticion: "finBueno"};
+							var escogerFinalBueno = {peticion: "finalBueno"};
 							connection.send(JSON.stringify(escogerFinalBueno));
 							this.scene.start('FinalBueno');
 						});
@@ -3747,8 +3747,7 @@
 					}
 
 					preload() {
-						var escogerFinalBueno = {peticion: "finBueno"};
-						connection.send(JSON.stringify(escogerFinalBueno));
+						
 					}
 
 					create() {
@@ -3783,8 +3782,7 @@
 					}
 
 					preload() {
-						var escogerFinalMalo = {peticion: "finMalo"};
-						connection.send(JSON.stringify(escogerFinalMalo));
+						
 					}
 
 					create() {
@@ -3795,6 +3793,8 @@
 					}
 
 					update() {
+						var escogerFinalMalo = {peticion: "finMalo"};
+						connection.send(JSON.stringify(escogerFinalMalo));
 						if (Phaser.Input.Keyboard.JustDown(this.enter)) {
 							this.scene.start('IrCreditos');
 						}

@@ -52,6 +52,8 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 	boolean h2 = false;
 	
 	// FINALES
+	boolean finalBueno = false;
+	boolean finalMalo = false;
 
 	
 	@Override
@@ -161,11 +163,21 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 				session.sendMessage(new TextMessage("finalElegiendo"));
 			}
 			break;
-		case "finMalo":
-			session.sendMessage(new TextMessage("esMalo"));
+		
+		case "finalBueno":
+			finalBueno = true;
 			break;
-		case "finBueno":
-			session.sendMessage(new TextMessage("esBueno"));
+		case "finalMalo":
+			finalMalo = true;
+			break;
+		
+		case "tipoFinal":
+			if(finalBueno == true) {
+				session.sendMessage(new TextMessage("esBueno"));
+			}
+			if (finalMalo == true) {
+				session.sendMessage(new TextMessage("esMalo"));
+			}
 			break;
 			
 			
