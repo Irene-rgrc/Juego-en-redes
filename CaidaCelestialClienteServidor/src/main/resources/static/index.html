@@ -498,12 +498,16 @@
 						case "listos":
 							window.listos = true;
 							break;
+						// FINALES
 						case "cassidieElige":
+							console.log("FINAL C")
 							window.finalC = true;
 							break;
 						case "seraphinaElige":
+							console.log("FINAL S")
 							window.finalS = true;
 							break;
+						// 
 						case "pulsadoLeft1":
 							window.left1 = true;
 							break;
@@ -1371,7 +1375,8 @@
 						var msg = {peticion: "checkPlayersReady"};
 						connection.send(JSON.stringify(msg));
 						if(window.listos) {
-							this.scene.start("NivelSubsuelo");
+							this.scene.start("NivelCielo");
+							// ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 						}
 						else setTimeout(this.startGame.bind(this), 3000);
 					}
@@ -2698,19 +2703,25 @@
 						// AQUI LE TENGO QUE MANDAR LA PETICION PARA QUE LLEGUE A UN JUGADOR A ESPERAR 
 						// Y AL OTRO A ESPERAR
 						// CASSIDIE
-						if(window.plyer==="player1" ){ // ME DICE EL PUTO CHATGPT QUE ES CON ===
+						console.log("INTENTANDO ENTRAR");
+						if(window.plyer === "player1" ){ 
+							console.log("Entro en p1");
 							var msg = {peticion: "playerPuertas", player:"player1"};
-							console.log("CASSIDIE GANO");
+							connection.send(JSON.stringify(msg));
 						}
 						//SERAPHINA
 						else if (window.plyer==="player2"){
+							console.log("Entro en p2");
 							var msg = {peticion: "playerPuertas", player:"player2"};
-							console.log("SERAPHINA GANO");
-						}else{console.log("No pilla el window.player!!!!")} 
+							connection.send(JSON.stringify(msg));
+						}
+						else{
+							console.log("No pilla el window.plyer!!!!")} 
+						
 						// Mando para que me eliga el final
-						var msgFinal = {peticion: "elegirFinal"};
-						connection.send(JSON.stringify(msgFinal));
-						console.log("Enviado")
+						//var msgFinal = {peticion: "elegirFinal"};
+						//connection.send(JSON.stringify(msgFinal));
+						//console.log("Enviado")
 						if(window.finalC) {
 							console.log("FINALC");
 							// Mando al jugador que ha llegado a la escena elegir
@@ -2718,20 +2729,23 @@
 								console.log("Elegir");
 								this.scene.start("Elegir");
 							}
-							else if(window.plyer==="player2"){
-								this.scene.start("Ajustes") // TEMPORAL, CREAR ESCENA DE ELECCION DEL OTRO
+							else if(window.plyer === "player2"){
+								this.scene.sleep() // TEMPORAL, CREAR ESCENA DE ELECCION DEL OTRO
 							}
 							//this.scene.start("Elegir");
 							// Mando al otro a la espera
-						}else if(window.finalS){
+						} 
+						else if(window.finalS){
 							console.log("FINALS");
 							if(window.plyer==="player2"){
 								console.log("Elegir");
 								this.scene.start("Elegir");
 							}
 							else if(window.plyer==="player1"){
-								this.scene.start("Ajustes") // TEMPORAL
+								this.scene.sleep() // TEMPORAL
 							}
+						} else {
+							console.log("NO LLEVA A LA PANTALLA DE FINALES");
 						}
 					}
 

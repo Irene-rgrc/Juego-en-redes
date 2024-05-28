@@ -50,13 +50,15 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 	
 	boolean h1 = false;
 	boolean h2 = false;
+	
+	// FINALES
 
 	
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode node = mapper.readTree(message.getPayload());
-		System.out.println("Message received: " + node.toString());
+		//System.out.println("Message received: " + node.toString());
 		
 		switch(node.get("peticion").asText()){
 		case "emparejar":
@@ -133,14 +135,18 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 			
 		case "playerPuertas":
 			String jugador = node.get("player").asText();
-			if(jugador.equals("player1")) cassidieFinal = true; // A LO MEJOR FALTA CASE DE ESTO
-			else if(jugador.equals("player2")) seraphineFinal = true;
+			if(jugador.equals("player1")) {
+				cassidieFinal = true; 
+				System.out.println("cassidieFinal");
+				session.sendMessage(new TextMessage("cassidieElige"));
+			} 
+			else if(jugador.equals("player2")) {
+				seraphineFinal = true;
+				System.out.println("seraphineFinal");
+				session.sendMessage(new TextMessage("seraphinaElige"));
+			}
 			break;
 			
-		case "elegirFinal":
-			if (cassidieFinal) session.sendMessage(new TextMessage("cassidieElige"));
-			if (seraphineFinal) session.sendMessage(new TextMessage("seraphinaElige"));
-			break;
 			
 			
 		case "pulsarJugadorLeft":
