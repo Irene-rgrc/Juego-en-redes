@@ -49,8 +49,13 @@
 			margin-top: 6px;
 
 		}
-
-
+		
+		.aviso-popup {
+			display: none;
+			width: 1920px;
+			height: 1080px;
+			background-image: url('assetsUsuarios/Aviso.jpg');
+		}
 
 		.form-container,
 		.iniciar-container,
@@ -383,6 +388,11 @@
 				<button type="button" class="btn cancelar" onclick="closeOtro2()"> </button>
 				<br><br>
 			</form>
+		</div>
+		
+		<div class="aviso-popup" id="aviso">
+				<h1>Se ha cerrado la conexión</h1>
+		</div>
 
 
 			<script type="text/javascript">
@@ -469,6 +479,7 @@
 				}
 				connection.onclose = function(){
 					console.log("Se ha cerrado la conexión.");
+					document.getElementById("aviso").style.display = "block";
 				}
 				connection.onerror = function(e) {
 				console.log("WS error: " + e);
@@ -3422,13 +3433,19 @@
 
 						//Al hacer click en el boton se sale del juego
 						botonSalir.on('pointerdown', (pointer) => {
-							if(window.plyer == "player1") {
-								var msg = {peticion: "continuar", player: "player1"};
-								connection.send(JSON.stringify(msg));
+							if(window.listos){
+								if(window.plyer == "player1") {
+									var msg = {peticion: "continuar", player: "player1"};
+									connection.send(JSON.stringify(msg));
+								}
+								if(window.plyer == "player2") {
+									var msg = {peticion: "continuar", player: "player2"};
+									connection.send(JSON.stringify(msg));
+								}
 							}
-							if(window.plyer == "player2") {
-								var msg = {peticion: "continuar", player: "player2"};
-								connection.send(JSON.stringify(msg));
+							else{
+								this.scene.wake(nivelActual);
+								this.scene.stop('Ajustes');
 							}
 						});
 
@@ -3461,15 +3478,16 @@
 					}
 
 					update() { 
-						if (!window.pausa1 && !window.pausa2){
-								console.log('Saliendo de Ajustes');
-								this.scene.wake(nivelActual);
-								//this.scene.resume(nivel);
-								this.scene.stop('Ajustes');
+						if(window.listos){
+							if (!window.pausa1 && !window.pausa2){
+									console.log('Saliendo de Ajustes');
+									this.scene.wake(nivelActual);
+									this.scene.stop('Ajustes');
+								}
+							if(window.pausa1 || window.pausa2){
+								var msg = {peticion: "play"};
+									connection.send(JSON.stringify(msg));
 							}
-						if(window.pausa1 || window.pausa2){
-							var msg = {peticion: "play"};
-								connection.send(JSON.stringify(msg));
 						}
 					}
 				}
