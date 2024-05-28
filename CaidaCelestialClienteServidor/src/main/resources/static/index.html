@@ -1302,7 +1302,27 @@
 						}
 						
 						if (window.h1 && window.h2){
-
+							console.log('Ayudando');
+							if(this.atrapadosS){
+								this.Seraphina.setPosition(this.Cassadie.x, this.Cassadie.y);
+								this.atrapadoS = false;
+								console.log(this.atrapadoS);
+								}
+							if(this.atrapadoC){
+								this.Cassadie.setPosition(this.Seraphina.x, this.Seraphina.y);
+								this.atrapadoC = false;
+								console.log(this.atrapadoC);
+								}
+								
+							if(this.atrapadoC && this.atrapadoS){
+								console.log('Han muerto los dos personajes')
+								this.Seraphina.setPosition(1100, 950);
+								this.Cassadie.setPosition(800, 950);
+								this.atrapadoC = false;
+								this.atrapadoS = false;
+							
+						
+						}
 						
 						}
 					}
@@ -1386,7 +1406,7 @@
 						var msg = {peticion: "checkPlayersReady"};
 						connection.send(JSON.stringify(msg));
 						if(window.listos) {
-							this.scene.start("NivelCielo");
+							this.scene.start("NivelSubsuelo");
 							// ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 						}
 						else setTimeout(this.startGame.bind(this), 3000);
@@ -1686,9 +1706,22 @@
 
 							if (this.atrapadoS == true && distance <= 250) {
 								console.log('Ayudando a Sera');
+								/*console.log('Ayudando a Sera');
 								this.Seraphina.setPosition(this.Cassadie.x, this.Cassadie.y);
 								this.atrapadoS = false;
 								console.log(this.atrapadoS);
+								console.log(this.atrapadoS);*/
+								if(this.atrapadoC == true){
+									this.Seraphina.setPosition(1100, 950);
+									this.Cassadie.setPosition(800, 950);
+									this.atrapadoC = false;
+									this.atrapadoS = false;
+								}
+								var msg = {peticion: "pulsarJugadorH", player: "player2"};
+								connection.send(JSON.stringify(msg));
+								var msg = {peticion: "pulsarJugadorH", player: "player1"};
+								connection.send(JSON.stringify(msg))
+								
 								if (this.numAleatorio === 1) {
 									this.golpe1.play();
 								}
@@ -1702,9 +1735,22 @@
 							}
 							if (this.atrapadoC == true && distance <= 250) {
 								console.log('Ayudando a Cas');
+								/*console.log('Ayudando a Cas');
 								this.Cassadie.setPosition(this.Seraphina.x, this.Seraphina.y);
 								this.atrapadoC = false;
 								console.log(this.atrapadoC);
+								console.log(this.atrapadoC);*/
+								if(this.atrapadoS == true){
+									this.Seraphina.setPosition(1100, 950);
+									this.Cassadie.setPosition(800, 950);
+									this.atrapadoC = false;
+									this.atrapadoS = false;
+								}
+								var msg = {peticion: "pulsarJugadorH", player: "player2"};
+								connection.send(JSON.stringify(msg));
+								var msg = {peticion: "pulsarJugadorH", player: "player1"};
+								connection.send(JSON.stringify(msg))
+								
 								if (this.numAleatorio === 1) {
 									this.golpe1.play();
 								}
