@@ -166,8 +166,10 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 		
 		case "finalBueno":
 			finalBueno = true;
+			System.out.println("finalBueno");
 			break;
 		case "finalMalo":
+			System.out.println("finalMalo");
 			finalMalo = true;
 			break;
 		

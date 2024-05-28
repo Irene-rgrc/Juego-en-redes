@@ -2896,6 +2896,8 @@
 						
 						if(window.finalElegido === true){
 							console.log("Personaje entro en eleccion");
+							var cualFinal = {peticion: "tipoFinal"};
+							connection.send(JSON.stringify(cualFinal));
 							if (window.esFinalMalo === true){
 								this.scene.start('FinalMalo');
 							}
