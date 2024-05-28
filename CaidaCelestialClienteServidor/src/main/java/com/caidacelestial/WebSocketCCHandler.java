@@ -154,7 +154,19 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 				session.sendMessage(new TextMessage("seraphinaElige"));
 			}
 			break;
-			
+		
+		case "comprobarExisteFinal":
+			if(cassidieFinal == true || seraphineFinal == true) {
+				// SI HAY FINAL ASI QUE AHORA ES VER SI ES BUENO O MALO
+				session.sendMessage(new TextMessage("finalElegiendo"));
+			}
+			break;
+		case "finMalo":
+			session.sendMessage(new TextMessage("esMalo"));
+			break;
+		case "finBueno":
+			session.sendMessage(new TextMessage("esBueno"));
+			break;
 			
 			
 		case "pulsarJugadorLeft":

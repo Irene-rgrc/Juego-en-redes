@@ -518,6 +518,17 @@
 							console.log("FINAL S")
 							window.finalS = true;
 							break;
+						
+						case "finalElegiendo":
+							window.finalElegido = true;
+							break;
+						case "esBueno":
+							window.esFinalBueno = true;
+							break;
+						case "esMalo":
+							window.esFinalMalo = true;
+							break;
+						
 						// 
 						case "pulsadoLeft1":
 							window.left1 = true;
@@ -1406,7 +1417,8 @@
 						var msg = {peticion: "checkPlayersReady"};
 						connection.send(JSON.stringify(msg));
 						if(window.listos) {
-							this.scene.start("NivelSubsuelo");
+							//this.scene.start("NivelSubsuelo");
+							this.scene.start("NivelCielo");
 							// ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 						}
 						else setTimeout(this.startGame.bind(this), 3000);
@@ -2793,7 +2805,7 @@
 							}
 							// NO ELIGE SE DUERME
 							else if(window.plyer === "player2"){
-								this.scene.pause(); // TEMPORAL, CREAR ESCENA DE ELECCION DEL OTRO
+								this.scene.start("EligiendoFinal"); // TEMPORAL, CREAR ESCENA DE ELECCION DEL OTRO
 							}
 							//this.scene.start("Elegir");
 							// Mando al otro a la espera
@@ -2805,7 +2817,8 @@
 								this.scene.start("Elegir");
 							}
 							else if(window.plyer==="player1"){
-								this.scene.pause(); // TEMPORAL
+								//this.scene.pause(); // TEMPORAL
+								this.scene.start("EligiendoFinal"); // TEMPORAL, CREAR ESCENA DE ELECCION DEL OTRO
 							}
 						} else {
 							console.log("NO LLEVA A LA PANTALLA DE FINALES");
@@ -2862,6 +2875,34 @@
 							nube.disableBody(true, true);
 							// Puedes agregar más lógica aquí si es necesario
 						}, 3000); // Ajusta el tiempo según tus necesidades
+					}
+				}
+				
+				class EligiendoFinal extends Phaser.Scene {
+					constructor() {
+						super('EligiendoFinal');
+						//this.enter;
+					}
+					preload() {
+					}
+					create() {
+						const eligiendoFinal = this.add.image(0, 0, 'sky').setDisplaySize(1920, 1080);
+						eligiendoFinal.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);
+					}
+					update() {
+						// AQUI METO PARA QUE CUANDO RECIBA DEL WEBSOCKET QUE HA CAMBIADO DEL CASE A TRUE ENTONCES 
+						var hayFinal = {peticion: "comprobarExisteFinal"};
+						connection.send(JSON.stringify(hayFinal));
+						
+						if(finalElegido === true){
+							if (esFinalMalo == true){
+								this.scene.start('FinalMalo');
+							}
+							if (esFinalBueno == true){
+								this.scene.start('FinalBueno');
+							}
+							
+						}
 					}
 				}
 
@@ -3314,6 +3355,7 @@
 						this.load.image('FondoPunt', 'assetsUsuarios/FondoPuntuaciones.png');
 						this.load.image('SeraphinaEsperando', 'assets/SeraphinaEsperando.png');
 						this.load.image('CassadieEsperando', 'assets/CassadieEsperando.png');
+						//this.load.image('eligiendoFinal', 'assetsFinales/ElegirFinal.png');
 					}
 
 					create() {
@@ -3659,6 +3701,9 @@
 
 						//Al hacer click en el boton comienza el juego
 						OpcionSolo.on('pointerdown', (pointer) => {
+							// MANDARSELO AL WEBSOCKET PARA QUE LO SEPA EL OTRO
+							var escogerFinalMalo = {peticion: "finMalo"};
+							connection.send(JSON.stringify(escogerFinalMalo));
 							this.scene.start('FinalMalo');
 						});
 
@@ -3681,6 +3726,9 @@
 
 						//Al hacer click en el boton se va a ajustes
 						OpcionJuntos.on('pointerdown', (pointer) => {
+							// MANDARSELO AL WEBSOCKET PARA QUE LO SEPA EL OTRO
+							var escogerFinalBueno = {peticion: "finBueno"};
+							connection.send(JSON.stringify(escogerFinalBueno));
 							this.scene.start('FinalBueno');
 						});
 					}
