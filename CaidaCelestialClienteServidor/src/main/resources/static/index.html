@@ -2392,8 +2392,8 @@
 						this.puerta = this.physics.add.group();
 						this.puerta = this.physics.add.sprite(1169.433, 310, 'puerta').setScale(0.2);
 						this.physics.add.collider(this.puerta, this.platforms);
-						this.physics.add.overlap(this.Cassadie, this.puerta, this.elegir, null, this);
-						this.physics.add.overlap(this.Seraphina, this.puerta, this.elegir, null, this);
+						this.physics.add.overlap(this.Cassadie, this.puerta, this.elegirC, null, this);
+						this.physics.add.overlap(this.Seraphina, this.puerta, this.elegirS, null, this);
 
 						// 0
 						// Verifica si Cassidie o Seraphine están encima de la nube y no se ha iniciado la animación
@@ -2696,32 +2696,37 @@
 						//se actualiza el nivel actual para que la pantalla de pausa te devuelva a donde debe
 						nivelActual = 'NivelCielo';
 					}
+					elegirC(){
+						// CASSIDIE
+						console.log("INTENTANDO ENTRAR C");
+						if(window.plyer === "player1" ){ 
+							console.log("Entro en p1");
+							var msg = {peticion: "playerPuertas", player:"player1"};
+							connection.send(JSON.stringify(msg));
+						}
+						this.elegir();
+					}
+					elegirS(){
+						//SERAPHINA
+						console.log("INTENTANDO ENTRAR S");
+						if (window.plyer==="player2"){
+							console.log("Entro en p2");
+							var msg = {peticion: "playerPuertas", player:"player2"};
+							connection.send(JSON.stringify(msg));
+						}	
+						this.elegir();	
+					}
 
 					elegir() {
 						pararContador();
 						tiempoAcabar = true;
 						// AQUI LE TENGO QUE MANDAR LA PETICION PARA QUE LLEGUE A UN JUGADOR A ESPERAR 
 						// Y AL OTRO A ESPERAR
-						// CASSIDIE
-						console.log("INTENTANDO ENTRAR");
-						if(window.plyer === "player1" ){ 
-							console.log("Entro en p1");
-							var msg = {peticion: "playerPuertas", player:"player1"};
-							connection.send(JSON.stringify(msg));
-						}
-						//SERAPHINA
-						else if (window.plyer==="player2"){
-							console.log("Entro en p2");
-							var msg = {peticion: "playerPuertas", player:"player2"};
-							connection.send(JSON.stringify(msg));
-						}
-						else{
-							console.log("No pilla el window.plyer!!!!")} 
 						
-						// Mando para que me eliga el final
-						//var msgFinal = {peticion: "elegirFinal"};
-						//connection.send(JSON.stringify(msgFinal));
-						//console.log("Enviado")
+						// Queremos saber que final es para saber que pantalla dormir.
+						var queFinal = {peticion: "getFinal"};
+						connection.send(JSON.stringify(queFinal));
+						
 						if(window.finalC) {
 							console.log("FINALC");
 							// Mando al jugador que ha llegado a la escena elegir
@@ -2729,8 +2734,9 @@
 								console.log("Elegir");
 								this.scene.start("Elegir");
 							}
+							// NO ELIGE SE DUERME
 							else if(window.plyer === "player2"){
-								this.scene.sleep() // TEMPORAL, CREAR ESCENA DE ELECCION DEL OTRO
+								this.scene.pause(); // TEMPORAL, CREAR ESCENA DE ELECCION DEL OTRO
 							}
 							//this.scene.start("Elegir");
 							// Mando al otro a la espera
@@ -2742,7 +2748,7 @@
 								this.scene.start("Elegir");
 							}
 							else if(window.plyer==="player1"){
-								this.scene.sleep() // TEMPORAL
+								this.scene.pause(); // TEMPORAL
 							}
 						} else {
 							console.log("NO LLEVA A LA PANTALLA DE FINALES");

@@ -147,6 +147,14 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 			}
 			break;
 			
+		case "getFinal":
+			if(cassidieFinal == true) {
+				session.sendMessage(new TextMessage("cassidieElige"));
+			} else if (seraphineFinal == true) {
+				session.sendMessage(new TextMessage("seraphinaElige"));
+			}
+			break;
+			
 			
 			
 		case "pulsarJugadorLeft":
