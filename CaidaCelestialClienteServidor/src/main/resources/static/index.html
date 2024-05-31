@@ -1418,8 +1418,8 @@
 						var msg = {peticion: "checkPlayersReady"};
 						connection.send(JSON.stringify(msg));
 						if(window.listos) {
-							//this.scene.start("NivelSubsuelo");
-							this.scene.start("NivelCielo");
+							this.scene.start("NivelSubsuelo");
+							//this.scene.start("NivelCielo");
 							// ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 						}
 						else setTimeout(this.startGame.bind(this), 3000);
