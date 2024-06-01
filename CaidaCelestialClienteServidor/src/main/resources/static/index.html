@@ -529,7 +529,6 @@
 						case "esMalo":
 							window.esFinalMalo = true;
 							break;
-						
 						// 
 						case "pulsadoLeft1":
 							window.left1 = true;
@@ -639,6 +638,16 @@
 							break;
 						case "soltadoH2":
 							window.h2 = false;
+							break;
+						
+						// REINICIO
+						case "hanAcabado":
+							window.finalElegido =false;
+							window.esFinalBueno = false;
+							window.esFinalMalo = false;
+							window.finalC = false;
+							window.finalS = false;
+							window.listos = false;
 							break;
 
 					}
@@ -1418,8 +1427,8 @@
 						var msg = {peticion: "checkPlayersReady"};
 						connection.send(JSON.stringify(msg));
 						if(window.listos) {
-							this.scene.start("NivelSubsuelo");
-							
+							//this.scene.start("NivelSubsuelo");
+							this.scene.start("NivelCielo");
 							// ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 						}
 						else setTimeout(this.startGame.bind(this), 3000);
@@ -3128,7 +3137,11 @@
 					preload() {
 					}
 					create() {
-
+						// PARA QUE SE REINICEN LOS JUGADORES UNA VEZ PASADOS
+						var reiniciarPersonajes = {peticion: "reiniciar"};
+						connection.send(JSON.stringify(reiniciarPersonajes));
+						//
+						
 						this.enter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
 						const imagen15 = this.add.image(0, 0, 'Imagen15').setDisplaySize(1920, 1080);
 						imagen15.setPosition(this.sys.game.config.width / 2, this.sys.game.config.height / 2);

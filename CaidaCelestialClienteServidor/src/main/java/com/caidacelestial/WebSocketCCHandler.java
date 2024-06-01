@@ -134,6 +134,12 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 		case "checkPlayersReady":
 			if(p1ready && p2ready) session.sendMessage(new TextMessage("listos"));
 			break;
+		
+		case "reiniciarPersonajes":
+			boolean p1ready = false;
+			boolean p2ready = false;
+			session.sendMessage(new TextMessage("hanAcabado"));
+			break;
 			
 		case "playerPuertas":
 			String jugador = node.get("player").asText();
