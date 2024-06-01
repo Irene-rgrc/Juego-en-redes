@@ -1419,7 +1419,7 @@
 						connection.send(JSON.stringify(msg));
 						if(window.listos) {
 							this.scene.start("NivelSubsuelo");
-							//this.scene.start("NivelCielo");
+							
 							// ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 						}
 						else setTimeout(this.startGame.bind(this), 3000);
@@ -1452,7 +1452,7 @@
 
 					preload() {
 						//tiempoAcabar = false;
-						//actualizarTiempo(this);
+						actualizarTiempo(this);
 					}
 
 					create() {
@@ -1863,7 +1863,9 @@
 						//si se necesitan añadir más botones se indican aquí como "this.boton1; this.boton2;"
 					}
 
-					//preload() {actualizarTiempo('NivelBosque');}
+					preload() {
+						//actualizarTiempo('NivelBosque');
+					}
 
 					create() {
 						//actualizarTiempo('NivelBosque');
