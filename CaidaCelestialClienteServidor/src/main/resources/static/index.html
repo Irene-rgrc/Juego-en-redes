@@ -1476,8 +1476,8 @@
 						var msg = {peticion: "checkPlayersReady"};
 						connection.send(JSON.stringify(msg));
 						if(window.listos) {
-							//this.scene.start("NivelSubsuelo");
-							this.scene.start("NivelCielo");						
+							this.scene.start("NivelSubsuelo");
+							//this.scene.start("NivelCielo");						
 
 							// ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 						}
@@ -3719,19 +3719,19 @@
 						this.add.text(750, 442, this.primerId,
 							{fontFamily: 'serif', fontSize: '50px', color: '#F8E0E6'});
 							
-						this.add.text(1050, 442, this.primerPunt,
+						this.add.text(1300, 442, this.primerPunt,
 							{fontFamily: 'serif', fontSize: '50px', color: '#F8E0E6'});
 							
 						this.add.text(750, 530, this.segundoId,
 							{fontFamily: 'serif', fontSize: '50px', color: '#F8E0E6'});
 							
-						this.add.text(1050, 530, this.segundoPunt,
+						this.add.text(1300, 530, this.segundoPunt,
 							{fontFamily: 'serif', fontSize: '50px', color: '#F8E0E6'});
 							
 						this.add.text(750, 618, this.tercerId,
 							{fontFamily: 'serif', fontSize: '50px', color: '#F8E0E6'});
 							
-						this.add.text(1050, 618, this.tercerPunt,
+						this.add.text(1300, 618, this.tercerPunt,
 							{fontFamily: 'serif', fontSize: '50px', color: '#F8E0E6'});
 							
 					}
