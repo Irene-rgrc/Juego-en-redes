@@ -646,15 +646,10 @@ Controles Seraphina y Cassadie: Controlan las acciones de los jugadores.
 handleTextMessage(WebSocketSession session, TextMessage message):
   Lee y parsea los mensajes JSON recibidos.
   Utiliza un switch para manejar diferentes tipos de peticiones:
-  
     - Emparejamiento (emparejar): Asigna roles a los jugadores.
-    
     - Control de Pausas (parar, pausa, continuar): Gestiona el estado de pausa.
-    
     - Control de Juegos (play, playerReady, checkPlayersReady, reiniciarPersonajes): Verifica el estado de preparación de los jugadores y reinicia personajes.
-    
     - Finales (playerPuertas, getFinal, comprobarExisteFinal, finalBueno, finalMalo, tipoFinal): Gestiona el estado de los finales del juego.
-    
     - Controles de Movimiento (pulsarJugadorLeft, soltarJugadorLeft, pulsarJugadorRight, soltarJugadorRight, pulsarJugadorUp, soltarJugadorUp, pulsarJugadorA, soltarJugadorA, pulsarJugadorD, soltarJugadorD,                 pulsarJugadorW, soltarJugadorW, pulsarJugadorSalto, soltarJugadorSalto, pulsarJugadorSprint, soltarJugadorSprint, pulsarJugadorH, soltarJugadorH): Gestiona los movimientos de los personajes de acuerdo a las         acciones de los jugadores.
 
 Una vez ya se ha creado pel WebSocketCCHandler para la gestión de comunicaciones en tiempo real entre jugadores y el servidor, se implementa las llamadas y los valores text que puede recibir del WebSocketccHandler en el index.html. De forma que si necesita hacer alguna petición de mensajes, este se crea una variable que indique el nombre de la petición del WebSocket y la envie através de herramientas que proporciona el Node.js. Además en el index, se tiene un método especial que es para recibir los diversos mensajes que puene enviar el websocket, de forma que por cada case hace algo distinto.
