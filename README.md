@@ -603,7 +603,7 @@ La anotación @SpringBootApplication marca esta clase como la clase de inicio de
 Se ha implementado un temporizador de 5 minutos de cuenta atrás el cual al llegar a 0 directamente lleva al final malo y al menú principal. Esto esta creado con Date que posteriormente se pasa a string. Este valor se llama cuando ya ha conseguido llegar a los finales. Debido a que javascript no permite que el cliente envie este se guarda en local con el método localStorage.setItem() y posteriormente en el index.html se hace el post para tenerlo para la comunicación cliente/servidor. Esto se guarda en un txt llamado puntuación que guarda al nombre del usuario con su puntuación.
 
 
-## Paso de mensajes
+# Paso de mensajes
 
 Para que se pueda jugar distintos usuarios y que no sea localmente, se ha implementado un paso de mensajes con Node Js. En el cual se estará haciendo peticiones a un WebSocket handler. Por lo que permite una comunicación bidireccional en tiempo real entre el cliente y el servidor. Esto es esencial para los juegos de plataformas, donde las acciones de los jugadores y los eventos del juego deben reflejarse inmediatamente en la pantalla. Además de una baja latencia, siendo ligero y eficiente. Una vez establecida la conexión, los mensajes se envían rápidamente sin la sobrecarga de establecer una nueva conexión HTTP para cada interacción. Esto reduce la latencia, un factor crítico en los juegos en línea donde los retrasos pueden afectar negativamente la experiencia del usuario.
 A diferencia de las solicitudes HTTP tradicionales (que son stateless y requieren una nueva conexión para cada intercambio de datos), WebSockets mantienen una conexión persistente entre el cliente y el servidor. Esto permite una transferencia de datos más rápida y continua, ideal para la sincronización de estados en un juego en tiempo real. Con WebSockets, tanto el servidor como el cliente pueden enviar y recibir datos en cualquier momento. Esto es crucial para el juego interactivo, ya que permite que el servidor envíe actualizaciones de estado a los clientes (como movimientos de otros jugadores, cambios en el entorno, etc.) y que los clientes envíen comandos al servidor (como movimientos y acciones del jugador) sin necesidad de esperar una solicitud. Dado que los WebSockets mantienen una conexión abierta, no es necesario abrir y cerrar conexiones repetidamente, lo cual consume más recursos y tiempo. Esto resulta en una mayor eficiencia y menor carga en el servidor, lo que puede ser especialmente importante en juegos con muchos jugadores.
@@ -654,7 +654,7 @@ handleTextMessage(WebSocketSession session, TextMessage message):
 
 Una vez ya se ha creado pel WebSocketCCHandler para la gestión de comunicaciones en tiempo real entre jugadores y el servidor, se implementa las llamadas y los valores text que puede recibir del WebSocketccHandler en el index.html. De forma que si necesita hacer alguna petición de mensajes, este se crea una variable que indique el nombre de la petición del WebSocket y la envie através de herramientas que proporciona el Node.js. Además en el index, se tiene un método especial que es para recibir los diversos mensajes que puene enviar el websocket, de forma que por cada case hace algo distinto.
 
-**Instrucciones**
+## Instrucciones
 
 Los pasos para jugar son los siguientes:
 
