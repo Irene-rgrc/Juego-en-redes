@@ -702,3 +702,12 @@ El personaje que primero llegue al final gana.
 Se puede pausar el juego en cualquier momento.
 Una vez acabe el juego se puede volver a jugar, se mantendran los personajes.
 
+## Mejoras realizadas
+
+Las mejoras realizadas se han implementado dentro del juego base, excepto el temporizador que ha sido implementado dentro de todas las fases, aunque con ligeros cambios para realizar la implementación de las puntuaciones.
+- Se ha añadido dentro del tutorial una imagen indicativa para enseñar al jugador como pasar los diálogos, además de añadir dentro de la introducción un nuevo fondo donde se muestra como pasar a la siguiente pantalla.
+- Además, también se ha hecho una mejora dentro del menú de inicio pudiendo acceder a los créditos dentro de este.
+- Por otro lado, dentro del menú de ajustes, cuando se está dentro de la partida se permite volver la menú de inicio.
+- Por último se ha añadido una cuenta atrás de 5 minutos, si la cuenta atrás llega a su fin y aún no se ha finalizado el juego este lleva automaticamente a los jugadores al final malo, en cambio si logran finalizar el juego entonces, dentro de las fases 3 y 4 se usa el tiempo que se ha utilizado para las puntuaciones, se puede mencionar que las puntuaciones no están implementadas dentro del juego base debido a que van según el jugador que haya inciado sesión.
+
+Además, se debe tener en cuenta que la rejugabilidad del juego no está completamente apoyada y manejada por lo tanto, es posible que ocurran errores al tratar de rejugar el juego siendo el más notorio que el contador no se reinicia una vez ya se ha ganado el juego.
