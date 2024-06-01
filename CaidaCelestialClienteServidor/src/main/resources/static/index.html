@@ -403,6 +403,8 @@
 				var existingUsers = [];
 				var existingPasswords = [];
 				var existingRecords = [];
+				var coupleNames = [];
+				var playerName = "Unknown";
 				var currentUser;
 				//var finalC = false;
 				//var finalS = false;
@@ -486,13 +488,16 @@
 				console.log("WS error: " + e);
 				}
 				connection.onmessage = function(msg) {
-					switch(msg.data){
+					const data = JSON.parse(event.data);
+					switch(data.type){
 						case "Cassadie":
 							window.plyer="player1";
 							console.log("primero");
 							break;
 						case "Seraphina":
 							window.plyer="player2";
+							var msg = {peticion: "subirNombreP2", nombre: playerName};
+							connection.send(JSON.stringify(msg));
 							console.log("segundo");
 							break;
 						case "Pausa1":
@@ -649,7 +654,20 @@
 							window.finalS = false;
 							window.listos = false;
 							break;
-
+						
+						//Guardar récord
+						case "nombreP2":
+							console.log("SUBIENDO RÉCORD...");
+							if(window.plyer === "player1"){
+								var nameP2 = data.name;
+								var record = {
+									names: nameP2 + " y " + playerName,
+									points: parseInt(mostrarTiempoTranscurrido())
+								}
+								
+								createRecord(record);
+							}
+							break;
 					}
 				}
 				
@@ -662,6 +680,15 @@
 						callback(users);
 					})
 				}
+				
+				function loadRecords(callback) {
+					$.ajax({
+						url: 'http://' + ip + '/records/'
+					}).done(function (records) {
+						console.log('Records loaded: ' + JSON.stringify(records));
+						callback(records);
+					})
+				}
 
 				$(document).ready(function () {
 
@@ -670,6 +697,12 @@
 							existingUsers[i] = users[i].username;
 							existingPasswords[i] = users[i].password;
 							existingRecords[i] = users[i].record;
+						}
+					})
+					loadRecords(function (records) {
+						for (var i = 0; i < records.length; i++) {
+							coupleNames[i] = records[i].names;
+							couplePoints[i] = records[i].points;
 						}
 					})
 				})
@@ -689,7 +722,18 @@
 						callback(user);
 					})
 				}
-
+				
+				function createRecord(record){
+					$.ajax({
+						method: "POST",
+						url: 'http://' + ip + '/records/',
+						data: JSON.stringify(record),
+						processData: false,
+						headers: {
+							"Content-Type": "application/json"
+						}
+					})
+				}
 
 				$('#registrarse-button').click(function () {
 					var name = $('#user').val();
@@ -713,6 +757,7 @@
 						});
 						openPrincipal();
 						closeForm();
+						playerName = name;
 					}
 				})
 
@@ -739,6 +784,7 @@
 						openDespuesInicio();
 						closeInicio();
 						closePrincipal();
+						playerName = name;
 					}
 				})
 
@@ -864,7 +910,9 @@
 				}
 
 				function mostrarTiempoTranscurrido() {
-					//console.log('Tiempo transcurrido: ' + tiempoTranscurrido + ' segundos');
+					
+					
+					console.log('Tiempo transcurrido: ' + tiempoTranscurrido + ' segundos');
 					var highscore = tiempoTranscurrido.toLocaleString();
 					//console.log(highscore);
 					return highscore; // DEVUELVE EL TIEMPO TRANSCURRIDO
@@ -1428,7 +1476,8 @@
 						connection.send(JSON.stringify(msg));
 						if(window.listos) {
 							//this.scene.start("NivelSubsuelo");
-							this.scene.start("NivelCielo");
+							this.scene.start("NivelCielo");						
+
 							// ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 						}
 						else setTimeout(this.startGame.bind(this), 3000);
@@ -2323,7 +2372,7 @@
 					}
 
 					preload() {
-						//actualizarTiempo('NivelCielo');
+						actualizarTiempo('NivelCielo');
 					}
 
 					create() {
@@ -2576,6 +2625,7 @@
 						this.physics.add.collider(this.Seraphina, this.nube8);
 						this.physics.add.overlap(this.Cassadie, this.nube8, this.desaparecerNube, null, this);
 						this.physics.add.overlap(this.Seraphina, this.nube8, this.desaparecerNube, null, this);
+						this.creado = false;
 					}
 
 					update() {
@@ -2803,7 +2853,11 @@
 						tiempoAcabar = true;
 						// AQUI LE TENGO QUE MANDAR LA PETICION PARA QUE LLEGUE A UN JUGADOR A ESPERAR 
 						// Y AL OTRO A ESPERAR
-						
+						if(window.plyer==="player1" && !this.creado){
+							this.creado = true;
+							var msg = {peticion: "getNombreP2"};
+							connection.send(JSON.stringify(msg));
+						}
 						// Queremos saber que final es para saber que pantalla dormir.
 						var queFinal = {peticion: "getFinal"};
 						connection.send(JSON.stringify(queFinal));
@@ -3641,31 +3695,25 @@
 							this.scene.stop('Puntuaciones');
 						});
 						
-						this.primerPunt = existingRecords[0];
-						this.primerId = existingUsers[0];
-						this.segundoPunt = existingRecords[1];
-						this.segundoId = existingUsers[1];
-						this.tercerPunt = existingRecords[2];
-						this.tercerId = existingUsers[2];
 						
-						for(var i = 1; i < existingRecords.length; i++){
-                            if(this.primerPunt > existingRecords[i]){
-                                this.segundoPunt = this.primerPunt
-                                this.segundoId = this.primerId
-                                this.primerId = existingUsers[i]
-                                this.primerPunt = existingRecords[i]
-
-                                }else if(this.segundoPunt > existingRecords[i]){
-                                    this.tercerPunt = this.segundoPunt;
-                                    this.tercerId = this.segundoId
-                                    this.segundoPunt = existingRecords[i]
-                                    this.segundoId = existingUsers[i]
-
-                                }else if(this.tercerPunt > existingRecords[i]){
-                                      this.tercerPunt = existingRecords[i]
-                                      this.tercerId = existingUsers[i]
-                            }
-                        }
+						var copyPoints = couplePoints.slice();
+						copyPoints.sort((a, b) => a - b);
+						
+						var podioIndex = [];
+						for (let i = 0; i < 3; i++) {
+        					for (let j = 0; j < couplePoints.length; j++) {
+            					if (couplePoints[j] === copyPoints[i] && !podioIndex.includes(j)) {
+                					podioIndex.push(j);
+					                break;
+					            }
+					        }
+					    }
+						this.primerPunt = couplePoints[podioIndex[0]];
+						this.primerId = coupleNames[podioIndex[0]];
+						this.segundoPunt = couplePoints[podioIndex[1]];
+						this.segundoId = coupleNames[podioIndex[1]];
+						this.tercerPunt = couplePoints[podioIndex[2]];
+						this.tercerId = coupleNames[podioIndex[2]];
 						
 						this.add.text(750, 442, this.primerId,
 							{fontFamily: 'serif', fontSize: '50px', color: '#F8E0E6'});

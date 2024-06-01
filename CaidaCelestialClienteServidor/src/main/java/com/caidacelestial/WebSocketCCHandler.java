@@ -55,24 +55,26 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 	boolean finalBueno = false;
 	boolean finalMalo = false;
 
+	//Nombre para los récords:
+	String nameP2 = "Unknown";
 	
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode node = mapper.readTree(message.getPayload());
 		//System.out.println("Message received: " + node.toString());
-		
+		String msg;
 		switch(node.get("peticion").asText()){
 		case "emparejar":
 			if(!primero) {
 				primero=true;
-				String msg="Cassadie";
+				msg = "{\"type\":\"Cassadie\"}";
 				session.sendMessage(new TextMessage(msg));
 				System.out.println(msg);
 			}
 			else if(!segundo){
 				segundo=true;
-				String msg="Seraphina";
+				msg = "{\"type\":\"Seraphina\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;
@@ -80,23 +82,23 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 		case "parar":
 			if(node.get("player").asText().equals("player1")) {
 				pausa1 = true;
-				String msg="Pausa1";
+				msg = "{\"type\":\"Pausa1\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			else if(node.get("player").asText().equals("player2")) {
 				pausa2 = true;
-				String msg="Pausa2";
+				msg = "{\"type\":\"Pausa2\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;
 		case "pausa":
 			
 			if(pausa1 == true) {
-				String msg="Pausa1";
+				msg = "{\"type\":\"Pausa1\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			if(pausa2 == true) {
-				String msg="Pausa2";
+				msg = "{\"type\":\"Pausa2\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;
@@ -104,23 +106,23 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 		case "continuar":
 			if(node.get("player").asText().equals("player1")) {
 				pausa1=false;
-				String msg="Play1";
+				msg = "{\"type\":\"Play1\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			else if(node.get("player").asText().equals("player2")) {
 				pausa2=false;
-				String msg="Play2";
+				msg = "{\"type\":\"Play2\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;
 			
 		case "play":
 			if(pausa1 == false) {
-				String msg="Play1";
+				msg = "{\"type\":\"Play1\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			if(pausa2 == false) {
-				String msg="Play2";
+				msg = "{\"type\":\"Play2\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;
@@ -132,13 +134,17 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 			break;
 			
 		case "checkPlayersReady":
-			if(p1ready && p2ready) session.sendMessage(new TextMessage("listos"));
+			if(p1ready && p2ready) {
+				msg = "{\"type\":\"listos\"}";
+				session.sendMessage(new TextMessage(msg));
+			}
 			break;
 		
 		case "reiniciarPersonajes":
 			boolean p1ready = false;
 			boolean p2ready = false;
-			session.sendMessage(new TextMessage("hanAcabado"));
+			msg = "{\"type\":\"hanAcabado\"}";
+			session.sendMessage(new TextMessage(msg));
 			break;
 			
 		case "playerPuertas":
@@ -146,27 +152,32 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 			if(jugador.equals("player1")) {
 				cassidieFinal = true; 
 				System.out.println("cassidieFinal");
-				session.sendMessage(new TextMessage("cassidieElige"));
+				msg = "{\"type\":\"cassadieElige\"}";
+				session.sendMessage(new TextMessage(msg));
 			} 
 			else if(jugador.equals("player2")) {
 				seraphineFinal = true;
 				System.out.println("seraphineFinal");
-				session.sendMessage(new TextMessage("seraphinaElige"));
+				msg = "{\"type\":\"seraphinaElige\"}";
+				session.sendMessage(new TextMessage(msg));
 			}
 			break;
 			
 		case "getFinal":
 			if(cassidieFinal == true) {
-				session.sendMessage(new TextMessage("cassidieElige"));
+				msg = "{\"type\":\"cassidieElige\"}";
+				session.sendMessage(new TextMessage(msg));
 			} else if (seraphineFinal == true) {
-				session.sendMessage(new TextMessage("seraphinaElige"));
+				msg = "{\"type\":\"seraphinaElige\"}";
+				session.sendMessage(new TextMessage(msg));
 			}
 			break;
 		
 		case "comprobarExisteFinal":
 			if(cassidieFinal == true || seraphineFinal == true) {
 				// SI HAY FINAL ASI QUE AHORA ES VER SI ES BUENO O MALO
-				session.sendMessage(new TextMessage("finalElegiendo"));
+				msg = "{\"type\":\"finalElegiendo\"}";
+				session.sendMessage(new TextMessage(msg));
 			}
 			break;
 		
@@ -181,10 +192,12 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 		
 		case "tipoFinal":
 			if(finalBueno == true) {
-				session.sendMessage(new TextMessage("esBueno"));
+				msg = "{\"type\":\"esBueno\"}";
+				session.sendMessage(new TextMessage(msg));
 			}
 			if (finalMalo == true) {
-				session.sendMessage(new TextMessage("esMalo"));
+				msg = "{\"type\":\"esMalo\"}";
+				session.sendMessage(new TextMessage(msg));
 			}
 			break;
 			
@@ -192,12 +205,12 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 		case "pulsarJugadorLeft":
 			if(node.get("player").asText().equals("player2")) {
 				left1 = true;
-				String msg="pulsadoLeft1";
+				msg = "{\"type\":\"pulsadoLeft1\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			if(node.get("player").asText().equals("player1")) {
 				left2 = true;
-				String msg="pulsadoLeft2";
+				msg = "{\"type\":\"pulsadoLeft2\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;
@@ -205,12 +218,12 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 		case "soltarJugadorLeft":
 			if(node.get("player").asText().equals("player2")) {
 				left1=false;
-				String msg="soltadoLeft1";
+				msg = "{\"type\":\"soltadoLeft1\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			if(node.get("player").asText().equals("player1")) {
 				left2=false;
-				String msg="soltadoLeft2";
+				msg = "{\"type\":\"soltadoLeft2\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;
@@ -218,23 +231,23 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 		case "pulsadoJugadorLeft":
 			
 			if(left1 == true) {
-				String msg="pulsadoLeft1";
+				msg = "{\"type\":\"pulsadoLeft1\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			
 			if(left2 == true) {
-				String msg="pulsadoLeft2";
+				msg = "{\"type\":\"pulsadoLeft2\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;
 		case "seguirJugadorLeft":
 			if(left1 == false) {
-				String msg="SoltadoLeft1";
+				msg = "{\"type\":\"SoltadoLeft1\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			
 			if(left2 == false) {
-				String msg="soltadoLeft2";
+				msg = "{\"type\":\"soltadoLeft2\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;
@@ -242,12 +255,12 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 		case "pulsarJugadorRight":
 			if(node.get("player").asText().equals("player2")) {
 				right1 = true;
-				String msg="pulsadoRight1";
+				msg = "{\"type\":\"pulsadoRight1\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			if(node.get("player").asText().equals("player1")) {
 				right2 = true;
-				String msg="pulsadoRight2";
+				msg = "{\"type\":\"pulsadoRight2\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;
@@ -255,12 +268,12 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 		case "soltarJugadorRight":
 			if(node.get("player").asText().equals("player2")) {
 				right1=false;
-				String msg="soltadoRight1";
+				msg = "{\"type\":\"soltadoRight1\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			if(node.get("player").asText().equals("player1")) {
 				right2=false;
-				String msg="soltadoRight2";
+				msg = "{\"type\":\"soltadoRight2\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;
@@ -268,35 +281,35 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 		case "pulsadoJugadorRight":
 			
 			if(right1 == true) {
-				String msg="pulsadoRight1";
+				msg = "{\"type\":\"pulsadoRight1\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			
 			if(right2 == true) {
-				String msg="pulsadoRight2";
+				msg = "{\"type\":\"pulsadoRight2\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;
 		case "seguirJugadorRight":
 			if(right1 == false) {
-				String msg="SoltadoRight1";
+				msg = "{\"type\":\"SoltadoRight1\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			
 			if(right2 == false) {
-				String msg="soltadoRight2";
+				msg = "{\"type\":\"soltadoRight2\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;
 		case "pulsarJugadorUp":
 			if(node.get("player").asText().equals("player2")) {
 				up1 = true;
-				String msg="pulsadoUp1";
+				msg = "{\"type\":\"pulsadoUp1\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			if(node.get("player").asText().equals("player1")) {
 				up2 = true;
-				String msg="pulsadoUp2";
+				msg = "{\"type\":\"pulsadoUp2\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;
@@ -304,12 +317,12 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 		case "soltarJugadorUp":
 			if(node.get("player").asText().equals("player2")) {
 				up1=false;
-				String msg="soltadoUp1";
+				msg = "{\"type\":\"soltadoUp1\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			if(node.get("player").asText().equals("player1")) {
 				up2=false;
-				String msg="soltadoUp2";
+				msg = "{\"type\":\"soltadoUp2\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;
@@ -317,35 +330,35 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 		case "pulsadoJugadorUp":
 			
 			if(up1 == true) {
-				String msg="pulsadoUp1";
+				msg = "{\"type\":\"pulsadoUp1\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			
 			if(up2 == true) {
-				String msg="pulsadoUp2";
+				msg = "{\"type\":\"pulsadoUp2\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;
 		case "seguirJugadorUp":
 			if(up1 == false) {
-				String msg="SoltadoUp1";
+				msg = "{\"type\":\"SoltadoUp1\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			
 			if(up2 == false) {
-				String msg="soltadoUp2";
+				msg = "{\"type\":\"soltadoUp2\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;
 		case "pulsarJugadorA":
 			if(node.get("player").asText().equals("player2")) {
 				a1 = true;
-				String msg="pulsadoA1";
+				msg = "{\"type\":\"pulsadoA1\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			if(node.get("player").asText().equals("player1")) {
 				a2 = true;
-				String msg="pulsadoA2";
+				msg = "{\"type\":\"pulsadoA2\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;
@@ -353,12 +366,12 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 		case "soltarJugadorA":
 			if(node.get("player").asText().equals("player2")) {
 				a1=false;
-				String msg="soltadoA1";
+				msg = "{\"type\":\"soltadoA1\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			if(node.get("player").asText().equals("player1")) {
 				a2=false;
-				String msg="soltadoA2";
+				msg = "{\"type\":\"soltadoA2\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;
@@ -366,23 +379,23 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 		case "pulsadoJugadorA":
 			
 			if(a1 == true) {
-				String msg="pulsadoA1";
+				msg = "{\"type\":\"pulsadoA1\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			
 			if(a2 == true) {
-				String msg="pulsadoA2";
+				msg = "{\"type\":\"pulsadoA2\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;
 		case "seguirJugadorA":
 			if(a1 == false) {
-				String msg="SoltadoA1";
+				msg = "{\"type\":\"SoltadoA1\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			
 			if(a2 == false) {
-				String msg="soltadoA2";
+				msg = "{\"type\":\"soltadoA2\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;
@@ -390,12 +403,12 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 		case "pulsarJugadorD":
 			if(node.get("player").asText().equals("player2")) {
 				d1 = true;
-				String msg="pulsadoD1";
+				msg = "{\"type\":\"pulsadoD1\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			if(node.get("player").asText().equals("player1")) {
 				d2 = true;
-				String msg="pulsadoD2";
+				msg = "{\"type\":\"pulsadoD2\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;
@@ -403,48 +416,47 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 		case "soltarJugadorD":
 			if(node.get("player").asText().equals("player2")) {
 				d1=false;
-				String msg="soltadoD1";
+				msg = "{\"type\":\"soltadoD1\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			if(node.get("player").asText().equals("player1")) {
 				d2=false;
-				String msg="soltadoD2";
+				msg = "{\"type\":\"soltadoD2\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;
 			
 		case "pulsadoJugadorD":
-			
 			if(d1 == true) {
-				String msg="pulsadoD1";
+				msg = "{\"type\":\"pulsadoD1\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			
 			if(d2 == true) {
-				String msg="pulsadoD2";
+				msg = "{\"type\":\"pulsadoD2\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;
 		case "seguirJugadorD":
 			if(d1 == false) {
-				String msg="SoltadoD1";
+				msg = "{\"type\":\"SoltadoD1\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			
 			if(d2 == false) {
-				String msg="soltadoD2";
+				msg = "{\"type\":\"soltadoD2\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;
 		case "pulsarJugadorW":
 			if(node.get("player").asText().equals("player2")) {
 				w1 = true;
-				String msg="pulsadoW1";
+				msg = "{\"type\":\"pulsadoW1\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			if(node.get("player").asText().equals("player1")) {
 				w2 = true;
-				String msg="pulsadoW2";
+				msg = "{\"type\":\"pulsadoW2\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;
@@ -452,12 +464,12 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 		case "soltarJugadorW":
 			if(node.get("player").asText().equals("player2")) {
 				w1=false;
-				String msg="soltadoW1";
+				msg = "{\"type\":\"soltadoW1\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			if(node.get("player").asText().equals("player1")) {
 				w2=false;
-				String msg="soltadoW2";
+				msg = "{\"type\":\"soltadoW2\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;
@@ -465,23 +477,23 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 		case "pulsadoJugadorW":
 			
 			if(w1 == true) {
-				String msg="pulsadoW1";
+				msg = "{\"type\":\"pulsadoW1\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			
 			if(w2 == true) {
-				String msg="pulsadoW2";
+				msg = "{\"type\":\"pulsadoW2\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;
 		case "seguirJugadorW":
 			if(w1 == false) {
-				String msg="SoltadoW1";
+				msg = "{\"type\":\"SoltadoW1\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			
 			if(w2 == false) {
-				String msg="soltadoW2";
+				msg = "{\"type\":\"soltadoW2\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;
@@ -489,12 +501,12 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 		case "pulsarJugadorSalto":
 			if(node.get("player").asText().equals("player2")) {
 				salto1 = true;
-				String msg="pulsadoSalto1";
+				msg = "{\"type\":\"pulsadoSalto1\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			if(node.get("player").asText().equals("player1")) {
 				salto2 = true;
-				String msg="pulsadoSalto2";
+				msg = "{\"type\":\"pulsadoSalto2\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;
@@ -502,12 +514,12 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 		case "soltarJugadorSalto":
 			if(node.get("player").asText().equals("player2")) {
 				salto1=false;
-				String msg="soltadoSalto1";
+				msg = "{\"type\":\"soltadoSalto1\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			if(node.get("player").asText().equals("player1")) {
 				salto2=false;
-				String msg="soltadoSalto2";
+				msg = "{\"type\":\"soltadoSalto2\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;
@@ -515,23 +527,23 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 		case "pulsadoJugadorSalto":
 			
 			if(salto1 == true) {
-				String msg="pulsadoSalto1";
+				msg = "{\"type\":\"pulsadoSalto1\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			
 			if(salto2 == true) {
-				String msg="pulsadoSalto2";
+				msg = "{\"type\":\"pulsadoSalto2\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;
 		case "seguirJugadorSalto":
 			if(salto1 == false) {
-				String msg="SoltadoSalto1";
+				msg = "{\"type\":\"SoltadoSalto1\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			
 			if(salto2 == false) {
-				String msg="soltadoSalto2";
+				msg = "{\"type\":\"soltadoSalto2\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;
@@ -539,12 +551,12 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 		case "pulsarJugadorSprint":
 			if(node.get("player").asText().equals("player2")) {
 				sprint1 = true;
-				String msg="pulsadoSprint1";
+				msg = "{\"type\":\"pulsadoSprint1\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			if(node.get("player").asText().equals("player1")) {
 				sprint2 = true;
-				String msg="pulsadoSprint2";
+				msg = "{\"type\":\"pulsadoSprint2\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;
@@ -552,12 +564,12 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 		case "soltarJugadorSprint":
 			if(node.get("player").asText().equals("player2")) {
 				sprint1=false;
-				String msg="soltadoSprint1";
+				msg = "{\"type\":\"soltadoSprint1\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			if(node.get("player").asText().equals("player1")) {
 				sprint2=false;
-				String msg="soltadoSprint2";
+				msg = "{\"type\":\"soltadoSprint2\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;
@@ -565,35 +577,35 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 		case "pulsadoJugadorSprint":
 			
 			if(sprint1 == true) {
-				String msg="pulsadoSprint1";
+				msg = "{\"type\":\"pulsadoSprint1\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			
 			if(sprint2 == true) {
-				String msg="pulsadoSprint2";
+				msg = "{\"type\":\"pulsadoSprint2\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;
 		case "seguirJugadorSprint":
 			if(sprint1 == false) {
-				String msg="SoltadoSprint1";
+				msg = "{\"type\":\"SoltadoSprint1\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			
 			if(sprint2 == false) {
-				String msg="soltadoSprint2";
+				msg = "{\"type\":\"soltadoSprint2\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;
 		case "pulsarJugadorH":
 			if(node.get("player").asText().equals("player2")) {
 				h1 = true;
-				String msg="pulsadoH1";
+				msg = "{\"type\":\"pulsadoH1\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			if(node.get("player").asText().equals("player1")) {
 				h2 = true;
-				String msg="pulsadoH2";
+				msg = "{\"type\":\"pulsadoH2\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;
@@ -601,12 +613,12 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 		case "soltarJugadorH":
 			if(node.get("player").asText().equals("player2")) {
 				h1=false;
-				String msg="soltadoH1";
+				msg = "{\"type\":\"soltadoH1\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			if(node.get("player").asText().equals("player1")) {
 				h2=false;
-				String msg="soltadoH2";
+				msg = "{\"type\":\"soltadoH2\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;
@@ -614,25 +626,34 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 		case "pulsadoJugadorH":
 			
 			if(h1 == true) {
-				String msg="pulsadoH1";
+				msg = "{\"type\":\"pulsadoH1\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			
 			if(h2 == true) {
-				String msg="pulsadoH2";
+				msg = "{\"type\":\"pulsadoH2\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;
 		case "seguirJugadorH":
 			if(h1 == false) {
-				String msg="SoltadoH1";
+				msg = "{\"type\":\"SoltadoH1\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			
 			if(h2 == false) {
-				String msg="soltadoH2";
+				msg = "{\"type\":\"soltadoH2\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
+			break;
+		
+		case "subirNombreP2":
+			nameP2 = node.get("nombre").asText();
+			System.out.println(nameP2);
+			break;
+		case "getNombreP2":
+			msg = "{\"type\":\"nombreP2\", \"name\":\"" + nameP2 + "\"}";
+			session.sendMessage(new TextMessage(msg));
 			break;
 			}	
 		}
