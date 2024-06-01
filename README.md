@@ -604,39 +604,45 @@ Se ha implementado un temporizador de 5 minutos de cuenta atrás el cual al lleg
 
 
 **Paso de mensajes**
+
 Para que se pueda jugar distintos usuarios y que no sea localmente, se ha implementado un paso de mensajes con Node Js. En el cual se estará haciendo peticiones a un WebSocket handler. Por lo que permite una comunicación bidireccional en tiempo real entre el cliente y el servidor. Esto es esencial para los juegos de plataformas, donde las acciones de los jugadores y los eventos del juego deben reflejarse inmediatamente en la pantalla. Además de una baja latencia, siendo ligero y eficiente. Una vez establecida la conexión, los mensajes se envían rápidamente sin la sobrecarga de establecer una nueva conexión HTTP para cada interacción. Esto reduce la latencia, un factor crítico en los juegos en línea donde los retrasos pueden afectar negativamente la experiencia del usuario.
 A diferencia de las solicitudes HTTP tradicionales (que son stateless y requieren una nueva conexión para cada intercambio de datos), WebSockets mantienen una conexión persistente entre el cliente y el servidor. Esto permite una transferencia de datos más rápida y continua, ideal para la sincronización de estados en un juego en tiempo real. Con WebSockets, tanto el servidor como el cliente pueden enviar y recibir datos en cualquier momento. Esto es crucial para el juego interactivo, ya que permite que el servidor envíe actualizaciones de estado a los clientes (como movimientos de otros jugadores, cambios en el entorno, etc.) y que los clientes envíen comandos al servidor (como movimientos y acciones del jugador) sin necesidad de esperar una solicitud. Dado que los WebSockets mantienen una conexión abierta, no es necesario abrir y cerrar conexiones repetidamente, lo cual consume más recursos y tiempo. Esto resulta en una mayor eficiencia y menor carga en el servidor, lo que puede ser especialmente importante en juegos con muchos jugadores.
 
 Se ha decidido que el backend del juego sea implementado con Node.js, debido a su arquitectura basada en eventos y su capacidad para manejar un gran número de conexiones concurrentes de manera eficiente. La combinación de Node.js y WebSockets proporciona un juego robusto y escalable para desarrollar y mantener el juego en tiempo real.
 
 **¿Qué es Node.js?**
+
 Node.js es una plataforma de código abierto y multiplataforma que se utiliza para crear aplicaciones del lado del servidor. Está construido sobre el motor de JavaScript V8 de Google Chrome, lo que le permite ejecutar código JavaScript muy rápido.
 *Características Clave de Node.js*
 
 1. *Asíncrono y Basado en Eventos*
 Node.js utiliza un modelo de E/S sin bloqueo y basado en eventos. Esto significa que las operaciones de entrada/salida (como leer archivos de disco o hacer solicitudes de red) no bloquean la ejecución del programa, lo que permite manejar muchas conexiones concurrentes con alta eficiencia.
-2. *Motor V8 de Google*
+3. *Motor V8 de Google*
 El motor V8 compila JavaScript a código de máquina nativo, proporcionando una ejecución rápida y eficiente del código.
-3. *Sistema de Paquetes NPM*
+4. *Sistema de Paquetes NPM*
 Node.js incluye NPM (Node Package Manager), el cual es un ecosistema vasto y rico de bibliotecas y herramientas de terceros que facilitan el desarrollo de aplicaciones. Con NPM, los desarrolladores pueden compartir y reutilizar código fácilmente.
-4. *Aplicaciones en Tiempo Real*
+5. *Aplicaciones en Tiempo Real*
 Node.js es ideal para aplicaciones en tiempo real, como chat en línea, juegos en línea y aplicaciones colaborativas, debido a su capacidad para manejar muchas conexiones simultáneas de manera eficiente.
-5. *Escalabilidad*
+6. *Escalabilidad*
 Node.js es muy escalable debido a su naturaleza no bloqueante y la capacidad de manejar múltiples conexiones concurrentes con eficiencia. Se pueden crear aplicaciones que escalen horizontalmente añadiendo más instancias de servidor.
 
 Es por todo esto que se ha decidido usar Node.js para la implementación de WebSockets.
 
 **Implementación Node.js**
+
 Primero se ha creado una clase que se encarga de manejar las comunicaciones WebSocket en el juego, denominada WebSocketCCHandler.La clase WebSocketCCHandler extiende TextWebSocketHandler y se encarga de manejar las comunicaciones WebSocket en un juego de plataforma. Se implementa para gestionar múltiples estados y acciones de los jugadores.
 
 *Atributos*
+
 Banderas de estado: Para controlar el estado de los jugadores, pausas y finales del juego.
   - boolean primero, segundo, pausa1, pausa2, p1ready, p2ready, seraphineFinal, cassidieFinal, finalBueno, finalMalo
 Controles Seraphina y Cassadie: Controlan las acciones de los jugadores.
   - boolean up1, left1, right1, up2, left2, right2
   - boolean a1, d1, w1, a2, d2, w2
   - boolean salto1, salto2, sprint1, sprint2, h1, h2
+
 *Metodos*
+
 handleTextMessage(WebSocketSession session, TextMessage message):
   Lee y parsea los mensajes JSON recibidos.
   Utiliza un switch para manejar diferentes tipos de peticiones:
