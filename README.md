@@ -652,7 +652,12 @@ handleTextMessage(WebSocketSession session, TextMessage message):
     - Finales (playerPuertas, getFinal, comprobarExisteFinal, finalBueno, finalMalo, tipoFinal): Gestiona el estado de los finales del juego.
     - Controles de Movimiento (pulsarJugadorLeft, soltarJugadorLeft, pulsarJugadorRight, soltarJugadorRight, pulsarJugadorUp, soltarJugadorUp, pulsarJugadorA, soltarJugadorA, pulsarJugadorD, soltarJugadorD,                 pulsarJugadorW, soltarJugadorW, pulsarJugadorSalto, soltarJugadorSalto, pulsarJugadorSprint, soltarJugadorSprint, pulsarJugadorH, soltarJugadorH): Gestiona los movimientos de los personajes de acuerdo a las         acciones de los jugadores.
 
-Una vez ya se ha creado pel WebSocketCCHandler para la gestión de comunicaciones en tiempo real entre jugadores y el servidor, se implementa las llamadas y los valores text que puede recibir del WebSocketccHandler en el index.html. De forma que si necesita hacer alguna petición de mensajes, este se crea una variable que indique el nombre de la petición del WebSocket y la envie através de herramientas que proporciona el Node.js. Además en el index, se tiene un método especial que es para recibir los diversos mensajes que puene enviar el websocket, de forma que por cada case hace algo distinto.
+Una vez ya se ha creado pel WebSocketCCHandler para la gestión de comunicaciones en tiempo real entre jugadores y el servidor, se implementa las llamadas y los valores text que puede recibir del WebSocketccHandler en el index.html. De forma que si necesita hacer alguna petición de mensajes, este se crea una variable que indique el nombre de la petición del WebSocket y la envie através de herramientas que proporciona el Node.js. Además en el index, se tiene un método especial que es para recibir los diversos mensajes que puede enviar el websocket, de forma que por cada case hace algo distinto.
+
+## Diagrama UML
+A continuación se muestra un diagrama de clases que contiene toda la información previa del proyecto, así como las nuevas clases que han sido necesarias incluir para implementar las características de comunicación asíncrona.
+![](CONCEPTS/FINALES/UML1.jpg)
+![](CONCEPTS/FINALES/UML2.jpg)
 
 ## Instrucciones
 
