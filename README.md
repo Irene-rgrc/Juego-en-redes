@@ -710,4 +710,8 @@ Las mejoras realizadas se han implementado dentro del juego base, excepto el tem
 - Por otro lado, dentro del menú de ajustes, cuando se está dentro de la partida se permite volver la menú de inicio.
 - Por último se ha añadido una cuenta atrás de 5 minutos, si la cuenta atrás llega a su fin y aún no se ha finalizado el juego este lleva automaticamente a los jugadores al final malo, en cambio si logran finalizar el juego entonces, dentro de las fases 3 y 4 se usa el tiempo que se ha utilizado para las puntuaciones, se puede mencionar que las puntuaciones no están implementadas dentro del juego base debido a que van según el jugador que haya inciado sesión.
 
+## Diagrama de clases actualizado
+
+![](CONCEPTS/FINALES/UMLact.png)
+
 Además, se debe tener en cuenta que la rejugabilidad del juego no está completamente apoyada y manejada por lo tanto, es posible que ocurran errores al tratar de rejugar el juego siendo el más notorio que el contador no se reinicia una vez ya se ha ganado el juego.
