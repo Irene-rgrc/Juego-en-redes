@@ -704,7 +704,7 @@ Una vez acabe el juego se puede volver a jugar, se mantendran los personajes.
 
 ## Mejoras realizadas
 
-Las mejoras realizadas se han implementado dentro del juego base, excepto el temporizador que ha sido implementado dentro de todas las fases, aunque con ligeros cambios para realizar la implementación de las puntuaciones.
+Las mejoras realizadas se han implementado dentro del juego base, ya que es el juego que va a ser publicado, excepto el temporizador que ha sido implementado dentro de todas las fases, aunque con ligeros cambios para realizar la implementación de las puntuaciones.
 - Se ha añadido dentro del tutorial una imagen indicativa para enseñar al jugador como pasar los diálogos, además de añadir dentro de la introducción un nuevo fondo donde se muestra como pasar a la siguiente pantalla.
 - Además, también se ha hecho una mejora dentro del menú de inicio pudiendo acceder a los créditos dentro de este.
 - Por otro lado, dentro del menú de ajustes, cuando se está dentro de la partida se permite volver la menú de inicio.
