@@ -658,7 +658,7 @@
 							
 						case "reiniciarPersonajes":
             			    //Lógica para reiniciar los personajes
-            			    //window.listos=false;
+            			    window.listos=false;
             				reiniciarPersonajes();
             				break;
 						
@@ -3220,7 +3220,7 @@
 						super('VolverAJugar');
 					}
 					preload() {
-					window.listos=false;
+
 					}
 					create() {
 						this.enter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
