@@ -129,11 +129,14 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 			
 		case "playerReady":
 			String player = node.get("player").asText();
+			System.out.println(player);
 			if(player.equals("player1")) p1ready = true;
 			else if(player.equals("player2")) p2ready = true;
 			break;
 			
 		case "checkPlayersReady":
+			System.out.println(p1ready);
+			System.out.println(p2ready);
 			if(p1ready && p2ready) {
 				msg = "{\"type\":\"listos\"}";
 				session.sendMessage(new TextMessage(msg));
@@ -141,8 +144,8 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 			break;
 		
 		case "reiniciarPersonajes":
-			boolean p1ready = false;
-			boolean p2ready = false;
+			 p1ready = false;
+			 p2ready = false;
 			msg = "{\"type\":\"hanAcabado\"}";
 			session.sendMessage(new TextMessage(msg));
 			break;

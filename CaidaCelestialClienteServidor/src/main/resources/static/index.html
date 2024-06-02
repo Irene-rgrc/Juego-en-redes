@@ -653,8 +653,14 @@
 							window.esFinalMalo = false;
 							window.finalC = false;
 							window.finalS = false;
-							window.listos = false;
+							//window.listos = false;
 							break;
+							
+						case "reiniciarPersonajes":
+            			    //Lógica para reiniciar los personajes
+            			    //window.listos=false;
+            				reiniciarPersonajes();
+            				break;
 						
 						//Guardar récord
 						case "nombreP2":
@@ -1475,6 +1481,7 @@
 					startGame(){
 						var msg = {peticion: "checkPlayersReady"};
 						connection.send(JSON.stringify(msg));
+						console.log(window.listos);
 						if(window.listos) {
 							this.scene.start("NivelSubsuelo");
 							//this.scene.start("NivelCielo");						
@@ -3193,7 +3200,7 @@
 					}
 					create() {
 						// PARA QUE SE REINICEN LOS JUGADORES UNA VEZ PASADOS
-						var reiniciarPersonajes = {peticion: "reiniciar"};
+						var reiniciarPersonajes = {peticion: "reiniciarPersonajes"};
 						connection.send(JSON.stringify(reiniciarPersonajes));
 						//
 						
@@ -3213,6 +3220,7 @@
 						super('VolverAJugar');
 					}
 					preload() {
+					window.listos=false;
 					}
 					create() {
 						this.enter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
