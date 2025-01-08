@@ -8,7 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-public class Record implements Serializable {
+public class Record implements Serializable { // VIGILAR
 	private long id;
 	private String names;
 	private long points;

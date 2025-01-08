@@ -12,6 +12,8 @@
 			top: 50%;
 			left: 50%;
 			transform: translate(-50%, -50%);
+			background-color: rgb(254, 216, 203);
+			background-image: url('ImagenesTutorial/FondoWebSinNada.png');
 		}
 
 		.register-popup {
@@ -21,6 +23,16 @@
 		}
 
 		.principal-popup {
+			position: fixed;
+			margin-top: -43px;
+		}
+
+		.principalReg-popup {
+			position: fixed;
+			margin-top: -43px;
+		}
+
+		.principalBorr-popup {
 			position: fixed;
 			margin-top: -43px;
 		}
@@ -50,6 +62,13 @@
 
 		}
 
+		.despuesInicioMod-popup {
+			display: none;
+			position: fixed;
+			margin-top: -35px;
+
+		}
+
 		.aviso-popup {
 			display: none;
 			position: fixed;
@@ -62,6 +81,20 @@
 			}
 		}
 
+		.form-container,
+		.iniciar-container,
+		.otros-container,
+		.despuesInicio-container,
+		.despuesInicioMod-container,
+		.principal-container,
+		.principalReg-container,
+		.principalBorr-container {
+			width: 1920px;
+			height: 1080px;
+			background-image: url('assetsUsuarios/FondoEstandar.jpg');
+		}
+
+		/* LO DE ARRIBA LO DE FASE 3 LO DE ABAJO FASE 4 QUE YA ESTABA DA MIEDO BORRAR */
 		.form-container,
 		.iniciar-container,
 		.otros-container,
@@ -203,6 +236,94 @@
 			left: 770px;
 		}
 
+		.principalReg-container .inicioSesion {
+
+			background-image: url('assetsUsuarios/IniciarSesionBoton.PNG');
+			background-size: contain;
+			background-repeat: no-repeat;
+			background-position: center;
+			opacity: 0.8;
+			width: 250px;
+			height: 70px;
+			display: block;
+			margin: 0 auto;
+			background-color: transparent;
+		}
+
+		.principalReg-container .registrarse {
+
+			background-image: url('assetsUsuarios/RegistrarseBoton.PNG');
+			background-size: contain;
+			background-repeat: no-repeat;
+			background-position: center;
+			opacity: 0.8;
+			width: 260px;
+			height: 120px;
+			display: block;
+			margin: 0 auto;
+			background-color: transparent;
+		}
+
+		.principalReg-container .offline {
+
+			background-image: url('assets/BotonJugar.PNG');
+			background-size: cover;
+			background-repeat: no-repeat;
+			background-position: center;
+			opacity: 0.8;
+			width: 360px;
+			height: 120px;
+			display: block;
+			margin: 0 auto;
+			background-color: transparent;
+			position: absolute;
+			left: 770px;
+		}
+
+		.principalBorr-container .inicioSesion {
+
+			background-image: url('assetsUsuarios/IniciarSesionBoton.PNG');
+			background-size: contain;
+			background-repeat: no-repeat;
+			background-position: center;
+			opacity: 0.8;
+			width: 250px;
+			height: 70px;
+			display: block;
+			margin: 0 auto;
+			background-color: transparent;
+		}
+
+		.principalBorr-container .registrarse {
+
+			background-image: url('assetsUsuarios/RegistrarseBoton.PNG');
+			background-size: contain;
+			background-repeat: no-repeat;
+			background-position: center;
+			opacity: 0.8;
+			width: 260px;
+			height: 120px;
+			display: block;
+			margin: 0 auto;
+			background-color: transparent;
+		}
+
+		.principalBorr-container .offline {
+
+			background-image: url('assets/BotonJugar.PNG');
+			background-size: cover;
+			background-repeat: no-repeat;
+			background-position: center;
+			opacity: 0.8;
+			width: 360px;
+			height: 120px;
+			display: block;
+			margin: 0 auto;
+			background-color: transparent;
+			position: absolute;
+			left: 770px;
+		}
+
 		.despuesInicio-container .continuar {
 
 			background-image: url('assetsUsuarios/ContinuarBoton.png');
@@ -218,6 +339,34 @@
 		}
 
 		.despuesInicio-container .ajustesCuenta {
+
+			background-image: url('assetsUsuarios/AjustesCuentaBoton.png');
+			background-size: contain;
+			background-repeat: no-repeat;
+			background-position: center;
+			opacity: 0.8;
+			width: 260px;
+			height: 120px;
+			display: block;
+			margin: 0 auto;
+			background-color: transparent;
+		}
+
+		.despuesInicioMod-container .continuar {
+
+			background-image: url('assetsUsuarios/ContinuarBoton.png');
+			background-size: contain;
+			background-repeat: no-repeat;
+			background-position: center;
+			opacity: 0.8;
+			width: 260px;
+			height: 120px;
+			display: block;
+			margin: 0 auto;
+			background-color: transparent;
+		}
+
+		.despuesInicioMod-container .ajustesCuenta {
 
 			background-image: url('assetsUsuarios/AjustesCuentaBoton.png');
 			background-size: contain;
@@ -310,10 +459,86 @@
 		html {
 			font-size: xx-large;
 		}
+
+		#chat {
+			position: fixed;
+			bottom: 10px;
+			left: 10px;
+			width: 300px;
+			height: 400px;
+			background-color: rgba(0, 0, 0, 0.7);
+			color: white;
+			padding: 10px;
+			border-radius: 10px;
+			z-index: 1000;
+			display: flex;
+			flex-direction: column;
+		}
+
+		#ventanaChat {
+			flex: 1;
+			overflow-y: auto;
+			border: 1px solid #fff;
+			padding: 5px;
+			margin-bottom: 10px;
+		}
+
+		#mensajeContainer {
+			display: flex;
+			margin-top: 10px;
+		}
+
+		#mensaje {
+			flex: 0 0 10%;
+			padding: 2px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			height: 30px;
+		}
+
+		#mensajeEnviar {
+			width: 70%;
+			padding: 7px;
+			margin-left: 30px;
+			background-color: #4CAF50;
+			color: white;
+			border: none;
+			cursor: pointer;
+			border-radius: 5px;
+			transition: background-color 0.3s;
+		}
+
+		#mensajeEnviar:hover {
+			background-color: rgb(255, 128, 192);
+		}
+
+		canvas {
+			z-index: 1;
+		}
 	</style>
 </head>
 
 <body>
+	<div id="errorReg"
+		style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(255,0,0,0.8); color: white; padding: 20px; border-radius: 10px; z-index: 1000;">
+		Este usuario ya existe
+	</div>
+
+	<div id="errorInicio"
+		style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(255,0,0,0.8); color: white; padding: 20px; border-radius: 10px; z-index: 1000;">
+		Datos de Inicio de sesión incorrectos
+	</div>
+
+	<div id="errorServidor"
+		style="display: none; position: fixed; top: 50px; left: 50%; transform: translate(-50%, -50%); background-color: rgba(255,0,0,0.5); color: white; padding: 20px; border-radius: 10px; z-index: 1000;">
+		Se ha perdido la conexión con el servidor
+	</div>
+
+	<div id="procesando"
+		style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(255,0,0,0.8); color: white; padding: 20px; border-radius: 10px; z-index: 1000;">
+		Procesando datos
+	</div>
+
 	<p id="tiempo" style="position: absolute; top: 10px; left: 10px; padding: 10px; background-color: LavenderBlush;">
 	</p>
 	<div class="principal-popup" id="principalForm">
@@ -330,10 +555,47 @@
 	</div>
 
 	<body>
+		<div class="principalReg-popup" id="principalRegForm">
+			<form class="principalReg-container">
+				<h1>Se ha registrado correctamente, inicie sesión con su cuenta</h1>
+				<br>
+				<button type="button" class="btn inicioSesion" onclick="openInicio()"> </button>
+				<br><br>
+				<button type="button" class="btn registrarse" onclick="openForm()"> </button>
+				<br><br>
+				<button type="button" class="btn offline" onclick="closePrincipalReg()"> </button>
+			</form>
+
+		</div>
+
+		<div class="principalBorr-popup" id="principalBorrForm">
+			<form class="principalBorr-container">
+				<h1>Su cuenta ha sido eliminada correctamente</h1>
+				<br>
+				<button type="button" class="btn inicioSesion" onclick="openInicio()"> </button>
+				<br><br>
+				<button type="button" class="btn registrarse" onclick="openForm()"> </button>
+				<br><br>
+				<button type="button" class="btn offline" onclick="closePrincipalBorr()"> </button>
+			</form>
+
+		</div>
 		<div class="despuesInicio-popup" id="despuesInicioForm">
 			<form class="despuesInicio-container">
 				<br>
 				<button type="button" class="btn continuar" onclick="closeDespuesInicio()"> .</button>
+				<br><br>
+				<button type="button" class="btn ajustesCuenta" onclick="openOtro()"> </button>
+				<br><br>
+			</form>
+
+		</div>
+
+		<div class="despuesInicioMod-popup" id="despuesInicioModForm">
+			<form class="despuesInicioMod-container">
+				<h1>Se ha modificado la contraseña</h1>
+				<br>
+				<button type="button" class="btn continuar" onclick="closeDespuesInicioMod()"> .</button>
 				<br><br>
 				<button type="button" class="btn ajustesCuenta" onclick="openOtro()"> </button>
 				<br><br>
@@ -351,14 +613,12 @@
 				<b>Contraseña</b></label>
 				<input type="password" id='password' placeholder="Introduzca su contraseña" required>
 				<br><br>
-				<p>Si el nombre de usuario ya está registrado por otra persona no podrás crear una cuenta y no se
-					guardará
-					tu record.</p>
+				<p>Si el nombre de usuario ya está registrado por otra persona no podrás crear una cuenta</p>
 				<br><br>
 				<button type="button" class="btn registrarse" id='registrarse-button'> </button>
 				<br><br>
-				<button type="button" class="btn login" onclick="openInicio()"> </button>
-				<br><br>
+				<!--<button type="button" class="btn login" onclick="openInicio()"> </button>
+				<br><br> -->
 				<button type="button" class="btn cancelar" onclick="closeForm()"> </button>
 			</form>
 		</div>
@@ -378,7 +638,15 @@
 				<button type="button" class="btn cancelar" onclick="closeInicio()"> </button>
 			</form>
 		</div>
+		<!-- EL CHAT WORKING PROGRESS::::::: -->
+		<div id="chat">
+			<div id="ventanaChat"></div>
+			<input type="text" id='mensaje' placeholder="Escribe tu mensaje aquí..." onfocus="disableMovement()"
+				onblur="enableMovement()"> <!-- / QUITAR O NO -->
+			<button type="button" id="mensajeEnviar">Enviar</button>
+		</div>
 
+		<!-- JUEGO CODIGO -->
 		<div class="otros-popup" id="otrosForm">
 			<form class="otros-container">
 				<h1>Cambiar contraseña</h1>
@@ -410,38 +678,64 @@
 			var couplePoints = [];
 			var playerName = "Unknown";
 			var currentUser;
-			//var finalC = false;
-			//var finalS = false;
+			var user;
 
 			function openForm() {
 				closePrincipal();
+				closePrincipalReg();
+				closePrincipalBorr();
 				document.getElementById("myForm").style.display = "block";
 			}
 
 			function openDespuesInicio() {
 				closePrincipal();
+				closePrincipalReg();
+				closePrincipalBorr();
 				document.getElementById("despuesInicioForm").style.display = "block";
+			}
+
+			function openDespuesInicioMod() {
+				closePrincipal();
+				closePrincipalReg();
+				closePrincipalBorr();
+				closeDespuesInicio();
+				document.getElementById("despuesInicioModForm").style.display = "block";
 			}
 
 			function openInicio() {
 				closePrincipal();
+				closePrincipalReg();
+				closePrincipalBorr();
 				document.getElementById("inicioForm").style.display = "block";
 			}
 
 			function openOtro() {
 				closeInicio();
 				closePrincipal();
+				closePrincipalReg();
+				closePrincipalBorr();
 				closeDespuesInicio();
+				closeDespuesInicioMod();
 				document.getElementById("otrosForm").style.display = "block";
 			}
 
 			function openPuntuacion() {
 				closePrincipal();
+				closePrincipalReg();
+				closePrincipalBorr();
 				document.getElementById("puntuacionForm").style.display = "block";
 			}
 
 			function openPrincipal() {
 				document.getElementById("principalForm").style.display = "block";
+			}
+
+			function openPrincipalReg() {
+				document.getElementById("principalRegForm").style.display = "block";
+			}
+
+			function openPrincipalBorr() {
+				document.getElementById("principalBorrForm").style.display = "block";
 			}
 
 
@@ -452,6 +746,14 @@
 
 			function closeDespuesInicio() {
 				document.getElementById("despuesInicioForm").style.display = "none";
+			}
+			function closeDespuesInicioMod() {
+				document.getElementById("despuesInicioModForm").style.display = "none";
+				closeInicio();
+				closePrincipal();
+				closePrincipalReg();
+				closePrincipalBorr();
+				closeDespuesInicio();
 			}
 
 
@@ -474,10 +776,27 @@
 				document.getElementById("principalForm").style.display = "none";
 			}
 
+			function closePrincipalReg() {
+				document.getElementById("principalRegForm").style.display = "none";
+			}
+
+			function closePrincipalBorr() {
+				document.getElementById("principalBorrForm").style.display = "none";
+			}
+
 			function closeOtro2() {
 				document.getElementById("otrosForm").style.display = "none";
 				openDespuesInicio();
 			}
+
+			var ip = location.host;
+				var currentUser = {
+					username: "",
+					password: "",
+					id: -1,
+					record: 300
+				}
+				var usuario; /*VIGILAR*/
 
 			var connection = new WebSocket('ws://' + ip + '/caidacelestial');
 			connection.onopen = function () {
@@ -727,10 +1046,24 @@
 					headers: {
 						"Content-Type": "application/json"
 					}
-				}).done(function (user) {
-					console.log("User created: " + JSON.stringify(user));
-					callback(user);
-				})
+				}).done(function (createdUser) {
+					console.log("User created: " + JSON.stringify(createdUser));
+					callback(createdUser);
+				}).fail(function (jqXHR, textStatus, errorThrown) {
+					console.error('Error creating user:', textStatus, errorThrown);
+				});
+			}
+			// FASE 3
+			function getUserByUsername(username, callback) {
+				$.ajax({
+					method: "GET",
+					url: 'http://' + ip + '/users/search',
+					data: {username: username}
+				}).done(function (identificacion) {
+					callback(identificacion);
+				}).fail(function (jqXHR, textStatus) {
+					callback(null);
+				});
 			}
 
 			function createRecord(record) {
@@ -770,8 +1103,98 @@
 					playerName = name;
 				}
 			})
+			// EL DE LA FASE 3
+			function logUser(id, password, callback) {
+				$.ajax({
+					method: 'GET',
+					url: 'http://' + ip + '/users/' + id,
+					data: {password: password},
+				}).done(function (loggedUser) {
+					callback(loggedUser);
+				}).fail(function (jqXHR, textStatus) {
+					callback(null);
+				});
+			}
 
-			function logUser(userId) {
+			$('#registrarse-button').click(function () {
+				var name = $('#user').val();
+				var password = $('#password').val();
+
+				var usuario = {
+					username: name,
+					password: password
+				};
+
+				document.getElementById("procesando").style.display = "block";
+				setTimeout(function () {
+					document.getElementById("procesando").style.display = "none";
+				}, 3000);
+
+				getUserByUsername(name, function (identificacion) {
+					if (!identificacion) {
+						createUser(usuario, function (usuarioConId) {
+							currentUser.username = usuarioConId.username;
+							currentUser.password = usuarioConId.password;
+							currentUser.id = usuarioConId.id;
+							currentUser.record = usuarioConId.record;
+							openPrincipalReg();
+							closeForm();
+						});
+					} else {
+						console.log("Este usuario ya existe");
+						document.getElementById("errorReg").style.display = "block";
+						setTimeout(function () {
+							document.getElementById("errorReg").style.display = "none";
+						}, 3000);
+					}
+				});
+			});
+
+			$(document).ready(function () {
+				closePrincipalReg();
+				closePrincipalBorr();
+				openPrincipal();
+			});
+			$('#iniciar-button').click(function () {
+				var name = $('#userA').val();
+				var password = $('#passwordA').val();
+
+				document.getElementById("procesando").style.display = "block";
+				setTimeout(function () {
+					document.getElementById("procesando").style.display = "none";
+				}, 3000);
+				getUserByUsername(name, function (identificacion) {
+					if (identificacion) {
+						logUser(identificacion, password, function (usuarioLoggeado) {
+							if (usuarioLoggeado) {
+								currentUser.username = usuarioLoggeado.username;
+								currentUser.password = usuarioLoggeado.password;
+								currentUser.id = usuarioLoggeado.id;
+								currentUser.record = usuarioLoggeado.record;
+								usuario = usuarioLoggeado;
+								openDespuesInicio();
+								closeInicio();
+								closePrincipal();
+							} else {
+								console.log("Usuario Incorrecto")
+								document.getElementById("errorInicio").style.display = "block";
+								setTimeout(function () {
+									document.getElementById("errorInicio").style.display = "none";
+								}, 3000);
+							}
+						});
+
+					} else {
+						console.log("Usuario Incorrecto")
+						document.getElementById("errorInicio").style.display = "block";
+						setTimeout(function () {
+							document.getElementById("errorInicio").style.display = "none";
+						}, 3000);
+					}
+				});
+			});
+			// EL DE LA FASE 4
+			/*function logUser(userId) {
 				$.ajax({
 					method: "GET",
 					url: 'http://' + ip + '/users/' + userId,
@@ -796,8 +1219,8 @@
 					closePrincipal();
 					playerName = name;
 				}
-			})
-
+			})**/
+			//FASE 4 -> NO EXISTE EN LA FASE 3 POR SI ACASO LO DEJO VIGILAR 
 			function updateUser(user) {
 				$.ajax({
 					method: 'PUT',
@@ -829,14 +1252,64 @@
 				existingPasswords[currentUser - 1] = contraseña;
 			})
 
+			// FASE 3
+			function updatePassword(id, password) {
+				$.ajax({
+					method: 'PUT',
+					url: 'http://' + ip + '/users/password/' + id,
+					data: {password: password},
+				}).done(function (user) {
+					console.log("Updated item: " + JSON.stringify(user));
+				}).fail(function (jqXHR, textStatus, errorThrown) {
+					console.error('Error updating user:', textStatus, errorThrown);
+				});
+			}
+			// FASE 3
+			function updateRecord(user) {
+				$.ajax({
+					method: 'PUT',
+					url: 'http://' + ip + '/users/record/' + user.id,
+					data: JSON.stringify(user),
+					processData: false,
+					headers: {
+						"Content-Type": "application/json"
+					}
+				}).done(function (user) {
+					currentUser.record = user.record;
+					console.log("Updated item: " + JSON.stringify(user));
+				}).fail(function (jqXHR, textStatus, errorThrown) {
+					console.error('Error updating user:', textStatus, errorThrown);
+				});
+			}
 
-			function deleteUser(userId) {
+			$('#cambiar-button').click(function () {
+				var password = $('#nPasswordC').val();
+				document.getElementById("procesando").style.display = "block";
+				setTimeout(function () {
+					document.getElementById("procesando").style.display = "none";
+				}, 3000);
+				getUserByUsername($('#userA').val(), function (identificacion) {
+					if (identificacion) {
+						currentUser.id = identificacion;
+						updatePassword(identificacion, password);
+						openDespuesInicioMod();
+						closeOtro();
+					} else {
+						console.log('User not found');
+					}
+				});
+			});
+
+			// FASE 4 
+			/*function deleteUser(userId) {
 				$.ajax({
 					method: 'DELETE',
 					url: 'http://' + ip + '/users/' + userId,
 				}).done(function (user) {
 					console.log("Deleted user " + userId)
-				})
+				}).fail(function (jqXHR, textStatus, errorThrown) {
+						console.error('Error deleting user:', textStatus, errorThrown);
+					});
 			}
 
 			$('#eliminar-button').click(function (event) {
@@ -854,8 +1327,44 @@
 						existingRecords[i] = users[i].record;
 					}
 				})
-			})
+			})*/
 
+			// FASE 4
+			/*function deleteUser(userId) {
+					$.ajax({
+						method: 'DELETE',
+						url: 'http://' + ip + '/users/' + userId,
+					}).done(function (user) {
+						console.log("Deleted user " + userId);
+					}).fail(function (jqXHR, textStatus, errorThrown) {
+						console.error('Error deleting user:', textStatus, errorThrown);
+					});
+				}
+
+				$('#eliminar-button').click(function () {
+					deleteUser(currentUser.id);
+					openPrincipalBorr();
+					closeOtro();
+				});*/
+			// FASE 3
+			function deleteUser(userId) {
+				$.ajax({
+					method: 'DELETE',
+					url: 'http://' + ip + '/users/' + userId,
+				}).done(function (user) {
+					console.log("Deleted user " + userId);
+				}).fail(function (jqXHR, textStatus, errorThrown) {
+					console.error('Error deleting user:', textStatus, errorThrown);
+				});
+			}
+
+			$('#eliminar-button').click(function () {
+				deleteUser(currentUser.id);
+				openPrincipalBorr();
+				closeOtro();
+			});
+
+			// ESTA NO ESTA EN LA FASE 3 VIGILAR
 			// Función para guardar la puntuación del usuario
 			function guardarPuntuacion() {
 				var usuario = {
@@ -868,13 +1377,32 @@
 
 				existingRecords[currentUser - 1] = tiempoTranscurrido;
 			}
-
+			//FASE 4
 			// Ejemplo de cómo utilizar estas funciones después de que el usuario complete una partida
-			function partidaCompleta() {
+			/*function partidaCompleta() {
 				// Guardar la puntuación en el servidor
 				if (tiempoTranscurrido < existingRecords[currentUser - 1]) {
 					guardarPuntuacion();
 				}
+			}*/
+
+			// FASE 3
+			function partidaCompleta(tiempoTranscurrido) {
+				var username = $('#userA').val();
+				document.getElementById("procesando").style.display = "block";
+				setTimeout(function () {
+					document.getElementById("procesando").style.display = "none";
+				}, 3000);
+				getUserByUsername(username, function (identificacion) {
+					if (identificacion) {
+						if (tiempoTranscurrido < currentUser.record) {
+							usuario.record = tiempoTranscurrido;
+							updateRecord(usuario);
+						}
+					} else {
+						console.log("Usuario no encontrado");
+					}
+				});
 			}
 
 			// VARIABLES
@@ -975,6 +1503,85 @@
 				// Reiniciar tiempoTotal al valor inicial y volver a llamar a actualizarTiempo
 				//actualizarTiempo(escena); // Asegúrate de tener la escena actual accesible
 			}
+
+			// Comprobación del Chat
+			let chatActive = false; // Flag que indica si esta activado o no el chat.
+
+			// TOCHACO A CONTINUACION
+			// Función para enviar mensajes AJAX
+			function mensajeChat(message) {
+				$.ajax({
+					method: 'POST',
+					url: 'http://' + ip + '/users/chat', // Asegúrate de que ip esté definido correctamente
+					data: JSON.stringify(message),
+					contentType: "application/json", // Define correctamente el tipo de contenido
+					success: function (response) {
+						console.log('Mensaje enviado correctamente:', response);
+						$('#mensaje').val(''); // Limpia el campo del mensaje tras el envío
+					},
+					error: function (jqXHR, textStatus, errorThrown) {
+						console.error('Error al enviar el mensaje:', textStatus, errorThrown, currentUser.id);
+
+					}
+				});
+			}
+
+			// Evento para enviar el mensaje al hacer clic en el botón
+			$('#mensajeEnviar').click(function () {
+				var mensajeA = $('#mensaje').val().trim(); // Trim para evitar espacios en blanco
+
+				if (mensajeA.length > 0) { // Verifica que no esté vacío
+					var message = {
+						userId: currentUser.id || 1, // Cambia por el userId correcto
+						username: "Manolo", // Puedes cambiarlo por el nombre correcto
+						message: mensajeA
+					};
+					mensajeChat(message);
+				} else {
+					alert('No puedes enviar un mensaje vacío.');
+				}
+			});
+			// Función para obtener los mensajes del servidor
+			function getMensajesChat() {
+				$.ajax({
+					url: 'http://' + ip + '/users/obtener-mensajes', // Asegúrate de que ip esté definido correctamente
+					method: 'GET',
+					success: function (data) {
+						let ventanaChat = document.getElementById('ventanaChat');
+						ventanaChat.innerHTML = ''; // Limpiar el contenido actual
+
+						if (Array.isArray(data)) {
+							data.forEach(function (msg) {
+								ventanaChat.innerHTML += `<p><strong>${msg.username}:</strong> ${msg.message}</p>`;
+							});
+						} else {
+							console.error('La respuesta no es un array:', data);
+						}
+
+						ventanaChat.scrollTop = ventanaChat.scrollHeight; // Hacer scroll hacia abajo para ver los últimos mensajes
+					},
+					error: function (jqXHR, textStatus, errorThrown) {
+						document.getElementById("errorServidor").style.display = "block";
+
+						console.error('Error al obtener los mensajes:', textStatus, errorThrown);
+					}
+				});
+			}
+
+			// Llama periódicamente a getMensajesChat cada 3 segundos
+			setInterval(getMensajesChat, 3000);
+			// Deshabilitar movimiento de Cassidie cuando se está escribiendo en el chat
+			function disableMovement() {
+				chatActive = true;
+			}
+			// Habilitar movimiento de Cassidie cuando se sale del chat
+			function enableMovement() {
+				chatActive = false;
+			}
+
+
+
+
 
 			class NivelBase extends Phaser.Scene {
 
@@ -1823,7 +2430,7 @@
 					//console.log(this.Cassadie.x)
 					//console.log(this.Cassadie.y)
 					// ................................................................................................................................................
-					
+
 
 					if (Phaser.Input.Keyboard.JustDown(this.keyH)) {
 						this.golpe1 = this.sound.add('golpe1', {loop: false});

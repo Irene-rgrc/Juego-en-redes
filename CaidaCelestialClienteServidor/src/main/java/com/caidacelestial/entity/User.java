@@ -8,41 +8,45 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+@Entity
 public class User implements Serializable {
-	private long id;
+	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
 	private String username;
 	private String password;
 	private long record;
 
-	public String getUsername() {
-		return username;
-	}
-	
-	public String getPassword() {
-		return password;
-	}
-	
-	public long getId() {
-		return id;
-	}
-	
-	public long getRecord() {
-		return record;
-	}
-	
-	public void setPassword(String contraseña) {
-		this.password = contraseña;
-	}
-	
-	public void setUsername(String user) {
-		this.username = user;
-	}
-	
-	public void setId(long idN) {
-		this.id = idN;
-	}
-	
-	public void setRecord(long newRecord) {
-		this.record = newRecord;
-	}
+	// Getters y setters
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getRecord() {
+        return record;
+    }
+
+    public void setRecord(long record) {
+        this.record = record;
+    }
 }
