@@ -920,7 +920,7 @@
 									//clearInterval(tiempo);
 									enPausa = true;
 									pararContador();
-								} else if (this.Scene == Ajustes || this.Scene == EligiendoFinal) {
+								} else if (this.Scene === Ajustes || this.Scene === EligiendoFinal || this.Scene === Elegir|| this.Scene === FinalBueno || this.Scene === FinalMalo) {
 									enPausa = true;
 									pararContador();
 								}
@@ -1505,8 +1505,8 @@
 					connection.send(JSON.stringify(msg));
 					console.log(window.listos);
 					if (window.listos) {
-						this.scene.start("NivelSubsuelo");
-						//this.scene.start("NivelCielo");						
+						//this.scene.start("NivelSubsuelo");
+						this.scene.start("NivelCielo");						
 
 						// ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 					}
@@ -2398,6 +2398,9 @@
 				preload() {
 					//actualizarTiempo('NivelCielo');
 					//enPausa = false;
+					enPausa = false;
+					actualizarTiempo(this);
+					
 				}
 
 				create() {
@@ -2968,6 +2971,8 @@
 					super('EligiendoFinal');
 				}
 				preload() {
+					enPausa = true;
+					pararContador();
 				}
 				create() {
 					this.add.image(960, 500, 'sky');
@@ -3768,6 +3773,8 @@
 				}
 
 				preload() {
+					enPausa = true;
+					pararContador();
 				}
 
 				create() {
@@ -3835,7 +3842,8 @@
 				}
 
 				preload() {
-
+					enPausa = true;
+					pararContador();
 				}
 
 				create() {
@@ -3870,7 +3878,8 @@
 				}
 
 				preload() {
-
+					enPausa = true;
+					pararContador();
 				}
 
 				create() {
