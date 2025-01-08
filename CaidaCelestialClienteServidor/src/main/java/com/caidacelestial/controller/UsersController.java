@@ -6,14 +6,18 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Collection;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicLong;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.beans.factory.annotation.Autowired;
+import com.caidacelestial.entity.User;
+import com.caidacelestial.entity.Message;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,101 +29,172 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.caidacelestial.entity.User;
-
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 
 @RestController
 @RequestMapping("/users")
 public class UsersController {
-	
-	ConcurrentHashMap<Long, User> users = new ConcurrentHashMap<>(); 
-	long nextId;
-	//long nextId = 0;
-	
-	@GetMapping(value = "/")
-	public Collection<User> usuarios() {
-		nextId = users.mappingCount()+1;
-		return users.values();
-	}
-	
-	@PostMapping(value = "/")
-	@ResponseStatus(HttpStatus.CREATED)
-	public User usuario(@RequestBody User usuario) throws ClassNotFoundException, IOException {
-		if(!users.containsKey(usuario.getId())) {
-			long id = nextId++;
-			usuario.setId(id);
-			usuario.setRecord(300);
-			users.put(id, usuario);
-			guardarUsuarios();
-			return usuario;
-		}
-		return null;
-	}
-	
-	@PutMapping("/{id}")
-	public ResponseEntity<User> actualizaUser(@PathVariable long id,@RequestBody User userActualizado) throws ClassNotFoundException, IOException {
 
-		User savedUser = users.get(userActualizado.getId());
+    ConcurrentHashMap<Long, User> users = new ConcurrentHashMap<>();
+    private List<Message> chatMessages = new ArrayList<>(); // Lista para almacenar los mensajes
+    long nextId = 1; // Initial value
+    BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
+    
+    //String encodedPass = encoder.encode("myPassword");
+    //boolean success = encoder.matches(p, encodedPass );
 
-		if (savedUser != null) {
+    // Obtener todos los usuarios
+    @GetMapping(value = "/")
+    public Collection<User> usuarios() {
+        return users.values();
+    }
 
-			users.put(id, userActualizado);
-			guardarUsuarios();
+    // Crear un nuevo usuario
+    @PostMapping(value = "/")
+    @ResponseStatus(HttpStatus.CREATED)
+    public User usuario(@RequestBody User usuario) throws IOException {
+        long id = nextId++;
+        usuario.setId(id);
+        usuario.setPassword(encoder.encode(usuario.getPassword()));
+        usuario.setRecord(300);
+        users.put(id, usuario);
+        guardarUsuarios();
+        return usuario;
+    }
 
-			return new ResponseEntity<>(userActualizado, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-	}
-	
-	@DeleteMapping("/{id}")
-	public ResponseEntity<User> eliminarUser(@PathVariable long id) throws ClassNotFoundException, IOException {
+    // Actualizar un usuario existente
+    @PutMapping("/password/{id}")
+    public ResponseEntity<User> actualizaPassword(@PathVariable long id, @RequestParam String password) throws IOException {
+        User savedUser = users.get(id);
+        if (savedUser != null) {
+            savedUser.setPassword(encoder.encode(password));
+            guardarUsuarios();
+            return new ResponseEntity<>(savedUser, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+    
+    @PutMapping("/record/{id}")
+    public ResponseEntity<User> actualizaRecord(@PathVariable long id, @RequestBody User userActualizado) throws IOException {
+        User savedUser = users.get(id);
+        if (savedUser != null) {
+            savedUser.setRecord(userActualizado.getRecord()); 
+            guardarUsuarios();
+            return new ResponseEntity<>(savedUser, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 
-		User savedUser = users.get(id);
+    // Eliminar un usuario
+    @DeleteMapping("/{id}")
+    public ResponseEntity<User> eliminarUser(@PathVariable long id) throws IOException {
+        User savedUser = users.get(id);
+        
+        if (savedUser != null) {
+            users.remove(id);
+            guardarUsuarios();
+            return new ResponseEntity<>(savedUser, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+    
+    @GetMapping("/{id}")
+    public ResponseEntity<User> loginUser(@PathVariable long id, @RequestParam String password) throws IOException  {
+        User loggedUser = users.get(id);
+        if (encoder.matches(password, loggedUser.getPassword())) {
+            return new ResponseEntity<>(loggedUser, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 
-		if (savedUser != null) {
-			users.remove(savedUser.getId());
-			users.get(nextId).setId(id);
-			users.put(id,users.get(nextId));
-			users.remove(nextId);
-			nextId--;
-			guardarUsuarios();
-			return new ResponseEntity<>(savedUser, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-	}
-	
-	@GetMapping("/{id}")
-	public ResponseEntity<User> loggearUser(@PathVariable long id) {
+    // Buscar un usuario por nombre de usuario
+    @GetMapping("/search")
+    public ResponseEntity<Long> getUserByUsername(@RequestParam String username) {
+        for (User user : users.values()) {
+            if (user.getUsername().equals(username)) {
+                return new ResponseEntity<>(user.getId(), HttpStatus.OK);
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 
-		User savedUser = users.get(id);
+    // Buscar un usuario por record
+    @GetMapping("/searchByRecord")
+    public ResponseEntity<User> getRecordByUsername(@RequestParam long record) {
+        for (User user : users.values()) {
+            if (user.getRecord() == record) {
+                return new ResponseEntity<>(user, HttpStatus.OK);
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 
-		if (savedUser != null) {
-			return new ResponseEntity<>(savedUser, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-	}
-	
-	
-	@PostConstruct
-	public void cargarUsuarios() throws IOException, ClassNotFoundException{
-		FileInputStream fileInputStream = new FileInputStream("src/main/resources/users.txt");
-		ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-		ConcurrentHashMap usersEnFichero = (ConcurrentHashMap) objectInputStream.readObject();
-		users = usersEnFichero;
-		objectInputStream.close();
-	}
+    // Endpoint para enviar un mensaje de chat
+    @PostMapping("/chat")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Message enviarMensaje(@RequestBody Message mensaje) throws IOException {
+        User user = users.get(mensaje.getUserId());
+        if (user != null) {
+            mensaje.setUsername(user.getUsername());
+        } else {
+            mensaje.setUsername("Anonimo");
+        }
+        chatMessages.add(mensaje); // Agregar el mensaje a la lista de chat
+        guardarChat();
+        //System.out.println(mensaje.getUserId() + ": " + mensaje.getMessage());
+        return mensaje;
+    }
 
-	@PreDestroy
-	public void guardarUsuarios() throws IOException, ClassNotFoundException{
-		FileOutputStream fileOutputStream = new FileOutputStream("src/main/resources/users.txt");
-		ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-		objectOutputStream.writeObject(users);
-		objectOutputStream.close();
-	}
+    
+    // Endpoint para obtener todos los mensajes del chat
+    @GetMapping("/obtener-mensajes")
+    public List<Message> obtenerMensajes() throws ClassNotFoundException, IOException {
+    	cargarChat();
+        return chatMessages; // Retornar todos los mensajes almacenados
+    }
+
+    // Cargar usuarios desde un archivo al iniciar el servidor
+    @PostConstruct
+    public void cargarUsuarios() throws IOException, ClassNotFoundException {
+        try (FileInputStream fileInputStream = new FileInputStream("src/main/resources/users.txt");
+             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
+            ConcurrentHashMap<Long, User> usersEnFichero = (ConcurrentHashMap<Long, User>) objectInputStream.readObject();
+            users = usersEnFichero;
+            if (!users.isEmpty()) {
+                nextId = users.keySet().stream().max(Long::compare).get() + 1;
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            // Handle exceptions (file not found, empty file, etc.)
+        }
+    }
+    @PostConstruct
+    public void cargarChat() throws IOException, ClassNotFoundException {
+        try (FileInputStream fileInputStream = new FileInputStream("src/main/resources/chat.txt");
+             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
+        	List<Message> chatEnFichero = (List<Message>) objectInputStream.readObject();
+            chatMessages = chatEnFichero;
+        } catch (IOException | ClassNotFoundException e) {
+            // Handle exceptions (file not found, empty file, etc.)
+        }
+    }
+
+    // Guardar usuarios en un archivo antes de apagar el servidor
+    @PreDestroy
+    public void guardarUsuarios() throws IOException {
+        try (FileOutputStream fileOutputStream = new FileOutputStream("src/main/resources/users.txt");
+             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {
+            objectOutputStream.writeObject(users);
+        }
+    }
+    @PreDestroy
+    public void guardarChat() throws IOException {
+        try (FileOutputStream fileOutputStream = new FileOutputStream("src/main/resources/chat.txt");
+             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {
+            objectOutputStream.writeObject(chatMessages);
+        }
+    }
 }
