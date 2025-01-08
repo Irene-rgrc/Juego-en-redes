@@ -885,6 +885,7 @@
 			let cancionReproducida = false;
 			let cancion;
 			var tiempoAcabar = false;
+			var display = document.getElementById('tiempo');
 
 			// HIGHSCORE
 			var tiempoInicio; // Variable para guardar el tiempo de inicio
@@ -898,8 +899,7 @@
 					if (tiempoAcabar == false) {
 						tiempoInicio = Date.now(); // Guardar el tiempo de inicio en milisegundos
 						var tiempoTotal = 5 * 60; // 5 minutos en segundos
-						//var tiempoTotal = 60; // 5 minutos en segundos
-						var display = document.getElementById('tiempo');
+						//var display = document.getElementById('tiempo');
 						var tiempo = setInterval(function () {
 							if (!enPausa) {
 								var minutos = Math.floor(tiempoTotal / 60);
@@ -910,17 +910,18 @@
 								display.textContent = minutos.toString().padStart(2, '0') + 'm ' + segundos.toString().padStart(2, '0') + 's';
 
 								if (--tiempoTotal < 0) {
-									//clearInterval(tiempo);
+									clearInterval(tiempo);
 									enPausa = true;
 									pararContador();
 									display.textContent = 'Se acabo el tiempo';
 									// Poner final malo
 									escena.scene.start('FinalMalo');
 								} else if (tiempoAcabar == true) {
-									//clearInterval(tiempo);
+									clearInterval(tiempo);
 									enPausa = true;
 									pararContador();
-								} else if (this.Scene === Ajustes || this.Scene === EligiendoFinal || this.Scene === Elegir|| this.Scene === FinalBueno || this.Scene === FinalMalo) {
+								} else if (this.Scene === Ajustes || this.Scene === EligiendoFinal || this.Scene === Elegir || this.Scene === FinalBueno || this.Scene === FinalMalo) {
+									clearInterval(tiempo);
 									enPausa = true;
 									pararContador();
 								}
@@ -945,14 +946,34 @@
 			function pararContador() {
 				if (enPausa) {
 					enPausa = true;
-					tiempo = 0;
+					// Detener cualquier temporizador activo
+					clearInterval(tiempo);
 					tiempoAcabar = true; // Detener el contador
-					var display = document.getElementById('tiempo');
+					//var display = document.getElementById('tiempo');
 					display.textContent = '';
 					partidaCompleta();
 					return tiempoTranscurrido;
 				}
 
+			}
+
+			function reiniciarContador() {
+				// Detener cualquier temporizador activo
+				clearInterval(tiempo);
+				// Reiniciar variables
+				tiempoAcabar = false;
+				enPausa = false;
+				tiempoTranscurrido = 0; // Reiniciamos el tiempo transcurrido a 0
+				tiempoInicio = Date.now(); // Restablecemos el tiempo de inicio
+				// Actualizar el display inmediatamente
+				//var display = document.getElementById('tiempo');
+				var tiempoTotal = 5 * 60; // Reiniciamos el tiempo total a 5 minutos
+				var minutos = Math.floor(tiempoTotal / 60);
+				var segundos = tiempoTotal % 60;
+				display.textContent = minutos.toString().padStart(2, '0') + 'm ' + segundos.toString().padStart(2, '0') + 's';
+
+				// Reiniciar tiempoTotal al valor inicial y volver a llamar a actualizarTiempo
+				//actualizarTiempo(escena); // Asegúrate de tener la escena actual accesible
 			}
 
 			class NivelBase extends Phaser.Scene {
@@ -1480,8 +1501,15 @@
 			class PantallaSeleccion extends NivelBase {
 				constructor() {
 					super('PantallaSeleccion');
+					// Reiniciar variables
+					tiempoAcabar = false;
+					enPausa = false;
+					tiempoTranscurrido = 0; // Reiniciamos el tiempo transcurrido a 0
+					//tiempoInicio = Date.now(); // Restablecemos el tiempo de inicio
+
 				}
 				preload() {
+					clearInterval(tiempo);
 				}
 				create() {
 					if (window.plyer === "player1") {
@@ -1505,8 +1533,8 @@
 					connection.send(JSON.stringify(msg));
 					console.log(window.listos);
 					if (window.listos) {
-						//this.scene.start("NivelSubsuelo");
-						this.scene.start("NivelCielo");						
+						this.scene.start("NivelSubsuelo");
+						//this.scene.start("NivelCielo");
 
 						// ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 					}
@@ -1539,9 +1567,11 @@
 				}
 
 				preload() {
-					//tiempoAcabar = false;
+					// Reiniciar variables
+					tiempoAcabar = false; enPausa = false;
 					actualizarTiempo(this);
-					enPausa = false;
+
+
 				}
 
 				create() {
@@ -1658,6 +1688,7 @@
 				}
 
 				update() {
+					mostrarTiempoTranscurrido();
 					this.controles();
 					if (window.left1 && window.left2) {
 						var msg = {peticion: "seguirJugadorLeft"};
@@ -1792,7 +1823,7 @@
 					//console.log(this.Cassadie.x)
 					//console.log(this.Cassadie.y)
 					// ................................................................................................................................................
-					mostrarTiempoTranscurrido();
+					
 
 					if (Phaser.Input.Keyboard.JustDown(this.keyH)) {
 						this.golpe1 = this.sound.add('golpe1', {loop: false});
@@ -2396,11 +2427,11 @@
 				}
 
 				preload() {
-					//actualizarTiempo('NivelCielo');
-					//enPausa = false;
-					enPausa = false;
-					actualizarTiempo(this);
-					
+					// Reiniciar variables
+					//tiempoAcabar = false; enPausa = false;
+					//reiniciarContador();
+					//actualizarTiempo(this);
+
 				}
 
 				create() {
@@ -2657,6 +2688,7 @@
 				}
 
 				update() {
+					//mostrarTiempoTranscurrido();
 					this.controles();
 					if (window.left1 && window.left2) {
 						var msg = {peticion: "seguirJugadorLeft"};
@@ -2729,6 +2761,8 @@
 							this.flores1D = false;
 						}, 3000);
 					}
+
+
 
 					// NUBES
 					// 0
