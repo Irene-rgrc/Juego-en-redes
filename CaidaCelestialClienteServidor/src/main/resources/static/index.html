@@ -670,133 +670,128 @@
 
 		<script type="text/javascript">
 
-			var ip = location.host;
-			var existingUsers = [];
-			var existingPasswords = [];
-			var existingRecords = [];
-			var coupleNames = [];
-			var couplePoints = [];
-			var playerName = "Unknown";
-			var currentUser;
 			var user;
 
-			function openForm() {
-				closePrincipal();
-				closePrincipalReg();
-				closePrincipalBorr();
-				document.getElementById("myForm").style.display = "block";
-			}
+				function openForm() {
+					closePrincipal();
+					closePrincipalReg();
+					closePrincipalBorr();
+					document.getElementById("myForm").style.display = "block";
+				}
 
-			function openDespuesInicio() {
-				closePrincipal();
-				closePrincipalReg();
-				closePrincipalBorr();
-				document.getElementById("despuesInicioForm").style.display = "block";
-			}
+				function openDespuesInicio() {
+					closePrincipal();
+					closePrincipalReg();
+					closePrincipalBorr();
+					document.getElementById("despuesInicioForm").style.display = "block";
+				}
 
-			function openDespuesInicioMod() {
-				closePrincipal();
-				closePrincipalReg();
-				closePrincipalBorr();
-				closeDespuesInicio();
-				document.getElementById("despuesInicioModForm").style.display = "block";
-			}
+				function openDespuesInicioMod() {
+					closePrincipal();
+					closePrincipalReg();
+					closePrincipalBorr();
+					closeDespuesInicio();
+					document.getElementById("despuesInicioModForm").style.display = "block";
+				}
 
-			function openInicio() {
-				closePrincipal();
-				closePrincipalReg();
-				closePrincipalBorr();
-				document.getElementById("inicioForm").style.display = "block";
-			}
+				function openInicio() {
+					closePrincipal();
+					closePrincipalReg();
+					closePrincipalBorr();
+					document.getElementById("inicioForm").style.display = "block";
+				}
 
-			function openOtro() {
-				closeInicio();
-				closePrincipal();
-				closePrincipalReg();
-				closePrincipalBorr();
-				closeDespuesInicio();
-				closeDespuesInicioMod();
-				document.getElementById("otrosForm").style.display = "block";
-			}
+				function openOtro() {
+					closeInicio();
+					closePrincipal();
+					closePrincipalReg();
+					closePrincipalBorr();
+					closeDespuesInicio();
+					closeDespuesInicioMod();
+					document.getElementById("otrosForm").style.display = "block";
+				}
 
-			function openPuntuacion() {
-				closePrincipal();
-				closePrincipalReg();
-				closePrincipalBorr();
-				document.getElementById("puntuacionForm").style.display = "block";
-			}
+				function openPuntuacion() {
+					closePrincipal();
+					closePrincipalReg();
+					closePrincipalBorr();
+					document.getElementById("puntuacionForm").style.display = "block";
+				}
 
-			function openPrincipal() {
-				document.getElementById("principalForm").style.display = "block";
-			}
+				function openPrincipal() {
+					document.getElementById("principalForm").style.display = "block";
+				}
 
-			function openPrincipalReg() {
-				document.getElementById("principalRegForm").style.display = "block";
-			}
+				function openPrincipalReg() {
+					document.getElementById("principalRegForm").style.display = "block";
+				}
 
-			function openPrincipalBorr() {
-				document.getElementById("principalBorrForm").style.display = "block";
-			}
-
-
-			function closeForm() {
-				document.getElementById("myForm").style.display = "none";
-				openPrincipal();
-			}
-
-			function closeDespuesInicio() {
-				document.getElementById("despuesInicioForm").style.display = "none";
-			}
-			function closeDespuesInicioMod() {
-				document.getElementById("despuesInicioModForm").style.display = "none";
-				closeInicio();
-				closePrincipal();
-				closePrincipalReg();
-				closePrincipalBorr();
-				closeDespuesInicio();
-			}
+				function openPrincipalBorr() {
+					document.getElementById("principalBorrForm").style.display = "block";
+				}
 
 
-			function closeInicio() {
-				document.getElementById("inicioForm").style.display = "none";
-				openPrincipal();
-			}
 
-			function closeOtro() {
-				document.getElementById("otrosForm").style.display = "none";
-				openPrincipal();
-			}
+				function closeForm() {
+					document.getElementById("myForm").style.display = "none";
+					openPrincipalReg();
 
-			function closePuntuacion() {
-				document.getElementById("puntuacionForm").style.display = "none";
-				openPrincipal();
-			}
+				}
 
-			function closePrincipal() {
-				document.getElementById("principalForm").style.display = "none";
-			}
+				function closeDespuesInicio() {
+					document.getElementById("despuesInicioForm").style.display = "none";
+				}
+				function closeDespuesInicioMod() {
+					document.getElementById("despuesInicioModForm").style.display = "none";
+					closeInicio();
+					closePrincipal();
+					closePrincipalReg();
+					closePrincipalBorr();
+					closeDespuesInicio();
+				}
 
-			function closePrincipalReg() {
-				document.getElementById("principalRegForm").style.display = "none";
-			}
 
-			function closePrincipalBorr() {
-				document.getElementById("principalBorrForm").style.display = "none";
-			}
 
-			function closeOtro2() {
-				document.getElementById("otrosForm").style.display = "none";
-				openDespuesInicio();
-			}
+				function closeInicio() {
+					document.getElementById("inicioForm").style.display = "none";
+					openPrincipal();
+				}
+
+				function closeOtro() {
+					document.getElementById("otrosForm").style.display = "none";
+					openPrincipalBorr();
+				}
+
+				function closePuntuacion() {
+					document.getElementById("puntuacionForm").style.display = "none";
+					openPrincipal();
+				}
+
+				function closePrincipal() {
+					document.getElementById("principalForm").style.display = "none";
+				}
+
+				function closePrincipalReg() {
+					document.getElementById("principalRegForm").style.display = "none";
+				}
+
+				function closePrincipalBorr() {
+					document.getElementById("principalBorrForm").style.display = "none";
+				}
+
+				function closeOtro2() {
+					document.getElementById("otrosForm").style.display = "none";
+					openDespuesInicio();
+				}
 
 			var ip = location.host;
-				var currentUser = {
-					username: "",
-					password: "",
-					id: -1,
-					record: 300
-				}
-				var usuario; /*VIGILAR*/
+			var currentUser = {
+				username: "",
+				password: "",
+				id: -1,
+				record: 300
+			}
+			var usuario; /*VIGILAR*/
 
 			var connection = new WebSocket('ws://' + ip + '/caidacelestial');
 			connection.onopen = function () {
@@ -1001,336 +996,193 @@
 			}
 
 
-			function loadUsers(callback) {
-				$.ajax({
-					url: 'http://' + ip + '/users/'
-				}).done(function (users) {
-					console.log('Users loaded: ' + JSON.stringify(users));
-					callback(users);
-				})
-			}
-
-			function loadRecords(callback) {
-				$.ajax({
-					url: 'http://' + ip + '/records/'
-				}).done(function (records) {
-					console.log('Records loaded: ' + JSON.stringify(records));
-					callback(records);
-				})
-			}
-
-			$(document).ready(function () {
-
-				loadUsers(function (users) {
-					for (var i = 0; i < users.length; i++) {
-						existingUsers[i] = users[i].username;
-						existingPasswords[i] = users[i].password;
-						existingRecords[i] = users[i].record;
-					}
-				})
-				loadRecords(function (records) {
-					for (var i = 0; i < records.length; i++) {
-						coupleNames[i] = records[i].names;
-						couplePoints[i] = records[i].points;
-					}
-				})
-			})
-
-
-			function createUser(user, callback) {
-				$.ajax({
-					method: "POST",
-					url: 'http://' + ip + '/users/',
-					data: JSON.stringify(user),
-					processData: false,
-					headers: {
-						"Content-Type": "application/json"
-					}
-				}).done(function (createdUser) {
-					console.log("User created: " + JSON.stringify(createdUser));
-					callback(createdUser);
-				}).fail(function (jqXHR, textStatus, errorThrown) {
-					console.error('Error creating user:', textStatus, errorThrown);
-				});
-			}
-			// FASE 3
-			function getUserByUsername(username, callback) {
-				$.ajax({
-					method: "GET",
-					url: 'http://' + ip + '/users/search',
-					data: {username: username}
-				}).done(function (identificacion) {
-					callback(identificacion);
-				}).fail(function (jqXHR, textStatus) {
-					callback(null);
-				});
-			}
-
-			function createRecord(record) {
-				$.ajax({
-					method: "POST",
-					url: 'http://' + ip + '/records/',
-					data: JSON.stringify(record),
-					processData: false,
-					headers: {
-						"Content-Type": "application/json"
-					}
-				})
-			}
-
-			$('#registrarse-button').click(function () {
-				var name = $('#user').val();
-				var contraseña = $('#password').val();
-
-				var usuario = {
-					username: name,
-					password: contraseña,
-				}
-
-				var existe = false;
-				for (var i = 0; i < existingUsers.length; i++) {
-					if (existingUsers[i] == name) {existe = true;}
-				}
-				if (!existe) {
-					createUser(usuario, function (usuarioConId) {
-						currentUser = usuarioConId.id;
-						existingUsers[currentUser - 1] = usuarioConId.username;
-						existingPasswords[currentUser - 1] = usuarioConId.password;
-						existingRecords[currentUser - 1] = usuarioConId.record;
+				function createUser(user, callback) {
+					$.ajax({
+						method: "POST",
+						url: 'http://' + ip + '/users/',
+						data: JSON.stringify(user),
+						processData: false,
+						headers: {
+							"Content-Type": "application/json"
+						}
+					}).done(function (createdUser) {
+						console.log("User created: " + JSON.stringify(createdUser));
+						callback(createdUser);
+					}).fail(function (jqXHR, textStatus, errorThrown) {
+						console.error('Error creating user:', textStatus, errorThrown);
 					});
+				}
+
+				/*function getRecordByUsername(record, callback) {
+					$.ajax({
+						method: "GET",
+						url: 'http://' + ip + '/users/searchByRecord',
+						data: {record: record}
+					}).done(function (user) {
+						callback(user);
+					}).fail(function (jqXHR, textStatus) {
+						callback(null);
+					});
+				}*/
+				
+				function getUserByUsername(username, callback) {
+					$.ajax({
+						method: "GET",
+						url: 'http://' + ip + '/users/search',
+						data: {username: username}
+					}).done(function (identificacion) {
+						callback(identificacion);
+					}).fail(function (jqXHR, textStatus) {
+						callback(null);
+					});
+				}
+				
+				function logUser(id, password, callback) {
+					$.ajax({
+						method: 'GET',
+						url: 'http://' + ip + '/users/' + id,
+						data: {password: password},
+					}).done(function (loggedUser) {
+						callback(loggedUser);
+					}).fail(function (jqXHR, textStatus) {
+						callback(null);
+					});
+				}
+
+				$('#registrarse-button').click(function () {
+					var name = $('#user').val();
+					var password = $('#password').val();
+
+					var usuario = {
+						username: name,
+						password: password
+					};
+
+					document.getElementById("procesando").style.display = "block";
+					setTimeout(function () {
+					document.getElementById("procesando").style.display = "none";}, 3000);
+											
+					getUserByUsername(name, function (identificacion) {
+						if (!identificacion) {
+							createUser(usuario, function (usuarioConId) {
+								currentUser.username = usuarioConId.username;
+								currentUser.password = usuarioConId.password;
+								currentUser.id = usuarioConId.id;
+								currentUser.record = usuarioConId.record;
+								openPrincipalReg();
+								closeForm();
+							});
+						} else {
+							console.log("Este usuario ya existe");
+							document.getElementById("errorReg").style.display = "block";
+							setTimeout(function () {
+								document.getElementById("errorReg").style.display = "none";
+							}, 3000);
+						}
+					});
+				});
+
+				$(document).ready(function () {
+					closePrincipalReg();
+					closePrincipalBorr();
 					openPrincipal();
-					closeForm();
-					playerName = name;
-				}
-			})
-			// EL DE LA FASE 3
-			function logUser(id, password, callback) {
-				$.ajax({
-					method: 'GET',
-					url: 'http://' + ip + '/users/' + id,
-					data: {password: password},
-				}).done(function (loggedUser) {
-					callback(loggedUser);
-				}).fail(function (jqXHR, textStatus) {
-					callback(null);
 				});
-			}
-
-			$('#registrarse-button').click(function () {
-				var name = $('#user').val();
-				var password = $('#password').val();
-
-				var usuario = {
-					username: name,
-					password: password
-				};
-
-				document.getElementById("procesando").style.display = "block";
-				setTimeout(function () {
-					document.getElementById("procesando").style.display = "none";
-				}, 3000);
-
-				getUserByUsername(name, function (identificacion) {
-					if (!identificacion) {
-						createUser(usuario, function (usuarioConId) {
-							currentUser.username = usuarioConId.username;
-							currentUser.password = usuarioConId.password;
-							currentUser.id = usuarioConId.id;
-							currentUser.record = usuarioConId.record;
-							openPrincipalReg();
-							closeForm();
-						});
-					} else {
-						console.log("Este usuario ya existe");
-						document.getElementById("errorReg").style.display = "block";
-						setTimeout(function () {
-							document.getElementById("errorReg").style.display = "none";
-						}, 3000);
-					}
-				});
-			});
-
-			$(document).ready(function () {
-				closePrincipalReg();
-				closePrincipalBorr();
-				openPrincipal();
-			});
-			$('#iniciar-button').click(function () {
-				var name = $('#userA').val();
-				var password = $('#passwordA').val();
-
-				document.getElementById("procesando").style.display = "block";
-				setTimeout(function () {
-					document.getElementById("procesando").style.display = "none";
-				}, 3000);
-				getUserByUsername(name, function (identificacion) {
-					if (identificacion) {
-						logUser(identificacion, password, function (usuarioLoggeado) {
-							if (usuarioLoggeado) {
-								currentUser.username = usuarioLoggeado.username;
-								currentUser.password = usuarioLoggeado.password;
-								currentUser.id = usuarioLoggeado.id;
-								currentUser.record = usuarioLoggeado.record;
-								usuario = usuarioLoggeado;
-								openDespuesInicio();
-								closeInicio();
-								closePrincipal();
-							} else {
-								console.log("Usuario Incorrecto")
-								document.getElementById("errorInicio").style.display = "block";
-								setTimeout(function () {
-									document.getElementById("errorInicio").style.display = "none";
-								}, 3000);
-							}
-						});
-
-					} else {
-						console.log("Usuario Incorrecto")
-						document.getElementById("errorInicio").style.display = "block";
-						setTimeout(function () {
-							document.getElementById("errorInicio").style.display = "none";
-						}, 3000);
-					}
-				});
-			});
-			// EL DE LA FASE 4
-			/*function logUser(userId) {
-				$.ajax({
-					method: "GET",
-					url: 'http://' + ip + '/users/' + userId,
-				}).done(function (user) {
-					console.log("User logged: " + JSON.stringify(user));
-				})
-			}
-
-
-			$('#iniciar-button').click(function () {
-				var name = $('#userA').val();
-				var contraseña = $('#passwordA').val();
-
-				var esCorrecto = false;
-				for (var i = 0; i < existingUsers.length; i++) {
-					if (existingUsers[i] == name) {if (existingPasswords[i]) {esCorrecto = true; currentUser = i + 1;} }
-				}
-				if (esCorrecto) {
-					logUser(currentUser);
-					openDespuesInicio();
-					closeInicio();
-					closePrincipal();
-					playerName = name;
-				}
-			})**/
-			//FASE 4 -> NO EXISTE EN LA FASE 3 POR SI ACASO LO DEJO VIGILAR 
-			function updateUser(user) {
-				$.ajax({
-					method: 'PUT',
-					url: 'http://' + ip + '/users/' + user.id,
-					data: JSON.stringify(user),
-					processData: false,
-					headers: {
-						"Content-Type": "application/json"
-					}
-				}).done(function (user) {
-					console.log("Updated item: " + JSON.stringify(user))
-				})
-			}
-
-			$('#cambiar-button').click(function () {
-				var contraseña = $('#nPasswordC').val();
-
-				var usuario = {
-					username: existingUsers[currentUser - 1],
-					password: contraseña,
-					record: existingRecords[currentUser - 1],
-					id: currentUser
-				}
-				console.log(usuario.id);
-				updateUser(usuario);
-				openDespuesInicio();
-				closeOtro();
-
-				existingPasswords[currentUser - 1] = contraseña;
-			})
-
-			// FASE 3
-			function updatePassword(id, password) {
-				$.ajax({
-					method: 'PUT',
-					url: 'http://' + ip + '/users/password/' + id,
-					data: {password: password},
-				}).done(function (user) {
-					console.log("Updated item: " + JSON.stringify(user));
-				}).fail(function (jqXHR, textStatus, errorThrown) {
-					console.error('Error updating user:', textStatus, errorThrown);
-				});
-			}
-			// FASE 3
-			function updateRecord(user) {
-				$.ajax({
-					method: 'PUT',
-					url: 'http://' + ip + '/users/record/' + user.id,
-					data: JSON.stringify(user),
-					processData: false,
-					headers: {
-						"Content-Type": "application/json"
-					}
-				}).done(function (user) {
-					currentUser.record = user.record;
-					console.log("Updated item: " + JSON.stringify(user));
-				}).fail(function (jqXHR, textStatus, errorThrown) {
-					console.error('Error updating user:', textStatus, errorThrown);
-				});
-			}
-
-			$('#cambiar-button').click(function () {
-				var password = $('#nPasswordC').val();
-				document.getElementById("procesando").style.display = "block";
-				setTimeout(function () {
-					document.getElementById("procesando").style.display = "none";
-				}, 3000);
-				getUserByUsername($('#userA').val(), function (identificacion) {
-					if (identificacion) {
-						currentUser.id = identificacion;
-						updatePassword(identificacion, password);
-						openDespuesInicioMod();
-						closeOtro();
-					} else {
-						console.log('User not found');
-					}
-				});
-			});
-
-			// FASE 4 
-			/*function deleteUser(userId) {
-				$.ajax({
-					method: 'DELETE',
-					url: 'http://' + ip + '/users/' + userId,
-				}).done(function (user) {
-					console.log("Deleted user " + userId)
-				}).fail(function (jqXHR, textStatus, errorThrown) {
-						console.error('Error deleting user:', textStatus, errorThrown);
+				/*function logUser(userId) {
+					$.ajax({
+						method: "GET",
+						url: 'http://' + ip + '/users/' + userId,
+					}).done(function (user) {
+						console.log("User logged: " + JSON.stringify(user));
+					}).fail(function (jqXHR, textStatus, errorThrown) {
+						console.error('Error logging user:', textStatus, errorThrown);
 					});
-			}
+				}*/
 
-			$('#eliminar-button').click(function (event) {
-				deleteUser(currentUser);
-				openPrincipal();
-				closeOtro();
+				$('#iniciar-button').click(function () {
+					var name = $('#userA').val();
+					var password = $('#passwordA').val();
 
-				loadUsers(function (users) {
-					existingUsers.length = 0;
-					existingPasswords.length = 0;
-					existingRecords.length = 0;
-					for (var i = 0; i < users.length; i++) {
-						existingUsers[i] = users[i].username;
-						existingPasswords[i] = users[i].password;
-						existingRecords[i] = users[i].record;
-					}
-				})
-			})*/
+					document.getElementById("procesando").style.display = "block";
+					setTimeout(function () {
+					document.getElementById("procesando").style.display = "none";}, 3000);
+					getUserByUsername(name, function (identificacion) {
+						if (identificacion) {
+							logUser(identificacion, password, function (usuarioLoggeado) {
+								if(usuarioLoggeado){
+									currentUser.username = usuarioLoggeado.username;
+									currentUser.password = usuarioLoggeado.password;
+									currentUser.id = usuarioLoggeado.id;
+									currentUser.record = usuarioLoggeado.record;
+									usuario = usuarioLoggeado;
+									openDespuesInicio();
+									closeInicio();
+									closePrincipal();
+								} else {
+									console.log("Usuario Incorrecto")
+									document.getElementById("errorInicio").style.display = "block";
+									setTimeout(function () {
+									document.getElementById("errorInicio").style.display = "none";
+									}, 3000);
+								}
+							});
+							
+						} else {
+							console.log("Usuario Incorrecto")
+							document.getElementById("errorInicio").style.display = "block";
+							setTimeout(function () {
+								document.getElementById("errorInicio").style.display = "none";
+							}, 3000);
+						}
+					});
+				});
 
-			// FASE 4
-			/*function deleteUser(userId) {
+				function updatePassword(id, password) {
+					$.ajax({
+						method: 'PUT',
+						url: 'http://' + ip + '/users/password/' + id,
+						data: {password: password},
+					}).done(function (user) {
+						console.log("Updated item: " + JSON.stringify(user));
+					}).fail(function (jqXHR, textStatus, errorThrown) {
+						console.error('Error updating user:', textStatus, errorThrown);
+					});
+				}
+				
+				function updateRecord(user) {
+					$.ajax({
+						method: 'PUT',
+						url: 'http://' + ip + '/users/record/' + user.id,
+						data: JSON.stringify(user),
+						processData: false,
+						headers: {
+							"Content-Type": "application/json"
+						}
+					}).done(function (user) {
+						currentUser.record = user.record;
+						console.log("Updated item: " + JSON.stringify(user));
+					}).fail(function (jqXHR, textStatus, errorThrown) {
+						console.error('Error updating user:', textStatus, errorThrown);
+					});
+				}
+
+				$('#cambiar-button').click(function () {
+					var password = $('#nPasswordC').val();
+					document.getElementById("procesando").style.display = "block";
+					setTimeout(function () {
+					document.getElementById("procesando").style.display = "none";}, 3000);
+					getUserByUsername($('#userA').val(), function (identificacion) {
+						if (identificacion) {
+							currentUser.id = identificacion;
+							updatePassword(identificacion, password);
+							openDespuesInicioMod();
+							closeOtro();
+						} else {
+							console.log('User not found');
+						}
+					});
+				});
+
+				function deleteUser(userId) {
 					$.ajax({
 						method: 'DELETE',
 						url: 'http://' + ip + '/users/' + userId,
@@ -1345,65 +1197,24 @@
 					deleteUser(currentUser.id);
 					openPrincipalBorr();
 					closeOtro();
-				});*/
-			// FASE 3
-			function deleteUser(userId) {
-				$.ajax({
-					method: 'DELETE',
-					url: 'http://' + ip + '/users/' + userId,
-				}).done(function (user) {
-					console.log("Deleted user " + userId);
-				}).fail(function (jqXHR, textStatus, errorThrown) {
-					console.error('Error deleting user:', textStatus, errorThrown);
 				});
-			}
 
-			$('#eliminar-button').click(function () {
-				deleteUser(currentUser.id);
-				openPrincipalBorr();
-				closeOtro();
-			});
-
-			// ESTA NO ESTA EN LA FASE 3 VIGILAR
-			// Función para guardar la puntuación del usuario
-			function guardarPuntuacion() {
-				var usuario = {
-					username: existingUsers[currentUser - 1],
-					password: existingPasswords[currentUser - 1],
-					record: tiempoTranscurrido,
-					id: currentUser
-				}
-				updateUser(usuario);
-
-				existingRecords[currentUser - 1] = tiempoTranscurrido;
-			}
-			//FASE 4
-			// Ejemplo de cómo utilizar estas funciones después de que el usuario complete una partida
-			/*function partidaCompleta() {
-				// Guardar la puntuación en el servidor
-				if (tiempoTranscurrido < existingRecords[currentUser - 1]) {
-					guardarPuntuacion();
-				}
-			}*/
-
-			// FASE 3
-			function partidaCompleta(tiempoTranscurrido) {
-				var username = $('#userA').val();
-				document.getElementById("procesando").style.display = "block";
-				setTimeout(function () {
-					document.getElementById("procesando").style.display = "none";
-				}, 3000);
-				getUserByUsername(username, function (identificacion) {
-					if (identificacion) {
-						if (tiempoTranscurrido < currentUser.record) {
-							usuario.record = tiempoTranscurrido;
-							updateRecord(usuario);
+				function partidaCompleta(tiempoTranscurrido) {
+					var username = $('#userA').val();
+					document.getElementById("procesando").style.display = "block";
+					setTimeout(function () {
+					document.getElementById("procesando").style.display = "none";}, 3000);
+					getUserByUsername(username, function (identificacion) {
+						if (identificacion) {
+							if (tiempoTranscurrido < currentUser.record) {
+								usuario.record = tiempoTranscurrido;
+								updateRecord(usuario);
+							}
+						} else {
+							console.log("Usuario no encontrado");
 						}
-					} else {
-						console.log("Usuario no encontrado");
-					}
-				});
-			}
+					});
+				}
 
 			// VARIABLES
 			var nivelActual;
@@ -2140,8 +1951,9 @@
 					connection.send(JSON.stringify(msg));
 					console.log(window.listos);
 					if (window.listos) {
-						this.scene.start("NivelSubsuelo");
-						//this.scene.start("NivelCielo");
+						//this.scene.start("NivelSubsuelo");
+						this.scene.start("NivelCielo");
+						//this.scene.start("FinalBueno");
 
 						// ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 					}
@@ -3035,9 +2847,9 @@
 
 				preload() {
 					// Reiniciar variables
-					//tiempoAcabar = false; enPausa = false;
-					//reiniciarContador();
-					//actualizarTiempo(this);
+					tiempoAcabar = false; enPausa = false;
+					reiniciarContador();
+					actualizarTiempo(this);
 
 				}
 
@@ -3295,7 +3107,7 @@
 				}
 
 				update() {
-					//mostrarTiempoTranscurrido();
+					mostrarTiempoTranscurrido();
 					this.controles();
 					if (window.left1 && window.left2) {
 						var msg = {peticion: "seguirJugadorLeft"};
