@@ -1022,7 +1022,7 @@
 				});
 			}
 
-			/*function getRecordByUsername(record, callback) {
+			function getRecordByUsername(record, callback) {
 				$.ajax({
 					method: "GET",
 					url: 'http://' + ip + '/users/searchByRecord',
@@ -1032,7 +1032,7 @@
 				}).fail(function (jqXHR, textStatus) {
 					callback(null);
 				});
-			}*/
+			}
 
 			function getUserByUsername(username, callback) {
 				$.ajax({
@@ -1285,6 +1285,13 @@
 						if (tiempoTranscurrido < currentUser.record) {
 							usuario.record = tiempoTranscurrido;
 							updateRecord(usuario);
+							getRecordByUsername(usuario.record, usuario)
+							loadRecords(function (records) {
+								for (var i = 0; i < records.length; i++) {
+									coupleNames[i] = records[i].names;
+									couplePoints[i] = records[i].points;
+								}
+							})
 						}
 					} else {
 						console.log("Usuario no encontrado");
