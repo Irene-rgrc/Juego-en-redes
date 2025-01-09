@@ -69,7 +69,6 @@ public class RecordsController {
 		}
 	}*/
 	
-	
 	@PostConstruct
 	public void cargarRecords() throws IOException, ClassNotFoundException{
 		FileInputStream fileInputStream = new FileInputStream("src/main/resources/records.txt");
@@ -77,7 +76,8 @@ public class RecordsController {
 		ConcurrentHashMap recordsEnFichero = (ConcurrentHashMap) objectInputStream.readObject();
 		records = recordsEnFichero;
 		objectInputStream.close();
-	}
+	}	
+	
 
 	@PreDestroy
 	public void guardarRecords() throws IOException, ClassNotFoundException{

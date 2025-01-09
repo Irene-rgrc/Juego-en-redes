@@ -672,6 +672,15 @@
 
 			var user;
 
+			var ip = location.host;
+			var existingUsers = [];
+			var existingPasswords = [];
+			var existingRecords = [];
+			var coupleNames = [];
+			var couplePoints = [];
+			var playerName = "Unknown";
+			var currentUser;
+
 			function openForm() {
 				closePrincipal();
 				closePrincipalReg();
@@ -1049,6 +1058,18 @@
 				});
 			}
 
+			function createRecord(record) { // VIGILARR
+				$.ajax({
+					method: "POST",
+					url: 'http://' + ip + '/records/',
+					data: JSON.stringify(record),
+					processData: false,
+					headers: {
+						"Content-Type": "application/json"
+					}
+				})
+			}
+
 			$('#registrarse-button').click(function () {
 				var name = $('#user').val();
 				var password = $('#password').val();
@@ -1119,6 +1140,7 @@
 								openDespuesInicio();
 								closeInicio();
 								closePrincipal();
+								playerName = name; // VIGILAR
 							} else {
 								console.log("Usuario Incorrecto")
 								document.getElementById("errorInicio").style.display = "block";
@@ -1149,6 +1171,55 @@
 					console.error('Error updating user:', textStatus, errorThrown);
 				});
 			}
+
+			// ----------------------------------------------------------------------------
+			/*function loadUsers(callback) {
+				$.ajax({
+					url: 'http://' + ip + '/users/'
+				}).done(function (users) {
+					console.log('Users loaded: ' + JSON.stringify(users));
+					callback(users);
+				})
+			}*/
+			function loadRecords(callback) {
+				$.ajax({
+					url: 'http://' + ip + '/records/'
+				}).done(function (records) {
+					console.log('Records loaded: ' + JSON.stringify(records));
+					callback(records);
+				})
+			}
+
+			$(document).ready(function () {
+
+				/*loadUsers(function (users) {
+					for (var i = 0; i < users.length; i++) {
+						existingUsers[i] = users[i].username;
+						existingPasswords[i] = users[i].password;
+						existingRecords[i] = users[i].record;
+					}
+				})*/
+				loadRecords(function (records) {
+					for (var i = 0; i < records.length; i++) {
+						coupleNames[i] = records[i].names;
+						couplePoints[i] = records[i].points;
+					}
+				})
+			})
+			// Función para guardar la puntuación del usuario
+			function guardarPuntuacion() {
+				var usuario = {
+					username: existingUsers[currentUser - 1],
+					password: existingPasswords[currentUser - 1],
+					record: tiempoTranscurrido,
+					id: currentUser
+				}
+				updateUser(usuario);
+
+				existingRecords[currentUser - 1] = tiempoTranscurrido;
+			}
+			// --------------------------------------------------
+
 
 			function updateRecord(user) {
 				$.ajax({
@@ -1213,6 +1284,13 @@
 						if (tiempoTranscurrido < currentUser.record) {
 							usuario.record = tiempoTranscurrido;
 							updateRecord(usuario);
+							//loadRecords(usuario.record)
+							loadRecords(function (records) {
+								for (var i = 0; i < records.length; i++) {
+									coupleNames[i] = records[i].names;
+									couplePoints[i] = records[i].points;
+								}
+							})
 						}
 					} else {
 						console.log("Usuario no encontrado");
@@ -1333,7 +1411,7 @@
 					success: function (response) {
 						console.log('Mensaje enviado correctamente:', response);
 						$('#mensaje').val(''); // Limpia el campo del mensaje tras el envío
-						
+
 					},
 					error: function (jqXHR, textStatus, errorThrown) {
 						console.error('Error al enviar el mensaje:', textStatus, errorThrown, currentUser.id);
@@ -1389,16 +1467,12 @@
 			// Deshabilitar movimiento de Cassidie cuando se está escribiendo en el chat
 			function disableMovement() {
 				chatActive = true;
-				
+
 			}
 			// Habilitar movimiento de Cassidie cuando se sale del chat
 			function enableMovement() {
 				chatActive = false;
 			}
-
-
-
-
 
 			class NivelBase extends Phaser.Scene {
 
@@ -1756,7 +1830,7 @@
 							connection.send(JSON.stringify(msg));
 						}
 					}
-					
+
 
 					this.comprobarPulsado()
 				}
@@ -4113,8 +4187,8 @@
 					//Al hacer click en el boton se sale del juego
 					botonSalir.on('pointerdown', (pointer) => {
 						if (window.listos) {
-						chatActive = false;
-						ventanaChat.innerHTML = ''; // Limpiar el contenido actual
+							chatActive = false;
+							ventanaChat.innerHTML = ''; // Limpiar el contenido actual
 							if (window.plyer == "player1") {
 								var msg = {peticion: "continuar", player: "player1"};
 								connection.send(JSON.stringify(msg));
