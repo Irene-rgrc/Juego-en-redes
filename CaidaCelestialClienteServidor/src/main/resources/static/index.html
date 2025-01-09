@@ -523,11 +523,11 @@
 		style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(255,0,0,0.8); color: white; padding: 20px; border-radius: 10px; z-index: 1000;">
 		Este usuario ya existe
 	</div>
-	
+
 	<div id="desconexionMsg"
-		     style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(255, 0, 0, 0.8); color: white; padding: 20px; border-radius: 10px; z-index: 1000; text-align: center;">
-		    Un jugador se ha desconectado, por favor reinicia la página si desea volver a jugar.
-		</div>
+		style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(255, 0, 0, 0.8); color: white; padding: 20px; border-radius: 10px; z-index: 1000; text-align: center;">
+		Un jugador se ha desconectado, por favor reinicia la página si desea volver a jugar.
+	</div>
 
 	<div id="errorInicio"
 		style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(255,0,0,0.8); color: white; padding: 20px; border-radius: 10px; z-index: 1000;">
@@ -797,19 +797,19 @@
 				document.getElementById("otrosForm").style.display = "none";
 				openDespuesInicio();
 			}
-			
+
 			function mostrarMensajeDesconexion(mensaje) {
-						    const msgElement = document.getElementById('desconexionMsg');
-						    if (msgElement) {
-						        msgElement.textContent = mensaje;
-						        msgElement.style.display = 'block';
-						        
-						        // Ocultar el mensaje automáticamente después de 3 segundos
-						        setTimeout(() => {
-						            msgElement.style.display = 'none';
-						        }, 3000);
-						    }
-						}
+				const msgElement = document.getElementById('desconexionMsg');
+				if (msgElement) {
+					msgElement.textContent = mensaje;
+					msgElement.style.display = 'block';
+
+					// Ocultar el mensaje automáticamente después de 3 segundos
+					setTimeout(() => {
+						msgElement.style.display = 'none';
+					}, 3000);
+				}
+			}
 
 			var ip = location.host;
 			var currentUser = {
@@ -826,24 +826,24 @@
 				connection.send(JSON.stringify(msg));
 			}
 			connection.onclose = function () {
-				console.log("Se ha cerrado la conexión.");
+				//console.log("Se ha cerrado la conexión.");
 				document.getElementById("aviso").style.display = "block";
 			}
 			connection.onerror = function (e) {
-				console.log("WS error: " + e);
+				//console.log("WS error: " + e);
 			}
 			connection.onmessage = function (msg) {
 				const data = JSON.parse(event.data);
 				switch (data.type) {
 					case "Cassadie":
 						window.plyer = "player1";
-						console.log("primero");
+						//console.log("primero");
 						break;
 					case "Seraphina":
 						window.plyer = "player2";
 						var msg = {peticion: "subirNombreP2", nombre: playerName};
 						connection.send(JSON.stringify(msg));
-						console.log("segundo");
+						//console.log("segundo");
 						break;
 					case "Pausa1":
 						window.pausa1 = true;
@@ -862,11 +862,11 @@
 						break;
 					// FINALES
 					case "cassidieElige":
-						console.log("FINAL C")
+						//console.log("FINAL C")
 						window.finalC = true;
 						break;
 					case "seraphinaElige":
-						console.log("FINAL S")
+						//console.log("FINAL S")
 						window.finalS = true;
 						break;
 
@@ -917,35 +917,35 @@
 						window.up2 = false;
 						break;
 
-						case "pulsadoA1":
-												window.a1 = true;
-												break;
-											case "soltadoA1":
-												window.a1 = false;
-												case "conectadoA1":
-																		window.desconexiona1 = false;
-																		case "conectadoA2":
-																								window.desconexiona2 = false;
-												break;
-											case "pulsadoA2":
-												window.a2 = true;
-												break;
-												
-												case "desconexionA1":
-												    window.desconexiona1 = true;
-												    if (window.desconexiona1 && window.desconexiona2) {
-												        //console.log('DESCONECTADO');
-												        mostrarMensajeDesconexion("Un jugador se ha desconectado. Por favor, recargue la página si desea volver a jugar");
-												    }
-												    break;
+					case "pulsadoA1":
+						window.a1 = true;
+						break;
+					case "soltadoA1":
+						window.a1 = false;
+					case "conectadoA1":
+						window.desconexiona1 = false;
+					case "conectadoA2":
+						window.desconexiona2 = false;
+						break;
+					case "pulsadoA2":
+						window.a2 = true;
+						break;
 
-												case "desconexionA2":
-												    window.desconexiona2 = true;
-												    if (window.desconexiona1 && window.desconexiona2) {
-												        //console.log('DESCONECTADO');
-												        mostrarMensajeDesconexion("Un jugador se ha desconectado. Por favor, recargue la página si desea volver a jugar");
-												    }
-												    break;
+					case "desconexionA1":
+						window.desconexiona1 = true;
+						if (window.desconexiona1 && window.desconexiona2) {
+							//console.log('DESCONECTADO');
+							mostrarMensajeDesconexion("Un jugador se ha desconectado. Por favor, recargue la página si desea volver a jugar");
+						}
+						break;
+
+					case "desconexionA2":
+						window.desconexiona2 = true;
+						if (window.desconexiona1 && window.desconexiona2) {
+							//console.log('DESCONECTADO');
+							mostrarMensajeDesconexion("Un jugador se ha desconectado. Por favor, recargue la página si desea volver a jugar");
+						}
+						break;
 					case "soltadoA2":
 						window.a2 = false;
 						break;
@@ -1028,7 +1028,7 @@
 
 					//Guardar récord
 					case "nombreP2":
-						console.log("SUBIENDO RÉCORD...");
+						//console.log("SUBIENDO RÉCORD...");
 						if (window.plyer === "player1") {
 							var nameP2 = data.name;
 							var record = {
@@ -1053,7 +1053,7 @@
 						"Content-Type": "application/json"
 					}
 				}).done(function (createdUser) {
-					console.log("User created: " + JSON.stringify(createdUser));
+					//console.log("User created: " + JSON.stringify(createdUser));
 					callback(createdUser);
 				}).fail(function (jqXHR, textStatus, errorThrown) {
 					console.error('Error creating user:', textStatus, errorThrown);
@@ -1133,7 +1133,7 @@
 							closeForm();
 						});
 					} else {
-						console.log("Este usuario ya existe");
+						//console.log("Este usuario ya existe");
 						document.getElementById("errorReg").style.display = "block";
 						setTimeout(function () {
 							document.getElementById("errorReg").style.display = "none";
@@ -1180,7 +1180,7 @@
 								closePrincipal();
 								playerName = name; // VIGILAR
 							} else {
-								console.log("Usuario Incorrecto")
+								//console.log("Usuario Incorrecto")
 								document.getElementById("errorInicio").style.display = "block";
 								setTimeout(function () {
 									document.getElementById("errorInicio").style.display = "none";
@@ -1189,7 +1189,7 @@
 						});
 
 					} else {
-						console.log("Usuario Incorrecto")
+						//console.log("Usuario Incorrecto")
 						document.getElementById("errorInicio").style.display = "block";
 						setTimeout(function () {
 							document.getElementById("errorInicio").style.display = "none";
@@ -1204,7 +1204,7 @@
 					url: 'http://' + ip + '/users/password/' + id,
 					data: {password: password},
 				}).done(function (user) {
-					console.log("Updated item: " + JSON.stringify(user));
+					//console.log("Updated item: " + JSON.stringify(user));
 				}).fail(function (jqXHR, textStatus, errorThrown) {
 					console.error('Error updating user:', textStatus, errorThrown);
 				});
@@ -1223,12 +1223,12 @@
 				$.ajax({
 					url: 'http://' + ip + '/records/'
 				}).done(function (records) {
-					console.log('Records loaded: ' + JSON.stringify(records));
+					//console.log('Records loaded: ' + JSON.stringify(records));
 					callback(records);
 				})
 			}
 
-			function cargarPuntuaciones () {
+			function cargarPuntuaciones() {
 				loadRecords(function (records) {
 					for (var i = 0; i < records.length; i++) {
 						coupleNames[i] = records[i].names;
@@ -1263,7 +1263,7 @@
 					}
 				}).done(function (user) {
 					currentUser.record = user.record;
-					console.log("Updated item: " + JSON.stringify(user));
+					//console.log("Updated item: " + JSON.stringify(user));
 				}).fail(function (jqXHR, textStatus, errorThrown) {
 					console.error('Error updating user:', textStatus, errorThrown);
 				});
@@ -1382,7 +1382,7 @@
 
 			function mostrarTiempoTranscurrido() {
 				if (!enPausa) {
-					console.log('Tiempo transcurrido: ' + tiempoTranscurrido + ' segundos');
+					//console.log('Tiempo transcurrido: ' + tiempoTranscurrido + ' segundos');
 					var highscore = tiempoTranscurrido.toLocaleString();
 					return highscore; // DEVUELVE EL TIEMPO TRANSCURRIDO
 				}
@@ -1434,7 +1434,7 @@
 					data: JSON.stringify(message),
 					contentType: "application/json", // Define correctamente el tipo de contenido
 					success: function (response) {
-						console.log('Mensaje enviado correctamente:', response);
+						//console.log('Mensaje enviado correctamente:', response);
 						$('#mensaje').val(''); // Limpia el campo del mensaje tras el envío
 
 					},
@@ -1482,7 +1482,7 @@
 					error: function (jqXHR, textStatus, errorThrown) {
 						document.getElementById("errorServidor").style.display = "block";
 
-						console.error('Error al obtener los mensajes:', textStatus, errorThrown);
+						//console.error('Error al obtener los mensajes:', textStatus, errorThrown);
 					}
 				});
 			}
@@ -1738,7 +1738,7 @@
 								//this.Cassadie.setVelocityX(-600);
 								//this.sprintActivado = true;
 								//this.empujon = false;
-								console.log("aqui va el sprint")
+								//console.log("aqui va el sprint")
 								var msg = {peticion: "pulsarJugadorSprint", player: "player2"};
 								connection.send(JSON.stringify(msg));
 								var msg = {peticion: "pulsarJugadorSprint", player: "player1"};
@@ -1765,7 +1765,7 @@
 								//this.Cassadie.setVelocityX(600);
 								//this.sprintActivado = true;
 								//this.empujon = false;
-								console.log("aqui va el sprint")
+								//console.log("aqui va el sprint")
 								var msg = {peticion: "pulsarJugadorSprint", player: "player2"};
 								connection.send(JSON.stringify(msg));
 								var msg = {peticion: "pulsarJugadorSprint", player: "player1"};
@@ -1977,16 +1977,16 @@
 					}
 
 					if (window.h1 && window.h2) {
-						console.log('Ayudando');
+						//console.log('Ayudando');
 						if (this.atrapadosS) {
 							this.Seraphina.setPosition(this.Cassadie.x, this.Cassadie.y);
 							this.atrapadoS = false;
-							console.log(this.atrapadoS);
+							//console.log(this.atrapadoS);
 						}
 						if (this.atrapadoC) {
 							this.Cassadie.setPosition(this.Seraphina.x, this.Seraphina.y);
 							this.atrapadoC = false;
-							console.log(this.atrapadoC);
+							//console.log(this.atrapadoC);
 						}
 
 						/*if(this.atrapadoC && this.atrapadoS){
@@ -2087,7 +2087,7 @@
 				startGame() {
 					var msg = {peticion: "checkPlayersReady"};
 					connection.send(JSON.stringify(msg));
-					console.log(window.listos);
+					//console.log(window.listos);
 					if (window.listos) {
 						//this.scene.start("NivelSubsuelo");
 						this.scene.start("NivelCielo");
@@ -2395,7 +2395,7 @@
 						this.numAleatorio = Math.floor(Math.random() * 3 + 1);
 
 						if (this.atrapadoS == true && distance <= 250) {
-							console.log('Ayudando a Sera');
+							//console.log('Ayudando a Sera');
 							/*console.log('Ayudando a Sera');
 							this.Seraphina.setPosition(this.Cassadie.x, this.Cassadie.y);
 							this.atrapadoS = false;
@@ -2424,7 +2424,7 @@
 
 						}
 						if (this.atrapadoC == true && distance <= 250) {
-							console.log('Ayudando a Cas');
+							//console.log('Ayudando a Cas');
 							/*console.log('Ayudando a Cas');
 							this.Cassadie.setPosition(this.Seraphina.x, this.Seraphina.y);
 							this.atrapadoC = false;
@@ -2463,14 +2463,14 @@
 					Seraphina.setVelocityX(0);
 					Seraphina.setPosition(pulpo.x, Seraphina.y);
 					this.atrapadoS = true;
-					console.log('atrapado' + this.atrapadoS);
+					//console.log('atrapado' + this.atrapadoS);
 				}
 				bloquearMovimientoC(Cassadie, pulpo) {
 					Cassadie.setVelocityY(0);
 					Cassadie.setVelocityX(0);
 					Cassadie.setPosition(pulpo.x, Cassadie.y);
 					this.atrapadoC = true;
-					console.log('atrapado' + this.atrapadoC);
+					//console.log('atrapado' + this.atrapadoC);
 				}
 
 				presionar1(player, boton) {
@@ -3246,9 +3246,9 @@
 
 				update() {
 					mostrarTiempoTranscurrido();
-					var msg = { peticion: "desconectadoA" };
-													console.log("HOLA")
-															        connection.send(JSON.stringify(msg));
+					var msg = {peticion: "desconectadoA"};
+					//console.log("HOLA")
+					connection.send(JSON.stringify(msg));
 
 					this.controles();
 					if (window.left1 && window.left2) {
@@ -3445,9 +3445,9 @@
 				}
 				elegirC() {
 					// CASSIDIE
-					console.log("INTENTANDO ENTRAR C");
+					//console.log("INTENTANDO ENTRAR C");
 					if (window.plyer === "player1") {
-						console.log("Entro en p1");
+						//console.log("Entro en p1");
 						var msg = {peticion: "playerPuertas", player: "player1"};
 						connection.send(JSON.stringify(msg));
 					}
@@ -3455,9 +3455,9 @@
 				}
 				elegirS() {
 					//SERAPHINA
-					console.log("INTENTANDO ENTRAR S");
+					//console.log("INTENTANDO ENTRAR S");
 					if (window.plyer === "player2") {
-						console.log("Entro en p2");
+						//console.log("Entro en p2");
 						var msg = {peticion: "playerPuertas", player: "player2"};
 						connection.send(JSON.stringify(msg));
 					}
@@ -3479,11 +3479,11 @@
 					connection.send(JSON.stringify(queFinal));
 
 					if (window.finalC) {
-						console.log("FINALC");
+						//console.log("FINALC");
 						// Mando al jugador que ha llegado a la escena elegir
 						if (window.plyer === "player1") {
 							console.log("Elegir");
-							this.scene.start("Elegir");
+							//this.scene.start("Elegir");
 						}
 						// NO ELIGE SE DUERME
 						else if (window.plyer === "player2") {
@@ -3494,9 +3494,9 @@
 						// Mando al otro a la espera
 					}
 					else if (window.finalS) {
-						console.log("FINALS");
+						//console.log("FINALS");
 						if (window.plyer === "player2") {
-							console.log("Elegir");
+							//onsole.log("Elegir");
 							this.scene.start("Elegir");
 						}
 						else if (window.plyer === "player1") {
@@ -3504,7 +3504,7 @@
 							this.scene.start("EligiendoFinal"); // TEMPORAL, CREAR ESCENA DE ELECCION DEL OTRO
 						}
 					} else {
-						console.log("NO LLEVA A LA PANTALLA DE FINALES");
+						//console.log("NO LLEVA A LA PANTALLA DE FINALES");
 					}
 				}
 
@@ -3576,10 +3576,10 @@
 					// AQUI METO PARA QUE CUANDO RECIBA DEL WEBSOCKET QUE HA CAMBIADO DEL CASE A TRUE ENTONCES 
 					var hayFinal = {peticion: "comprobarExisteFinal"};
 					connection.send(JSON.stringify(hayFinal));
-					console.log("esperando a que se elija final....");
+					//console.log("esperando a que se elija final....");
 
 					if (window.finalElegido === true) {
-						console.log("Personaje entro en eleccion");
+						//console.log("Personaje entro en eleccion");
 						var cualFinal = {peticion: "tipoFinal"};
 						connection.send(JSON.stringify(cualFinal));
 						if (window.esFinalMalo === true) {
@@ -3685,7 +3685,7 @@
 					//Al hacer click en el boton se pasan las imagenes
 					botonSiguiente.on('pointerdown', (pointer) => {
 						this.indice = (this.indice + 1) % 15;
-						console.log('Indice' + this.indice);
+						//console.log('Indice' + this.indice);
 
 						if (this.indice == 0) {
 							image1.setVisible(true);
@@ -3744,7 +3744,7 @@
 							image14.setVisible(true);
 						}
 						if (this.indice == 14) {
-							console.log('ComenzandoJuego');
+							//console.log('ComenzandoJuego');
 							this.scene.start('Intro');
 						}
 
@@ -3793,7 +3793,7 @@
 
 					//Al hacer click en el boton comienza el juego
 					botonTutorial.on('pointerdown', (pointer) => {
-						console.log('IrCreditos');
+						//console.log('IrCreditos');
 						this.scene.start('Creditos');
 					});
 				}
@@ -3807,13 +3807,8 @@
 					this.enter;
 				}
 				preload() {
-<<<<<<< HEAD
 					this.load.image('fondoCreditos', 'assets/imagenCreditosFinal.png'); // Clave única para créditos
 				}
-=======
-											        this.load.image('fondoCreditos', 'CreditosImagenes/Creditos2.png'); // Clave única para créditos
-											    }
->>>>>>> parent of d72b001 (Quite los console log que no avisan de errores)
 				create() {
 					// PARA QUE SE REINICEN LOS JUGADORES UNA VEZ PASADOS
 					var reiniciarPersonajes = {peticion: "reiniciarPersonajes"};
@@ -3862,7 +3857,7 @@
 
 					//Al hacer click en el boton comienza el juego
 					botonTutorial.on('pointerdown', (pointer) => {
-						console.log('VolverAJugar');
+						//console.log('VolverAJugar');
 						this.scene.start('MenuInicio');
 					});
 				}
@@ -3904,7 +3899,7 @@
 
 					//Al hacer click en el boton comienza el juego
 					botonJugar.on('pointerdown', (pointer) => {
-						console.log('Comenzando Juego');
+						//console.log('Comenzando Juego');
 						this.scene.start('Intro');
 					});
 
@@ -3927,7 +3922,7 @@
 
 					//Al hacer click en el boton comienza el tutorial
 					botonTutorial.on('pointerdown', (pointer) => {
-						console.log('Comenzando Tutorial');
+						//console.log('Comenzando Tutorial');
 						this.scene.start('TutorialImagenes');
 					});
 
@@ -4075,132 +4070,132 @@
 
 					//-------------------------------------------------------------------------------------------------
 					//BOTON JUGAR
-																               //Se añade el boton para jugar
-																               const botonJugar = this.add.image(960, 400, "jugar").setInteractive();
-																               botonJugar.setScale(0.35, 0.35)
+					//Se añade el boton para jugar
+					const botonJugar = this.add.image(960, 400, "jugar").setInteractive();
+					botonJugar.setScale(0.35, 0.35)
 
-																               //Al pasar por encima se pone mas oscuro y crece en tamaño
-																               botonJugar.on('pointerover', function () {
-																                   this.setTint(0x555555);
-																                   this.setScale(0.40, 0.40);
-																               });
+					//Al pasar por encima se pone mas oscuro y crece en tamaño
+					botonJugar.on('pointerover', function () {
+						this.setTint(0x555555);
+						this.setScale(0.40, 0.40);
+					});
 
-																               //Al quitar el cursor el boton vuelve al tamaño original
-																               botonJugar.on('pointerout', function () {
-																                   this.clearTint();
-																                   this.setScale(0.35, 0.35);
-																               });
+					//Al quitar el cursor el boton vuelve al tamaño original
+					botonJugar.on('pointerout', function () {
+						this.clearTint();
+						this.setScale(0.35, 0.35);
+					});
 
-																               //Al hacer click en el boton comienza el juego
-																               botonJugar.on('pointerdown', (pointer) => {
-																                   console.log('Comenzando Juego');
-																				  
-																                   this.scene.start('Tutorial');
-																               });
+					//Al hacer click en el boton comienza el juego
+					botonJugar.on('pointerdown', (pointer) => {
+						//console.log('Comenzando Juego');
 
-																               //BOTON AJUSTES
-																               //Se añade el boton de ajustes
-																               const botonAjustes = this.add.image(973, 530, "ajustes").setInteractive();
-																               botonAjustes.setScale(0.30, 0.30)
+						this.scene.start('Tutorial');
+					});
 
-																               //Al pasar por encima se pone mas oscuro y crece en tamaño
-																               botonAjustes.on('pointerover', function () {
-																                   this.setTint(0x555555);
-																                   this.setScale(0.35, 0.35);
-																               });
+					//BOTON AJUSTES
+					//Se añade el boton de ajustes
+					const botonAjustes = this.add.image(973, 530, "ajustes").setInteractive();
+					botonAjustes.setScale(0.30, 0.30)
 
-																               //Al quitar el cursor el boton vuelve al tamaño original
-																               botonAjustes.on('pointerout', function () {
-																                   this.clearTint();
-																                   this.setScale(0.30, 0.30);
-																               });
+					//Al pasar por encima se pone mas oscuro y crece en tamaño
+					botonAjustes.on('pointerover', function () {
+						this.setTint(0x555555);
+						this.setScale(0.35, 0.35);
+					});
 
-																               //Al hacer click en el boton se va a ajustes
-																               botonAjustes.on('pointerdown', (pointer) => {
-																                   this.scene.sleep('MenuInicio');
-																                   this.scene.launch('Ajustes');
-																                   console.log('Pantalla ajustes');
+					//Al quitar el cursor el boton vuelve al tamaño original
+					botonAjustes.on('pointerout', function () {
+						this.clearTint();
+						this.setScale(0.30, 0.30);
+					});
 
-																               });
+					//Al hacer click en el boton se va a ajustes
+					botonAjustes.on('pointerdown', (pointer) => {
+						this.scene.sleep('MenuInicio');
+						this.scene.launch('Ajustes');
+						//console.log('Pantalla ajustes');
 
-
-																               //BOTON CREDITOS
-																               //Se añade el boton de CREDITOS
-																               const botonCreditos = this.add.image(1010, 820, "IrCreditos").setInteractive();
-																               botonCreditos.setScale(0.48, 0.48)
-
-																               //Al pasar por encima se pone mas oscuro y crece en tamaño
-																               botonCreditos.on('pointerover', function () {
-																                   this.setTint(0x555555);
-																                   this.setScale(0.53, 0.53);
-																               });
-
-																               //Al quitar el cursor el boton vuelve al tamaño original
-																               botonCreditos.on('pointerout', function () {
-																                   this.clearTint();
-																                   this.setScale(0.48, 0.48);
-																               });
-
-																               //Al hacer click en el boton se sale del juego
-																               botonCreditos.on('pointerdown', (pointer) => {
-																                   console.log('Creditos');
-																                   this.scene.start('Creditos');
-																               });
-																               
-																               const botonPuntuacion = this.add.image(975, 680, "PuntuacionesBien").setInteractive();
-																			   botonPuntuacion.setScale(0.65, 0.65)
-
-																			   //Al pasar por encima se pone mas oscuro y crece en tamaño
-																			   botonPuntuacion.on('pointerover', function () {
-																			   		this.setTint(0x555555);
-																			   		this.setScale(0.75, 0.75);
-																			   		});
-																			   		
-																			   //Al quitar el cursor el boton vuelve al tamaño original
-																			   	botonPuntuacion.on('pointerout', function () {
-																			   		this.clearTint();
-																			   		this.setScale(0.65, 0.65);
-																			   		});
-
-																			   	//Al hacer click en el boton se va a ajustes
-																			   	botonPuntuacion.on('pointerdown', (pointer) => {
-																					cargarPuntuaciones();
-																			   		this.scene.sleep('MenuInicio');
-																			   		this.scene.launch('Puntuaciones');
-																			   		console.log('Pantalla de Puntuaciones');
-
-																			   		});
-																			   
-																			   //BOTON SALIR
-																			   //Se añade el boton de salir
-																		       const botonSalir = this.add.image(970, 1000, "salir").setInteractive();
-																			   botonSalir.setScale(0.30, 0.30)
-
-																			   //Al pasar por encima se pone mas oscuro y crece en tamaño
-																			   botonSalir.on('pointerover', function () {
-																			   		this.setTint(0x555555);
-																			   		this.setScale(0.35, 0.35);
-																			   	});
-
-																			  //Al quitar el cursor el boton vuelve al tamaño original
-																			   botonSalir.on('pointerout', function () {
-																			   		this.clearTint();
-																			   		this.setScale(0.30, 0.30);
-																			   	});
-
-																			   	//Al hacer click en el boton se sale del juego
-																			   	botonSalir.on('pointerdown', (pointer) => {
-																			   	    console.log('Saliendo');
-																			   		window.close();
-																			    });
+					});
 
 
-																           }
+					//BOTON CREDITOS
+					//Se añade el boton de CREDITOS
+					const botonCreditos = this.add.image(1010, 820, "IrCreditos").setInteractive();
+					botonCreditos.setScale(0.48, 0.48)
+
+					//Al pasar por encima se pone mas oscuro y crece en tamaño
+					botonCreditos.on('pointerover', function () {
+						this.setTint(0x555555);
+						this.setScale(0.53, 0.53);
+					});
+
+					//Al quitar el cursor el boton vuelve al tamaño original
+					botonCreditos.on('pointerout', function () {
+						this.clearTint();
+						this.setScale(0.48, 0.48);
+					});
+
+					//Al hacer click en el boton se sale del juego
+					botonCreditos.on('pointerdown', (pointer) => {
+						//console.log('Creditos');
+						this.scene.start('Creditos');
+					});
+
+					const botonPuntuacion = this.add.image(975, 680, "PuntuacionesBien").setInteractive();
+					botonPuntuacion.setScale(0.65, 0.65)
+
+					//Al pasar por encima se pone mas oscuro y crece en tamaño
+					botonPuntuacion.on('pointerover', function () {
+						this.setTint(0x555555);
+						this.setScale(0.75, 0.75);
+					});
+
+					//Al quitar el cursor el boton vuelve al tamaño original
+					botonPuntuacion.on('pointerout', function () {
+						this.clearTint();
+						this.setScale(0.65, 0.65);
+					});
+
+					//Al hacer click en el boton se va a ajustes
+					botonPuntuacion.on('pointerdown', (pointer) => {
+						cargarPuntuaciones();
+						this.scene.sleep('MenuInicio');
+						this.scene.launch('Puntuaciones');
+						//console.log('Pantalla de Puntuaciones');
+
+					});
+
+					//BOTON SALIR
+					//Se añade el boton de salir
+					const botonSalir = this.add.image(970, 1000, "salir").setInteractive();
+					botonSalir.setScale(0.30, 0.30)
+
+					//Al pasar por encima se pone mas oscuro y crece en tamaño
+					botonSalir.on('pointerover', function () {
+						this.setTint(0x555555);
+						this.setScale(0.35, 0.35);
+					});
+
+					//Al quitar el cursor el boton vuelve al tamaño original
+					botonSalir.on('pointerout', function () {
+						this.clearTint();
+						this.setScale(0.30, 0.30);
+					});
+
+					//Al hacer click en el boton se sale del juego
+					botonSalir.on('pointerdown', (pointer) => {
+						//console.log('Saliendo');
+						window.close();
+					});
+
+
+				}
 				update() {
 					nivelActual = 'MenuInicio';
 					//Otra manera de iniciar el juego, al pulsar enter comienza el juego
 					if (Phaser.Input.Keyboard.JustDown(this.enter)) { //Al hacer enter se inicia el juego
-						console.log('Comenzando Juego');
+						//console.log('Comenzando Juego');
 						this.scene.start('Tutorial');
 						//this.scene.resume(nivel);
 						//this.scene.stop('MenuInicio');
@@ -4230,87 +4225,87 @@
 
 					//BOTON SALIR
 					//Se añade el boton de salir
-					if(nivelActual!='MenuInicio'){
-					const botonSalir = this.add.image(975, 700, "botonVolverJur").setInteractive();
-					botonSalir.setScale(0.40, 0.40)
+					if (nivelActual != 'MenuInicio') {
+						const botonSalir = this.add.image(975, 700, "botonVolverJur").setInteractive();
+						botonSalir.setScale(0.40, 0.40)
+
+						//Al pasar por encima se pone mas oscuro y crece en tamaño
+						botonSalir.on('pointerover', function () {
+							this.setTint(0x555555);
+							this.setScale(0.43, 0.43);
+						});
+
+						//Al quitar el cursor el boton vuelve al tamaño original
+						botonSalir.on('pointerout', function () {
+							this.clearTint();
+							this.setScale(0.40, 0.40);
+						});
+
+
+
+						//Al hacer click en el boton se sale del juego
+						botonSalir.on('pointerdown', (pointer) => {
+							if (window.listos) {
+								document.getElementById('mensaje').blur();
+								chatActive = false;
+								document.getElementById('mensaje').value = ''; // Limpiar el contenido actual
+								if (window.plyer == "player1") {
+									var msg = {peticion: "continuar", player: "player1"};
+									connection.send(JSON.stringify(msg));
+								}
+								if (window.plyer == "player2") {
+									var msg = {peticion: "continuar", player: "player2"};
+									connection.send(JSON.stringify(msg));
+								}
+							}
+							else {
+								this.scene.wake(nivelActual);
+								document.getElementById('mensaje').blur();
+								chatActive = false;
+								document.getElementById('mensaje').value = ''; // Limpiar el contenido actual
+								this.scene.stop('Ajustes');
+							}
+						});
+					}
+
+
+					const botonMenu = this.add.image(973, 840, "salir").setInteractive();
+					botonMenu.setScale(0.20, 0.20)
 
 					//Al pasar por encima se pone mas oscuro y crece en tamaño
-					botonSalir.on('pointerover', function () {
+					botonMenu.on('pointerover', function () {
 						this.setTint(0x555555);
-						this.setScale(0.43, 0.43);
+						this.setScale(0.23, 0.23);
 					});
 
 					//Al quitar el cursor el boton vuelve al tamaño original
-					botonSalir.on('pointerout', function () {
+					botonMenu.on('pointerout', function () {
 						this.clearTint();
-						this.setScale(0.40, 0.40);
+						this.setScale(0.20, 0.20);
 					});
-					
-					
 
 					//Al hacer click en el boton se sale del juego
-					botonSalir.on('pointerdown', (pointer) => {
+					botonMenu.on('pointerdown', (pointer) => {
 						if (window.listos) {
-							document.getElementById('mensaje').blur();
-							chatActive = false;
-							document.getElementById('mensaje').value = ''; // Limpiar el contenido actual
-							if (window.plyer == "player1") {
-								var msg = {peticion: "continuar", player: "player1"};
-								connection.send(JSON.stringify(msg));
-							}
-							if (window.plyer == "player2") {
-								var msg = {peticion: "continuar", player: "player2"};
-								connection.send(JSON.stringify(msg));
-							}
+							var msg = {peticion: "desconexionA", player: "player2"};
+							connection.send(JSON.stringify(msg));
+							var msg = {peticion: "desconexionA", player: "player1"};
+							connection.send(JSON.stringify(msg));
 						}
-						else {
-							this.scene.wake(nivelActual);
-							document.getElementById('mensaje').blur();
-							chatActive = false;
-							document.getElementById('mensaje').value = ''; // Limpiar el contenido actual
-							this.scene.stop('Ajustes');
+
+
+
+						//console.log('Saliendo de Ajustes');
+						if (nivelActual === 'MenuInicio') {
+							this.scene.wake('MenuInicio');
+						} else {
+
+							this.scene.start('MenuInicio');
+
 						}
+
+						this.scene.stop('Ajustes');
 					});
-					}
-					
-					
-					const botonMenu = this.add.image(973, 840, "salir").setInteractive();
-																                botonMenu.setScale(0.20, 0.20)
-
-																                //Al pasar por encima se pone mas oscuro y crece en tamaño
-																                botonMenu.on('pointerover', function () {
-																                    this.setTint(0x555555);
-																                    this.setScale(0.23, 0.23);
-																                });
-
-																                //Al quitar el cursor el boton vuelve al tamaño original
-																                botonMenu.on('pointerout', function () {
-																                    this.clearTint();
-																                    this.setScale(0.20, 0.20);
-																                });
-
-																                //Al hacer click en el boton se sale del juego
-																				botonMenu.on('pointerdown', (pointer) => {
-																					if(window.listos){
-																					var msg = {peticion: "desconexionA", player: "player2"};
-																					connection.send(JSON.stringify(msg));
-																					var msg = {peticion: "desconexionA", player: "player1"};
-																					connection.send(JSON.stringify(msg));
-																					}
-																					
-
-
-																				    console.log('Saliendo de Ajustes');
-																				    if (nivelActual === 'MenuInicio') {
-																				        this.scene.wake('MenuInicio');
-																				    } else {
-																						
-																				        this.scene.start('MenuInicio');
-																				        
-																				    }
-
-																				    this.scene.stop('Ajustes');
-																				});
 
 					//CANCION
 
@@ -4333,8 +4328,8 @@
 						posicionSliderGlobal = controlVol.x;
 						volumenGlobal = (controlVol.x - 780) / 430;
 						cancion.setVolume(volumenGlobal);
-						console.log(volumenGlobal);
-						console.log("Ajustando volumen");
+						//console.log(volumenGlobal);
+						//console.log("Ajustando volumen");
 						cancion.resume();
 
 					})
@@ -4343,7 +4338,7 @@
 				update() {
 					if (window.listos) {
 						if (!window.pausa1 && !window.pausa2) {
-							console.log('Saliendo de Ajustes');
+							//console.log('Saliendo de Ajustes');
 							enPausa = false;
 							this.scene.wake(nivelActual);
 							this.scene.stop('Ajustes');
@@ -4353,9 +4348,9 @@
 							connection.send(JSON.stringify(msg));
 						}
 					}
-					
+
 					var msg = {peticion: "desconectadoA"};
-															connection.send(JSON.stringify(msg));
+					connection.send(JSON.stringify(msg));
 				}
 			}
 
@@ -4370,7 +4365,7 @@
 					this.segundoPunt;
 					this.tercerPunt;
 				}
-				preload() {}
+				preload() { }
 				create() {
 
 					const punt = this.add.image(0, 0, 'FondoPunt').setDisplaySize(1920, 1080);
@@ -4393,7 +4388,7 @@
 
 					//Al hacer click en el boton se sale del juego
 					botonSalir.on('pointerdown', (pointer) => {
-						console.log('Saliendo de Ajustes');
+						//console.log('Saliendo de Ajustes');
 						this.scene.wake(nivelActual);
 						//this.scene.resume(nivel);
 						this.scene.stop('Puntuaciones');
@@ -4593,18 +4588,18 @@
 			};
 
 			var game = new Phaser.Game(config);
-			var msg = { peticion: "desconectadoA" };
-						//console.log("HOLA")
-								        		document.addEventListener("visibilitychange", function () {
-						    if (document.visibilityState === "hidden" && window.listos) {
-						        const msg1 = JSON.stringify({ peticion: "desconexionA", player: "player2" });
-						        const msg2 = JSON.stringify({ peticion: "desconexionA", player: "player1" });
+			var msg = {peticion: "desconectadoA"};
+			//console.log("HOLA")
+			document.addEventListener("visibilitychange", function () {
+				if (document.visibilityState === "hidden" && window.listos) {
+					const msg1 = JSON.stringify({peticion: "desconexionA", player: "player2"});
+					const msg2 = JSON.stringify({peticion: "desconexionA", player: "player1"});
 
-						        // Envía los mensajes al cerrar la pestaña o perder visibilidad
-						        connection.send(msg1);
-						        connection.send(msg2);
-						    }
-						});
+					// Envía los mensajes al cerrar la pestaña o perder visibilidad
+					connection.send(msg1);
+					connection.send(msg2);
+				}
+			});
 
 		</script>
 
