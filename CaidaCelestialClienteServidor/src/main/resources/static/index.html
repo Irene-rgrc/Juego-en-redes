@@ -4188,8 +4188,9 @@
 					//Al hacer click en el boton se sale del juego
 					botonSalir.on('pointerdown', (pointer) => {
 						if (window.listos) {
+							document.getElementById('mensaje').blur();
 							chatActive = false;
-							ventanaChat.innerHTML = ''; // Limpiar el contenido actual
+							document.getElementById('mensaje').value = ''; // Limpiar el contenido actual
 							if (window.plyer == "player1") {
 								var msg = {peticion: "continuar", player: "player1"};
 								connection.send(JSON.stringify(msg));
@@ -4201,8 +4202,9 @@
 						}
 						else {
 							this.scene.wake(nivelActual);
+							document.getElementById('mensaje').blur();
 							chatActive = false;
-							ventanaChat.innerHTML = ''; // Limpiar el contenido actual
+							document.getElementById('mensaje').value = ''; // Limpiar el contenido actual
 							this.scene.stop('Ajustes');
 						}
 					});
