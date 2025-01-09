@@ -662,11 +662,12 @@ El chat que se implementó posteriormente también sufrío cmabios con la implem
 Asimismo, se decidieron implementar cambios en el sistema de puntuaciones. Ahora con el uso de WebSockets se alamcenan los dos nombres de los usuarios jugadores y la puntuación que han obtenido en el ranking, es decir, ahora la clasificación es por parejas y no individual. Para reaizar esto el jugador cliente simplemente le envía un mensaje con su nombre al host cuando ambos son emparejados antes de comenzar a jugar, de esta manera ambos nombres se almacenan juntos.
 
 ## WebSockets
+![](CONCEPTS/FINALES/Websocket_connection.png)
 **Protocolo de Comunicación usado**
 *Protocolo Utilizado*
 El sistema de comunicación implementado para este proyecto utiliza el protocolo WebSockets para garantizar una comunicación bidireccional en tiempo real entre los jugadores (clientes) y el servidor. Este protocolo es fundamental para sincronizar las acciones y estados de la partida, permitiendo que los movimientos, eventos y notificaciones se reflejen de manera inmediata en todos los participantes. A continuación, se detallan las fases y tipos de mensajes intercambiados, así como su significado y función dentro del juego.
 
-*Establecimiento de la Conexión*
+**Establecimiento de la Conexión**
 El primer paso en la comunicación es el establecimiento de la conexión entre el cliente y el servidor. Cuando un cliente abre la aplicación, envía una solicitud inicial al servidor para "estrechar la mano" (conocido como handshake). Esta acción asegura que la conexión se haya establecido correctamente. El servidor responde implícitamente al aceptar la conexión y mantener abierto un canal persistente para el intercambio de mensajes. Durante esta fase, no se envían datos adicionales más allá de la confirmación del establecimiento de la conexión. Si la conexión no puede realizarse o se interrumpe, el cliente detecta este evento y lo comunica al usuario mostrando un aviso en la pantalla, informándole que debe recargar la aplicación para intentar reconectarse.
 
 **Emparejamiento de Jugadores**
