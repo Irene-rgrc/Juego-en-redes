@@ -1190,22 +1190,14 @@
 				})
 			}
 
-			$(document).ready(function () {
-
-				/*loadUsers(function (users) {
-					for (var i = 0; i < users.length; i++) {
-						existingUsers[i] = users[i].username;
-						existingPasswords[i] = users[i].password;
-						existingRecords[i] = users[i].record;
-					}
-				})*/
+			function cargarPuntuaciones () {
 				loadRecords(function (records) {
 					for (var i = 0; i < records.length; i++) {
 						coupleNames[i] = records[i].names;
 						couplePoints[i] = records[i].points;
 					}
 				})
-			})
+			}
 			// Función para guardar la puntuación del usuario
 			function guardarPuntuacion() {
 				var usuario = {
@@ -1285,13 +1277,7 @@
 						if (tiempoTranscurrido < currentUser.record) {
 							usuario.record = tiempoTranscurrido;
 							updateRecord(usuario);
-							getRecordByUsername(usuario.record, usuario)
-							loadRecords(function (records) {
-								for (var i = 0; i < records.length; i++) {
-									coupleNames[i] = records[i].names;
-									couplePoints[i] = records[i].points;
-								}
-							})
+							getRecordByUsername(usuario.record, usuario);
 						}
 					} else {
 						console.log("Usuario no encontrado");
@@ -4128,6 +4114,7 @@
 
 					//Al hacer click en el boton se va a ajustes
 					botonPuntuacion.on('pointerdown', (pointer) => {
+						cargarPuntuaciones();
 						this.scene.sleep('MenuInicio');
 						this.scene.launch('Puntuaciones');
 						console.log('Pantalla de Puntuaciones');
@@ -4264,8 +4251,7 @@
 					this.segundoPunt;
 					this.tercerPunt;
 				}
-				preload() {
-				}
+				preload() {}
 				create() {
 
 					const punt = this.add.image(0, 0, 'FondoPunt').setDisplaySize(1920, 1080);
