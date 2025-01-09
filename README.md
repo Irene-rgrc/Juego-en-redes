@@ -661,6 +661,48 @@ El chat que se implementó posteriormente también sufrío cmabios con la implem
 
 Asimismo, se decidieron implementar cambios en el sistema de puntuaciones. Ahora con el uso de WebSockets se alamcenan los dos nombres de los usuarios jugadores y la puntuación que han obtenido en el ranking, es decir, ahora la clasificación es por parejas y no individual. Para reaizar esto el jugador cliente simplemente le envía un mensaje con su nombre al host cuando ambos son emparejados antes de comenzar a jugar, de esta manera ambos nombres se almacenan juntos.
 
+## WebSockets
+** Protocolo de Comunicación usado **
+*Protocolo Utilizado*
+El sistema de comunicación implementado para este proyecto utiliza el protocolo WebSockets para garantizar una comunicación bidireccional en tiempo real entre los jugadores (clientes) y el servidor. Este protocolo es fundamental para sincronizar las acciones y estados de la partida, permitiendo que los movimientos, eventos y notificaciones se reflejen de manera inmediata en todos los participantes. A continuación, se detallan las fases y tipos de mensajes intercambiados, así como su significado y función dentro del juego.
+
+*Establecimiento de la Conexión*
+El primer paso en la comunicación es el establecimiento de la conexión entre el cliente y el servidor. Cuando un cliente abre la aplicación, envía una solicitud inicial al servidor para "estrechar la mano" (conocido como handshake). Esta acción asegura que la conexión se haya establecido correctamente. El servidor responde implícitamente al aceptar la conexión y mantener abierto un canal persistente para el intercambio de mensajes. Durante esta fase, no se envían datos adicionales más allá de la confirmación del establecimiento de la conexión. Si la conexión no puede realizarse o se interrumpe, el cliente detecta este evento y lo comunica al usuario mostrando un aviso en la pantalla, informándole que debe recargar la aplicación para intentar reconectarse.
+
+*Emparejamiento de Jugadores*
+Una vez establecida la conexión, el cliente solicita al servidor ser emparejado con otro jugador. Esta es una de las primeras tareas del servidor, quien asigna roles únicos a cada jugador para diferenciar sus funciones dentro del juego. El servidor determina si el cliente que se conecta es el primero o el segundo jugador en la partida.
+- Al primer jugador en conectarse, se le asigna un rol predefinido (por ejemplo, el personaje "Cassadie").
+- Al segundo jugador, se le asigna otro rol (como "Seraphina").
+Este emparejamiento inicial asegura que cada jugador tenga una identidad específica en la partida, lo que resulta crucial para la sincronización de sus acciones y estados. Una vez emparejados, ambos jugadores pueden interactuar en el juego.
+
+*Actualización de Controles y Acciones*
+El aspecto más importante del protocolo es la transmisión de los movimientos y acciones de los jugadores, ya que estos determinan el progreso de la partida. Cada vez que un jugador realiza una acción, como moverse hacia adelante, hacia los lados o usar una habilidad especial, el cliente envía un mensaje al servidor informando de esta acción específica. Estos mensajes pueden incluir eventos como:
+- Pulsar o soltar una tecla para moverse hacia adelante, hacia atrás o lateralmente.
+- Activar un salto, un sprint o una habilidad especial.
+- Detener cualquiera de estas acciones.
+El servidor recibe estos mensajes y actualiza su estado interno para reflejar los movimientos del jugador en cuestión. Luego, transmite estos datos al otro jugador para garantizar que la acción realizada se refleje correctamente en la pantalla de ambos participantes. Este mecanismo de ida y vuelta asegura que los estados del juego estén sincronizados en tiempo real. Por ejemplo, si un jugador pulsa una tecla para moverse hacia adelante, el servidor procesa esta acción y envía una notificación al otro cliente para que observe el movimiento de su oponente. Esto permite que ambos jugadores interactúen en un entorno dinámico y sincronizado.
+
+*Gestión de Pausas y Reanudaciones*
+El protocolo también incluye mecanismos para manejar pausas y reanudaciones de la partida, ya sea por decisión de un jugador o por un evento dentro del juego. Si un jugador decide pausar la partida, el cliente envía una notificación al servidor indicando que desea detener el progreso. El servidor registra esta solicitud y notifica a ambos jugadores de que el juego está en pausa. Para reanudar la partida, el jugador debe enviar otra solicitud al servidor, quien actualiza su estado interno y notifica a ambos clientes que el juego puede continuar. Este mecanismo asegura que ambos jugadores estén sincronizados y que no haya confusión respecto al estado de la partida en curso. Además, el servidor verifica constantemente el estado de ambos jugadores. Si ambos están listos para continuar, el juego se reanuda automáticamente.
+
+*Manejo de Desconexiones*
+Uno de los retos en un sistema de juego multijugador es gestionar las desconexiones de los jugadores. Este protocolo está diseñado para detectar si un jugador abandona la partida, ya sea de forma intencional o por un fallo técnico. Cuando el servidor detecta que un jugador se ha desconectado, notifica al otro jugador informándole que su oponente ya no está disponible. Este evento genera un mensaje visual en la interfaz del cliente que permanece conectado, indicando que la partida no puede continuar debido a la ausencia de su oponente. Esto es especialmente útil para evitar confusiones y permitir que el jugador restante pueda decidir si desea volver a intentar la partida desde el inicio.
+
+*Sincronización de Eventos y Estados del Juego*
+El protocolo también maneja eventos importantes dentro de la partida que no están directamente relacionados con los movimientos básicos de los jugadores. Algunos ejemplos incluyen:
+- El inicio de la partida: El servidor verifica si ambos jugadores están listos antes de permitir que el juego comience.
+- Progreso hacia finales alternativos: Cuando un jugador alcanza una puerta o un punto final específico, se genera un evento que el servidor registra. Este evento se notifica al otro jugador para que ambos sean conscientes de las decisiones tomadas en la partida.
+- Eventos finales: Si uno de los jugadores alcanza un final "bueno" o "malo", el servidor sincroniza esta información entre ambos jugadores y actualiza el estado del juego.
+Este manejo de eventos permite que las decisiones y el progreso de cada jugador influyan directamente en el desarrollo de la partida, garantizando una experiencia fluida y conectada.
+
+*Registro de Puntuaciones y Récords*
+El protocolo incluye una funcionalidad para registrar las puntuaciones al final de la partida. Cuando esta concluye, el servidor recopila los datos necesarios, como los nombres de ambos jugadores y la puntuación acumulada durante el juego. Esta información es enviada al cliente responsable de almacenar los récords. El registro de puntuaciones se utiliza para guardar las mejores marcas alcanzadas por los jugadores y puede ser mostrado posteriormente en tablas de clasificación o pantallas de logros.
+
+*Flexibilidad y Extensibilidad del Protocolo*
+El protocolo está diseñado de manera modular, lo que permite la fácil adición de nuevas funcionalidades sin comprometer su estructura existente. Por ejemplo, se podrían incluir nuevos tipos de mensajes para implementar nuevas acciones, estados o mecánicas de juego. Esto hace que el sistema sea altamente flexible y adaptable a futuros cambios o expansiones del juego.
+
+El protocolo implementado para este sistema de comunicación en WebSockets es eficiente, dinámico y robusto. Permite sincronizar en tiempo real las acciones y estados de los jugadores, gestionar eventos complejos como pausas y desconexiones, y garantizar una experiencia fluida para ambos participantes. Además, su diseño modular lo convierte en una herramienta poderosa para manejar juegos multijugador de manera efectiva, con posibilidades de expansión y personalización según las necesidades del proyecto.
+
 ## Diagrama UML
 A continuación se muestra un diagrama de clases que contiene toda la información previa del proyecto, así como las nuevas clases que han sido necesarias incluir para implementar las características de comunicación asíncrona.
 ![](CONCEPTS/FINALES/UML1New.jpg)
