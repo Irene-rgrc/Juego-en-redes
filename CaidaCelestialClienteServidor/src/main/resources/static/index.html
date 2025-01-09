@@ -1333,6 +1333,7 @@
 					success: function (response) {
 						console.log('Mensaje enviado correctamente:', response);
 						$('#mensaje').val(''); // Limpia el campo del mensaje tras el envío
+						
 					},
 					error: function (jqXHR, textStatus, errorThrown) {
 						console.error('Error al enviar el mensaje:', textStatus, errorThrown, currentUser.id);
@@ -1388,6 +1389,7 @@
 			// Deshabilitar movimiento de Cassidie cuando se está escribiendo en el chat
 			function disableMovement() {
 				chatActive = true;
+				
 			}
 			// Habilitar movimiento de Cassidie cuando se sale del chat
 			function enableMovement() {
@@ -1728,7 +1730,7 @@
 						}
 					}
 
-					if (Phaser.Input.Keyboard.JustDown(this.keyP)) {
+					if (Phaser.Input.Keyboard.JustDown(this.keyP) && !chatActive) {
 						if (window.plyer === "player1") {
 							var msg = {peticion: "parar", player: "player1"};
 							connection.send(JSON.stringify(msg));
@@ -4111,6 +4113,8 @@
 					//Al hacer click en el boton se sale del juego
 					botonSalir.on('pointerdown', (pointer) => {
 						if (window.listos) {
+						chatActive = false;
+						ventanaChat.innerHTML = ''; // Limpiar el contenido actual
 							if (window.plyer == "player1") {
 								var msg = {peticion: "continuar", player: "player1"};
 								connection.send(JSON.stringify(msg));
@@ -4122,6 +4126,8 @@
 						}
 						else {
 							this.scene.wake(nivelActual);
+							chatActive = false;
+							ventanaChat.innerHTML = ''; // Limpiar el contenido actual
 							this.scene.stop('Ajustes');
 						}
 					});
