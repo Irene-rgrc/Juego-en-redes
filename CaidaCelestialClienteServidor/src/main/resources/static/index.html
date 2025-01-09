@@ -4158,6 +4158,7 @@
 
 																			   	//Al hacer click en el boton se va a ajustes
 																			   	botonPuntuacion.on('pointerdown', (pointer) => {
+																					cargarPuntuaciones();
 																			   		this.scene.sleep('MenuInicio');
 																			   		this.scene.launch('Puntuaciones');
 																			   		console.log('Pantalla de Puntuaciones');
