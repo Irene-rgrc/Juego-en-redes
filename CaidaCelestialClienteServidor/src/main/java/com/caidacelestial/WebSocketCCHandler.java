@@ -54,6 +54,9 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 	// FINALES
 	boolean finalBueno = false;
 	boolean finalMalo = false;
+	boolean desconexiona2 = false;
+	boolean desconexiona1 = false;
+
 
 	//Nombre para los récords:
 	String nameP2 = "Unknown";
@@ -366,6 +369,20 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 			}
 			break;
 			
+			
+		case "desconexionA":
+			if(node.get("player").asText().equals("player2")) {
+				desconexiona1 = true;
+				msg = "{\"type\":\"desconexionA1\"}";
+				session.sendMessage(new TextMessage(msg));
+			}
+			if(node.get("player").asText().equals("player1")) {
+				desconexiona2 = true;
+				msg = "{\"type\":\"desconexionA2\"}";
+				session.sendMessage(new TextMessage(msg));
+			}
+			break;
+			
 		case "soltarJugadorA":
 			if(node.get("player").asText().equals("player2")) {
 				a1=false;
@@ -379,6 +396,19 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 			}
 			break;
 			
+		case "conectadoA":
+			if(node.get("player").asText().equals("player2")) {
+				desconexiona1=false;
+				msg = "{\"type\":\"conectadoA1\"}";
+				session.sendMessage(new TextMessage(msg));
+			}
+			if(node.get("player").asText().equals("player1")) {
+				desconexiona2=false;
+				msg = "{\"type\":\"conectadoA2\"}";
+				session.sendMessage(new TextMessage(msg));
+			}
+			break;
+			
 		case "pulsadoJugadorA":
 			
 			if(a1 == true) {
@@ -388,6 +418,19 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 			
 			if(a2 == true) {
 				msg = "{\"type\":\"pulsadoA2\"}";
+				session.sendMessage(new TextMessage(msg));
+			}
+			break;
+			
+case "desconectadoA":
+			
+			if(desconexiona1 == true) {
+				msg = "{\"type\":\"desconexionA1\"}";
+				session.sendMessage(new TextMessage(msg));
+			}
+			
+			if(desconexiona2 == true) {
+				msg = "{\"type\":\"desconexionA2\"}";
 				session.sendMessage(new TextMessage(msg));
 			}
 			break;
@@ -658,6 +701,20 @@ public class WebSocketCCHandler extends TextWebSocketHandler {
 			msg = "{\"type\":\"nombreP2\", \"name\":\"" + nameP2 + "\"}";
 			session.sendMessage(new TextMessage(msg));
 			break;
+			
+		case "jugadorDesc":
+		    String jugador1 = node.get("player").asText(); 
+		    String tipoMsg = jugador1.equals("player1") ? "JugadorDesconectado1" : "JugadorDesconectado2";
+
+		    String msg1 = "{\"type\":\"" + tipoMsg + "\",\"player\":\"" + jugador1 + "\"}";
+
+
+		    if (pausa1 || pausa2) { 
+		        session.sendMessage(new TextMessage(msg1)); 
+		    } else {
+		        session.sendMessage(new TextMessage(msg1)); 
+		    }
+		    break;
 			}	
 		}
 		
