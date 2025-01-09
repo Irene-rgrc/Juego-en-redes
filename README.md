@@ -671,7 +671,7 @@ Asimismo, se decidieron implementar cambios en el sistema de puntuaciones. Ahora
 
 *Protocolo Utilizado*
 
-El sistema de comunicación implementado para este proyecto utiliza el protocolo WebSockets para garantizar una comunicación bidireccional en tiempo real entre los jugadores (clientes) y el servidor. Este protocolo es fundamental para sincronizar las acciones y estados de la partida, permitiendo que los movimientos, eventos y notificaciones se reflejen de manera inmediata en todos los participantes. A continuación, se detallan las fases y tipos de mensajes intercambiados, así como su significado y función dentro del juego.
+El sistema de comunicación utilizado para este proyecto está basado en el protocolo WebSockets, que opera sobre el modelo TCP/IP. Esto significa que el canal de comunicación es confiable, orientado a conexión, y garantiza la entrega de los mensajes en el orden correcto, sin pérdidas ni duplicados. WebSockets extiende el protocolo HTTP al establecer una conexión persistente y bidireccional entre cliente y servidor, lo que es especialmente útil para videojuegos multijugador como es este. En este contexto, el protocolo TCP (Transmission Control Protocol) se encarga de gestionar la conexión entre los dispositivos involucrados, asegurando la transmisión de datos de manera confiable. Por su parte, IP (Internet Protocol) facilita la comunicación a través de la red al proporcionar las direcciones de origen y destino necesarias para enviar los paquetes. Gracias a esta combinación, WebSockets puede ofrecer un canal estable y eficiente para el intercambio continuo de información en la partida multijugador.
 
 **Establecimiento de la Conexión**
 
