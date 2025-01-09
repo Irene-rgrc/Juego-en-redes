@@ -661,8 +661,8 @@ Asimismo, se decidieron implementar cambios en el sistema de puntuaciones. Ahora
 
 ## Diagrama UML
 A continuación se muestra un diagrama de clases que contiene toda la información previa del proyecto, así como las nuevas clases que han sido necesarias incluir para implementar las características de comunicación asíncrona.
-![](CONCEPTS/FINALES/UML1.jpg)
-![](CONCEPTS/FINALES/UML2.jpg)
+![](CONCEPTS/FINALES/UML1New.jpg)
+![](CONCEPTS/FINALES/UML2New.jpg)
 
 ## Instrucciones
 
