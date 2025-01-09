@@ -459,7 +459,7 @@ Se puede acceder a través del menú principal o mientras se está jugando, el m
    
 En la pantalla de puntuaciones aparece una lista de las tres mejores puntuaciones junto a los nombres de usuario de los jugadores que las han obtenido. Es necesario tener una cuenta e iniciar sesión para poder obtener una puntuación y que esta sea registrada en dicha pantalla.
 
-![](CONCEPTS/FINALES/PantallaPuntuaciones.png)
+![](CONCEPTS/FINALES/puntuacionesPareja.png)
 
 *Img. Pantalla Puntuaciones*
 
@@ -569,6 +569,8 @@ Se ha realizado una exhaustiva búsqueda de información, permitiendo así obten
 Como resultado de estas consideraciones, se ha desarrollado una interfaz que requiere que el cliente o usuario inicie sesión antes de acceder al juego; en caso de no tener una sesión iniciada, se le denegará el acceso al mismo. Esta interfaz presenta tres botones principales: "Iniciar sesión", "Registrarse", "Cambiar contraseña" y "Eliminar usuario". Para acceder a esta pantalla inicial, se debe activar el botón de inicio. Asimismo, se ha contemplado la incorporación de un sistema de puntuación basado en el feedback proporcionado por los profesores. Esta puntuación se conforma de un contador que, transcurridos 5 minutos sin completar el juego, resulta en una situación de "game over". En caso de finalizar el juego dentro del tiempo establecido, la puntuación se determinará por el tiempo empleado, reflejándose mediante una solicitud de tipo POST en una base de datos aparte destinada a las puntuaciones. Adjunto se presenta el diagrama de clases, el cual contribuye a la comprensión y visualización de estos procesos y métodos.
 
 Posteriormente se decidió implementar un chat persistente entre sesiones. Los usuarios pueden escribir mensajes para cominucarse entre ellos durente el menú y la partida. Si el usuario no ha iniciado sesión, el chat indica que el mensaje lo ha enviado una persona anónima, si por el contrario ha iniciado sesión, aparecerá su nombre en el chat. Asimismo, si en cualquier momento se corta la conexión con el servidor aparecerá un mensaje en pantalla que alertará a los jugadores de ello.
+
+![](CONCEPTS/FINALES/imagenChat.png)
 
 ![](CONCEPTS/FINALES/DiagramadeclasesAPIREST.png)
 
