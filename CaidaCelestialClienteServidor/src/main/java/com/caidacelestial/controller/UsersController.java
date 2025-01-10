@@ -142,7 +142,7 @@ public class UsersController {
     // Endpoint para obtener todos los mensajes del chat
     @GetMapping("/obtener-mensajes")
     public List<Message> obtenerMensajes() throws ClassNotFoundException, IOException {
-    	//cargarChat();
+    	cargarChat();
         return chatMessages; // Retornar todos los mensajes almacenados
     }
 
@@ -160,7 +160,7 @@ public class UsersController {
             // Handle exceptions (file not found, empty file, etc.)
         }
     }
-    /*@PostConstruct
+    @PostConstruct
     public void cargarChat() throws IOException, ClassNotFoundException {
         try (FileInputStream fileInputStream = new FileInputStream("src/main/resources/chat.txt");
              ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
@@ -169,7 +169,7 @@ public class UsersController {
         } catch (IOException | ClassNotFoundException e) {
             // Handle exceptions (file not found, empty file, etc.)
         }
-    }*/
+    }
 
     // Guardar usuarios en un archivo antes de apagar el servidor
     @PreDestroy
