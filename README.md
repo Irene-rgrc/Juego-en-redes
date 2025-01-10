@@ -437,13 +437,13 @@ El menú principal consta del título del juego que ocupe un tamaño razonable p
 *Img. Esquema del menú principal*
 
 La pantalla que visualizamos al abrir el ejecutable contiene los botones de Jugar, Iniciar Sesión y Registrarse.
-![](CONCEPTS/inicio.jpg)
+![](CONCEPTS/FINALES/MenuPrincipalimgFinal.png)
 
 *Img. Menú principal *
 
 El menú principal consta del título con un fondo de las puertas las cuales son el objetivo final del juego. En el centro se pueden ver cuatro botones que son Jugar, Ajustes, Puntuaciones y Salir. Al pulsar Salir se cierra el ejecutable, el botón de Ajustes lleva a la pantalla de ajustes, Puntuaciones lleva a la pantalla con los records y Jugar a la selección de juego o tutorial.
 
-![](CONCEPTS/FINALES/MenuPrincipalFinal2.png)
+![](CONCEPTS/inicio.jpg)
 
 *Img. Menú principal 2*
 
