@@ -437,7 +437,7 @@ El menú principal consta del título del juego que ocupe un tamaño razonable p
 *Img. Esquema del menú principal*
 
 La pantalla que visualizamos al abrir el ejecutable contiene los botones de Jugar, Iniciar Sesión y Registrarse.
-![](CONCEPTS/FINALES/MenuPrincipalimgFinal.png)
+![](CONCEPTS/inicio.jpg)
 
 *Img. Menú principal *
 
@@ -471,7 +471,7 @@ Las pantallas para Iniciar Sesión y Registrarse explicadas anteriromente son la
 
 *Img. Pantalla Iniciar Sesión *
 
-![](CONCEPTS/FINALES/RegistrarseImg.png)
+![](CONCEPTS/registro.jpg)
 
 *Img. Pantalla Registrarse *
 
