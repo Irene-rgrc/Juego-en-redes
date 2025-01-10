@@ -720,9 +720,9 @@ El protocolo implementado para este sistema de comunicación en WebSockets es ef
 
 ## Diagrama UML
 A continuación se muestra un diagrama de clases que contiene toda la información previa del proyecto, así como las nuevas clases que han sido necesarias incluir para implementar las características de comunicación asíncrona.
-![](CONCEPTS/FINALES/UMLClass.jpg)
-![](CONCEPTS/FINALES/UML1New.jpg)
-![](CONCEPTS/FINALES/UML2New.jpg)
+![](CONCEPTS/FINALES/UMLClass.png)
+![](CONCEPTS/FINALES/UML1New.png)
+![](CONCEPTS/FINALES/UML2New.png)
 
 
 ## Instrucciones
