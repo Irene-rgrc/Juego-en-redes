@@ -773,3 +773,7 @@ Una vez acabe el juego se puede volver a jugar.
 ![](CONCEPTS/FINALES/UMLact.png)
 
 Además, se debe tener en cuenta que la rejugabilidad del juego no está completamente apoyada y manejada por lo tanto, es posible que ocurran errores al tratar de rejugar el juego siendo el más notorio que el contador no se reinicia una vez ya se ha ganado el juego.
+
+## Vídeo explicativo
+
+[![Reproducir Video](https://img.youtube.com/vi/UnOZFGYVq5M/maxresdefault.jpg)](https://www.youtube.com/watch?v=UnOZFGYVq5M)
