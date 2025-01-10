@@ -25,6 +25,10 @@ descripción de la temática: "Se trata de un juego cooperativo para dos jugador
 
 ![](CONCEPTS/URJC.png)
 
+## Vídeo explicativo
+
+[![Reproducir Video](https://img.youtube.com/vi/UnOZFGYVq5M/maxresdefault.jpg)](https://www.youtube.com/watch?v=UnOZFGYVq5M)
+
 ## ***Índice***
 
 **1 Introducción** 
@@ -776,6 +780,4 @@ Una vez acabe el juego se puede volver a jugar.
 
 Además, se debe tener en cuenta que la rejugabilidad del juego no está completamente apoyada y manejada por lo tanto, es posible que ocurran errores al tratar de rejugar el juego siendo el más notorio que el contador no se reinicia una vez ya se ha ganado el juego.
 
-## Vídeo explicativo
 
-[![Reproducir Video](https://img.youtube.com/vi/UnOZFGYVq5M/maxresdefault.jpg)](https://www.youtube.com/watch?v=UnOZFGYVq5M)
